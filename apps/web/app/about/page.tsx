@@ -4,34 +4,6 @@ import styled from 'styled-components';
 
 const StyledPage = styled.div`
   text-align: center;
-
-  .container {
-    height: 100vh;
-    position: relative;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-  }
-
-  .vertical-center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    padding: 1rem;
-    max-width: 720px;
-  }
-
-  .learn-more {
-    position: absolute;
-    bottom: 1rem;
-    button {
-      margin: 0;
-      padding: 1rem 2rem;
-    }
-  }
-
   #welcome {
     h1 {
       font-size: 3rem;
@@ -41,6 +13,13 @@ const StyledPage = styled.div`
       font-size: 1rem;
       color: #333;
       margin-bottom: 1rem;
+    }
+    .steps {
+      margin-top: 2rem;
+    }
+    h2 {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
     }
     @media only screen and (max-width: 822px) {
       h1 {
@@ -64,7 +43,7 @@ export default function Index() {
   return (
     <StyledPage>
       <div className="wrapper">
-        <div className="container">
+        <div className="full-container">
           <div id="welcome" className="vertical-center">
             <h1>DOING GODS WORK</h1>
             <p>
@@ -72,16 +51,28 @@ export default function Index() {
               and nurture a vibrant, supportive environment where creativity
               thrives and meaningful connections are forged.
             </p>
-            <p>
-              Artist hands are provided select paint materials in addition to a
-              primed canvas for the work.
-            </p>
-          </div>
-          {/* <div className="learn-more">
+            <div className="steps">
+              <h2>HOW</h2>
+              <p>
+                Artist hands are provided select paint materials in addition to
+                a primed canvas for the work.
+              </p>
+              <p>
+                Completed and ongoing works will be made available for viewing
+                at community events.
+              </p>
+              <p>
+                Monetary value from purchased works will be collected into a
+                shared wallet where members will decide how funds are
+                distributed.
+              </p>
+            </div>
+            {/* <div className="button-container">
             <a href="/apply">
               <button>APPLY</button>
             </a>
           </div> */}
+          </div>
         </div>
       </div>
     </StyledPage>
