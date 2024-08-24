@@ -20,7 +20,7 @@ const StyledPage = styled.div`
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     padding: 1rem;
-    max-width: 680px;
+    max-width: 720px;
   }
 
   .learn-more {
@@ -68,12 +68,12 @@ export default function Index() {
           <div id="welcome" className="vertical-center">
             <h1>DOING GODS WORK</h1>
             <p>
-              Through the collective efforts of local artists,
+              Through the collective efforts of artist communities,
               we will fund and nurture a vibrant, supportive environment where
               creativity thrives and meaningful connections are forged.
             </p>
             <p>
-                Artists are provided select acrylic and spray paints in addition to a primed canvas for the work.
+                Artist hands are provided select paint materials in addition to a primed canvas for the work.
             </p>
           </div>
           {/* <div className="learn-more">

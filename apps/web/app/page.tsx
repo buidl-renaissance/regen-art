@@ -26,10 +26,15 @@ const StyledPage = styled.div`
   .learn-more {
     position: absolute;
     bottom: 1rem;
-    button {
-      margin: 0;
-      padding: 1rem 2rem;
-    }
+  }
+  .button-container {
+    margin: 1rem;
+  }
+
+  button {
+    margin: 0;
+    padding: 1rem 2rem;
+    cursor: pointer;
   }
 
   #welcome {
@@ -75,12 +80,17 @@ export default function Index() {
               we will fund and nurture a vibrant, supportive environment where
               creativity thrives and meaningful connections are forged.
             </div> */}
+            <div className="button-container">
+              <a href="/about">
+                <button>Learn More</button>
+              </a>
+            </div>
           </div>
-          <div className="learn-more">
+          {/* <div className="learn-more">
             <a href="/about">
               <button>Learn More</button>
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </StyledPage>
