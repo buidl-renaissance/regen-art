@@ -82,7 +82,7 @@ export default function Index() {
             </div> */}
             <div className="button-container">
               <a href="/about">
-                <button>Learn More</button>
+                <button>Learn How</button>
               </a>
             </div>
           </div>
