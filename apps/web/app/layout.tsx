@@ -3,7 +3,7 @@ import { StyledComponentsRegistry } from './registry';
 
 export const metadata = {
   title: 'GODS WORK',
-  description: 'Our mission is to empower artistic communities by creating opportunities for collaboration, growth, and financial sustainability.',
+  description: 'Our mission is to empower artistic communities to create by providing opportunities for collaboration, growth, and financial sustainability.',
 };
 
 export default function RootLayout({

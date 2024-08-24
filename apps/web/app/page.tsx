@@ -71,8 +71,8 @@ export default function Index() {
           <div id="welcome" className="vertical-center">
             <h1>GODS WORK</h1>
             <p>
-              Our mission is to empower artistic communities by creating
-              opportunities for collaboration, growth, and financial
+              Our mission is to empower artistic communities to create by
+              providing opportunities for collaboration, growth, and financial
               sustainability.
             </p>
             {/* <div>
