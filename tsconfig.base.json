@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@gods.work/ui": ["apps/web/ui/src/index.ts"],
-      "@gods.work/ui/server": ["apps/web/ui/src/server.ts"]
+      "@gods.work/ui/server": ["apps/web/ui/src/server.ts"],
+      "@gods.work/utils": ["packages/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

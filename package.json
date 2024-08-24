@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "@react-spring/web": "^9.7.4",
+    "moment": "^2.30.1",
     "next": "14.2.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -14,6 +15,8 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
     "@nx/cypress": "19.6.2",
     "@nx/eslint": "19.6.2",
     "@nx/eslint-plugin": "19.6.2",

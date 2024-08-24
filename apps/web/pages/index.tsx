@@ -1,5 +1,3 @@
-'use client';
-
 import styled from 'styled-components';
 
 const StyledPage = styled.div`
@@ -26,7 +24,7 @@ const StyledPage = styled.div`
   }
 `;
 
-export default function Index() {
+const Index = () => {
   return (
     <StyledPage>
       <div className="wrapper">
@@ -49,3 +47,5 @@ export default function Index() {
     </StyledPage>
   );
 }
+
+export default Index;
