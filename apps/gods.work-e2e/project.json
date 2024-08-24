@@ -1,9 +1,0 @@
-{
-  "name": "gods.work-e2e",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/gods.work-e2e/src",
-  "tags": [],
-  "implicitDependencies": ["gods.work"],
-  "// targets": "to see all targets run: nx show project gods.work-e2e --web",
-  "targets": {}
-}

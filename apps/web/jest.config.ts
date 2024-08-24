@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  displayName: 'gods.work',
+  displayName: 'web',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/apps/gods.work',
+  coverageDirectory: '../../coverage/apps/web',
 };
