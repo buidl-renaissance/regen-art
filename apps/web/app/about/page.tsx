@@ -68,12 +68,13 @@ export default function Index() {
           <div id="welcome" className="vertical-center">
             <h1>DOING GODS WORK</h1>
             <p>
-              Through the collective efforts of artist communities,
-              we will fund and nurture a vibrant, supportive environment where
-              creativity thrives and meaningful connections are forged.
+              Through the collective efforts of artist communities, we will fund
+              and nurture a vibrant, supportive environment where creativity
+              thrives and meaningful connections are forged.
             </p>
             <p>
-                Artist hands are provided select paint materials in addition to a primed canvas for the work.
+              Artist hands are provided select paint materials in addition to a
+              primed canvas for the work.
             </p>
           </div>
           {/* <div className="learn-more">
