@@ -76,7 +76,7 @@ pre {
   width: 100%;
 }
 .full-container {
-  height: 100vh;
+  height: 90vh;
   position: relative;
   padding: 0;
   display: flex;
