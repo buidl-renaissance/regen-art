@@ -15,8 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@gods.work/ui": ["apps/web/ui/src/index.ts"],
-      "@gods.work/ui/server": ["apps/web/ui/src/server.ts"],
+      "@gods.work/ui": ["packages/ui/src/index.ts"],
       "@gods.work/utils": ["packages/utils/src/index.ts"]
     }
   },

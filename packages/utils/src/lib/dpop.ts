@@ -65,6 +65,7 @@ export interface DAArtwork {
   description: string;
   artist: DAArtist;
   content?: DAContent[];
+  data?: any;
   meta: any;
 }
 
@@ -234,6 +235,13 @@ export const getArtwork = async (artwork: string) => {
     await fetch(`${hostname}/api/artwork/${artwork}`)
   ).json();
   return result;
+};
+
+export const getArtworks = async () => {
+  const result = await (
+    await fetch(`${hostname}/api/artwork`)
+  ).json();
+  return result.data;
 };
 
 export const getContent = async (cid: string) => {

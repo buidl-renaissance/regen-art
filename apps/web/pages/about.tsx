@@ -1,10 +1,10 @@
-'use client';
-
+import { DAArtwork, getArtworks } from '@gods.work/utils';
+import { Artwork } from '@gods.work/ui';
 import styled from 'styled-components';
 
 const StyledPage = styled.div`
   text-align: center;
-  #welcome {
+  .about {
     h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
@@ -13,6 +13,11 @@ const StyledPage = styled.div`
       font-size: 1rem;
       color: #333;
       margin-bottom: 1rem;
+    }
+    .works {
+      width: 80%;
+      margin: auto;
+      margin-top: 2rem;
     }
     .steps {
       margin-top: 2rem;
@@ -34,7 +39,11 @@ const StyledPage = styled.div`
   }
 `;
 
-export default function Index() {
+interface AboutPageProps {
+  artworks: DAArtwork[];
+}
+
+const AboutPage = ({ artworks }: AboutPageProps) => {
   /*
    * Replace the elements below with your own.
    *
@@ -42,9 +51,9 @@ export default function Index() {
    */
   return (
     <StyledPage>
-      <div className="wrapper">
+      <div className="about wrapper">
         <div className="full-container">
-          <div id="welcome" className="vertical-center">
+          <div className="vertical-center">
             <h1>DOING GODS WORK</h1>
             <p>
               Through the collective efforts of artist communities, we will fund
@@ -74,18 +83,27 @@ export default function Index() {
           </div> */}
           </div>
         </div>
+        <div className="works">
+          <h2>WORKS</h2>
+          {artworks?.length > 0 &&
+            artworks.map((artwork: DAArtwork, i: number) => {
+              return <Artwork artwork={artwork} key={i} />;
+            })}
+        </div>
       </div>
     </StyledPage>
   );
-}
+};
 
 export const getServerSideProps = async () => {
   const url = `https://gods.work/about`;
 
   //   const image = event.image ?? event.venue?.image ?? env.image;
+  const artworks = await getArtworks();
 
   return {
     props: {
+      artworks,
       meta: {
         title: 'Doing Gods Work',
         description:
@@ -108,3 +126,5 @@ export const getServerSideProps = async () => {
     },
   };
 };
+
+export default AboutPage;
