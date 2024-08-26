@@ -1,6 +1,7 @@
 import { DAArtwork, getArtworks } from '@gods.work/utils';
 import { Artwork } from '@gods.work/ui';
 import styled from 'styled-components';
+import { animated, easings, useSpring } from '@react-spring/web';
 
 const StyledPage = styled.div`
   text-align: center;
@@ -36,6 +37,9 @@ const StyledPage = styled.div`
         margin-bottom: 1rem;
       }
     }
+    .words {
+      opacity: 0;
+    }
   }
 `;
 
@@ -44,38 +48,46 @@ interface AboutPageProps {
 }
 
 const AboutPage = ({ artworks }: AboutPageProps) => {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.styled-components file.
-   */
+  const [springs, api] = useSpring(() => ({
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+    },
+    config: {
+      duration: 5000,
+    },
+  }));
   return (
     <StyledPage>
       <div className="about wrapper">
         <div className="full-container">
           <div className="vertical-center">
             <h1>DOING GODS WORK</h1>
-            <p>
-              Through the collective efforts of artist communities, we will fund
-              and nurture a vibrant, supportive environment where creativity
-              thrives and meaningful connections are forged.
-            </p>
-            <div className="steps">
-              <h2>HOW</h2>
+            <animated.div className='words' style={springs}>
               <p>
-                Artist hands are provided select paint materials in addition to
-                a primed canvas for the work.
+                Through the collective efforts of artist communities, we will
+                fund and nurture a vibrant, supportive environment where
+                creativity thrives and meaningful connections are forged.
               </p>
-              <p>
-                Completed and ongoing works will be made available for viewing
-                at community events.
-              </p>
-              <p>
-                Monetary value from purchased works will be collected into a
-                shared wallet where members will decide how funds are
-                distributed.
-              </p>
-            </div>
+              <div className="steps">
+                <h2>HOW</h2>
+                <p>
+                  Artist hands are provided select paint materials in addition
+                  to a primed canvas for the work.
+                </p>
+                <p>
+                  Completed and ongoing works will be made available for viewing
+                  at community events.
+                </p>
+                <p>
+                  Monetary value from purchased works will be collected into a
+                  shared wallet where members will decide how funds are
+                  distributed.
+                </p>
+              </div>
+            </animated.div>
             {/* <div className="button-container">
             <a href="/apply">
               <button>APPLY</button>
