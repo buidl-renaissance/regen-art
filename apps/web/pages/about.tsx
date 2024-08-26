@@ -26,9 +26,9 @@ const StyledPage = styled.div`
         font-size: 2rem;
       }
       p {
-        font-size: 0.8rem;
+        font-size: 1rem;
         color: #333;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
       }
     }
   }
