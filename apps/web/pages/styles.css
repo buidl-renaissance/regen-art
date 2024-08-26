@@ -83,9 +83,9 @@ pre {
   justify-content: center;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 822px) {
   .full-container {
-    height: 90vh;
+    height: 80vh;
   }  
 }
 
