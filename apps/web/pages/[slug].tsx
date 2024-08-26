@@ -27,6 +27,9 @@ const ArtworkPage = ({ artwork }: ArtworkPageProps) => {
             <div className="timestamp">
               {moment(content.timestamp).format('dddd MMMM Do, YYYY – h:mm a')}
             </div>
+            {content.caption && (
+              <div className="caption">{content.caption}</div>
+            )}
             {content.data.type === 'image/jpeg' && (
               <img src={content.data.url} />
             )}
@@ -65,6 +68,9 @@ const PageWrapper = styled.div`
     padding: 1rem;
     padding-top: 0.5rem;
     max-width: 100%;
+  }
+  .caption {
+    margin-left: 1rem;
   }
 `;
 
