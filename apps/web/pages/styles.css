@@ -83,6 +83,12 @@ pre {
   justify-content: center;
 }
 
+@media screen and (max-width: 768px) {
+  .full-container {
+    height: 90vh;
+  }  
+}
+
 .vertical-center {
   margin: 0;
   position: absolute;
