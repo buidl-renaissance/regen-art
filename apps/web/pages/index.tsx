@@ -46,6 +46,36 @@ const Index = () => {
       </div>
     </StyledPage>
   );
-}
+};
+
+export const getServerSideProps = async () => {
+  const url = `https://gods.work/`;
+
+  //   const image = event.image ?? event.venue?.image ?? env.image;
+
+  return {
+    props: {
+      meta: {
+        title: 'Gods Work',
+        description:
+          'Our mission is to empower artistic communities to create by providing opportunities for collaboration, growth, and financial sustainability.',
+        canonical: url,
+        openGraph: {
+          url: url,
+          type: 'webpage',
+          //   images: image
+          //     ? [
+          //         {
+          //           url: image,
+          //           alt: artwork.title,
+          //         },
+          //       ]
+          //     : [],
+          site_name: 'GODS WORK',
+        },
+      },
+    },
+  };
+};
 
 export default Index;

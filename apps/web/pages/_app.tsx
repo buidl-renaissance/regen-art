@@ -6,7 +6,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Welcome to example!</title>
+        <title>{pageProps.meta?.title ? `${pageProps.meta?.title}` : 'Gods Work'}</title>
       </Head>
       <main className="app">
         <Component {...pageProps} />

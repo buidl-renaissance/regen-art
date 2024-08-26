@@ -139,7 +139,7 @@ export const getServerSideProps = async ({ query, res }: any) => {
     props: {
       artwork,
       meta: {
-        title: `${artwork.title}`,
+        title: `${artwork.title} | Gods Work`,
         description: artwork.description,
         canonical: url,
         openGraph: {

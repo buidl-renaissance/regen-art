@@ -78,3 +78,33 @@ export default function Index() {
     </StyledPage>
   );
 }
+
+export const getServerSideProps = async () => {
+  const url = `https://gods.work/about`;
+
+  //   const image = event.image ?? event.venue?.image ?? env.image;
+
+  return {
+    props: {
+      meta: {
+        title: 'Doing Gods Work',
+        description:
+          'Through the collective efforts of artist communities, we will fund and nurture a vibrant, supportive environment where creativity thrives and meaningful connections are forged.',
+        canonical: url,
+        openGraph: {
+          url: url,
+          type: 'webpage',
+          //   images: image
+          //     ? [
+          //         {
+          //           url: image,
+          //           alt: artwork.title,
+          //         },
+          //       ]
+          //     : [],
+          site_name: 'GODS WORK',
+        },
+      },
+    },
+  };
+};
