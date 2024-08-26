@@ -158,7 +158,7 @@ const setDPoPToken = (token: string) => {
 
 export const getUser = (): User => {
   const u = localStorage.getItem('DPoPUser');
-  return JSON.parse(u);
+  return u ? JSON.parse(u) : null;
 };
 
 const setUser = (user: User) => {
@@ -251,7 +251,7 @@ export const getUserEvents = async (user_cid?: string) => {
 };
 
 export const createContact = async (contact: Contact, user_cid?: string) => {
-  const data = contact;
+  const data = contact as any;
   if (user_cid) data['attestator'] = user_cid;
   const result = await authorizedRequest(`user`, {
     method: 'POST',
@@ -300,7 +300,7 @@ export const submitEventCheckIn = async (
   contact: Contact,
   user_cid: string
 ) => {
-  const data = contact;
+  const data = contact as any;
   data['attestator'] = user_cid;
   const result = await authorizedRequest(`event/${event}/check-in`, {
     method: 'POST',
@@ -389,18 +389,18 @@ export const getRsvps = async () => {
   return result.data;
 };
 
-export const inRSVPs = (rsvps) => {
+export const inRSVPs = (rsvps: any) => {
   const userId = getUserId();
-  return rsvps.filter((rsvp) => rsvp.user.id == userId)?.length ? true : false;
+  return rsvps.filter((rsvp: any) => rsvp.user.id == userId)?.length ? true : false;
 };
 
-export const myRSVP = (rsvps) => {
+export const myRSVP = (rsvps: any) => {
   const cid = getUserCID();
-  const matches = rsvps.filter((rsvp) => rsvp.user.cid == cid);
+  const matches = rsvps.filter((rsvp: any) => rsvp.user.cid == cid);
   return matches[0];
 };
 
-const parseJwt = (token) => {
+const parseJwt = (token: string) => {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(
