@@ -30,12 +30,23 @@ const ArtworkPage = ({ artwork }: ArtworkPageProps) => {
             {content.caption && (
               <div className="caption">{content.caption}</div>
             )}
+            {content.data.type === 'youtube' && (
+              <iframe
+                className="media"
+                width="100%"
+                height="315"
+                src={`https://www.youtube.com/embed/${content.data.youtubeId}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            )}
             {content.data.type === 'image/jpeg' && (
-              <img src={content.data.url} />
+              <img className="media" src={content.data.url} />
             )}
             {content.data.type === 'video/mp4' && (
               <>
-                <video controls preload="metadata">
+                <video className="media" controls preload="metadata">
                   <source
                     src={`${content.data.url}#t=0.1`}
                     type="video/mp4"
@@ -59,12 +70,7 @@ const PageWrapper = styled.div`
     padding: 1rem 0;
     margin-left: 1rem;
   }
-  img {
-    padding: 1rem;
-    padding-top: 0.5rem;
-    max-width: 100%;
-  }
-  video {
+  .media {
     padding: 1rem;
     padding-top: 0.5rem;
     max-width: 100%;
