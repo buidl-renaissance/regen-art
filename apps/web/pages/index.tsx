@@ -31,7 +31,28 @@ const StyledPage = styled.div`
     }
 `;
 
-const Index = ({
+interface FeedItem {
+  id: string;
+  title: string;
+  link: string;
+  pubDate: string;
+  content: string;
+  contentSnippet: string;
+  enclosure: {
+    url: string;
+    type: string;
+    length: number;
+  };
+  categories: string[];
+}
+
+interface Props {
+  feed: {
+    items: FeedItem[];
+  };
+}
+
+const Index: React.FC<Props> = ({
   feed
 }) => {
   return (
