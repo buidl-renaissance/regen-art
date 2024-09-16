@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Parser from 'rss-parser';
 
 const StyledPage = styled.div`
   text-align: center;
@@ -22,9 +23,17 @@ const StyledPage = styled.div`
       }
     }
   }
+    .video-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
 `;
 
-const Index = () => {
+const Index = ({
+  feed
+}) => {
   return (
     <StyledPage>
       <div className="wrapper">
@@ -43,6 +52,22 @@ const Index = () => {
             </div>
           </div>
         </div>
+        <div className="video-container">
+          {feed.items.map((item: any) => {
+            return (
+              <iframe
+                className="media"
+                width="100%"
+                height="315"
+                src={`https://www.youtube.com/embed/${item.id.replace('yt:video:', '')}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            );
+          })}
+
+        </div>
       </div>
     </StyledPage>
   );
@@ -53,8 +78,12 @@ export const getServerSideProps = async () => {
 
   //   const image = event.image ?? event.venue?.image ?? env.image;
 
+  const parser = new Parser();
+  const feed = await parser.parseURL('https://www.youtube.com/feeds/videos.xml?channel_id=UC2qSsi0v6ib9ZNWOazpjWWQ');
+
   return {
     props: {
+      feed,
       meta: {
         title: 'Gods Work',
         description:
