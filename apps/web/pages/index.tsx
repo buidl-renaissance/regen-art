@@ -28,6 +28,8 @@ const StyledPage = styled.div`
       flex-direction: column;
       gap: 1rem;
       padding: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
     }
 `;
 
