@@ -1,5 +1,5 @@
 import { DAArtwork, getArtworks } from '@gods.work/utils';
-import { Artwork } from '@gods.work/ui';
+import { Artwork, Donate } from '@gods.work/ui';
 import styled from 'styled-components';
 
 const StyledPage = styled.div`
@@ -76,6 +76,7 @@ const AboutPage = ({ artworks }: AboutPageProps) => {
                 distributed.
               </p>
             </div>
+            <Donate />
             {/* <div className="button-container">
             <a href="/apply">
               <button>APPLY</button>

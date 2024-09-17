@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Parser from 'rss-parser';
-
+import { Donate } from '@gods.work/ui';
 const StyledPage = styled.div`
   text-align: center;
 
@@ -13,6 +13,7 @@ const StyledPage = styled.div`
       font-size: 1.2rem;
       color: #333;
     }
+    
     @media only screen and (max-width: 822px) {
       h1 {
         font-size: 2rem;
@@ -73,6 +74,7 @@ const Index: React.FC<Props> = ({
                 <button>Learn How</button>
               </a>
             </div>
+            <Donate />
           </div>
         </div>
         <div className="video-container">
