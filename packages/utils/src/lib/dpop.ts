@@ -56,6 +56,7 @@ export interface DAArtist {
   id: number;
   name: string;
   bio: string;
+  profile_picture: string;
 }
 
 export interface DAArtwork {

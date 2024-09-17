@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 
 import { DAArtwork, DAContent, getArtwork } from '@gods.work/utils';
+import { ArtistProfile } from '@gods.work/ui';
 // import { getArtwork } from "../../dpop";
 import moment from 'moment';
 
@@ -18,6 +19,8 @@ const ArtworkPage = ({ artwork }: ArtworkPageProps) => {
         <HeaderTimelineLeft />
         <HeaderTimelineDot />
         <h1 dangerouslySetInnerHTML={{ __html: artwork.title }} />
+        {/* <ArtistProfile artist={artwork.artist} /> */}
+        <div className="artist-name">by {artwork.artist.name}</div>
       </HeaderWrapper>
       {artwork.content?.map((content: DAContent, i: number) => {
         return (
@@ -101,6 +104,13 @@ const TimelineLine = styled.div`
 const HeaderWrapper = styled.div`
   /* border-left: solid 1px #333; */
   margin-left: 1rem;
+  .artist-name {
+    font-size: 0.8rem;
+    margin-left: 1rem;
+    font-style: italic;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const HeaderTimelineLine = styled.div`
@@ -113,9 +123,9 @@ const HeaderTimelineLine = styled.div`
 
 const HeaderTimelineLeft = styled.div`
   width: 1px;
-  height: 32px;
-  margin-top: -32px;
-  top: 94px;
+  height: 60px;
+  margin-top: -60px;
+  top: 116px;
   position: relative;
   background-color: #333;
 `;
