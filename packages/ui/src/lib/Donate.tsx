@@ -7,6 +7,7 @@ const StyledDonate = styled.div`
     font-weight: bold;
   }
   .donate-address {
+    font-size: 0.8rem;
   }
 `;
 
