@@ -55,12 +55,19 @@ const AboutPage = ({ artworks }: AboutPageProps) => {
         <div className="full-container">
           <div className="vertical-center">
             <h1>DOING GODS WORK</h1>
-            <p>
+            {/* <p>
               Through the collective efforts of artist communities, we will fund
               and nurture a vibrant, supportive environment where creativity
-              thrives and meaningful connections are forged.
+              thrives and meaningful connections are forged.              
+            </p> */}
+            <p>We provide free, custom-stretched canvas frames to members,
+              empowering them to create and give back. Through this initiative,
+              God's Work helps build stronger, healthier relationships in the
+              creative community while making a positive impact on society.
             </p>
-            <div className="steps">
+            <Donate />
+
+            {/* <div className="steps">
               <h2>HOW</h2>
               <p>
                 Artist hands are provided select paint materials in addition to
@@ -76,7 +83,6 @@ const AboutPage = ({ artworks }: AboutPageProps) => {
                 distributed.
               </p>
             </div>
-            <Donate />
             {/* <div className="button-container">
             <a href="/apply">
               <button>APPLY</button>
