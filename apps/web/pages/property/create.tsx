@@ -60,7 +60,7 @@ export default function CreateProperty() {
               label="Property Location"
               {...register('location', { required: 'Location is required.' })}
               error={!!errors.location}
-              helperText={errors.location?.message}
+              helperText={errors.location?.message as string}
               variant="outlined"
             />
           </Grid>
@@ -74,7 +74,7 @@ export default function CreateProperty() {
                 min: { value: 0.01, message: 'Price must be greater than 0.' },
               })}
               error={!!errors.price}
-              helperText={errors.price?.message}
+              helperText={errors.price?.message as string}
               variant="outlined"
             />
           </Grid>
@@ -88,7 +88,7 @@ export default function CreateProperty() {
                 required: 'Description is required.',
               })}
               error={!!errors.description}
-              helperText={errors.description?.message}
+              helperText={errors.description?.message as string}
               variant="outlined"
             />
           </Grid>
