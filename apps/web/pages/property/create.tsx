@@ -44,6 +44,13 @@ export default function CreateProperty() {
       <Typography variant="h4" gutterBottom>
         Mint New Property
       </Typography>
+      {!isConnected && (
+        <Box>
+          <Typography variant="body1" gutterBottom>
+            Get started by connecting your wallet.
+          </Typography>
+        </Box>
+      )}
       <Button
         variant="contained"
         onClick={connectWallet}
@@ -52,9 +59,10 @@ export default function CreateProperty() {
       >
         {isConnected ? `Connected: ${userAddress}` : 'Connect Wallet'}
       </Button>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
+      {isConnected && (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
             <TextField
               fullWidth
               label="Property Location"
@@ -97,8 +105,9 @@ export default function CreateProperty() {
               Mint Property
             </Button>
           </Grid>
-        </Grid>
-      </form>
+          </Grid>
+        </form>
+      )}
     </Box>
   );
 }
