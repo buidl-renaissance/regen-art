@@ -15,7 +15,7 @@ interface PropertyFormData {
 // Function for client-side interaction to create a new property
 export const mintProperty = async (
   propertyFormData: PropertyFormData
-): Promise<{ receipt: any; txHash: string }> => {
+): Promise<{ receipt: any; txHash: string; tokenId: string | null }> => {
   const { contractAddress, location, description, ipfsHash } = propertyFormData;
 
   try {
@@ -41,7 +41,9 @@ export const mintProperty = async (
     // Wait for transaction to be mined
     const receipt = await tx.wait();
 
-    return { receipt, txHash: tx.hash };
+    const tokenId = getTokenIdFromReceipt(receipt);
+
+    return { receipt, txHash: tx.hash, tokenId };
   } catch (error: any) {
     throw new Error(`Error creating property: ${error.message}`);
   }
