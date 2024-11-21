@@ -1,58 +1,83 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 
 contract RealEstateProperty is ERC721 {
     struct Property {
         uint256 id;
         string location;
-        uint256 price;
         string description;
-        uint256 totalShares;  // Total shares minted for the property
-        uint256 availableShares;  // Shares available for purchase
+        string ipfsHash;
+        uint256 totalShares; // Total shares minted for the property
+        mapping(address => uint256) shareBalances;
+        address[] stakeholders;
     }
 
     // Mapping to store properties by token ID
     mapping(uint256 => Property) public properties;
-    uint256 public nextPropertyId;
-
-    // Mapping to store share ownership by property ID and shareholder address
-    mapping(uint256 => mapping(address => uint256)) public sharesOwned;
+    uint256 public propertyCounter;
 
     // Event to be emitted when a new property is listed
-    event PropertyListed(uint256 propertyId, string location, uint256 price, string description);
+    event PropertyListed(
+        uint256 propertyId,
+        string location,
+        string description,
+        string ipfsHash
+    );
     event SharesMinted(uint256 propertyId, uint256 totalShares);
-    event SharesTransferred(uint256 propertyId, address from, address to, uint256 shares);
+    event SharesTransferred(
+        uint256 propertyId,
+        address from,
+        address to,
+        uint256 shares
+    );
 
-    constructor() ERC721("RealEstateProperty", "REPROP") {}
+    constructor() ERC721('RealEstateProperty', 'REPROP') {}
 
     // Function to mint a new property
+    // Mint a new property
     function mintProperty(
         address owner,
         string memory location,
-        uint256 price,
-        string memory description
+        string memory description,
+        string memory ipfsHash
     ) public {
-        uint256 propertyId = nextPropertyId;
-        properties[propertyId] = Property(propertyId, location, price, description, 0, 0);
-        _safeMint(owner, propertyId);
-        nextPropertyId++;
+        propertyCounter++;
+        uint256 propertyId = propertyCounter;
 
-        emit PropertyListed(propertyId, location, price, description);
+
+        Property storage newProperty = properties[propertyId];
+        newProperty.id = propertyId;
+        newProperty.location = location;
+        newProperty.ipfsHash = ipfsHash;
+        newProperty.description = description;
+        newProperty.totalShares = 1000; // Default total shares
+
+        newProperty.shareBalances[owner] = 1000; // Initial shares to the owner
+        newProperty.stakeholders.push(owner); // Add owner as the first stakeholder
+
+        _mint(owner, propertyId);
+
+        emit PropertyListed(propertyId, location, description, ipfsHash);
     }
 
     // Function to mint shares for a property (only callable by the property owner)
     function mintShares(uint256 propertyId, uint256 totalShares) public {
-        require(ownerOf(propertyId) == msg.sender, "Only the property owner can mint shares.");
-        require(properties[propertyId].totalShares == 0, "Shares already minted for this property.");
-        
+        require(
+            ownerOf(propertyId) == msg.sender,
+            'Only the property owner can mint shares.'
+        );
+        require(
+            properties[propertyId].totalShares == 0,
+            'Shares already minted for this property.'
+        );
+
         properties[propertyId].totalShares = totalShares;
-        properties[propertyId].availableShares = totalShares;
 
         // The property owner starts owning all the shares initially
-        sharesOwned[propertyId][msg.sender] = totalShares;
+        properties[propertyId].shareBalances[msg.sender] = totalShares;
 
         emit SharesMinted(propertyId, totalShares);
     }
@@ -63,56 +88,104 @@ contract RealEstateProperty is ERC721 {
         address to,
         uint256 shares
     ) public {
-        require(sharesOwned[propertyId][msg.sender] >= shares, "Not enough shares owned.");
-        require(to != address(0), "Invalid address.");
+        require(
+            properties[propertyId].shareBalances[msg.sender] >= shares,
+            'Not enough shares owned.'
+        );
+        require(to != address(0), 'Invalid address.');
+
+        Property storage property = properties[propertyId];
+
+        if (property.shareBalances[to] == 0) {
+            property.stakeholders.push(to); // Add to stakeholders if not already
+        }
 
         // Deduct shares from the sender and add to the recipient
-        sharesOwned[propertyId][msg.sender] -= shares;
-        sharesOwned[propertyId][to] += shares;
+        property.shareBalances[msg.sender] -= shares;
+        property.shareBalances[to] += shares;
 
         emit SharesTransferred(propertyId, msg.sender, to, shares);
     }
 
-    // Function to get share ownership for a property by a specific address
-    function getSharesOwned(uint256 propertyId, address owner) public view returns (uint256) {
-        return sharesOwned[propertyId][owner];
+    // Get shares owned by an address for a specific property
+    function getSharesOwned(
+        uint256 propertyId,
+        address owner
+    ) public view returns (uint256) {
+        return properties[propertyId].shareBalances[owner];
     }
 
-    // Function to retrieve property details
-    function getPropertyDetails(
-        uint256 propertyId
-    )
+    // **New Method**: Get properties in which the user owns shares
+    function getUserPropertiesWithShares(
+        address user
+    ) public view returns (uint256[] memory, uint256[] memory) {
+        uint256 count = 0;
+
+        // Count the number of properties the user has shares in
+        for (uint256 i = 1; i <= propertyCounter; i++) {
+            if (properties[i].shareBalances[user] > 0) {
+                count++;
+            }
+        }
+
+        // Initialize arrays to store property IDs and share counts
+        uint256[] memory userProperties = new uint256[](count);
+        uint256[] memory userShares = new uint256[](count);
+        uint256 index = 0;
+
+        // Populate arrays with properties and shares
+        for (uint256 i = 1; i <= propertyCounter; i++) {
+            uint256 shares = properties[i].shareBalances[user];
+            if (shares > 0) {
+                userProperties[index] = i;
+                userShares[index] = shares;
+                index++;
+            }
+        }
+
+        return (userProperties, userShares);
+    }
+
+    // **New Method**: Get property details including share distribution
+    function getProperty(uint256 propertyId)
         public
         view
         returns (
-            string memory location,
-            uint256 price,
-            string memory description,
             address owner,
+            string memory location,
+            string memory description,
+            string memory ipfsHash,
             uint256 totalShares,
-            uint256 availableShares
+            address[] memory stakeholders,
+            uint256[] memory shares
         )
     {
-        // require(_exists(propertyId), "Property does not exist.");
-        Property memory property = properties[propertyId];
-        return (property.location, property.price, property.description, owner, property.totalShares, property.availableShares);
+        Property storage property = properties[propertyId];
+        uint256 stakeholderCount = property.stakeholders.length;
+
+        uint256[] memory stakeholderShares = new uint256[](stakeholderCount);
+        for (uint256 i = 0; i < stakeholderCount; i++) {
+            address stakeholder = property.stakeholders[i];
+            stakeholderShares[i] = property.shareBalances[stakeholder];
+        }
+
+        return (
+            ownerOf(propertyId),
+            property.location,
+            property.description,
+            property.ipfsHash,
+            property.totalShares,
+            property.stakeholders,
+            stakeholderShares
+        );
     }
 
     // Function to transfer ownership of the property
     function transferProperty(address to, uint256 propertyId) public {
         require(
             ownerOf(propertyId) == msg.sender,
-            "Only the property owner can transfer."
+            'Only the property owner can transfer.'
         );
         _transfer(msg.sender, to, propertyId);
-    }
-
-    // Optional: Function to set the price of the property (only owner of property can set it)
-    function setPrice(uint256 propertyId, uint256 newPrice) public {
-        require(
-            ownerOf(propertyId) == msg.sender,
-            "Only the property owner can set the price."
-        );
-        properties[propertyId].price = newPrice;
     }
 }

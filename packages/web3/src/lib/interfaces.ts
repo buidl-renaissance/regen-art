@@ -1,9 +1,10 @@
 export interface Property {
   propertyId: number;
   location: string;
-  price: string;
+  ipfsHash: string;
   description: string;
   owner: string;
   totalShares: string;
-  availableShares: string;
+  stakeholders: string[];
+  shares: string[];
 }

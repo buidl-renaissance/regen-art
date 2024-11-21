@@ -1,13 +1,15 @@
 import React from 'react';
 import { useWallet } from '@gods.work/ui';
-import { mintProperty } from '@gods.work/web3';
+import { getTokenIdFromReceipt, mintProperty } from '@gods.work/web3';
 
 import { TextField, Button, Grid, Box, Typography } from '@mui/material';
 
 import { useForm } from 'react-hook-form';
+import router from 'next/router';
 
 export default function CreateProperty() {
   const { isConnected, connectWallet, userAddress } = useWallet();
+  const [isMinting, setIsMinting] = React.useState<boolean>(false);
 
   const {
     register,
@@ -23,19 +25,30 @@ export default function CreateProperty() {
     }
 
     // console.log('data: ', data);
-    const { location, price, description } = data;
+    const { location, description } = data;
+    const ipfsHash = '';
 
     try {
-      const receipt = await mintProperty({
-        contractAddress: '0xB15d7fba336BC916EE14864F04FafC9295926577',
+
+      setIsMinting(true);
+
+      const { receipt } = await mintProperty({
+        contractAddress: '0x06a3D2Fe63BB7197E96B9C5173E8a740AAC16F58',
         location,
-        price,
         description,
+        ipfsHash,
       });
+      const tokenId = getTokenIdFromReceipt(receipt);
+      // forward to the property details page
+      if (tokenId) {
+        router.push(`/property/${tokenId}`);
+      }
       console.log('Transaction confirmed:', receipt);
+      setIsMinting(false);
     } catch (error) {
       console.error('Error minting property:', error);
       alert('Failed to mint property. Check the console for details.');
+      setIsMinting(false);
     }
   };
 
@@ -65,7 +78,8 @@ export default function CreateProperty() {
             <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Property Location"
+              label="Location"
+              disabled={isMinting}
               {...register('location', { required: 'Location is required.' })}
               error={!!errors.location}
               helperText={errors.location?.message as string}
@@ -75,23 +89,10 @@ export default function CreateProperty() {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Price in ETH"
-              type="number"
-              {...register('price', {
-                required: 'Price is required.',
-                min: { value: 0.01, message: 'Price must be greater than 0.' },
-              })}
-              error={!!errors.price}
-              helperText={errors.price?.message as string}
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
               label="Description"
               multiline
               rows={4}
+              disabled={isMinting}
               {...register('description', {
                 required: 'Description is required.',
               })}
@@ -101,8 +102,8 @@ export default function CreateProperty() {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button variant="contained" color="primary" fullWidth type="submit">
-              Mint Property
+            <Button variant="contained" color="primary" fullWidth type="submit" disabled={isMinting}>
+              {isMinting ? 'Minting...' : 'Mint Property'}
             </Button>
           </Grid>
           </Grid>

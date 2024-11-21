@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 // import Image from 'next/image';
-import { getPropertyDetailsClient, Property } from '@gods.work/web3';
+import { getProperty, Property } from '@gods.work/web3';
 
 export default function PropertyDetails() {
   const router = useRouter();
@@ -12,7 +12,8 @@ export default function PropertyDetails() {
   useEffect(() => {
     if (id) {
         (async () => {
-            const property = await getPropertyDetailsClient('0xB15d7fba336BC916EE14864F04FafC9295926577', id as unknown as number);
+            const property = await getProperty('0x06a3D2Fe63BB7197E96B9C5173E8a740AAC16F58', id as unknown as number);
+            console.log('property: ', property);
             setProperty(property);
             setLoading(false);
         })();
@@ -44,13 +45,15 @@ export default function PropertyDetails() {
         
         <div className="space-y-6">
           <h1 className="text-3xl font-bold">{property.location}</h1>
-          <p className="text-2xl font-semibold text-green-600">
-            ${property.price.toLocaleString()}
-          </p>
 
           <div>
             <h2 className="text-xl font-semibold mb-2">Description</h2>
             <p className="text-gray-600">{property.description}</p>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold mb-2">IPFS Hash</h2>
+            <p className="text-gray-600">{property.ipfsHash}</p>
           </div>
 
           <button 
