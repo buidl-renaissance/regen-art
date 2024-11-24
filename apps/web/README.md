@@ -1,3 +1,5 @@
+We'll want to update this in the context of home affordability through the Detroit Housing Commission: https://detroitmi.gov/departments/housing-and-revitalization-department/affordable-housing
+
 # **Make It a Home: Tokenized Real Estate and Repair Assistance**
 
 Note: This is a working document.
