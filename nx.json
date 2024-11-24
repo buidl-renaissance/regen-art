@@ -55,11 +55,12 @@
     "e2e-ci--**/*": {
       "dependsOn": ["^build"]
     },
-<<<<<<< Updated upstream
     "@nx/js:tsc": {
-=======
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
     "@nx/esbuild:esbuild": {
->>>>>>> Stashed changes
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
