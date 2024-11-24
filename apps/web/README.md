@@ -78,19 +78,11 @@ The "Make It a Home" initiative prioritizes critical repairs to ensure homes mee
 5. **Completion and Validation:**  
    - Municipal inspectors validate repairs, and the NFT metadata updates to reflect the completed work.
 
----
-
 This approach ensures that health and habitability remain a priority while leveraging blockchain technology to enhance efficiency and accountability. 
 
 ---
 
-### **3. Incentive Mechanisms**
-- **Tax Rebates:** Automatically applied for eligible repairs and property improvements.
-- **Health Score Integration:** NFT metadata reflects property condition, unlocking benefits like reduced interest rates or priority funding.
-
----
-
-### **4.Decentralized Identifiers (DIDs) for Make It a Home**
+### **3.Decentralized Identifiers (DIDs) for Make It a Home**
 
 To support transparency and secure participation in the "Make It a Home" initiative, the system will leverage Decentralized Identifiers (DIDs). These will manage and verify stakeholder identities, ensuring secure interactions and ongoing engagement throughout the program. [Read detailed docs here.](https://github.com/johngulb/gods.work/edit/main/apps/web/README.md)
 
