@@ -5,21 +5,17 @@
   "scripts": {},
   "private": true,
   "dependencies": {
-<<<<<<< Updated upstream
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@google-cloud/speech": "^6.7.0",
     "@mui/base": "^5.0.0-beta.61",
     "@mui/material": "^6.1.7",
     "@mui/system": "^6.1.7",
     "@react-spring/web": "^9.7.4",
+    "axios": "^1.6.0",
     "dotenv": "^16.4.5",
     "ethers": "5.7",
-=======
-    "@google-cloud/speech": "^6.7.0",
-    "@react-spring/web": "^9.7.4",
-    "axios": "^1.6.0",
     "express": "~4.18.1",
->>>>>>> Stashed changes
     "moment": "^2.30.1",
     "next": "14.2.3",
     "node-record-lpcm16": "^1.0.1",
