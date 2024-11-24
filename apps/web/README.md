@@ -11,9 +11,9 @@ UCHC sells the properties to the occupants through a 0% interest land contract w
 In May 2022, the Center for Community Progress, with support from RCF, launched the Make it Home National Replication Initiative, which aimed to explore whether Make it Home could be replicated in other communities. Through the summer of 2022, we convened a Make it Home Learning Cohort, which helped thirteen selected communities learn about Detroit’s program and explore whether they could create a similar program in their communities.
 
 Resources:
-https://detroitmi.gov/news/make-it-home-partnership-helps-nearly-100-more-families-become-homeowners
-https://detroitmi.gov/news/rocket-community-fund-united-community-housing-coalition-and-city-detroit-help-1500-detroit-families
-https://communityprogress.org/services/technical-assistance/mih-nri/
+- https://detroitmi.gov/news/make-it-home-partnership-helps-nearly-100-more-families-become-homeowners
+- https://detroitmi.gov/news/rocket-community-fund-united-community-housing-coalition-and-city-detroit-help-1500-detroit-families
+- https://communityprogress.org/services/technical-assistance/mih-nri/
 
 The following document outlines how blockchain technology could provide means to assist the resilience and growth of this program.
 
