@@ -47,14 +47,19 @@
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
-      }
+      },
+      "exclude": ["apps/theword-e2e/**/*"]
     }
   ],
   "targetDefaults": {
     "e2e-ci--**/*": {
       "dependsOn": ["^build"]
     },
+<<<<<<< Updated upstream
     "@nx/js:tsc": {
+=======
+    "@nx/esbuild:esbuild": {
+>>>>>>> Stashed changes
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
