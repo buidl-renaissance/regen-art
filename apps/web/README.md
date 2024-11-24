@@ -90,22 +90,9 @@ This approach ensures that health and habitability remain a priority while lever
 
 ---
 
-## **Governance and Integration**
-- **DAO Oversight:** A decentralized organization manages the community fund, approves proposals, and monitors tax rebates.
-- **Government Collaboration:** Blockchain integration with local tax systems ensures accurate, real-time tracking and compliance.
+### **4.Decentralized Identifiers (DIDs) for Make It a Home**
 
----
-
-## **Benefits**
-- **Transparency:** Real-time tracking of ownership, tax payments, and repair progress.
-- **Community Empowerment:** Encourages local investment and collaboration in housing initiatives.
-- **Sustainability:** Incentivizes property maintenance and improvement for long-term habitability.
-
----
-
-### **3.Decentralized Identifiers (DIDs) for Make It a Home**
-
-To support transparency and secure participation in the "Make It a Home" initiative, the system will leverage Decentralized Identifiers (DIDs). These will manage and verify stakeholder identities, ensuring secure interactions and ongoing engagement throughout the program.
+To support transparency and secure participation in the "Make It a Home" initiative, the system will leverage Decentralized Identifiers (DIDs). These will manage and verify stakeholder identities, ensuring secure interactions and ongoing engagement throughout the program. [Read detailed docs here.](https://github.com/johngulb/gods.work/edit/main/apps/web/README.md)
 
 #### **Key Features of DIDs**
 1. **Identity Management:**
@@ -122,6 +109,19 @@ To support transparency and secure participation in the "Make It a Home" initiat
    - The decentralized nature of DIDs ensures that all stakeholders have access to immutable and transparent records of participation and property status.
 
 By incorporating DIDs, the initiative can provide a more robust and trustworthy system, improving engagement and accountability in the community.
+
+---
+
+## **Governance and Integration**
+- **DAO Oversight:** A decentralized organization manages the community fund, approves proposals, and monitors tax rebates.
+- **Government Collaboration:** Blockchain integration with local tax systems ensures accurate, real-time tracking and compliance.
+
+---
+
+## **Benefits**
+- **Transparency:** Real-time tracking of ownership, tax payments, and repair progress.
+- **Community Empowerment:** Encourages local investment and collaboration in housing initiatives.
+- **Sustainability:** Incentivizes property maintenance and improvement for long-term habitability.
 
 ---
 
