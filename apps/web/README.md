@@ -3,7 +3,15 @@
 Note: This is a working document.
 
 ## **Overview**
-["Make It a Home"](https://detroitmi.gov/news/make-it-home-partnership-helps-nearly-100-more-families-become-homeowners) is a Detroit program enabling tenants of foreclosed homes to purchase their residences at a reasonable price with 0% interest loans funded by local businesses. This project integrates blockchain technology to:
+
+Make It Home enables eligible Detroiters occupying tax-foreclosed houses to become homeowners rather than face eviction. The program leverages the City of Detroit’s “right of refusal,” allowing the City to purchase properties before the tax foreclosure auction for the value of the back taxes owed, or two times the state equalized value (SEV) if a Claim of Interest was filed by the previous owner. These properties are then purchased by the [United Community Housing Coalition](https://www.uchcdetroit.org/who-we-are) using philanthropic funding from the [Rocket Community Fund](https://www.rocketcommunityfund.org/).  
+
+UCHC sells the properties to the occupants through a 0% interest land contract with a payment plan that enables each resident to make payments into an escrow account for roughly a year until they reach the purchase price for their property. This year, families paid an average of $8,400 to achieve homeownership. Upon completing their payments, they receive the deed to their property, while also gaining access to home repair grants, loans and financial counseling provided through the program. 
+
+https://detroitmi.gov/news/make-it-home-partnership-helps-nearly-100-more-families-become-homeowners
+https://detroitmi.gov/news/rocket-community-fund-united-community-housing-coalition-and-city-detroit-help-1500-detroit-families
+
+This project explores how blockchain technology can assist in programs like this to:
 - Tokenize real estate assets for transparency and efficiency.
 - Streamline property tax tracking and rebate management.
 - Facilitate critical health and habitability repairs.
@@ -24,6 +32,10 @@ Note: This is a working document.
 ### **2. Health and Habitability Repair Assistance**
 
 The "Make It a Home" initiative prioritizes critical repairs to ensure homes meet health and safety standards. Blockchain technology can streamline this process, providing transparent and efficient solutions for homeowners, community stakeholders, and local government.
+
+The repair program was created in 2019 to ensure the stability of Make It Home participants who were often experiencing the negative consequences of deferred maintenance. Through grants and 0% interest loans, UCHC helps residents address home health and habitability home repairs.
+
+The following outlines how blockchain could assist in the future success of the program.
 
 #### **Repair Fund Management**
 - **Tokenized Repair Grants:**  
