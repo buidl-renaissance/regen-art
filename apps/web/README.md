@@ -8,13 +8,14 @@ Make It Home enables eligible Detroiters occupying tax-foreclosed houses to beco
 
 UCHC sells the properties to the occupants through a 0% interest land contract with a payment plan that enables each resident to make payments into an escrow account for roughly a year until they reach the purchase price for their property. This year, families paid an average of $8,400 to achieve homeownership. Upon completing their payments, they receive the deed to their property, while also gaining access to home repair grants, loans and financial counseling provided through the program. 
 
+In May 2022, the Center for Community Progress, with support from RCF, launched the Make it Home National Replication Initiative, which aimed to explore whether Make it Home could be replicated in other communities. Through the summer of 2022, we convened a Make it Home Learning Cohort, which helped thirteen selected communities learn about Detroit’s program and explore whether they could create a similar program in their communities.
+
+Resources:
 https://detroitmi.gov/news/make-it-home-partnership-helps-nearly-100-more-families-become-homeowners
 https://detroitmi.gov/news/rocket-community-fund-united-community-housing-coalition-and-city-detroit-help-1500-detroit-families
+https://communityprogress.org/services/technical-assistance/mih-nri/
 
-This project explores how blockchain technology can assist in programs like this to:
-- Tokenize real estate assets for transparency and efficiency.
-- Streamline property tax tracking and rebate management.
-- Facilitate critical health and habitability repairs.
+The following document outlines how blockchain technology could provide means to assist the resilience and growth of this program.
 
 ---
 
