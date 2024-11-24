@@ -1,5 +1,7 @@
 # **Make It a Home: Tokenized Real Estate and Repair Assistance**
 
+Note: This is a working document.
+
 ## **Overview**
 ["Make It a Home"](https://detroitmi.gov/news/make-it-home-partnership-helps-nearly-100-more-families-become-homeowners) is a Detroit program enabling tenants of foreclosed homes to purchase their residences at a reasonable price with 0% interest loans funded by local businesses. This project integrates blockchain technology to:
 - Tokenize real estate assets for transparency and efficiency.
