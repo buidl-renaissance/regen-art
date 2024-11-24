@@ -82,7 +82,7 @@ This approach ensures that health and habitability remain a priority while lever
 
 ---
 
-### **3.Decentralized Identifiers (DIDs) for Make It a Home**
+### **3. Decentralized Identifiers (DIDs) for Make It a Home**
 
 To support transparency and secure participation in the "Make It a Home" initiative, the system will leverage Decentralized Identifiers (DIDs). These will manage and verify stakeholder identities, ensuring secure interactions and ongoing engagement throughout the program. [Read detailed docs here.](https://github.com/johngulb/gods.work/edit/main/apps/web/README.md)
 
