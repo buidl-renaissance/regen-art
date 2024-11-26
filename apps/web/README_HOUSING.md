@@ -8,12 +8,13 @@ This document outlines how blockchain technology can enhance the efficiency, tra
 ## **1. Make It a Home Program**
 
 ### **Program Overview**
-A program that allows tenants of foreclosed homes to purchase the property at a reasonable price with 0% interest loans provided by a community fund.
+A program that allows tenants of foreclosed homes to purchase the property at a reasonable price with 0% interest loans provided by a community fund. Participants can also access **home repair grants** focused on critical repairs that ensure health and habitability.
 
 ### **Blockchain Integration**
-- **Tokenized Ownership:** Create NFTs to represent property ownership, ensuring clear, immutable records.
-- **Tax Management:** Smart contracts to automate property tax tracking and manage tax-rebate initiatives tied to property improvements.
-- **Funding Transparency:** Use blockchain to monitor loan disbursements and repayments, ensuring community fund accountability.
+- **Tokenized Ownership:** Create NFTs to represent property ownership, ensuring clear, immutable records of ownership transfer.
+- **Tax Management:** Use smart contracts to automate property tax tracking and rebates for improvements.
+- **Repair Grant Allocation:** Tokenize repair grant disbursements to track usage and ensure funds are directed toward critical health and habitability improvements.
+- **Funding Transparency:** Use blockchain to monitor loan disbursements, repair grants, and repayments, ensuring community fund accountability.
 - **Decentralized Identifiers (DIDs):** Maintain updated records of stakeholders for secure social account recovery and community engagement.
 
 ---
@@ -35,11 +36,11 @@ Focuses on providing affordable housing and managing federal programs that fund 
 ### **Program Summaries**
 #### **Structures**
 - Platforms include Auction, Own It Now, Rehabbed & Ready, and MLS Listings.
-- **Integration:** Tokenize property listings as NFTs to streamline ownership transfers and manage compliance.
+  - **Integration:** Tokenize property listings as NFTs to streamline ownership transfers and manage compliance.
 
 #### **Vacant Land**
 - Includes Side Lots, Neighborhood Lots, Oversized Lots, and Infill Lots.
-- **Integration:** Tokenize land parcels for fractional investments and enable community-driven development initiatives.
+  - **Integration:** Tokenize land parcels for fractional investments and enable community-driven development initiatives.
 
 #### **Policy Programs**
 - **Buy Back / Occupied:** Provide renters with pathways to ownership.
@@ -71,6 +72,10 @@ Provides property tax abatements for residential property owners who occupy thei
 - **Smart Contracts:** Automate abatement management and ensure compliance tracking.
 - **Proof of Improvements:** Tokenized funding tied to smart contracts for repair validation.
 - **Community Engagement:** Reward tokens for compliance and participation in community initiatives.
+- **Tokenized Tax Credits:**
+  - Issue blockchain-based tax credits to incentivize participation in the NEZH program.
+  - Credits could be redeemable against future tax bills or transferable, enabling a secondary market for tax incentives.
+  - Smart contracts ensure credits are issued only to eligible participants.
 
 ---
 
@@ -81,9 +86,9 @@ Collaborate with city officials, community leaders, and program administrators t
 
 ### **2. Pilot Implementation**
 Develop prototypes for each program:
-- Tokenized property ownership and tax management (Make It a Home).
+- Tokenized property ownership, repair grants, and tax management (Make It a Home).
 - Compliance tracking and reward systems (DLBA).
-- Transparent fund management and abatement automation (NEZH).
+- Tax credits and abatement automation (NEZH).
 
 ### **3. Educational Outreach**
 Host workshops and informational sessions to educate residents and stakeholders on the benefits of blockchain integration.
