@@ -4,7 +4,7 @@
 
 ## **Features**
 - **Collaborative Community:** Tools for communities to share knowledge, skills, and opportunities.  
-- **Contracts:** Tools for smart contracts that enable communities and individuals to manage assets.
+- **Contracts:** Tools to deploy smart contracts that enable communities and individuals to manage assets.
 - **Community Giveback:** Mechanisms to spearhead initiatives that contribute to funding events and resources for the community.
 - **Transparent Resource Allocation:** All contributions and deployments are managed transparently to ensure accountability.
 
