@@ -23,10 +23,9 @@ Welcome to God's Work! This guide will help you get involved with the project, w
 ## **For Developers**
 
 1. **Set Up the Project:**
-   - Fork the repository on GitHub.
-   - Clone your fork:
+   - Clone:
      ```bash
-     git clone https://github.com/your-username/gods-work.git
+     git clone https://github.com/johngulb/gods-work.git
      ```
    - Install dependencies:
      ```bash
