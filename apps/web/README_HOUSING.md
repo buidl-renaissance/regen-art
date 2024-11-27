@@ -1,4 +1,4 @@
-# Blockchain Integration for Detroit Community Programs
+# Detroit Housing Programs
 
 ## Overview
 This document outlines how blockchain technology can enhance the efficiency, transparency, and accessibility of key Detroit community programs, including **Make It a Home**, **Detroit Housing Commission Initiatives**, **Detroit Land Bank Authority (DLBA) Programs**, and the **Neighborhood Enterprise Zone Homestead (NEZH)** program.
