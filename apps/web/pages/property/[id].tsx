@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 // import Image from 'next/image';
 import { getProperty, Property } from '@gods.work/web3';
 import { TransferShares } from '@gods.work/ui';
-import { transferShares } from '@gods.work/web3';
+
 export default function PropertyDetails() {
   const router = useRouter();
   const { id } = router.query;
@@ -53,6 +53,11 @@ export default function PropertyDetails() {
           </div>
 
           <div>
+            <h2 className="text-xl font-semibold mb-2">Owner</h2>
+            <p className="text-gray-600">{property.owner}</p>
+          </div>
+
+          <div>
             <h2 className="text-xl font-semibold mb-2">IPFS Hash</h2>
             <p className="text-gray-600">{property.ipfsHash}</p>
           </div>
@@ -61,8 +66,8 @@ export default function PropertyDetails() {
             <h2 className="text-xl font-semibold mb-2">Shares Breakdown</h2>
             <div className="text-gray-600">
               <p>Total Shares: {property.totalShares}</p>
-              {/* <p>Available Shares: {property.availableShares}</p>
-              <p>Sold Shares: {property.totalShares - property.availableShares}</p> */}
+              <p>Available Shares: {Number(property.shares[property.stakeholders.indexOf(property.owner)])}</p>
+              {/* <p>Sold Shares: {property.totalShares - property.availableShares}</p> */}
               {property.stakeholders && property.stakeholders.length > 0 && (
                 <div className="mt-2">
                   <p className="font-medium">Shareholders:</p>
@@ -77,7 +82,7 @@ export default function PropertyDetails() {
               )}
             </div>
           </div>
-
+          
           <TransferShares
             propertyId={property.propertyId}
             shareholders={property.stakeholders}
