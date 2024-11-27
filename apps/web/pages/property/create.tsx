@@ -1,6 +1,6 @@
 import React from 'react';
 import { useWallet } from '@gods.work/ui';
-import { getTokenIdFromReceipt, mintProperty } from '@gods.work/web3';
+import { mintProperty } from '@gods.work/web3';
 
 import { TextField, Button, Grid, Box, Typography } from '@mui/material';
 

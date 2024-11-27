@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 // import Image from 'next/image';
 import { getProperty, Property } from '@gods.work/web3';
-
+import { TransferShares } from '@gods.work/ui';
+import { transferShares } from '@gods.work/web3';
 export default function PropertyDetails() {
   const router = useRouter();
   const { id } = router.query;
@@ -56,12 +57,32 @@ export default function PropertyDetails() {
             <p className="text-gray-600">{property.ipfsHash}</p>
           </div>
 
-          <button 
-            className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
-            onClick={() => {/* Add contact functionality */}}
-          >
-            Contact Agent
-          </button>
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Shares Breakdown</h2>
+            <div className="text-gray-600">
+              <p>Total Shares: {property.totalShares}</p>
+              {/* <p>Available Shares: {property.availableShares}</p>
+              <p>Sold Shares: {property.totalShares - property.availableShares}</p> */}
+              {property.stakeholders && property.stakeholders.length > 0 && (
+                <div className="mt-2">
+                  <p className="font-medium">Shareholders:</p>
+                  <ul className="list-disc pl-5">
+                    {property.stakeholders.map((stakeholder, index) => (
+                      <li key={index}>
+                        {stakeholder}: {property.shares[index]} shares
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <TransferShares
+            propertyId={property.propertyId}
+            shareholders={property.stakeholders}
+            shares={property.shares}
+          />
         </div>
       </div>
     </div>
