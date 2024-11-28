@@ -77,7 +77,7 @@ export default function PropertyDetails() {
                 <Typography variant="body2" color="text.secondary">
                   {property.description}
                 </Typography>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* <div>
                     <p className="text-sm font-medium">Property Type</p>
                     <p>{property.type}</p>
@@ -90,7 +90,13 @@ export default function PropertyDetails() {
                     <Typography variant="h6" color="text.secondary">
                       Owner
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      maxWidth="120px"
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                    >
                       {property.owner}
                     </Typography>
                   </div>
@@ -113,7 +119,8 @@ export default function PropertyDetails() {
                         property.shares[
                           property.stakeholders.indexOf(property.owner)
                         ]
-                      )} of {property.totalShares}
+                      )}{' '}
+                      of {property.totalShares}
                     </Typography>
                   </div>
 
@@ -155,10 +162,15 @@ export default function PropertyDetails() {
                           {property.stakeholders.map((stakeholder, index) => (
                             <TableRow key={index}>
                               <TableCell>
-                                {stakeholder}
-                                {stakeholder === property.owner
-                                  ? ' [owner]'
-                                  : ''}
+                                <Typography
+                                  maxWidth="120px"
+                                  overflow="hidden"
+                                  textOverflow="ellipsis"
+                                >
+                                  {stakeholder === property.owner
+                                    ? ' [property owner]'
+                                    : stakeholder}
+                                </Typography>
                               </TableCell>
                               <TableCell>{property.shares[index]}</TableCell>
                               <TableCell>
