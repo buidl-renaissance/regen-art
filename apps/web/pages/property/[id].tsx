@@ -3,6 +3,17 @@ import { useRouter } from 'next/router';
 // import Image from 'next/image';
 import { getProperty, Property } from '@gods.work/web3';
 import { TransferShares } from '@gods.work/ui';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Card,
+  CardContent,
+  Typography,
+} from '@mui/material';
+
 import { Box } from '@mui/material';
 
 export default function PropertyDetails() {
@@ -42,9 +53,9 @@ export default function PropertyDetails() {
   }
 
   return (
-    <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4 }}>
+    <Box sx={{ maxWidth: 800, mx: 'auto', mt: 4 }}>
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8">
           {/* <div className="relative h-[400px]">
           {property.images[0] && (
             <Image
@@ -58,51 +69,110 @@ export default function PropertyDetails() {
         </div> */}
 
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold">{property.location}</h1>
-
-            <div>
-              <h2 className="text-xl font-semibold mb-2">Description</h2>
-              <p className="text-gray-600">{property.description}</p>
-            </div>
-
-            <div>
-              <h2 className="text-xl font-semibold mb-2">Owner</h2>
-              <p className="text-gray-600">{property.owner}</p>
-            </div>
-
-            <div>
-              <h2 className="text-xl font-semibold mb-2">IPFS Hash</h2>
-              <p className="text-gray-600">{property.ipfsHash}</p>
-            </div>
-
-            <div>
-              <h2 className="text-xl font-semibold mb-2">Shares Breakdown</h2>
-              <div className="text-gray-600">
-                <p>Total Shares: {property.totalShares}</p>
-                <p>
-                  Available Shares:{' '}
-                  {Number(
-                    property.shares[
-                      property.stakeholders.indexOf(property.owner)
-                    ]
-                  )}
-                </p>
-                {/* <p>Sold Shares: {property.totalShares - property.availableShares}</p> */}
-                {property.stakeholders && property.stakeholders.length > 0 && (
-                  <div className="mt-2">
-                    <p className="font-medium">Shareholders:</p>
-                    <ul className="list-disc pl-5">
-                      {property.stakeholders.map((stakeholder, index) => (
-                        <li key={index}>
-                          {stakeholder}: {property.shares[index]} shares{' '}
-                          {(Number(property.shares[index]) /
-                            Number(property.totalShares)) *
-                            100}
-                          %{stakeholder === property.owner ? '[owner]' : ''}
-                        </li>
-                      ))}
-                    </ul>
+            <Card variant="outlined">
+              <CardContent>
+                <Typography variant="h2" color="text.primary">
+                  {property.location}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {property.description}
+                </Typography>
+                <div className="grid grid-cols-2 gap-4">
+                  {/* <div>
+                    <p className="text-sm font-medium">Property Type</p>
+                    <p>{property.type}</p>
                   </div>
+                  <div>
+                    <p className="text-sm font-medium">Number of Units</p>
+                    <p>{property.units}</p>
+                  </div> */}
+                  <div>
+                    <Typography variant="h6" color="text.secondary">
+                      Owner
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {property.owner}
+                    </Typography>
+                  </div>
+                  <div>
+                    <Typography variant="h6" color="text.secondary">
+                      IPFS Hash
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {property.ipfsHash?.length > 0
+                        ? property.ipfsHash
+                        : '(not set)'}
+                    </Typography>
+                  </div>
+                  <div>
+                    <Typography variant="h6" color="text.secondary">
+                      Available Shares
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {Number(
+                        property.shares[
+                          property.stakeholders.indexOf(property.owner)
+                        ]
+                      )} of {property.totalShares}
+                    </Typography>
+                  </div>
+
+                  {/* <div>
+                    <p className="text-sm font-medium">Available Shares</p>
+                    <p>{property.availableShares}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">Price per Share</p>
+                    <p>${property.pricePerShare}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">Percentage Owned</p>
+                    <p>{percentageOwned.toFixed(2)}%</p>
+                  </div> */}
+                </div>
+              </CardContent>
+            </Card>
+
+            <div>
+              <div className="text-gray-600">
+                {property.stakeholders && property.stakeholders.length > 0 && (
+                  <Card variant="outlined">
+                    <CardContent>
+                      <Typography variant="h5">Shareholders</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        The following table shows the shareholders of the
+                        property and their respective shares.
+                      </Typography>
+                      <Table>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Shareholder</TableCell>
+                            <TableCell>Shares</TableCell>
+                            <TableCell>Percentage</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {property.stakeholders.map((stakeholder, index) => (
+                            <TableRow key={index}>
+                              <TableCell>
+                                {stakeholder}
+                                {stakeholder === property.owner
+                                  ? ' [owner]'
+                                  : ''}
+                              </TableCell>
+                              <TableCell>{property.shares[index]}</TableCell>
+                              <TableCell>
+                                {(Number(property.shares[index]) /
+                                  Number(property.totalShares)) *
+                                  100}
+                                %
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
                 )}
               </div>
             </div>
