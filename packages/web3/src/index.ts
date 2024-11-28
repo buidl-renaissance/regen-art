@@ -3,4 +3,5 @@ export * from './lib/getProperty';
 export * from './lib/interfaces';
 export * from './lib/mintProperty';
 export * from './lib/transferShares';
-export * from './lib/web3';
+export * from './lib/registerInvestor';
+export * from './lib/getAllInvestors';

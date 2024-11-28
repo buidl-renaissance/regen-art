@@ -8,10 +8,14 @@ contract InvestorRegistry {
         bool isVerified;
         address verifier;
         uint256 verificationTimestamp;
+        string name;
     }
 
     // Mapping to store registered investors and their details
     mapping(address => InvestorDetails) private investors;
+    
+    // Array to store all investor addresses
+    address[] private investorList;
     
     // Mapping of authorized third-party verifiers
     mapping(address => bool) private authorizedVerifiers;
@@ -58,18 +62,38 @@ contract InvestorRegistry {
         emit VerifierRemoved(verifier);
     }
     
-    // Register a new investor
-    function registerInvestor(address investor) external onlyOwner {
+    // Register a new investor - can be called by anyone to register themselves
+    function registerInvestor(string memory name) external {
+        require(!investors[msg.sender].isRegistered, "Investor already registered");
+        require(bytes(name).length > 0, "Name cannot be empty");
+        
+        investors[msg.sender] = InvestorDetails({
+            isRegistered: true,
+            isVerified: false,
+            verifier: address(0),
+            verificationTimestamp: 0,
+            name: name
+        });
+        
+        investorList.push(msg.sender);
+        emit InvestorRegistered(msg.sender);
+    }
+
+    // Register another investor - only owner can register others
+    function registerInvestorByOwner(address investor, string memory name) external onlyOwner {
         require(investor != address(0), "Invalid investor address");
         require(!investors[investor].isRegistered, "Investor already registered");
+        require(bytes(name).length > 0, "Name cannot be empty");
         
         investors[investor] = InvestorDetails({
             isRegistered: true,
             isVerified: false,
             verifier: address(0),
-            verificationTimestamp: 0
+            verificationTimestamp: 0,
+            name: name
         });
         
+        investorList.push(investor);
         emit InvestorRegistered(investor);
     }
     
@@ -77,6 +101,15 @@ contract InvestorRegistry {
     function removeInvestor(address investor) external onlyOwner {
         require(investor != address(0), "Invalid investor address");
         require(investors[investor].isRegistered, "Investor not registered");
+        
+        // Remove from investorList array
+        for(uint i = 0; i < investorList.length; i++) {
+            if(investorList[i] == investor) {
+                investorList[i] = investorList[investorList.length - 1];
+                investorList.pop();
+                break;
+            }
+        }
         
         delete investors[investor];
         emit InvestorRemoved(investor);
@@ -108,19 +141,25 @@ contract InvestorRegistry {
         bool isRegistered,
         bool isVerified,
         address verifier,
-        uint256 verificationTimestamp
+        uint256 verificationTimestamp,
+        string memory name
     ) {
         InvestorDetails memory details = investors[investor];
         return (
             details.isRegistered,
             details.isVerified,
             details.verifier,
-            details.verificationTimestamp
+            details.verificationTimestamp,
+            details.name
         );
     }
     
     function isAuthorizedVerifier(address verifier) external view returns (bool) {
         return authorizedVerifiers[verifier];
     }
-}
 
+    // Get all investors
+    function getAllInvestors() external view returns (address[] memory) {
+        return investorList;
+    }
+}
