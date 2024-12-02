@@ -1,24 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-interface IERC20 {
-    function totalSupply() external view returns (uint256);
-    function balanceOf(address account) external view returns (uint256);
-    function transfer(address recipient, uint256 amount) external returns (bool);
-    function approve(address spender, uint256 amount) external returns (bool);
-    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
-}
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./XNBC.sol";
 
 contract DogeStaking {
     IERC20 public dogeToken; // DOGE token address
+    XNBC public xnbcToken;   // XNBC token address
     address public owner;
-    uint256 public rewardRate; // rate at which rewards are given, in terms of DOGE per block
+    uint256 public rewardRate; // rate at which XNBC rewards are minted per block
     uint256 public totalStaked;
 
     // Struct for storing staking information
     struct Staker {
         uint256 amountStaked;
-        uint256 rewardDebt; // Tracks the amount of reward the staker is entitled to
+        uint256 rewardDebt; // Tracks the amount of XNBC the staker is entitled to
         uint256 lastUpdateBlock; // Last block when rewards were calculated for this staker
     }
 
@@ -35,8 +31,9 @@ contract DogeStaking {
         _;
     }
 
-    constructor(address _dogeToken, uint256 _rewardRate) {
+    constructor(address _dogeToken, address _xnbcToken, uint256 _rewardRate) {
         dogeToken = IERC20(_dogeToken);
+        xnbcToken = XNBC(_xnbcToken);
         rewardRate = _rewardRate;
         owner = msg.sender;
     }
@@ -80,7 +77,7 @@ contract DogeStaking {
         emit Unstaked(msg.sender, amount);
     }
 
-    // Function to claim rewards
+    // Function to claim XNBC rewards
     function claimReward() external {
         Staker storage staker = stakers[msg.sender];
         _updateReward(msg.sender);
@@ -91,8 +88,8 @@ contract DogeStaking {
         // Reset the reward debt
         staker.rewardDebt = 0;
 
-        // Transfer the reward to the user
-        dogeToken.transfer(msg.sender, reward);
+        // Mint XNBC tokens to the user
+        xnbcToken.mint(msg.sender, reward);
 
         emit RewardPaid(msg.sender, reward);
     }
