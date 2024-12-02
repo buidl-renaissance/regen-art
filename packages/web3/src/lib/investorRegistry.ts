@@ -226,29 +226,41 @@ export const INVESTOR_REGISTRY_ABI = [
     name: 'getInvestorDetails',
     outputs: [
       {
-        internalType: 'bool',
-        name: 'isRegistered',
-        type: 'bool',
-      },
-      {
-        internalType: 'bool',
-        name: 'isVerified',
-        type: 'bool',
-      },
-      {
-        internalType: 'address',
-        name: 'verifier',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'verificationTimestamp',
-        type: 'uint256',
-      },
-      {
-        internalType: 'string',
-        name: 'name',
-        type: 'string',
+        components: [
+          {
+            internalType: 'bool',
+            name: 'isRegistered',
+            type: 'bool',
+          },
+          {
+            internalType: 'bool',
+            name: 'isVerified',
+            type: 'bool',
+          },
+          {
+            internalType: 'address',
+            name: 'verifier',
+            type: 'address',
+          },
+          {
+            internalType: 'uint256',
+            name: 'verificationTimestamp',
+            type: 'uint256',
+          },
+          {
+            internalType: 'string',
+            name: 'name',
+            type: 'string',
+          },
+          {
+            internalType: 'address',
+            name: 'investor',
+            type: 'address',
+          },
+        ],
+        internalType: 'struct InvestorRegistry.InvestorDetails',
+        name: '',
+        type: 'tuple',
       },
     ],
     stateMutability: 'view',
@@ -276,6 +288,64 @@ export const INVESTOR_REGISTRY_ABI = [
   {
     inputs: [],
     name: 'getAllInvestors',
+    outputs: [
+      {
+        internalType: 'address[]',
+        name: '',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getAllInvestorsDetails',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'bool',
+            name: 'isRegistered',
+            type: 'bool',
+          },
+          {
+            internalType: 'bool',
+            name: 'isVerified',
+            type: 'bool',
+          },
+          {
+            internalType: 'address',
+            name: 'verifier',
+            type: 'address',
+          },
+          {
+            internalType: 'uint256',
+            name: 'verificationTimestamp',
+            type: 'uint256',
+          },
+          {
+            internalType: 'string',
+            name: 'name',
+            type: 'string',
+          },
+          {
+            internalType: 'address',
+            name: 'investor',
+            type: 'address',
+          },
+        ],
+        internalType: 'struct InvestorRegistry.InvestorDetails[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getAuthorizedVerifiers',
     outputs: [
       {
         internalType: 'address[]',

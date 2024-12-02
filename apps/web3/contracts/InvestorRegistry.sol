@@ -9,6 +9,7 @@ contract InvestorRegistry {
         address verifier;
         uint256 verificationTimestamp;
         string name;
+        address investor;
     }
 
     // Mapping to store registered investors and their details
@@ -19,6 +20,9 @@ contract InvestorRegistry {
     
     // Mapping of authorized third-party verifiers
     mapping(address => bool) private authorizedVerifiers;
+    
+    // Array to store all verifier addresses
+    address[] private verifierList;
     
     // Owner of the contract
     address public owner;
@@ -51,6 +55,7 @@ contract InvestorRegistry {
         require(!authorizedVerifiers[verifier], "Verifier already authorized");
         
         authorizedVerifiers[verifier] = true;
+        verifierList.push(verifier);
         emit VerifierAuthorized(verifier);
     }
     
@@ -59,6 +64,16 @@ contract InvestorRegistry {
         require(authorizedVerifiers[verifier], "Verifier not authorized");
         
         authorizedVerifiers[verifier] = false;
+        
+        // Remove from verifierList array
+        for(uint i = 0; i < verifierList.length; i++) {
+            if(verifierList[i] == verifier) {
+                verifierList[i] = verifierList[verifierList.length - 1];
+                verifierList.pop();
+                break;
+            }
+        }
+        
         emit VerifierRemoved(verifier);
     }
     
@@ -72,7 +87,8 @@ contract InvestorRegistry {
             isVerified: false,
             verifier: address(0),
             verificationTimestamp: 0,
-            name: name
+            name: name,
+            investor: msg.sender
         });
         
         investorList.push(msg.sender);
@@ -90,7 +106,8 @@ contract InvestorRegistry {
             isVerified: false,
             verifier: address(0),
             verificationTimestamp: 0,
-            name: name
+            name: name,
+            investor: investor
         });
         
         investorList.push(investor);
@@ -137,21 +154,10 @@ contract InvestorRegistry {
         return investors[investor].isVerified;
     }
     
-    function getInvestorDetails(address investor) external view returns (
-        bool isRegistered,
-        bool isVerified,
-        address verifier,
-        uint256 verificationTimestamp,
-        string memory name
-    ) {
-        InvestorDetails memory details = investors[investor];
-        return (
-            details.isRegistered,
-            details.isVerified,
-            details.verifier,
-            details.verificationTimestamp,
-            details.name
-        );
+    function getInvestorDetails(address investor) external view returns (InvestorDetails memory) {
+        require(investor != address(0), "Invalid investor address");
+        require(investors[investor].isRegistered, "Investor not registered");
+        return investors[investor];
     }
     
     function isAuthorizedVerifier(address verifier) external view returns (bool) {
@@ -161,5 +167,19 @@ contract InvestorRegistry {
     // Get all investors
     function getAllInvestors() external view returns (address[] memory) {
         return investorList;
+    }
+
+    // Get all investors with their details
+    function getAllInvestorsDetails() external view returns (InvestorDetails[] memory) {
+        InvestorDetails[] memory allInvestors = new InvestorDetails[](investorList.length);
+        for(uint i = 0; i < investorList.length; i++) {
+            allInvestors[i] = investors[investorList[i]];
+        }
+        return allInvestors;
+    }
+
+    // Get all authorized verifiers
+    function getAuthorizedVerifiers() external view returns (address[] memory) {
+        return verifierList;
     }
 }

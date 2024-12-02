@@ -2,15 +2,15 @@ import { ethers } from 'ethers';
 import { getWalletSigner } from './connectWallet';
 import { INVESTOR_REGISTRY_ABI } from './investorRegistry';
 
-interface RegisterInvestorData {
-  name: string;
+interface AuthorizeVerifierData {
+    verifierAddress: string;
 }
 
 // Function for client-side interaction to create a new property
-export const registerInvestor = async (
-  registerInvestorData: RegisterInvestorData
+export const authorizeVerifier = async (
+  authorizeVerifierData: AuthorizeVerifierData
 ): Promise<{ receipt: any; txHash: string }> => {
-  const { name } = registerInvestorData;
+  const { verifierAddress } = authorizeVerifierData;
 
   try {
     // Need to use a signer since this is a state-changing operation
@@ -24,7 +24,7 @@ export const registerInvestor = async (
     );
 
     // Create property
-    const tx = await contract['registerInvestor'](name, { gasLimit: 16721975 });
+    const tx = await contract['authorizeVerifier'](verifierAddress, { gasLimit: 16721975 });
 
     // Wait for transaction to be mined
     const receipt = await tx.wait();

@@ -5,3 +5,6 @@ export * from './lib/mintProperty';
 export * from './lib/transferShares';
 export * from './lib/registerInvestor';
 export * from './lib/getAllInvestors';
+export * from './lib/getAuthorizedVerifiers';
+export * from './lib/authorizeVerifier';
+export * from './lib/verifyInvestor';
