@@ -1,3 +1,15 @@
+import { ethers } from 'ethers';
+
+export const InvestorRegistryContract = (
+  provider: ethers.providers.JsonRpcProvider | ethers.Signer
+) => {
+  return new ethers.Contract(
+    '0x7C52880F5e72d823FD00Ff9dD236e9393472aFb9',
+    INVESTOR_REGISTRY_ABI,
+    provider
+  );
+};
+
 export const INVESTOR_REGISTRY_ABI = [
   {
     inputs: [],
@@ -61,6 +73,19 @@ export const INVESTOR_REGISTRY_ABI = [
       {
         indexed: true,
         internalType: 'address',
+        name: 'newOwner',
+        type: 'address',
+      },
+    ],
+    name: 'OwnershipTransferred',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
         name: 'verifier',
         type: 'address',
       },
@@ -92,6 +117,19 @@ export const INVESTOR_REGISTRY_ABI = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'newOwner',
+        type: 'address',
+      },
+    ],
+    name: 'transferOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
