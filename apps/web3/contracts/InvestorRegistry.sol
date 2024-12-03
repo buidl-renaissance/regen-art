@@ -33,7 +33,7 @@ contract InvestorRegistry {
     event VerifierAuthorized(address indexed verifier);
     event VerifierRemoved(address indexed verifier);
     event InvestorVerified(address indexed investor, address indexed verifier, uint256 timestamp);
-    
+    event OwnershipTransferred(address indexed newOwner);
     constructor() {
         owner = msg.sender;
     }
@@ -49,6 +49,12 @@ contract InvestorRegistry {
         _;
     }
     
+    function transferOwnership(address newOwner) external onlyOwner {
+        require(newOwner != address(0), "Invalid new owner address");
+        owner = newOwner;
+        emit OwnershipTransferred(owner);
+    }
+
     // Owner functions to manage verifiers
     function authorizeVerifier(address verifier) external onlyOwner {
         require(verifier != address(0), "Invalid verifier address");
