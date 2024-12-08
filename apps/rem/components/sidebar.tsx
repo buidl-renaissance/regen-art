@@ -1,5 +1,8 @@
 import Link from 'next/link'
-import { Home, Building, PlusCircle, Settings, ShoppingCart, Briefcase } from 'lucide-react'
+import { Home, Building, PlusCircle, Settings, ShoppingCart, Briefcase, Users, UserPlus } from 'lucide-react'
+
+// In a real application, you would check if the current user is an admin
+const isAdmin = true
 
 export function Sidebar() {
   return (
@@ -25,6 +28,16 @@ export function Sidebar() {
           <Briefcase className="inline-block mr-2" size={20} />
           Portfolio
         </Link>
+        <Link href="/register" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
+          <UserPlus className="inline-block mr-2" size={20} />
+          Register
+        </Link>
+        {isAdmin && (
+          <Link href="/admin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
+            <Users className="inline-block mr-2" size={20} />
+            Admin
+          </Link>
+        )}
         <Link href="/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
           <Settings className="inline-block mr-2" size={20} />
           Settings
