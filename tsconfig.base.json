@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@gods.work/the-word": ["packages/the-word/src/index.ts"],
       "@gods.work/ui": ["packages/ui/src/index.ts"],
       "@gods.work/utils": ["packages/utils/src/index.ts"],
       "@gods.work/web3": ["packages/web3/src/index.ts"]

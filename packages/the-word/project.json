@@ -1,0 +1,9 @@
+{
+  "name": "the-word",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/the-word/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project the-word --web",
+  "targets": {}
+}
