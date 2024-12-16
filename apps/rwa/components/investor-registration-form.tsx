@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../components/ui/form"
 import { Input } from "../components/ui/input"
-import { toast } from "../hooks/use-toast"
-import { TextField, Button, Grid, Box, Typography } from '@mui/material';
+import { toast } from "@libs/shadcn-ui/hooks/use-toast"
+import { Button, Box, Typography } from '@mui/material';
 
 import { useWallet } from '@gods.work/ui';
 import { registerInvestor } from '@gods.work/web3';

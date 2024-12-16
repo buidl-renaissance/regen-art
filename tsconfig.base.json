@@ -17,6 +17,8 @@
     "paths": {
       "@/*": ["./*"],
       "@gods.work/shadcn": ["libs/shadcn/src/index.ts"],
+      "@libs/shadcn-ui": ["libs/shadcn-ui/src/index.ts"],
+      "@libs/shadcn-ui/*": ["libs/shadcn-ui/src/*"],
       "@gods.work/the-word": ["packages/the-word/src/index.ts"],
       "@gods.work/ui": ["packages/ui/src/index.ts"],
       "@gods.work/utils": ["packages/utils/src/index.ts"],
