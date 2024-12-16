@@ -1,0 +1,10 @@
+{
+  "name": "rwa",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/rwa",
+  "projectType": "application",
+  "buildLibsFromSource": true,
+  "tags": [],
+  "// targets": "to see all targets run: nx show project rwa --web",
+  "targets": {}
+}
