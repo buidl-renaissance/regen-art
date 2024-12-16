@@ -4,43 +4,43 @@ import { Edit, Trash2, Share2, Eye } from 'lucide-react'
 import { Property } from "../app/types/property"
 import Link from 'next/link'
 
-const properties: Property[] = [
-  { 
-    id: 1, 
-    name: "Sunset Apartments", 
-    address: "123 Sunset Blvd, Los Angeles, CA 90001", 
-    type: "Apartment", 
-    units: 24, 
-    totalShares: 1000, 
-    availableShares: 250, 
-    pricePerShare: 100,
-    shareholders: []
-  },
-  { 
-    id: 2, 
-    name: "Downtown Lofts", 
-    address: "456 Main St, New York, NY 10001", 
-    type: "Loft", 
-    units: 12, 
-    totalShares: 500, 
-    availableShares: 100, 
-    pricePerShare: 200,
-    shareholders: []
-  },
-  { 
-    id: 3, 
-    name: "Green Valley Homes", 
-    address: "789 Oak Rd, Chicago, IL 60601", 
-    type: "House", 
-    units: 8, 
-    totalShares: 800, 
-    availableShares: 400, 
-    pricePerShare: 150,
-    shareholders: []
-  },
-]
+// const properties: Property[] = [
+//   { 
+//     id: 1, 
+//     name: "Sunset Apartments", 
+//     address: "123 Sunset Blvd, Los Angeles, CA 90001", 
+//     type: "Apartment", 
+//     units: 24, 
+//     totalShares: 1000, 
+//     availableShares: 250, 
+//     pricePerShare: 100,
+//     shareholders: []
+//   },
+//   { 
+//     id: 2, 
+//     name: "Downtown Lofts", 
+//     address: "456 Main St, New York, NY 10001", 
+//     type: "Loft", 
+//     units: 12, 
+//     totalShares: 500, 
+//     availableShares: 100, 
+//     pricePerShare: 200,
+//     shareholders: []
+//   },
+//   { 
+//     id: 3, 
+//     name: "Green Valley Homes", 
+//     address: "789 Oak Rd, Chicago, IL 60601", 
+//     type: "House", 
+//     units: 8, 
+//     totalShares: 800, 
+//     availableShares: 400, 
+//     pricePerShare: 150,
+//     shareholders: []
+//   },
+// ]
 
-export function PropertyList() {
+export function PropertyList({ properties }: { properties: Property[] }) {
   return (
     <Table>
       <TableHeader>

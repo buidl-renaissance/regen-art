@@ -1,9 +1,10 @@
 import { ethers } from 'ethers';
 import { Property } from './interfaces';
+import { getProvider } from './provider';
 // Function for client-side interaction
 export const getProperty = async (contractAddress: string, propertyId: number): Promise<Property> => {
 
-    const provider = new ethers.providers.InfuraProvider('sepolia', 'c135bebf5b714a58940f17f031d4b278');
+    const provider = getProvider();
 
     try {
         // Create contract ABI - this should match your deployed contract

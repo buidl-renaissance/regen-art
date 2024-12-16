@@ -180,6 +180,30 @@ contract RealEstateProperty is ERC721 {
         );
     }
 
+    // Get all properties with their details
+    function getProperties() public view returns (
+        Property[] memory allProperties
+    ) {
+        allProperties = new Property[](propertyCounter);
+        
+        for (uint256 i = 0; i < propertyCounter; i++) {
+            uint256 propertyId = i + 1;
+            Property storage property = properties[propertyId];
+            
+            // Create a memory struct for each property
+            Property memory propertyData;
+            propertyData.id = propertyId;
+            propertyData.location = property.location;
+            propertyData.description = property.description;
+            propertyData.ipfsHash = property.ipfsHash;
+            propertyData.totalShares = property.totalShares;
+            
+            allProperties[i] = propertyData;
+        }
+        
+        return allProperties;
+    }
+
     // Function to transfer ownership of the property
     function transferProperty(address to, uint256 propertyId) public {
         require(
