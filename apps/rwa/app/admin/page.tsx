@@ -10,11 +10,11 @@ import {
   verifyInvestor,
   authorizeVerifier,
 } from '@gods.work/web3';
-
+import { Investor } from '../../app/types/investor';
 export default function AdminPage() {
 
   const [verifiers, setVerifiers] = useState<string[]>([]);
-  const [investors, setInvestors] = useState<string[]>([]);
+  const [investors, setInvestors] = useState<Investor[]>([]);
   const [newVerifier, setNewVerifier] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -27,14 +27,17 @@ export default function AdminPage() {
   const loadData = async () => {
     console.log('LOAD DATA!!!');
     try {
+      setLoading(true);
       const verifiersResult = await getAuthorizedVerifiers();
       const investorsResult = await getAllInvestorsDetails();
       console.log('verifiersResult: ', verifiersResult);
       console.log('investorsResult: ', investorsResult);
       setVerifiers(verifiersResult);
       setInvestors(investorsResult);
+      setLoading(false);
     } catch (err: any) {
       setError(err.message);
+      setLoading(false);
     }
   };
 
@@ -45,7 +48,8 @@ export default function AdminPage() {
         <Header />
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Admin Panel</h2>
-          <AdminInvestorManagement />
+          {loading && <div>Loading...</div>}
+          {!loading && <AdminInvestorManagement verifiers={verifiers} investors={investors} />}
         </main>
       </div>
     </div>

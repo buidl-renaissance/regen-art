@@ -1,7 +1,7 @@
 export type Investor = {
-  id: number;
+  investor: string;
   name: string;
-  email: string;
+  // email: string;
   isVerified: boolean;
   registrationDate: string;
 }

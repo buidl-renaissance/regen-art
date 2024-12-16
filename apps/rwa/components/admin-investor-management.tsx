@@ -7,32 +7,34 @@ import { Input } from "../components/ui/input"
 import { CheckCircle, XCircle, Search } from 'lucide-react'
 import { Investor } from "../app/types/investor"
 
-const mockInvestors: Investor[] = [
-  { id: 1, name: "John Doe", email: "john@example.com", isVerified: false, registrationDate: "2023-06-01" },
-  { id: 2, name: "Jane Smith", email: "jane@example.com", isVerified: true, registrationDate: "2023-05-15" },
-  { id: 3, name: "Bob Johnson", email: "bob@example.com", isVerified: false, registrationDate: "2023-06-10" },
-]
+// const mockInvestors: Investor[] = [
+//   { id: 1, name: "John Doe", email: "john@example.com", isVerified: false, registrationDate: "2023-06-01" },
+//   { id: 2, name: "Jane Smith", email: "jane@example.com", isVerified: true, registrationDate: "2023-05-15" },
+//   { id: 3, name: "Bob Johnson", email: "bob@example.com", isVerified: false, registrationDate: "2023-06-10" },
+// ]
 
-export function AdminInvestorManagement() {
-  const [investors, setInvestors] = useState<Investor[]>(mockInvestors)
+export function AdminInvestorManagement({ verifiers, investors }: { verifiers: string[], investors: Investor[] }) {
+
+  const [investorList, setInvestorList] = useState<Investor[]>(investors ?? [])
   const [searchTerm, setSearchTerm] = useState("")
 
-  const handleVerify = (id: number) => {
-    setInvestors(investors.map(investor => 
-      investor.id === id ? { ...investor, isVerified: true } : investor
+  const handleVerify = (address: string) => {
+    setInvestorList(investorList.map(investor => 
+      investor.investor === address ? { ...investor, isVerified: true } : investor
     ))
   }
 
-  const handleUnverify = (id: number) => {
-    setInvestors(investors.map(investor => 
-      investor.id === id ? { ...investor, isVerified: false } : investor
+  const handleUnverify = (address: string) => {
+    setInvestorList(investorList.map(investor => 
+      investor.investor === address ? { ...investor, isVerified: false } : investor
     ))
   }
 
-  const filteredInvestors = investors.filter(investor => 
-    investor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    investor.email.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredInvestors = investorList.filter(investor => 
+    searchTerm.length === 0 || investor.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
+
+  console.log('filteredInvestors: ', investorList, filteredInvestors);
 
   return (
     <div className="space-y-4">
@@ -52,17 +54,18 @@ export function AdminInvestorManagement() {
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
+            {/* <TableHead>Email</TableHead> */}
             <TableHead>Registration Date</TableHead>
             <TableHead>Verified</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredInvestors.map((investor) => (
-            <TableRow key={investor.id}>
-              <TableCell>{investor.name}</TableCell>
-              <TableCell>{investor.email}</TableCell>
+          {investorList.map((investor) => {
+            console.log('investor: ', investor);
+            return (
+              <TableRow key={investor.investor}>
+                <TableCell>{investor.name}</TableCell>
               <TableCell>{investor.registrationDate}</TableCell>
               <TableCell>
                 {investor.isVerified ? (
@@ -73,17 +76,18 @@ export function AdminInvestorManagement() {
               </TableCell>
               <TableCell>
                 {investor.isVerified ? (
-                  <Button variant="outline" size="sm" onClick={() => handleUnverify(investor.id)}>
+                  <Button variant="outline" size="sm" onClick={() => handleUnverify(investor.investor)}>
                     Unverify
                   </Button>
                 ) : (
-                  <Button variant="outline" size="sm" onClick={() => handleVerify(investor.id)}>
+                  <Button variant="outline" size="sm" onClick={() => handleVerify(investor.investor)}>
                     Verify
                   </Button>
                 )}
               </TableCell>
-            </TableRow>
-          ))}
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
     </div>
