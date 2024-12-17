@@ -26,7 +26,7 @@ export default function PropertyDetails() {
     if (id) {
       (async () => {
         const property = await getProperty(
-          '0x06a3D2Fe63BB7197E96B9C5173E8a740AAC16F58',
+          '0xc36d046616Ae801F1caaEBBb87f1Ca370A2485aa',
           id as unknown as number
         );
         console.log('property: ', property);

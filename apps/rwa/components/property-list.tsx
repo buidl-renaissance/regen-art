@@ -40,7 +40,10 @@ import Link from 'next/link'
 //   },
 // ]
 
-export function PropertyList({ properties }: { properties: Property[] }) {
+export function PropertyList({ properties }: { properties: any[] }) {
+  if (properties.length === 0) {
+    return <div>No properties found</div>;
+  }
   return (
     <Table>
       <TableHeader>
@@ -57,12 +60,11 @@ export function PropertyList({ properties }: { properties: Property[] }) {
       <TableBody>
         {properties.map((property) => (
           <TableRow key={property.id}>
-            <TableCell>{property.name}</TableCell>
-            <TableCell>{property.address}</TableCell>
-            <TableCell>{property.type}</TableCell>
-            <TableCell>{property.units}</TableCell>
-            <TableCell>{property.availableShares} / {property.totalShares}</TableCell>
-            <TableCell>${property.pricePerShare}</TableCell>
+            <TableCell>{property.location}</TableCell>
+            <TableCell>{property.description}</TableCell>
+            <TableCell>{property.ipfsHash}</TableCell>
+            <TableCell>{property.totalShares}</TableCell>
+            <TableCell>{property.numberOfStakeholders}</TableCell>
             <TableCell>
               <Link href={`/properties/${property.id}`}>
                 <Button variant="ghost" size="icon">

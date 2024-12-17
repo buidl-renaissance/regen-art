@@ -1,3 +1,5 @@
+'use client'
+
 import { Sidebar } from '../../components/sidebar'
 import { Header } from '../../components/header'
 import { PropertyList } from '../../components/property-list'
@@ -15,6 +17,7 @@ export default function Properties() {
 
   const loadData = async () => {
     const properties = await getProperties();
+    // console.log('properties: ', properties);
     setProperties(properties);
   }
 

@@ -31,7 +31,7 @@ export const registerInvestor = async (
 
   const contract = InvestorRegistryContract(signer);
 
-  const tx = await contract['registerInvestor'](name, { gasLimit: 16721975 });
+  const tx = await contract['registerInvestor'](name);
 
   const receipt = await tx.wait();
 

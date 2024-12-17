@@ -33,7 +33,6 @@ export default function CreateProperty() {
       setIsMinting(true);
 
       const { receipt, tokenId } = await mintProperty({
-        contractAddress: '0x06a3D2Fe63BB7197E96B9C5173E8a740AAC16F58',
         location,
         description,
         ipfsHash,

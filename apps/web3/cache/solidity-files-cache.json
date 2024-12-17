@@ -38,8 +38,8 @@
       ]
     },
     "/Users/johngulbronson/DetroitArt/gods.work/apps/web3/contracts/RealEstateProperty.sol": {
-      "lastModificationDate": 1732108410203,
-      "contentHash": "fb145e080fb0ff6a136369973106afed",
+      "lastModificationDate": 1734369751027,
+      "contentHash": "3f898d0bbefdfef8edbb2af33ea3a90e",
       "sourceName": "contracts/RealEstateProperty.sol",
       "solcConfig": {
         "version": "0.8.20",

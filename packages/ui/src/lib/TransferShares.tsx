@@ -28,7 +28,7 @@ export const TransferShares = ({
     if (data.transferTo && Number(data.numShares) > 0) {
       setIsTransferring(true);
       await transferShares({
-        contractAddress: '0x06a3D2Fe63BB7197E96B9C5173E8a740AAC16F58',
+        contractAddress: '0xc36d046616Ae801F1caaEBBb87f1Ca370A2485aa',
         propertyId: propertyId,
         to: data.transferTo,
         amount: data.numShares,
