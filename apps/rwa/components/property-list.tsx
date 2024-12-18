@@ -48,12 +48,12 @@ export function PropertyList({ properties }: { properties: any[] }) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Name</TableHead>
+          {/* <TableHead>Name</TableHead> */}
           <TableHead>Address</TableHead>
-          <TableHead>Type</TableHead>
-          <TableHead>Units</TableHead>
-          <TableHead>Available Shares</TableHead>
-          <TableHead>Price per Share</TableHead>
+          <TableHead>Description</TableHead>
+          <TableHead>IPFS Hash</TableHead>
+          <TableHead>Total Shares</TableHead>
+          <TableHead>Number of Stakeholders</TableHead>
           <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
