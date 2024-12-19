@@ -76,9 +76,7 @@ export const verifyInvestor = async (
 
   const contract = InvestorRegistryContract(signer);
 
-  const tx = await contract['verifyInvestor'](investorAddress, {
-    gasLimit: 1721975,
-  });
+  const tx = await contract['verifyInvestor'](investorAddress);
 
   // Wait for transaction to be mined
   const receipt = await tx.wait();
@@ -96,9 +94,7 @@ export const removeInvestor = async (
 
   const contract = InvestorRegistryContract(signer);
 
-  const tx = await contract['removeInvestor'](investorAddress, {
-    gasLimit: 1721975,
-  });
+  const tx = await contract['removeInvestor'](investorAddress);
 
   const receipt = await tx.wait();
 
