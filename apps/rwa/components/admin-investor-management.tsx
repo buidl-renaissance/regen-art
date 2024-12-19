@@ -6,6 +6,7 @@ import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { CheckCircle, XCircle, Search } from 'lucide-react'
 import { Investor } from "../app/types/investor"
+import { removeInvestor, verifyInvestor } from '@gods.work/web3';
 
 // const mockInvestors: Investor[] = [
 //   { id: 1, name: "John Doe", email: "john@example.com", isVerified: false, registrationDate: "2023-06-01" },
@@ -18,13 +19,19 @@ export function AdminInvestorManagement({ verifiers, investors }: { verifiers: s
   const [investorList, setInvestorList] = useState<Investor[]>(investors ?? [])
   const [searchTerm, setSearchTerm] = useState("")
 
-  const handleVerify = (address: string) => {
+  const handleVerify = async (address: string) => {
+    await verifyInvestor({
+      investorAddress: address,
+    });
     setInvestorList(investorList.map(investor => 
       investor.investor === address ? { ...investor, isVerified: true } : investor
     ))
   }
 
-  const handleUnverify = (address: string) => {
+  const handleUnverify = async (address: string) => {
+    await removeInvestor({
+      investorAddress: address,
+    });
     setInvestorList(investorList.map(investor => 
       investor.investor === address ? { ...investor, isVerified: false } : investor
     ))

@@ -54,7 +54,7 @@ export const authorizeVerifier = async (
   const contract = InvestorRegistryContract(signer);
 
   const tx = await contract['authorizeVerifier'](verifierAddress, {
-    gasLimit: 16721975,
+    gasLimit: 1721975,
   });
 
   const receipt = await tx.wait();
@@ -77,10 +77,29 @@ export const verifyInvestor = async (
   const contract = InvestorRegistryContract(signer);
 
   const tx = await contract['verifyInvestor'](investorAddress, {
-    gasLimit: 16721975,
+    gasLimit: 1721975,
   });
 
   // Wait for transaction to be mined
+  const receipt = await tx.wait();
+
+  return { receipt, txHash: tx.hash };
+};
+
+export const removeInvestor = async (
+  removeInvestorData: VerifyInvestorData
+): Promise<{ receipt: any; txHash: string }> => {
+
+  const { investorAddress } = removeInvestorData;
+
+  const signer = await getWalletSigner();
+
+  const contract = InvestorRegistryContract(signer);
+
+  const tx = await contract['removeInvestor'](investorAddress, {
+    gasLimit: 1721975,
+  });
+
   const receipt = await tx.wait();
 
   return { receipt, txHash: tx.hash };

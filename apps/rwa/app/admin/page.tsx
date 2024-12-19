@@ -7,18 +7,13 @@ import { useState, useEffect } from 'react';
 import {
   getAuthorizedVerifiers,
   getAllInvestorsDetails,
-  verifyInvestor,
-  authorizeVerifier,
 } from '@gods.work/web3';
 import { Investor } from '../../app/types/investor';
 export default function AdminPage() {
 
   const [verifiers, setVerifiers] = useState<string[]>([]);
   const [investors, setInvestors] = useState<Investor[]>([]);
-  const [newVerifier, setNewVerifier] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
   useEffect(() => {
     loadData();
