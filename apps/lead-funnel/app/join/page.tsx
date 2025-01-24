@@ -64,17 +64,17 @@ export default function JoinPage() {
                   <span className="mr-2">🤝</span>
                   <span>Connect with a diverse community of artists</span>
                 </li>
-                <li className="flex items-center">
+                {/* <li className="flex items-center">
                   <span className="mr-2">💼</span>
                   <span>Showcase your skills and certifications</span>
-                </li>
+                </li> */}
                 <li className="flex items-center">
                   <span className="mr-2">🌟</span>
                   <span>Collaborate on inspiring projects</span>
                 </li>
               </ul>
             </div>
-            <div>
+            {/* <div>
               <h2 className="text-xl font-semibold mb-2">Membership Includes:</h2>
               <ul className="space-y-2">
                 <li className="flex items-center">
@@ -98,7 +98,7 @@ export default function JoinPage() {
                   <span>Rotating Tuesday Workshops – Learn new skills and techniques</span>
                 </li>
               </ul>
-            </div>
+            </div> */}
             <div>
               <h2 className="text-xl font-semibold mb-2">Exclusive Membership Perks:</h2>
               <ul className="space-y-2">
@@ -123,10 +123,10 @@ export default function JoinPage() {
                   <span className="mr-2">👥</span>
                   <span>View detailed member profiles</span>
                 </li>
-                <li className="flex items-center">
+                {/* <li className="flex items-center">
                   <span className="mr-2">📞</span>
                   <span>Access contact information for collaboration</span>
-                </li>
+                </li> */}
                 <li className="flex items-center">
                   <span className="mr-2">🔍</span>
                   <span>Find members with complementary skills</span>
