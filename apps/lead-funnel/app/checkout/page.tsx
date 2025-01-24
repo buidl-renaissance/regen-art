@@ -5,14 +5,14 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckoutForm from '../components/checkout-form'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 export default function CheckoutPage() {
   const [clientSecret, setClientSecret] = useState('')
-  const searchParams = useSearchParams()
-  const email = searchParams.get('email')
+  const router = useRouter();
+  const { email } = useParams();
 
   useEffect(() => {
     if (!email) return
@@ -41,7 +41,7 @@ export default function CheckoutPage() {
         <CardContent>
           {clientSecret && (
             <Elements stripe={stripePromise} options={{ clientSecret }}>
-              <CheckoutForm email={email} />
+              <CheckoutForm email={email as string} />
             </Elements>
           )}
         </CardContent>

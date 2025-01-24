@@ -1,11 +1,10 @@
 'use client'
 
 import { useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 export function ScrollManager() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -26,7 +25,7 @@ export function ScrollManager() {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
     }
-  }, [pathname, searchParams])
+  }, [pathname])
 
   useEffect(() => {
     // Restore scroll position on back/forward navigation

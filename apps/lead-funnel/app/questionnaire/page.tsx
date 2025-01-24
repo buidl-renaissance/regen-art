@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { EventPreferences } from '../components/event-preferences'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,8 +9,7 @@ import { ReloadIcon } from "@radix-ui/react-icons"
 
 export default function QuestionnairePage() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const email = searchParams.get('email')
+  const { email } = useParams();
   const [eventPreferences, setEventPreferences] = useState<EventPreferences>({ customIdea: '' })
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -37,7 +36,7 @@ export default function QuestionnairePage() {
 
       const result = await response.json()
 
-      if (result.success) {
+      if (result.success && typeof email === 'string') {
         router.push(`/checkout?email=${encodeURIComponent(email!)}`)
       } else {
         setError(result.error || 'An error occurred. Please try again.')
