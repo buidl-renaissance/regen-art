@@ -1,23 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFormState } from 'react-dom'
 import { subscribeToEvents } from '../actions'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
-const interestOptions = [
-  { id: 'art', label: 'Art Events' },
-  { id: 'music', label: 'Music Events' },
-  { id: 'workshops', label: 'Workshops' },
-  { id: 'networking', label: 'Networking Events' },
-]
-
-export default function SubscriptionForm() {
+export default function SubscriptionForm({ onSuccess }: { onSuccess: (result: any) => void }) {
   const [state, formAction] = useFormState(subscribeToEvents, null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -27,6 +19,12 @@ export default function SubscriptionForm() {
     const formData = new FormData(e.currentTarget)
     formAction(formData)
   }
+
+  useEffect(() => {
+    if (state?.success) {
+      onSuccess(state.data)
+    }
+  }, [state])
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -39,13 +37,8 @@ export default function SubscriptionForm() {
         <Input id="email" name="email" type="email" required />
       </div>
       <div className="space-y-2">
-        <Label>Interests</Label>
-        {interestOptions.map((option) => (
-          <div key={option.id} className="flex items-center space-x-2">
-            <Checkbox id={option.id} name="interests" value={option.id} />
-            <Label htmlFor={option.id}>{option.label}</Label>
-          </div>
-        ))}
+        <Label htmlFor="phone">Phone</Label>
+        <Input id="phone" name="phone" type="tel" required />
       </div>
       <Button className="w-full" disabled={isSubmitting}>
         {isSubmitting ? (

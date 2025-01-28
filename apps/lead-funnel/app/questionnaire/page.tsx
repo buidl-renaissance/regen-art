@@ -40,7 +40,7 @@ const QuestionaireCard = () => {
       const result = await response.json();
 
       if (result.success && typeof email === 'string') {
-        router.push(`/checkout?email=${encodeURIComponent(email!)}`);
+        router.push(`/learn-more`);
       } else {
         setError(result.error || 'An error occurred. Please try again.');
       }
@@ -75,7 +75,7 @@ const QuestionaireCard = () => {
                 Submitting...
               </>
             ) : (
-              'Continue to Checkout'
+              'Submit'
             )}
           </Button>
           {error && <p className="text-sm text-red-500">{error}</p>}

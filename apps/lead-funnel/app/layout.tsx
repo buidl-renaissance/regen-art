@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ScrollManager />
         {children}
-        <ProfileBubble />
+        {/* <ProfileBubble /> */}
       </body>
     </html>
   )

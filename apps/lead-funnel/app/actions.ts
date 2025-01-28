@@ -5,32 +5,31 @@ import { z } from 'zod'
 const subscriptionSchema = z.object({
   email: z.string().email("Invalid email address"),
   name: z.string().min(2, "Name must be at least 2 characters"),
-  interests: z.array(z.string()).min(1, "Please select at least one interest"),
+  phone: z.string().min(10, "Phone number must be at least 10 characters"),
 })
 
 export async function subscribeToEvents(prevState: any, formData: FormData) {
   const validatedFields = subscriptionSchema.safeParse({
     email: formData.get('email'),
     name: formData.get('name'),
-    interests: formData.getAll('interests'),
+    phone: formData.get('phone'),
   })
 
   if (!validatedFields.success) {
     return { success: false, errors: validatedFields.error.flatten().fieldErrors }
   }
 
-  const { email, name, interests } = validatedFields.data
+  const { email, name, phone } = validatedFields.data
 
   // Here you would typically save the subscription to your database
   // and potentially trigger a welcome email
   // For this example, we'll just log the information
-  console.log(`New subscription: ${name} (${email})`)
-  console.log(`Interests: ${interests.join(', ')}`)
+  console.log(`New subscription: ${name} (${email}) - ${phone}`)
 
   // Simulate an API delay
   await new Promise(resolve => setTimeout(resolve, 1000))
 
-  return { success: true, message: "You've successfully subscribed to event notifications!" }
+  return { success: true, message: "You've successfully subscribed to event notifications!", data: validatedFields.data }
 }
 
 const profileSchema = z.object({
