@@ -19,9 +19,6 @@ export default function LearnMore() {
           <CardDescription className="text-center mt-2">
             Join our vibrant community of artists!
           </CardDescription>
-          <p className="text-center text-2xl font-bold mt-4">
-            Only $20 per month
-          </p>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
@@ -77,6 +74,9 @@ export default function LearnMore() {
                 <span>Exclusive deals and perks at local establishments</span>
               </li>
             </ul>
+            <p className="text-center text-2xl font-bold mt-4">
+              Join for only $20/month
+            </p>
           </div>
           {/* <div className="flex justify-center mt-6">
             <Button asChild>

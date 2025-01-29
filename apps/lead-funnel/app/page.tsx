@@ -22,80 +22,55 @@ export default function Home() {
         </div>
       </ScrollLockSection>
 
-      <ScrollLockSection parallaxSpeed={0.3} className="bg-gradient-to-b from-purple-100 to-pink-100 flex items-center justify-center">
+      <ScrollLockSection parallaxSpeed={0.3} className="bg-gray-900 text-white flex items-center justify-center">
         <div className="w-full max-w-6xl mx-auto p-4 md:p-8 lg:p-12 animate-fade-in mobile-py flex flex-col items-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-purple-800">Why Join Us?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12">Why Join Us?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow duration-300">
+            <Card className="bg-gray-800 hover:bg-gray-700 transition-colors duration-300">
               <CardHeader className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 bg-purple-500 rounded-full flex items-center justify-center">
                   <Star className="w-8 h-8 text-white" />
                 </div>
-                <CardTitle className="text-xl font-semibold text-purple-800">Exclusive Events</CardTitle>
+                <CardTitle className="text-xl font-semibold text-white">Exclusive Events</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-center text-gray-600">Access to members-only workshops, art nights, and creative sessions that inspire and challenge you.</p>
+                <p className="text-center text-gray-300">
+                  Access to members-only workshops, art nights, and creative sessions that inspire and challenge you.
+                </p>
               </CardContent>
             </Card>
-            <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow duration-300">
+            <Card className="bg-gray-800 hover:bg-gray-700 transition-colors duration-300">
               <CardHeader className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 bg-pink-500 rounded-full flex items-center justify-center">
                   <Users className="w-8 h-8 text-white" />
                 </div>
-                <CardTitle className="text-xl font-semibold text-pink-800">Collaborative Space</CardTitle>
+                <CardTitle className="text-xl font-semibold text-white">Collaborative Space</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-center text-gray-600">Work alongside fellow artists in our inspiring industrial setting, fostering creativity and collaboration.</p>
+                <p className="text-center text-gray-300">
+                  Work alongside fellow artists in our inspiring industrial setting, fostering creativity and
+                  collaboration.
+                </p>
               </CardContent>
             </Card>
-            <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow duration-300">
+            <Card className="bg-gray-800 hover:bg-gray-700 transition-colors duration-300">
               <CardHeader className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center">
                   <Zap className="w-8 h-8 text-white" />
                 </div>
-                <CardTitle className="text-xl font-semibold text-blue-800">Creative Resources</CardTitle>
+                <CardTitle className="text-xl font-semibold text-white">Creative Resources</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-center text-gray-600">Enjoy discounted rates on equipment rentals and access to shared resources to bring your vision to life.</p>
+                <p className="text-center text-gray-300">
+                  Enjoy discounted rates on equipment rentals and access to shared resources to bring your vision to
+                  life.
+                </p>
               </CardContent>
             </Card>
           </div>
           <div className="mt-8 md:mt-12 text-center">
-            <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white">
+            <Button asChild size="lg" className="bg-white text-gray-900 hover:bg-gray-200">
               <Link href="/join">Become a Member</Link>
-            </Button>
-          </div>
-        </div>
-      </ScrollLockSection>
-
-      <ScrollLockSection parallaxSpeed={0.4} className="bg-gray-100 flex items-center justify-center">
-        <div className="w-full max-w-5xl mx-auto p-4 md:p-6 animate-fade-in mobile-py flex flex-col items-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">Experience Our Vibrant Events</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center">
-              <CalendarDays className="w-16 h-16 mx-auto mb-4 text-purple-600" />
-              <h3 className="text-xl font-semibold mb-2">Weekly Gatherings</h3>
-              <p>Join our community for regular events that foster creativity and connection.</p>
-            </div>
-            <div className="text-center">
-              <Palette className="w-16 h-16 mx-auto mb-4 text-pink-600" />
-              <h3 className="text-xl font-semibold mb-2">Art Workshops</h3>
-              <p>Expand your skills with our diverse range of artistic workshops and classes.</p>
-            </div>
-            <div className="text-center">
-              <Music className="w-16 h-16 mx-auto mb-4 text-blue-600" />
-              <h3 className="text-xl font-semibold mb-2">Music Nights</h3>
-              <p>Experience the rhythm of our community with open decks and live performances.</p>
-            </div>
-            <div className="text-center">
-              <Users className="w-16 h-16 mx-auto mb-4 text-green-600" />
-              <h3 className="text-xl font-semibold mb-2">Networking Mixers</h3>
-              <p>Connect with fellow creatives and expand your professional network.</p>
-            </div>
-          </div>
-          <div className="text-center mt-8 md:mt-12">
-            <Button asChild size="lg">
-              <Link href="/events">View Studio Events</Link>
             </Button>
           </div>
         </div>
