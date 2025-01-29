@@ -29,20 +29,33 @@ const QuestionaireCard = () => {
     setError(null);
 
     try {
-      const response = await fetch('/api/submit-questionnaire', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, eventPreferences }),
-      });
+      // Save questionnaire data to localStorage
+      localStorage.setItem(
+        'questionnaire',
+        JSON.stringify({
+          eventPreferences,
+          timestamp: new Date().toISOString(),
+        })
+      );
 
-      const result = await response.json();
+      if (email) {
+        const response = await fetch('/api/submit-questionnaire', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, eventPreferences }),
+        });
 
-      if (result.success && typeof email === 'string') {
-        router.push(`/learn-more`);
+        const result = await response.json();
+
+        if (result.success && typeof email === 'string') {
+          router.push(`/learn-more`);
+        } else {
+          setError(result.error || 'An error occurred. Please try again.');
+        }
       } else {
-        setError(result.error || 'An error occurred. Please try again.');
+        router.push(`/subscribe`);
       }
     } catch (error) {
       console.error('Error submitting questionnaire:', error);
@@ -53,13 +66,14 @@ const QuestionaireCard = () => {
   };
 
   return (
-    <Card className="w-full max-w-2xl">
+    <Card className="w-full max-w-lg">
       <CardHeader>
-        <CardTitle className="text-3xl font-bold text-center">
-          Event Preferences
+        <CardTitle className="text-3xl font-bold">
+          What Excites You? Let Us Know!
         </CardTitle>
-        <CardDescription className="text-center mt-2">
-          Help us tailor your experience!
+        <CardDescription className="mt-2">
+          We're curating events tailored to our members' passions. Which of
+          these spark your interest?
         </CardDescription>
       </CardHeader>
       <CardContent>

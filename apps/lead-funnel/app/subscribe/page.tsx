@@ -8,8 +8,30 @@ import { useRouter } from 'next/navigation';
 export default function SubscribePage() {
   const router = useRouter();
   
-  const onSuccess = (result: any) => {
-    router.push(`/questionnaire?email=${encodeURIComponent(result.email)}`)
+  const onSuccess = async (result: any) => {
+    const questionnaire = localStorage.getItem('questionnaire');
+    if (questionnaire) {
+      const { eventPreferences } = JSON.parse(questionnaire);
+      try {
+        const response = await fetch('/api/submit-questionnaire', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            email: result.email, 
+            eventPreferences 
+          }),
+        });
+        if (response.ok) {
+          router.push('/learn-more');
+        }
+      } catch (error) {
+        router.push(`/questionnaire?email=${encodeURIComponent(result.email)}`);
+      }
+    } else {
+      router.push(`/questionnaire?email=${encodeURIComponent(result.email)}`);
+    }
   }
 
   return (

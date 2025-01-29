@@ -31,8 +31,6 @@ export function EventPreferences({ preferences, onChange }: EventPreferencesProp
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold">What Excites You? Let Us Know!</h3>
-      <p className="text-sm text-gray-600">We're curating events tailored to our members' passions. Which of these spark your interest?</p>
       <div className="space-y-2">
         {eventOptions.map((option) => (
           <div key={option.id} className="flex items-center space-x-2">
