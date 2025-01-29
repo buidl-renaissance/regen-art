@@ -4,11 +4,13 @@ import { Textarea } from "@/components/ui/textarea"
 
 const eventOptions = [
   { id: 'dj', label: '🎧 Open Decks/DJ Practice' },
-  { id: 'movie', label: '🎬 Movie Night/Game Night' },
-  { id: 'artWorkshop', label: '🖌️ Art Workshops (Tie-Dye, Acrylic/Oil Painting)' },
+  { id: 'painting', label: '🖌️ Painting Workshops (Acrylic & Oil)' },
+  { id: 'canvas', label: '🖼️ Canvas Frame Assembly' },
   { id: 'drawing', label: '🎨 Open Drawing/Figure Drawing' },
   { id: 'crafts', label: '🛠️ Arts, Crafts & Other Workshops' },
+  { id: 'grants', label: '💰 Grants & Business Education' },
   { id: 'vr', label: '🌐 VR Experiences' },
+  { id: 'movie', label: '🎬 Movie Night/Game Night' },
   { id: 'dinner', label: '🍽️ Dinner Nights' },
   { id: 'hack', label: '💻 Hack Nights' },
   { id: 'drum', label: '🥁 Drum Circles' },
