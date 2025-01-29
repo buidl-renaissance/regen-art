@@ -12,6 +12,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { ReloadIcon } from '@radix-ui/react-icons';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 const QuestionaireCard = () => {
   const router = useRouter();
@@ -20,6 +22,7 @@ const QuestionaireCard = () => {
   const [eventPreferences, setEventPreferences] = useState<EventPreferences>({
     customIdea: '',
   });
+  const [emailInput, setEmailInput] = useState('');
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -38,18 +41,20 @@ const QuestionaireCard = () => {
         })
       );
 
-      if (email) {
+      const emailToUse = email || emailInput;
+
+      if (emailToUse) {
         const response = await fetch('/api/submit-questionnaire', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, eventPreferences }),
+          body: JSON.stringify({ email: emailToUse, eventPreferences }),
         });
 
         const result = await response.json();
 
-        if (result.success && typeof email === 'string') {
+        if (result.success) {
           router.push(`/learn-more`);
         } else {
           setError(result.error || 'An error occurred. Please try again.');
@@ -82,6 +87,19 @@ const QuestionaireCard = () => {
             preferences={eventPreferences}
             onChange={setEventPreferences}
           />
+          {!email && (
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                required
+                placeholder="Enter your email"
+              />
+            </div>
+          )}
           <Button className="w-full" disabled={isPending}>
             {isPending ? (
               <>

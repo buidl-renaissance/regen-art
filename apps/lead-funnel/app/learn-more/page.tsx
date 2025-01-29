@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 
 export default function LearnMore() {
   return (
@@ -74,9 +74,9 @@ export default function LearnMore() {
                 <span>Exclusive deals and perks at local establishments</span>
               </li>
             </ul>
-            <p className="text-center text-2xl font-bold mt-4">
+            {/* <p className="text-center text-2xl font-bold mt-4">
               Join for only $20/month
-            </p>
+            </p> */}
           </div>
           {/* <div className="flex justify-center mt-6">
             <Button asChild>
