@@ -1,5 +1,6 @@
 import sqlite3 from 'sqlite3'
 import { open } from 'sqlite'
+import { Pool } from 'pg'
 
 let db: any = null;
 
@@ -42,59 +43,82 @@ export async function getEvents() {
   return db.all('SELECT * FROM events')
 }
 
-const createQuestionnaireTable = async (db: any) => {
-  await db.exec(`
-    CREATE TABLE IF NOT EXISTS questionnaire_responses (
-      id SERIAL PRIMARY KEY,
-      email TEXT UNIQUE,
-      preferences JSONB,
-      custom_idea TEXT,
-      created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-    )
-  `)
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+})
+
+const createQuestionnaireTable = async () => {
+  const client = await pool.connect()
+  try {
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS questionnaire_responses (
+        id SERIAL PRIMARY KEY,
+        email TEXT UNIQUE,
+        preferences JSONB,
+        custom_idea TEXT,
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+      )
+    `)
+  } finally {
+    client.release()
+  }
 }
 
 export const saveQuestionnaireResponse = async (email: string, preferences: any) => {
-  const db = await openDb()
-  // await createQuestionnaireTable(db)
+  const client = await pool.connect()
   
   // Convert preferences object to JSON string, excluding customIdea
   const { customIdea, ...prefsToSave } = preferences
   const preferencesJson = JSON.stringify(prefsToSave)
 
   try {
-    const result = await db.run(`
-      INSERT INTO questionnaire_responses (email, preferences, custom_idea)
-      VALUES ($1, $2, $3)
-      ON CONFLICT (email) DO UPDATE SET
-        preferences = EXCLUDED.preferences,
-        custom_idea = EXCLUDED.custom_idea,
-        created_at = CURRENT_TIMESTAMP
-    `, [email, preferencesJson, preferences.customIdea || null])
+    await createQuestionnaireTable()
+
+    const result = await client.query(
+      `INSERT INTO questionnaire_responses (email, preferences, custom_idea)
+       VALUES ($1, $2, $3)
+       ON CONFLICT (email) DO UPDATE SET
+         preferences = EXCLUDED.preferences,
+         custom_idea = EXCLUDED.custom_idea,
+         created_at = CURRENT_TIMESTAMP
+       RETURNING id`,
+      [email, preferencesJson, preferences.customIdea || null]
+    )
     
-    return result.lastID
+    return result.rows[0].id
   } catch (error) {
     console.error('Error saving questionnaire response:', error)
     throw error
+  } finally {
+    client.release()
   }
 }
 
 export const getQuestionnaireResponse = async (email: string) => {
-  const db = await openDb()
-  await createQuestionnaireTable(db)
+  const client = await pool.connect()
   
   try {
-    const response = await db.get('SELECT * FROM questionnaire_responses WHERE email = $1', [email])
-    if (response) {
+    await createQuestionnaireTable()
+    
+    const result = await client.query(
+      'SELECT * FROM questionnaire_responses WHERE email = $1',
+      [email]
+    )
+    
+    if (result.rows[0]) {
       return {
-        ...response,
-        preferences: JSON.parse(response.preferences)
+        ...result.rows[0],
+        preferences: JSON.parse(result.rows[0].preferences)
       }
     }
     return null
   } catch (error) {
     console.error('Error getting questionnaire response:', error)
     throw error
+  } finally {
+    client.release()
   }
 }
-
