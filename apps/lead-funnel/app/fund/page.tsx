@@ -1,3 +1,8 @@
+export const metadata = {
+  title: 'Renaissance City Community Fund',
+  description: 'Join our community-powered investment model strengthening Detroit\'s future, one bond at a time.',
+}
+
 import CallToAction from "../components/CallToAction"
 import Hero from "../components/Hero"
 import HowItWorks from "../components/HowItWorks"
@@ -15,4 +20,3 @@ export default function Home() {
     </div>
   )
 }
-
