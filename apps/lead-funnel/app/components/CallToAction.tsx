@@ -21,6 +21,8 @@ export default function CallToAction() {
       method: 'POST',
       body: JSON.stringify({ email, formId: 'fund' }),
     })
+
+    document.body.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   return (
