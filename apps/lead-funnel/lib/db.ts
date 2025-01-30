@@ -122,3 +122,36 @@ export const getQuestionnaireResponse = async (email: string) => {
     client.release()
   }
 }
+
+// await client.query(`
+//   CREATE TABLE IF NOT EXISTS email_captures (
+//     id SERIAL PRIMARY KEY,
+//     email VARCHAR(255) NOT NULL,
+//     form_id VARCHAR(255) NOT NULL,
+//     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+//     UNIQUE(email, form_id)
+//   )
+// `)
+
+export const storeEmail = async (email: string, formId: string) => {
+  const client = await pool.connect()
+
+  try {
+
+    const result = await client.query(
+      `INSERT INTO email_captures (email, form_id)
+       VALUES ($1, $2)
+       ON CONFLICT (email, form_id) DO UPDATE SET
+         created_at = CURRENT_TIMESTAMP
+       RETURNING id`,
+      [email, formId]
+    )
+
+    return result.rows[0].id
+  } catch (error) {
+    console.error('Error storing email:', error)
+    throw error
+  } finally {
+    client.release()
+  }
+}

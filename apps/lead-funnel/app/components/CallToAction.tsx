@@ -16,7 +16,11 @@ export default function CallToAction() {
     // Reset the form
     setEmail("")
     // Show a success message (you might want to add state for this)
-    alert("Thank you for signing up! We'll be in touch soon.")
+    // alert("Thank you for signing up! We'll be in touch soon.")
+    fetch('/api/capture-email', {
+      method: 'POST',
+      body: JSON.stringify({ email, formId: 'fund' }),
+    })
   }
 
   return (
