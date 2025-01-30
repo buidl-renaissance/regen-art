@@ -1,5 +1,6 @@
 'use server'
 
+import { saveProfile } from '@/lib/db'
 import { z } from 'zod'
 
 const subscriptionSchema = z.object({
@@ -35,6 +36,7 @@ export async function subscribeToEvents(prevState: any, formData: FormData) {
 const profileSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
+  handle: z.string().min(2, "Handle must be at least 2 characters"),
   bio: z.string().optional(),
   certifications: z.array(z.string()),
   skills: z.array(z.string()),
@@ -49,7 +51,7 @@ export async function updateProfile(data: z.infer<typeof profileSchema>) {
     return { success: false, errors: validatedFields.error.flatten().fieldErrors }
   }
 
-  const { name, email, bio, certifications, skills, creativePursuits, groupFitnessActivities } = validatedFields.data
+  const { name, email, bio, certifications, skills, creativePursuits, groupFitnessActivities, handle } = validatedFields.data
 
   // Here you would typically update the user's profile in your database
   // For this example, we'll just log it
@@ -60,9 +62,26 @@ export async function updateProfile(data: z.infer<typeof profileSchema>) {
   console.log(`Creative Pursuits: ${creativePursuits.join(', ')}`)
   console.log(`Group Fitness Activities: ${groupFitnessActivities.join(', ')}`)
 
-  // Simulate a delay to mimic database operation
-  await new Promise(resolve => setTimeout(resolve, 1000))
+  const response = await saveProfile({ email, handle, name, bio, data: { certifications, skills, creativePursuits, groupFitnessActivities } });
+  // const response = await fetch(`/api/profile`, {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({
+  //     email,
+  //     handle,
+  //     name,
+  //     bio,
+  //     data: {
+  //       certifications,
+  //       skills,
+  //       creativePursuits,
+  //       groupFitnessActivities
+  //     }
+  //   }),
+  // });
 
-  return { success: true }
+  return { success: true, response }
 }
 

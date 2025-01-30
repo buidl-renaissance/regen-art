@@ -53,6 +53,7 @@ const groupFitnessActivities = [
 export default function ProfilePage() {
   const router = useRouter()
   const [name, setName] = useState('')
+  const [handle, setHandle] = useState('')
   const [email, setEmail] = useState('')
   const [bio, setBio] = useState('')
   const [userCertifications, setUserCertifications] = useState<string[]>([])
@@ -71,6 +72,7 @@ export default function ProfilePage() {
         await new Promise(resolve => setTimeout(resolve, 1000))
         setName('John Doe')
         setEmail('john@example.com')
+        setHandle('john')
         setBio('I am a passionate developer and real estate enthusiast.')
         setUserCertifications(['AWS Certified Solutions Architect', 'Real Estate License'])
         setUserSkills(['JavaScript', 'React', 'Property Management'])
@@ -95,8 +97,9 @@ export default function ProfilePage() {
     try {
       const result = await updateProfile({ 
         name, 
-        email, 
+        email,   
         bio, 
+        handle,
         certifications: userCertifications, 
         skills: userSkills,
         creativePursuits: userCreativePursuits,
@@ -139,6 +142,16 @@ export default function ProfilePage() {
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="handle">Handle</Label>
+              <Input
+                id="handle"
+                name="handle"
+                value={handle}
+                onChange={(e) => setHandle(e.target.value)}
                 required
               />
             </div>

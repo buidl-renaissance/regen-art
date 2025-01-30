@@ -90,7 +90,7 @@ export default function Home() {
                     width={60}
                     height={60}
                     className="rounded-full mr-4"
-                  />
+                  />                  
                   <div>
                     <p className="font-semibold text-purple-800">Sarah J.</p>
                     <p className="text-sm text-gray-600">Visual Artist</p>
