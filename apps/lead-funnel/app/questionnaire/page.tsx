@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { EventPreferences } from '../components/event-preferences';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,11 +14,11 @@ import {
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { getEmail } from '@/lib/utils';
 
 const QuestionaireCard = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const email = searchParams.get('email');
+  const email = getEmail();
   const [eventPreferences, setEventPreferences] = useState<EventPreferences>({
     customIdea: '',
   });

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -9,21 +9,66 @@ import BasicInfoForm from "./BasicInfoForm"
 import InterestsForm from "./InterestsForm"
 import ProfilePictureForm from "./ProfilePictureForm"
 import SocialConnectForm from "./SocialConnectForm"
-import { submitProfile } from "../actions"
+import { submitProfile, savePartialProfile } from "../actions"
+import { toast } from "@/components/ui/use-toast"
+import { getEmail } from "@/lib/utils"
 
-const steps = ["Connect Social", "Bio", "Interests", "Profile Picture"]
+const steps = ["Connect Social", "Bio"]
+// const steps = ["Connect Social", "Bio", "Interests", "Profile Picture"]
 
 export default function BuildProfilePage() {
   const [currentStep, setCurrentStep] = useState(0)
   const [profileData, setProfileData] = useState({
+    email: getEmail(),
     socialConnection: null as "instagram" | "linkedin" | "skip" | null,
+    name: "",
+    handle: "",
     bio: "",
     interests: [] as string[],
     profilePicture: null as string | null,
+    certifications: [] as string[],
+    skills: [] as string[],
+    creativePursuits: [] as string[],
+    groupFitnessActivities: [] as string[]
   })
   const router = useRouter()
 
-  const handleNext = () => {
+  useEffect(() => {
+    const storedEmail = getEmail()
+    if (!storedEmail) {
+      router.push('/join')
+      return
+    }
+    
+    setProfileData(prev => ({
+      ...prev,
+      email: storedEmail
+    }))
+  }, [router])
+
+  const handleNext = async () => {
+    if (currentStep === 1) {
+      // Save basic info before moving to the next step
+      const result = await savePartialProfile({
+        email: profileData.email,
+        name: profileData.name,
+        handle: profileData.handle,
+        bio: profileData.bio,
+      })
+      if (result.success) {
+        toast({
+          title: "Profile information saved",
+          description: "Your basic info has been saved successfully.",
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: "Failed to save profile information. Please try again.",
+          variant: "destructive",
+        })
+        return
+      }
+    }
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1)
     }
@@ -41,7 +86,11 @@ export default function BuildProfilePage() {
       router.push("/profile")
     } else {
       console.error("Error submitting profile:", result.errors)
-      // Handle error (e.g., show error message to user)
+      toast({
+        title: "Error",
+        description: "Failed to submit profile. Please try again.",
+        variant: "destructive",
+      })
     }
   }
 
@@ -54,11 +103,18 @@ export default function BuildProfilePage() {
       case 0:
         return <SocialConnectForm data={profileData} updateData={updateProfileData} onNext={handleNext} />
       case 1:
-        return <BasicInfoForm data={profileData} updateData={updateProfileData} />
-      case 2:
-        return <InterestsForm data={profileData} updateData={updateProfileData} />
-      case 3:
-        return <ProfilePictureForm data={profileData} updateData={updateProfileData} />
+        return (
+          <>
+            <ProfilePictureForm data={profileData} updateData={updateProfileData} />
+            <BasicInfoForm data={profileData} updateData={updateProfileData} />
+          </>
+        )
+      // case 2:
+      //   return (
+      //     <InterestsForm data={profileData} updateData={updateProfileData} />
+      //   )
+      // case 3:
+      //   return <ProfilePictureForm data={profileData} updateData={updateProfileData} />
       default:
         return null
     }
@@ -69,18 +125,18 @@ export default function BuildProfilePage() {
       <Card className="w-full max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center">Build Your Profile</CardTitle>
-          <CardDescription className="text-center mt-2">
+          {/* <CardDescription className="text-center mt-2">
             Step {currentStep + 1} of {steps.length}: {steps[currentStep]}
-          </CardDescription>
+          </CardDescription> */}
         </CardHeader>
         <CardContent>
-          <Progress value={((currentStep + 1) / steps.length) * 100} className="mb-6" />
+          {/* <Progress value={((currentStep + 1) / steps.length) * 100} className="mb-6" /> */}
           {renderStep()}
           {currentStep > 0 && (
             <div className="flex justify-between mt-6">
-              <Button onClick={handlePrevious}>Previous</Button>
+              <Button variant="outline" onClick={handlePrevious}>Previous</Button>
               {currentStep === steps.length - 1 ? (
-                <Button onClick={handleSubmit}>Finish</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
               ) : (
                 <Button onClick={handleNext}>Next</Button>
               )}

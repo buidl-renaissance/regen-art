@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ReloadIcon } from "@radix-ui/react-icons"
+import { captureEmail } from '@/lib/utils'
 
 export default function JoinPage() {
   const router = useRouter()
@@ -20,19 +21,10 @@ export default function JoinPage() {
     setIsPending(true)
     setError(null)
 
-    try {
-      const captureResponse = await fetch('/api/capture-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, formId: 'join' }),
-      })
-
-      const captureResult = await captureResponse.json()
-
+    try { 
+      const captureResult = await captureEmail(email, 'join')
       if (captureResult.success) {
-        router.push(`/questionnaire?email=${encodeURIComponent(email)}`)
+        router.push(`/questionnaire`)
       } else {
         setError(captureResult.error || 'An error occurred. Please try again.')
       }

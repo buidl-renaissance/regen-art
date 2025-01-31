@@ -115,8 +115,8 @@ export default function ProfilePictureForm({ data, updateData }: ProfilePictureF
             <AvatarFallback>Upload</AvatarFallback>
           </Avatar>
         )}
-        <p className="text-sm text-gray-500 mt-2">Click the image or button to upload a new picture</p>
-        <Label htmlFor="profile-picture-input" className="cursor-pointer">
+        {croppedImage && <p className="text-sm text-gray-500 mt-2">Click the image to upload a new picture</p>}
+        {/* <Label htmlFor="profile-picture-input" className="cursor-pointer">
           <Button
             type="button"
             className="mt-4"
@@ -124,7 +124,7 @@ export default function ProfilePictureForm({ data, updateData }: ProfilePictureF
           >
             {croppedImage ? "Change Image" : "Upload Profile Picture"}
           </Button>
-        </Label>
+        </Label> */}
         <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="profile-picture-input" />
         {isCropping && (
           <Button onClick={handleCropImage} className="mt-4" disabled={isLoading}>

@@ -18,6 +18,11 @@ export async function POST(req: Request) {
     // - Adding the email to specific mailing lists based on preferences
     await storeEmail(email, formId)
 
+    // Store email in localStorage (client-side)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('userEmail', email)
+    }
+
     return NextResponse.json({ success: true, email })
   } catch (error) {
     console.error('Error capturing email:', error)

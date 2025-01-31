@@ -176,7 +176,7 @@ interface Profile {
   handle: string;
   name: string;
   bio?: string;
-  data: {
+  data?: {
     certifications: string[];
     skills: string[];
     creativePursuits: string[];
@@ -203,26 +203,51 @@ export const saveProfile = async (profile: Profile) => {
   const client = await pool.connect();
 
   try {
-    const result = await client.query(
-      `INSERT INTO profiles (
-        email,
-        handle,
-        name,
-        bio,
-        data
-      )
-      VALUES ($1, $2, $3, $4, $5)
-      ON CONFLICT (handle) DO UPDATE SET
-        email = $1,
-        name = $3,
-        bio = $4,
-        data = $5,
-        updated_at = CURRENT_TIMESTAMP
-      RETURNING id`,
-      [profile.email, profile.handle, profile.name, profile.bio || null, profile.data]
-    );
-
-    return result.rows[0].id;
+    if (!profile.data) {
+      const result = await client.query(
+        `INSERT INTO profiles (
+          email,
+          handle,
+          name,
+          bio
+        )
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT (handle) DO UPDATE SET
+          email = $1,
+          name = $3,
+          bio = $4,
+          updated_at = CURRENT_TIMESTAMP
+        RETURNING id`,
+        [profile.email, profile.handle, profile.name, profile.bio || null]
+      );
+      return result.rows[0].id;
+    } else {
+      const result = await client.query(
+        `INSERT INTO profiles (
+            email,
+            handle,
+            name,
+            bio,
+            data
+          )
+          VALUES ($1, $2, $3, $4, $5)
+          ON CONFLICT (handle) DO UPDATE SET
+            email = $1,
+            name = $3,
+            bio = $4,
+            data = $5,
+            updated_at = CURRENT_TIMESTAMP
+          RETURNING id`,
+        [
+          profile.email,
+          profile.handle,
+          profile.name,
+          profile.bio || null,
+          profile.data || null,
+        ]
+      );
+      return result.rows[0].id;
+    }
   } catch (error) {
     console.error('Error saving profile:', error);
     throw error;
@@ -239,6 +264,8 @@ export const getProfiles = async () => {
 
 export const getProfile = async (id: string) => {
   const client = await pool.connect();
-  const result = await client.query('SELECT * FROM profiles WHERE id = $1', [id]);
+  const result = await client.query('SELECT * FROM profiles WHERE id = $1', [
+    id,
+  ]);
   return result.rows[0];
 };
