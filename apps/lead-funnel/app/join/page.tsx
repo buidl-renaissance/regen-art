@@ -10,7 +10,7 @@ import { ReloadIcon } from "@radix-ui/react-icons"
 
 export default function JoinPage() {
   const router = useRouter()
-  const [name, setName] = useState('')
+  // const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -26,7 +26,7 @@ export default function JoinPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email }),
+        body: JSON.stringify({ email, formId: 'join' }),
       })
 
       const captureResult = await captureResponse.json()
@@ -135,7 +135,7 @@ export default function JoinPage() {
             </div>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
               <Input
                 id="name"
@@ -144,7 +144,7 @@ export default function JoinPage() {
                 onChange={(e) => setName(e.target.value)}
                 required
               />
-            </div>
+            </div> */}
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input

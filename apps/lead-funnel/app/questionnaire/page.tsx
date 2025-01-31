@@ -55,7 +55,11 @@ const QuestionaireCard = () => {
         const result = await response.json();
 
         if (result.success) {
-          router.push(`/learn-more`);
+          if (email) {
+            router.push(`/build-profile`);
+          } else {
+            router.push(`/learn-more`);
+          }
         } else {
           setError(result.error || 'An error occurred. Please try again.');
         }

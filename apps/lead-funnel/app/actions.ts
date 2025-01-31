@@ -44,7 +44,7 @@ const profileSchema = z.object({
   groupFitnessActivities: z.array(z.string()),
 })
 
-export async function updateProfile(data: z.infer<typeof profileSchema>) {
+export const submitProfile = async (data: z.infer<typeof profileSchema>) => {
   const validatedFields = profileSchema.safeParse(data)
 
   if (!validatedFields.success) {
@@ -85,3 +85,6 @@ export async function updateProfile(data: z.infer<typeof profileSchema>) {
   return { success: true, response }
 }
 
+export const updateProfile = async (data: z.infer<typeof profileSchema>) => {
+  return submitProfile(data)
+}
