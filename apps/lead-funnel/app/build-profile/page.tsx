@@ -17,7 +17,7 @@ const steps = ["Connect Social", "Bio"]
 // const steps = ["Connect Social", "Bio", "Interests", "Profile Picture"]
 
 export default function BuildProfilePage() {
-  const [currentStep, setCurrentStep] = useState(0)
+  const [currentStep, setCurrentStep] = useState(1)
   const [profileData, setProfileData] = useState({
     email: getEmail(),
     socialConnection: null as "instagram" | "linkedin" | "skip" | null,
@@ -133,8 +133,8 @@ export default function BuildProfilePage() {
           {/* <Progress value={((currentStep + 1) / steps.length) * 100} className="mb-6" /> */}
           {renderStep()}
           {currentStep > 0 && (
-            <div className="flex justify-between mt-6">
-              <Button variant="outline" onClick={handlePrevious}>Previous</Button>
+            <div className="flex justify-end mt-6">
+              {/* <Button variant="outline" onClick={handlePrevious}>Previous</Button> */}
               {currentStep === steps.length - 1 ? (
                 <Button onClick={handleSubmit}>Submit</Button>
               ) : (

@@ -42,7 +42,7 @@ export default function BasicInfoForm({ data, updateData }: BasicInfoFormProps) 
           id="handle"
           value={data.handle}
           onChange={(e) => updateData({ handle: e.target.value })}
-          placeholder="Enter your unique handle (e.g., @username)"
+          placeholder="Enter your unique handle"
           required
         />
         {/* <p className="text-sm text-gray-500 mt-1">Your unique handle is required (e.g., @username).</p> */}
