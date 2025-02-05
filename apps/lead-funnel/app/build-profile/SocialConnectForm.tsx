@@ -39,14 +39,14 @@ export default function SocialConnectForm({
   const handleInstagramSuccess = (instagramData: {
     name: string;
     handle: string;
-    profilePicture: string;
+    profile_picture: string;
   }) => {
     updateData({
       socialConnection: 'instagram',
       name: instagramData.name,
       handle: instagramData.handle,
-      // You might want to add profilePicture to your profileData state if you haven't already
-      // profilePicture: instagramData.profilePicture,
+      // You might want to add profile_picture to your profileData state if you haven't already
+      // profile_picture: instagramData.profile_picture,
     });
     onNext();
   };

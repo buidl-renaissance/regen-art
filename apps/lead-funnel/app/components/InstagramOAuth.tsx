@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Instagram } from "lucide-react"
 
 interface InstagramOAuthProps {
-  onSuccess: (data: { name: string; handle: string; profilePicture: string }) => void
+  onSuccess: (data: { name: string; handle: string; profile_picture: string }) => void
   onError: (error: string) => void
 }
 

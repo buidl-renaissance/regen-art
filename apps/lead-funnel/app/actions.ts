@@ -49,7 +49,7 @@ const profileSchema = z.object({
   skills: z.array(z.string()),
   creativePursuits: z.array(z.string()),
   groupFitnessActivities: z.array(z.string()),
-  profilePicture: z.string().optional(),
+  profile_picture: z.string().optional(),
 });
 
 const partialProfileSchema = z.object({
@@ -57,7 +57,7 @@ const partialProfileSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   handle: z.string().min(2, 'Handle must be at least 2 characters'),
   bio: z.string().optional(),
-  profilePicture: z.string().optional(),
+  profile_picture: z.string().optional(),
 });
 
 export async function savePartialProfile(
@@ -72,7 +72,7 @@ export async function savePartialProfile(
     };
   }
 
-  const { name, handle, bio, email, profilePicture } = validatedFields.data;
+  const { name, handle, bio, email, profile_picture } = validatedFields.data;
 
   // Here you would typically save the partial profile data to your database
   // For this example, we'll just log it
@@ -85,7 +85,7 @@ export async function savePartialProfile(
     handle,
     name,
     bio,
-    profilePicture,
+    profile_picture,
   });
 
   return { success: true, profileId: response };
@@ -110,7 +110,7 @@ export const submitProfile = async (data: z.infer<typeof profileSchema>) => {
     creativePursuits,
     groupFitnessActivities,
     handle,
-    profilePicture,
+    profile_picture,
   } = validatedFields.data;
 
   // Here you would typically update the user's profile in your database
@@ -127,7 +127,7 @@ export const submitProfile = async (data: z.infer<typeof profileSchema>) => {
     handle,
     name,
     bio,
-    profilePicture: profilePicture || '',
+    profile_picture: profile_picture || '',
     data: { 
       certifications, 
       skills, 

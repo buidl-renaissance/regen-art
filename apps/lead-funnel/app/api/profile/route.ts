@@ -34,9 +34,9 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const { email, handle, name, bio, data } = await req.json();
+    const { email, handle, name, bio, profile_picture, data } = await req.json();
 
-    const profileId = await saveProfile({ email, handle, name, bio, data });
+    const profileId = await saveProfile({ email, handle, name, bio, profile_picture, data });
     console.log('Profile saved:', profileId);
     const profile = await getProfile(profileId);
 

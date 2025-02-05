@@ -4,7 +4,7 @@ export interface Profile {
     handle: string;
     name: string;
     bio?: string;
-    profilePicture?: string;
+    profile_picture?: string;
     data?: {
       certifications: string[];
       skills: string[];

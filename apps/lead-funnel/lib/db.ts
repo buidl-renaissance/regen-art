@@ -181,7 +181,7 @@ export const createProfileTable = async () => {
       handle TEXT UNIQUE,
       name TEXT,
       bio TEXT,
-      profilePicture VARCHAR(255),
+      profile_picture VARCHAR(255),
       data JSONB,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
@@ -199,17 +199,17 @@ export const saveProfile = async (profile: Profile) => {
           handle,
           name,
           bio,
-          profilePicture
+          profile_picture
         )
         VALUES ($1, $2, $3, $4, $5)
         ON CONFLICT (handle) DO UPDATE SET
           email = $1,
           name = $3,
           bio = $4,
-          profilePicture = $5,
+          profile_picture = $5,
           updated_at = CURRENT_TIMESTAMP
         RETURNING id`,
-        [profile.email, profile.handle, profile.name, profile.bio || null, profile.profilePicture || null]
+        [profile.email, profile.handle, profile.name, profile.bio || null, profile.profile_picture || null]
       );
       return result.rows[0].id;
     } else {
@@ -219,7 +219,7 @@ export const saveProfile = async (profile: Profile) => {
             handle,
             name,
             bio,
-            profilePicture,
+            profile_picture,
             data
           )
           VALUES ($1, $2, $3, $4, $5, $6)
@@ -227,7 +227,7 @@ export const saveProfile = async (profile: Profile) => {
             email = $1,
             name = $3,
             bio = $4,
-            profilePicture = $5,
+            profile_picture = $5,
             data = $6,
             updated_at = CURRENT_TIMESTAMP
           RETURNING id`,
@@ -236,7 +236,7 @@ export const saveProfile = async (profile: Profile) => {
           profile.handle,
           profile.name,
           profile.bio || null,
-          profile.profilePicture || null,
+          profile.profile_picture || null,
           profile.data || null,
         ]
       );

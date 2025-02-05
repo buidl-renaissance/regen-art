@@ -79,7 +79,7 @@ export default function ProfilePage() {
           setHandle(profile.handle)
           setEmail(profile.email)
           setBio(profile.bio)
-          setProfilePicture(profile.profilePicture)
+          setProfilePicture(profile.profile_picture)
           setUserCertifications(profile.data?.certifications || [])
           setUserSkills(profile.data?.skills || [])
           setUserCreativePursuits(profile.data?.creativePursuits || [])
@@ -109,7 +109,7 @@ export default function ProfilePage() {
         email,   
         bio, 
         handle,
-        profilePicture: profilePicture || undefined,
+        profile_picture: profilePicture || undefined,
         certifications: userCertifications, 
         skills: userSkills,
         creativePursuits: userCreativePursuits,
@@ -147,8 +147,8 @@ export default function ProfilePage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="flex justify-center mb-6">
               <ProfilePictureForm 
-                data={{ profilePicture }} 
-                updateData={(data) => setProfilePicture(data.profilePicture || '')} 
+                data={{ profile_picture: profilePicture }} 
+                updateData={(data) => setProfilePicture(data.profile_picture || '')} 
               />
             </div>
             <div className="space-y-2">

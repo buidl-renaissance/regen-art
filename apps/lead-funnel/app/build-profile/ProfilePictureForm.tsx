@@ -7,14 +7,14 @@ import type { Point, Area } from "react-easy-crop/types"
 
 interface ProfilePictureFormProps {
   data: {
-    profilePicture: string | null
+    profile_picture: string | null
   }
-  updateData: (data: Partial<{ profilePicture: string | null }>) => void
+  updateData: (data: Partial<{ profile_picture: string | null }>) => void
 }
 
 export default function ProfilePictureForm({ data, updateData }: ProfilePictureFormProps) {
-  const [image, setImage] = useState<string | null>(data.profilePicture)
-  const [croppedImage, setCroppedImage] = useState<string | null>(data.profilePicture)
+  const [image, setImage] = useState<string | null>(data.profile_picture)
+  const [croppedImage, setCroppedImage] = useState<string | null>(data.profile_picture)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
@@ -101,7 +101,7 @@ export default function ProfilePictureForm({ data, updateData }: ProfilePictureF
           }
 
           const { url } = await response.json()
-          updateData({ profilePicture: url })
+          updateData({ profile_picture: url })
           setIsCropping(false)
         }
       } catch (e) {

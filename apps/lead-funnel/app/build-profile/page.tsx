@@ -25,7 +25,7 @@ export default function BuildProfilePage() {
     handle: "",
     bio: "",
     interests: [] as string[],
-    profilePicture: null as string | null,
+    profile_picture: null as string | null,
     certifications: [] as string[],
     skills: [] as string[],
     creativePursuits: [] as string[],
@@ -54,7 +54,7 @@ export default function BuildProfilePage() {
         name: profileData.name,
         handle: profileData.handle,
         bio: profileData.bio,
-        profilePicture: profileData.profilePicture ?? undefined,
+        profile_picture: profileData.profile_picture ?? undefined,
       })
       if (result.success) {
         toast({
@@ -84,7 +84,7 @@ export default function BuildProfilePage() {
   const handleSubmit = async () => {
     const result = await submitProfile({
       ...profileData,
-      profilePicture: profileData.profilePicture ?? undefined
+      profile_picture: profileData.profile_picture ?? undefined
     })
     if (result.success) {
       const profileId = result.profileId;
