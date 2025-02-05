@@ -56,7 +56,8 @@ const QuestionaireCard = () => {
 
         if (result.success) {
           if (email) {
-            router.push(`/build-profile`);
+            router.push(`/events`);
+            // router.push(`/build-profile`);
           } else {
             router.push(`/learn-more`);
           }
