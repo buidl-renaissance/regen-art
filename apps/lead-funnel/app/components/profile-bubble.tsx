@@ -42,15 +42,15 @@ export function ProfileBubble() {
           <DropdownMenuItem asChild>
             <Link href="/profile">View Profile</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
+          {/* <DropdownMenuItem asChild>
             <Link href="/members">Connect with Members</Link>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem asChild>
             <Link href="/events">View Events</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
+          {/* <DropdownMenuItem asChild>
             <Link href="/events/promote">Promote Event</Link>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem asChild>
             <Link href="/">Home</Link>
           </DropdownMenuItem>
