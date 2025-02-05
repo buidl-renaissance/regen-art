@@ -116,7 +116,7 @@ export default function MembersPage() {
             <Card key={member.id} className="flex flex-col">
               <CardHeader className="flex flex-row items-center space-x-4 pb-2">
                 <Avatar className="h-16 w-16">
-                  <AvatarImage src={member.profilePicture} alt={member.name} />
+                  <AvatarImage src={member.profile_picture} alt={member.name} />
                   <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
                 <div>
@@ -141,7 +141,7 @@ export default function MembersPage() {
                     </div> */}
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Bio</h3>
+                    {/* <h3 className="font-semibold mb-1">Bio</h3> */}
                     <p className="text-sm text-gray-600">{member.bio}</p>
                   </div>
                   {/* <div>
