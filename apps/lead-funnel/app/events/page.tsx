@@ -24,7 +24,7 @@ const studioEvents = [
     title: "Community Dinner & Open Studio",
     description: "Join us for a communal dinner and stay for open studio time to work on your projects.",
     date: "Every Sunday",
-    time: "6:00 PM - 11:00 PM",
+    time: "7:00 PM - 10:00 PM",
     emoji: "🍽️🎨"
   },
   {
@@ -32,7 +32,7 @@ const studioEvents = [
     title: "Art Night Wednesdays",
     description: "Join us for a creative evening of art and socializing.",
     date: "Every Wednesday",
-    time: "7:00 PM - 10:00 PM",
+    time: "7:00 PM - 1:00 AM",
     emoji: "🖼️"
   }
 ]
