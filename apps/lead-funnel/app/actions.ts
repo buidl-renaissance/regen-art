@@ -1,6 +1,6 @@
 'use server';
 
-import { saveProfile } from '@/lib/db';
+import { saveProfile, getProfile as getProfileFromDb, getMembers as getMembersFromDb } from '@/lib/db';
 import { z } from 'zod';
 
 const subscriptionSchema = z.object({
@@ -49,6 +49,7 @@ const profileSchema = z.object({
   skills: z.array(z.string()),
   creativePursuits: z.array(z.string()),
   groupFitnessActivities: z.array(z.string()),
+  profilePicture: z.string().optional(),
 });
 
 const partialProfileSchema = z.object({
@@ -56,6 +57,7 @@ const partialProfileSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   handle: z.string().min(2, 'Handle must be at least 2 characters'),
   bio: z.string().optional(),
+  profilePicture: z.string().optional(),
 });
 
 export async function savePartialProfile(
@@ -70,7 +72,7 @@ export async function savePartialProfile(
     };
   }
 
-  const { name, handle, bio, email } = validatedFields.data;
+  const { name, handle, bio, email, profilePicture } = validatedFields.data;
 
   // Here you would typically save the partial profile data to your database
   // For this example, we'll just log it
@@ -83,9 +85,10 @@ export async function savePartialProfile(
     handle,
     name,
     bio,
+    profilePicture,
   });
 
-  return { success: true, response };
+  return { success: true, profileId: response };
 }
 
 export const submitProfile = async (data: z.infer<typeof profileSchema>) => {
@@ -107,6 +110,7 @@ export const submitProfile = async (data: z.infer<typeof profileSchema>) => {
     creativePursuits,
     groupFitnessActivities,
     handle,
+    profilePicture,
   } = validatedFields.data;
 
   // Here you would typically update the user's profile in your database
@@ -123,30 +127,26 @@ export const submitProfile = async (data: z.infer<typeof profileSchema>) => {
     handle,
     name,
     bio,
-    data: { certifications, skills, creativePursuits, groupFitnessActivities },
+    profilePicture: profilePicture || '',
+    data: { 
+      certifications, 
+      skills, 
+      creativePursuits, 
+      groupFitnessActivities,
+    },
   });
-  // const response = await fetch(`/api/profile`, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({
-  //     email,
-  //     handle,
-  //     name,
-  //     bio,
-  //     data: {
-  //       certifications,
-  //       skills,
-  //       creativePursuits,
-  //       groupFitnessActivities
-  //     }
-  //   }),
-  // });
 
-  return { success: true, response };
+  return { success: true, profileId: response };
 };
 
 export const updateProfile = async (data: z.infer<typeof profileSchema>) => {
   return submitProfile(data);
+};
+
+export const getProfile = async (profileId: string) => {
+  return getProfileFromDb(profileId);
+};
+
+export const getMembers = async () => {
+  return getMembersFromDb();
 };

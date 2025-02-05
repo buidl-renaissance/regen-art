@@ -1,6 +1,7 @@
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import { Pool } from 'pg';
+import { Profile } from '@/lib/types';
 
 let db: any = null;
 
@@ -171,19 +172,6 @@ export const storeEmail = async (email: string, formId: string) => {
   }
 };
 
-interface Profile {
-  email: string;
-  handle: string;
-  name: string;
-  bio?: string;
-  data?: {
-    certifications: string[];
-    skills: string[];
-    creativePursuits: string[];
-    groupFitnessActivities: string[];
-  };
-}
-
 export const createProfileTable = async () => {
   const client = await pool.connect();
   await client.query(`
@@ -193,6 +181,7 @@ export const createProfileTable = async () => {
       handle TEXT UNIQUE,
       name TEXT,
       bio TEXT,
+      profilePicture VARCHAR(255),
       data JSONB,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
@@ -209,16 +198,18 @@ export const saveProfile = async (profile: Profile) => {
           email,
           handle,
           name,
-          bio
+          bio,
+          profilePicture
         )
-        VALUES ($1, $2, $3, $4)
+        VALUES ($1, $2, $3, $4, $5)
         ON CONFLICT (handle) DO UPDATE SET
           email = $1,
           name = $3,
           bio = $4,
+          profilePicture = $5,
           updated_at = CURRENT_TIMESTAMP
         RETURNING id`,
-        [profile.email, profile.handle, profile.name, profile.bio || null]
+        [profile.email, profile.handle, profile.name, profile.bio || null, profile.profilePicture || null]
       );
       return result.rows[0].id;
     } else {
@@ -228,14 +219,16 @@ export const saveProfile = async (profile: Profile) => {
             handle,
             name,
             bio,
+            profilePicture,
             data
           )
-          VALUES ($1, $2, $3, $4, $5)
+          VALUES ($1, $2, $3, $4, $5, $6)
           ON CONFLICT (handle) DO UPDATE SET
             email = $1,
             name = $3,
             bio = $4,
-            data = $5,
+            profilePicture = $5,
+            data = $6,
             updated_at = CURRENT_TIMESTAMP
           RETURNING id`,
         [
@@ -243,6 +236,7 @@ export const saveProfile = async (profile: Profile) => {
           profile.handle,
           profile.name,
           profile.bio || null,
+          profile.profilePicture || null,
           profile.data || null,
         ]
       );
@@ -268,4 +262,10 @@ export const getProfile = async (id: string) => {
     id,
   ]);
   return result.rows[0];
+};
+
+export const getMembers = async () => {
+  const client = await pool.connect();
+  const result = await client.query('SELECT * FROM profiles');
+  return result.rows;
 };

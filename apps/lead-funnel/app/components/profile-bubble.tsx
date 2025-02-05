@@ -11,9 +11,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useProfile } from '@/hooks/useProfile';
 
 export function ProfileBubble() {
+  const { profile } = useProfile();
   const [isOpen, setIsOpen] = useState(false)
+
+  if (!profile) {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
@@ -26,7 +32,7 @@ export function ProfileBubble() {
             <div className="relative h-full w-full">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 opacity-75"></div>
               <Avatar className="h-full w-full border-2 border-white">
-                <AvatarImage src="/placeholder.svg?height=56&width=56" alt="Profile" />
+                <AvatarImage src={profile.profilePicture || "/placeholder.svg?height=56&width=56"} alt="Profile" />
                 <AvatarFallback>US</AvatarFallback>
               </Avatar>
             </div>

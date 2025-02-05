@@ -10,6 +10,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { updateProfile } from '../actions'
 import { InlineSearchSelect } from '../components/InlineSearchSelect'
+import { getProfile } from '@/app/actions'
+import ProfilePictureForm from '../build-profile/ProfilePictureForm'
 
 const certifications = [
   "AWS Certified Solutions Architect",
@@ -56,6 +58,7 @@ export default function ProfilePage() {
   const [handle, setHandle] = useState('')
   const [email, setEmail] = useState('')
   const [bio, setBio] = useState('')
+  const [profilePicture, setProfilePicture] = useState<string>('')
   const [userCertifications, setUserCertifications] = useState<string[]>([])
   const [userSkills, setUserSkills] = useState<string[]>([])
   const [userCreativePursuits, setUserCreativePursuits] = useState<string[]>([])
@@ -69,15 +72,21 @@ export default function ProfilePage() {
       setIsLoading(true)
       try {
         // Simulate fetching user data
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        setName('John Doe')
-        setEmail('john@example.com')
-        setHandle('john')
-        setBio('I am a passionate developer and real estate enthusiast.')
-        setUserCertifications(['AWS Certified Solutions Architect', 'Real Estate License'])
-        setUserSkills(['JavaScript', 'React', 'Property Management'])
-        setUserCreativePursuits(['Photography', 'Digital Art'])
-        setUserGroupFitnessActivities(['Yoga', 'HIIT', 'Climbing', 'Soccer'])
+        const profileId = localStorage.getItem('profileId')
+        if (profileId) {
+          const profile = await getProfile(profileId)
+          setName(profile.name)
+          setHandle(profile.handle)
+          setEmail(profile.email)
+          setBio(profile.bio)
+          setProfilePicture(profile.profilePicture)
+          setUserCertifications(profile.data?.certifications || [])
+          setUserSkills(profile.data?.skills || [])
+          setUserCreativePursuits(profile.data?.creativePursuits || [])
+          setUserGroupFitnessActivities(profile.data?.groupFitnessActivities || [])
+        } else {
+          router.push('/join')
+        }
       } catch (error) {
         console.error('Error fetching user data:', error)
         setError('Failed to load user data. Please try again.')
@@ -100,6 +109,7 @@ export default function ProfilePage() {
         email,   
         bio, 
         handle,
+        profilePicture: profilePicture || undefined,
         certifications: userCertifications, 
         skills: userSkills,
         creativePursuits: userCreativePursuits,
@@ -108,7 +118,7 @@ export default function ProfilePage() {
       if (result.success) {
         console.log('Profile updated successfully')
       } else {
-        setError(result.error || 'An error occurred while updating your profile')
+        setError(result.errors ? Object.values(result.errors).flat()[0] : 'An error occurred while updating your profile')
       }
     } catch (error) {
       console.error('Error updating profile:', error)
@@ -135,6 +145,12 @@ export default function ProfilePage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="flex justify-center mb-6">
+              <ProfilePictureForm 
+                data={{ profilePicture }} 
+                updateData={(data) => setProfilePicture(data.profilePicture || '')} 
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
               <Input
@@ -229,4 +245,3 @@ export default function ProfilePage() {
     </div>
   )
 }
-

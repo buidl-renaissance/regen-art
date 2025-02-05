@@ -54,6 +54,7 @@ export default function BuildProfilePage() {
         name: profileData.name,
         handle: profileData.handle,
         bio: profileData.bio,
+        profilePicture: profileData.profilePicture ?? undefined,
       })
       if (result.success) {
         toast({
@@ -81,8 +82,15 @@ export default function BuildProfilePage() {
   }
 
   const handleSubmit = async () => {
-    const result = await submitProfile(profileData)
+    const result = await submitProfile({
+      ...profileData,
+      profilePicture: profileData.profilePicture ?? undefined
+    })
     if (result.success) {
+      const profileId = result.profileId;
+      // Store profile ID in localStorage for later use
+      localStorage.setItem('profileId', profileId.toString());
+
       router.push("/profile")
     } else {
       console.error("Error submitting profile:", result.errors)

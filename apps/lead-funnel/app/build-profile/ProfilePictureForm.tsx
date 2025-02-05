@@ -20,6 +20,7 @@ export default function ProfilePictureForm({ data, updateData }: ProfilePictureF
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isCropping, setIsCropping] = useState(false)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const onCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
@@ -27,12 +28,16 @@ export default function ProfilePictureForm({ data, updateData }: ProfilePictureF
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0]
+      setSelectedFile(file)
+      
+      // Show preview immediately
       const reader = new FileReader()
       reader.addEventListener("load", () => {
         setImage(reader.result as string)
         setIsCropping(true)
       })
-      reader.readAsDataURL(event.target.files[0])
+      reader.readAsDataURL(file)
     }
   }
 
@@ -61,13 +66,13 @@ export default function ProfilePictureForm({ data, updateData }: ProfilePictureF
     // Draw cropped image
     ctx.drawImage(image, pixelCrop.x, pixelCrop.y, pixelCrop.width, pixelCrop.height, 0, 0, 256, 256)
 
-    return new Promise<string>((resolve) => {
+    return new Promise<Blob>((resolve) => {
       canvas.toBlob((blob) => {
         if (!blob) {
           console.error("Canvas is empty")
           return
         }
-        resolve(URL.createObjectURL(blob))
+        resolve(blob)
       }, "image/jpeg")
     })
   }
@@ -76,10 +81,27 @@ export default function ProfilePictureForm({ data, updateData }: ProfilePictureF
     if (image && croppedAreaPixels) {
       try {
         setIsLoading(true)
-        const croppedImage = await getCroppedImg(image, croppedAreaPixels)
-        if (croppedImage) {
-          setCroppedImage(croppedImage)
-          updateData({ profilePicture: croppedImage })
+        const croppedBlob = await getCroppedImg(image, croppedAreaPixels)
+        if (croppedBlob) {
+          // Create a preview URL for display
+          const previewUrl = URL.createObjectURL(croppedBlob)
+          setCroppedImage(previewUrl)
+          
+          // Create form data with cropped image blob
+          const formData = new FormData()
+          formData.append('file', croppedBlob, 'cropped-image.jpg')
+
+          const response = await fetch('/api/upload-profile-picture', {
+            method: 'POST',
+            body: formData
+          })
+
+          if (!response.ok) {
+            throw new Error('Failed to upload image')
+          }
+
+          const { url } = await response.json()
+          updateData({ profilePicture: url })
           setIsCropping(false)
         }
       } catch (e) {
@@ -135,4 +157,3 @@ export default function ProfilePictureForm({ data, updateData }: ProfilePictureF
     </div>
   )
 }
-

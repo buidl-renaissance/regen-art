@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Phone, Mail, Instagram } from 'lucide-react'
+import { getMembers } from '../actions'
+import { Profile } from '@/lib/types'
 
 // Mock data for members
 const members = [
@@ -80,11 +82,20 @@ const members = [
 
 export default function MembersPage() {
   const [searchTerm, setSearchTerm] = useState('')
+  const [members, setMembers] = useState<Profile[]>([]);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      const members = await getMembers();
+      setMembers(members);
+    };
+    fetchMembers();
+  }, []);
 
   const filteredMembers = members.filter(member =>
     member.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-400 to-pink-500 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
@@ -105,7 +116,7 @@ export default function MembersPage() {
             <Card key={member.id} className="flex flex-col">
               <CardHeader className="flex flex-row items-center space-x-4 pb-2">
                 <Avatar className="h-16 w-16">
-                  <AvatarImage src={member.photo} alt={member.name} />
+                  <AvatarImage src={member.profilePicture} alt={member.name} />
                   <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
                 <div>
@@ -116,55 +127,55 @@ export default function MembersPage() {
               <CardContent className="flex-grow">
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                       <Phone className="mr-2 h-4 w-4" />
                       <span>{member.phone}</span>
-                    </div>
-                    <div className="flex items-center">
+                    </div> */}
+                    {/* <div className="flex items-center">
                       <Mail className="mr-2 h-4 w-4" />
                       <span>{member.email}</span>
-                    </div>
-                    <div className="flex items-center">
+                    </div> */}
+                    {/* <div className="flex items-center">
                       <Instagram className="mr-2 h-4 w-4" />
                       <span>{member.instagram}</span>
-                    </div>
+                    </div> */}
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Bio</h3>
                     <p className="text-sm text-gray-600">{member.bio}</p>
                   </div>
-                  <div>
+                  {/* <div>
                     <h3 className="font-semibold mb-1">Certifications</h3>
                     <div className="flex flex-wrap gap-1">
                       {member.certifications.map((cert, index) => (
                         <Badge key={index} variant="secondary">{cert}</Badge>
                       ))}
                     </div>
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <h3 className="font-semibold mb-1">Skills</h3>
                     <div className="flex flex-wrap gap-1">
                       {member.skills.map((skill, index) => (
                         <Badge key={index} variant="outline">{skill}</Badge>
                       ))}
                     </div>
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <h3 className="font-semibold mb-1">Creative Pursuits</h3>
                     <div className="flex flex-wrap gap-1">
                       {member.creativePursuits.map((pursuit, index) => (
                         <Badge key={index} variant="default">{pursuit}</Badge>
                       ))}
                     </div>
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <h3 className="font-semibold mb-1">Group Fitness Activities</h3>
                     <div className="flex flex-wrap gap-1">
                       {member.groupFitnessActivities.map((activity, index) => (
                         <Badge key={index} variant="secondary">{activity}</Badge>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </CardContent>
             </Card>
