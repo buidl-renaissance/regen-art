@@ -68,11 +68,11 @@ export default function StudioEventsPage() {
             </Card>
           ))}
         </div>
-        <div className="mt-12 text-center">
+        {/* <div className="mt-12 text-center">
           <Button asChild size="lg">
             <Link href="/join">Become a Member</Link>
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   )

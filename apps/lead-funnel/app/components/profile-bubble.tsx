@@ -12,10 +12,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useProfile } from '@/hooks/useProfile';
+import { useRouter } from 'next/navigation'
 
 export function ProfileBubble() {
   const { profile } = useProfile();
   const [isOpen, setIsOpen] = useState(false)
+  const router = useRouter();
+  
+  const handleLogout = () => {
+    localStorage.removeItem('profileId');
+    localStorage.removeItem('email');
+    router.push('/');
+  }
 
   if (!profile) {
     return null;
@@ -53,6 +61,9 @@ export function ProfileBubble() {
           </DropdownMenuItem> */}
           <DropdownMenuItem asChild>
             <Link href="/">Home</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Button onClick={handleLogout}>Logout</Button>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
