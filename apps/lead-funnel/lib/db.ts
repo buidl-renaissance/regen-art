@@ -252,7 +252,7 @@ export const saveProfile = async (profile: Profile) => {
 
 export const getProfiles = async () => {
   const client = await pool.connect();
-  const result = await client.query('SELECT * FROM profiles');
+  const result = await client.query('SELECT id, handle, name, bio, profile_picture, data FROM profiles');
   return result.rows;
 };
 
