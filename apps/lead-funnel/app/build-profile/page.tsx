@@ -91,7 +91,7 @@ export default function BuildProfilePage() {
       // Store profile ID in localStorage for later use
       localStorage.setItem('profileId', profileId.toString());
 
-      router.push("/profile")
+      router.push("/members")
     } else {
       console.error("Error submitting profile:", result.errors)
       toast({

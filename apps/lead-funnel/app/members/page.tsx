@@ -93,7 +93,8 @@ export default function MembersPage() {
   }, []);
 
   const filteredMembers = members.filter(member =>
-    member.name.toLowerCase().includes(searchTerm.toLowerCase())
+    member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    member.handle.toLowerCase().includes(searchTerm.toLowerCase())
   )
   
   return (
@@ -120,8 +121,8 @@ export default function MembersPage() {
                   <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <CardTitle>{member.name}</CardTitle>
-                  <CardDescription>Member</CardDescription>
+                  <CardTitle>{member.handle}</CardTitle>
+                  <CardDescription>{member.name}</CardDescription>
                 </div>
               </CardHeader>
               <CardContent className="flex-grow">
