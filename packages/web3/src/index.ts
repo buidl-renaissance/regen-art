@@ -3,3 +3,7 @@ export * from './lib/interfaces';
 export * from './lib/transferShares';
 export * from './lib/InvestorRegistery/utils';
 export * from './lib/RealEstateProperty/utils';
+export * from './lib/ArtNightNFT/contract';
+export * from './lib/ArtNightNFT/utils';
+export * from './lib/RealEstateProperty/contract';
+export * from './lib/ipfs';
