@@ -6,7 +6,14 @@ import { useState, useEffect } from "react";
 import { getArtwork } from "@/mock";
 import { Artwork } from "@/types";
 
-export default function ArtworkDetails({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default function ArtworkDetails({ params }: PageProps) {
   const [showModal, setShowModal] = useState(false);
   const [artwork, setArtwork] = useState<Artwork | null>(null);
 
