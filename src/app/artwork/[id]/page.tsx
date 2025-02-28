@@ -7,9 +7,9 @@ import { getArtwork } from "@/mock";
 import { Artwork } from "@/types";
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 
@@ -19,13 +19,14 @@ export default function ArtworkDetails({ params }: Props) {
 
   useEffect(() => {
     const fetchArtwork = async () => {
-      const data = getArtwork(Number(params.id));
+      const resolvedParams = await params;
+      const data = getArtwork(Number(resolvedParams.id));
       if (data) {
         setArtwork(data);
       }
     };
     fetchArtwork();
-  }, [params.id]);
+  }, [params]);
 
   if (!artwork) {
     return <div>Loading...</div>;
