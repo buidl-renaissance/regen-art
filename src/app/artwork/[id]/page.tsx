@@ -12,7 +12,7 @@ export default function ArtworkDetails({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const fetchArtwork = async () => {
-      const data = await getArtwork(Number(params.id));
+      const data = getArtwork(Number(params.id));
       if (data) {
         setArtwork(data);
       }
