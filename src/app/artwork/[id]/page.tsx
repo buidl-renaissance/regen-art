@@ -1,68 +1,78 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { getArtwork } from "@/mock";
 import { Artwork } from "@/types";
-import { useParams } from 'next/navigation';
+import ArtworkImage from "@/components/artwork/image";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-export default function ArtworkDetails() {
-  const [showModal, setShowModal] = useState(false);
-  const [artwork, setArtwork] = useState<Artwork | null>(null);
-  const params = useParams();
-  const id = params.id;
-
-  useEffect(() => {
-    const fetchArtwork = async () => {
-      const data = getArtwork(Number(id));
-      if (data) {
-        setArtwork(data);
-      }
+export const generateMetadata = async ({ params }: { params: { id: string } }): Promise<Metadata> => {
+  const artwork: Artwork | undefined = getArtwork(Number(params.id));
+  
+  if (!artwork) {
+    return {
+      title: "Artwork Not Found",
+      description: "The requested artwork could not be found."
     };
-    fetchArtwork();
-  }, [id]);
+  }
+
+  return {
+    title: `${artwork.title} | Regenerative Art Collective`,
+    description: artwork.description,
+    openGraph: {
+      title: artwork.title,
+      description: artwork.description,
+      images: [
+        {
+          url: artwork.image,
+          width: 1200,
+          height: 1200,
+          alt: artwork.title,
+        },
+      ],
+    },
+  };
+};
+
+export default function ArtworkDetails({ params }: { params: { id: string } }) {
+  const artwork: Artwork | undefined = getArtwork(Number(params.id));
 
   if (!artwork) {
-    return <div>Loading...</div>;
+    notFound();
   }
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        <Link 
+        <Link
           href="/"
           className="inline-flex items-center mb-8 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors"
         >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          <svg
+            className="w-5 h-5 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
           </svg>
           Back to Home
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Artwork Image */}
-          <div 
-            className="relative aspect-square overflow-hidden rounded-lg cursor-pointer"
-            onClick={() => setShowModal(true)}
-          >
-            <Image
-              src={artwork.image}
-              alt={artwork.title}
-              className="object-cover"
-              fill
-              priority
-              quality={90}
-              unoptimized={true}
-            />
-          </div>
+          <ArtworkImage artwork={artwork} />
 
           {/* Artwork Details */}
           <div className="space-y-6">
             <h1 className="text-4xl font-bold text-neutral-900 dark:text-neutral-50">
               {artwork.title}
             </h1>
-            
+
             <div className="space-y-2">
               <p className="text-xl text-neutral-700 dark:text-neutral-300">
                 {artwork.artist}
@@ -118,34 +128,6 @@ export default function ArtworkDetails() {
           </div>
         </div>
       </div>
-
-      {/* Full Image Modal */}
-      {showModal && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
-          onClick={() => setShowModal(false)}
-        >
-          <div className="relative w-full h-full flex items-center justify-center">
-            <div className="relative w-[80vw] h-[80vh]">
-              <Image
-                src={artwork.image}
-                alt={artwork.title}
-                className="object-contain"
-                fill
-                sizes="80vw"
-                quality={100}
-                priority
-              />
-            </div>
-            <button
-              className="absolute top-4 right-4 text-white text-xl hover:opacity-75"
-              onClick={() => setShowModal(false)}
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
