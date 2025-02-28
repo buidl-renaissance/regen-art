@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '**',
       },
+      {
+        hostname: "dpop.nyc3.digitaloceanspaces.com",
+        protocol: "https",
+        port: '',
+        pathname: '**',
+      },
     ],
   },
 };
