@@ -6,24 +6,6 @@ import { useState, useEffect } from "react";
 import { getArtwork } from "@/mock";
 import { Artwork } from "@/types";
 import { useParams } from 'next/navigation';
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Artwork Details | Regenerative Art Collective",
-  description: "View detailed information about this collaborative artwork, including the artist, medium, dimensions and exhibition details.",
-  openGraph: {
-    title: "Artwork Details | Regenerative Art Collective",
-    description: "View detailed information about this collaborative artwork, including the artist, medium, dimensions and exhibition details.",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Artwork Details",
-      },
-    ],
-  },
-};
 
 export default function ArtworkDetails() {
   const [showModal, setShowModal] = useState(false);
