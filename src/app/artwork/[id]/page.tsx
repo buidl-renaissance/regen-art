@@ -5,26 +5,23 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getArtwork } from "@/mock";
 import { Artwork } from "@/types";
+import { useRouter } from 'next/router';
 
-interface Props {
-  params: {
-    id: string;
-  };
-}
-
-export default function ArtworkDetails({ params }: Props) {
+export default function ArtworkDetails() {
   const [showModal, setShowModal] = useState(false);
   const [artwork, setArtwork] = useState<Artwork | null>(null);
+  const router = useRouter();
+  const id = router.query.id;
 
   useEffect(() => {
     const fetchArtwork = async () => {
-      const data = getArtwork(Number(params.id));
+      const data = getArtwork(Number(id));
       if (data) {
         setArtwork(data);
       }
     };
     fetchArtwork();
-  }, [params]);
+  }, [id]);
 
   if (!artwork) {
     return <div>Loading...</div>;
