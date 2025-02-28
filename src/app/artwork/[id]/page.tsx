@@ -7,10 +7,9 @@ import { getArtwork } from "@/mock";
 import { Artwork } from "@/types";
 
 interface Props {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
-  searchParams?: { [key: string]: string | string[] | undefined };
+  };
 }
 
 export default function ArtworkDetails({ params }: Props) {
