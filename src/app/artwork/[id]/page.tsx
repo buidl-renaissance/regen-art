@@ -18,8 +18,7 @@ export default function ArtworkDetails({ params }: Props) {
 
   useEffect(() => {
     const fetchArtwork = async () => {
-      const resolvedParams = await params;
-      const data = getArtwork(Number(resolvedParams.id));
+      const data = getArtwork(Number(params.id));
       if (data) {
         setArtwork(data);
       }
