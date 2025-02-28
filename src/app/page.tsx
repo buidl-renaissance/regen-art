@@ -1,6 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { artworks } from "@/mock";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Regenerative Art Collective",
+  description: "A Community Gallery & Creative Agency showcasing collaborative works and providing art curation, creative consulting, and project management services.",
+  openGraph: {
+    title: "Regenerative Art Collective",
+    description: "A Community Gallery & Creative Agency showcasing collaborative works and providing art curation, creative consulting, and project management services.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Regenerative Art Collective",
+      },
+    ],
+  },
+};
 
 export default function Home() {
   return (
