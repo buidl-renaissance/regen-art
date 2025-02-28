@@ -9,11 +9,11 @@ export const artworks = [
     id: 1,
     title: "Journey of the Heart",
     artist: "Daniel Geanes | ECNTRC, Andrea Burg, Munera Ziad Kaakouch",
-    year: "2023",
+    year: "2024",
     image:
       "https://nyc3.digitaloceanspaces.com/dpop/images/1740711833455-618073127.jpg",
     description:
-      "This whimsical landscape portrays a lone traveler standing atop surreal, undulating hills, proudly waving a flag adorned with a heart. Set against a backdrop of lush greens and dreamy cloud formations, the scene exudes a sense of hope and exploration. Ethereal golden swirls dance among the clouds, symbolizing the unseen energies guiding the traveler's journey. The flowing, fluid strokes evoke movement and emotion, as vibrant yellows and blues melt into one another. This painting beautifully captures the essence of adventure, love, and the pursuit of purpose, inviting viewers to reflect on their own journeys of the heart.",
+      "This surreal landscape depicts a lone traveler standing atop the curves of a woman's body, seamlessly blending with the earth’s contours. The figure proudly waves a flag adorned with a heart, symbolizing a journey of love and self-discovery. Set against a backdrop of lush greens and dreamy cloud formations, the scene exudes a sense of hope and exploration. Ethereal golden swirls dance among the clouds, symbolizing the unseen energies guiding the traveler's journey. The flowing, fluid strokes evoke movement and emotion, as vibrant yellows and blues melt into one another. This painting beautifully captures the essence of adventure, love, and the pursuit of purpose, inviting viewers to reflect on the interconnectedness of humanity and nature. It celebrates the divine feminine form as a powerful symbol of creation, growth, and emotional exploration.",
     medium: "Acrylic on Canvas",
     dimensions: "24\" x 36\"",
     exhibition: "Art Night Detroit 2024",
