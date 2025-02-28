@@ -7,7 +7,7 @@ export default function Home() {
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center">
-        <div className="absolute inset-0 z-0">
+        {/* <div className="absolute inset-0 z-0">
           <Image
             src="/hero-art.jpg" 
             alt="Collaborative Art Piece"
@@ -15,7 +15,7 @@ export default function Home() {
             className="object-cover opacity-60"
             priority
           />
-        </div>
+        </div> */}
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-neutral-900 dark:text-neutral-50">
             Regenerative Art Collective
