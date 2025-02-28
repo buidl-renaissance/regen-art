@@ -5,13 +5,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getArtwork } from "@/mock";
 import { Artwork } from "@/types";
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 
 export default function ArtworkDetails() {
   const [showModal, setShowModal] = useState(false);
   const [artwork, setArtwork] = useState<Artwork | null>(null);
-  const router = useRouter();
-  const id = router.query.id;
+  const params = useParams();
+  const id = params.id;
 
   useEffect(() => {
     const fetchArtwork = async () => {
