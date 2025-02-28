@@ -4,15 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getArtwork } from "@/mock";
+import { Artwork } from "@/types";
 
 export default function ArtworkDetails({ params }: { params: { id: string } }) {
   const [showModal, setShowModal] = useState(false);
-  const [artwork, setArtwork] = useState<any>(null);
+  const [artwork, setArtwork] = useState<Artwork | null>(null);
 
   useEffect(() => {
     const fetchArtwork = async () => {
       const data = await getArtwork(Number(params.id));
-      setArtwork(data);
+      if (data) {
+        setArtwork(data);
+      }
     };
     fetchArtwork();
   }, [params.id]);

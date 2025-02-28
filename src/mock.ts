@@ -1,4 +1,6 @@
-export const getArtwork = async (id: number) => {
+import { Artwork } from "./types";
+
+export const getArtwork = (id: number): Artwork | undefined => {
   return artworks.find((artwork) => artwork.id === id);
 };
 
