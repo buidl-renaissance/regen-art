@@ -11,7 +11,7 @@ import { createStore } from "mipd";
 export default function GalleryMini() {
   const [selectedArtworks, setSelectedArtworks] = useState<Artwork[]>([]);
   const [, setIsSigningIn] = useState(false);
-  const [context, setContext] = useState<Context.FrameContext>();
+  const [, setContext] = useState<Context.FrameContext>();
   const [, setAdded] = useState(false);
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
 
@@ -76,22 +76,9 @@ export default function GalleryMini() {
         }
       });
 
-      sdk.on("frameAddRejected", ({ reason }) => {
-        // setLastEvent(`frameAddRejected, reason ${reason}`);
-      });
-
       sdk.on("frameRemoved", () => {
         // setLastEvent("frameRemoved");
         setAdded(false);
-        // setNotificationDetails(null);
-      });
-
-      sdk.on("notificationsEnabled", ({ notificationDetails }) => {
-        // setLastEvent("notificationsEnabled");
-        // setNotificationDetails(notificationDetails);
-      });
-      sdk.on("notificationsDisabled", () => {
-        // setLastEvent("notificationsDisabled");
         // setNotificationDetails(null);
       });
 
