@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '**',
       },
+      {
+        hostname: "brown-selective-rodent-822.mypinata.cloud",
+        protocol: "https",
+        port: '',
+        pathname: '**',
+      },
     ],
   },
 };

@@ -6,23 +6,27 @@ import Link from "next/link";
 
 import { mintArtNightNFT } from "@/web3/lib/ArtNightNFT/utils";
 import { uploadMetadata, uploadImage } from "@/web3/lib/ipfs";
+import { getWalletSigner } from "@/web3/lib/connectWallet";
+import { Artwork } from "@/types";
+import { getArtwork } from "@/mock";
 
 export default function CreateArtwork() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  //   const [success, setSuccess] = useState(false);
+  const [walletConnected, setWalletConnected] = useState(false);
+  const [artwork, ] = useState<Artwork | undefined>(getArtwork(3));
 
   const [formData, setFormData] = useState({
-    title: "",
-    artist: "",
-    year: "",
-    description: "",
-    medium: "",
-    dimensions: "",
-    exhibition: "",
-    location: "",
+    title: artwork?.title,
+    artist: artwork?.artist,
+    year: artwork?.year,
+    description: artwork?.description,
+    medium: artwork?.medium,
+    dimensions: artwork?.dimensions,
+    exhibition: artwork?.exhibition,
+    location: artwork?.location,
   });
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +41,42 @@ export default function CreateArtwork() {
     }
   };
 
+  const connectWallet = async () => {
+    if (!window.ethereum) {
+      setError("Please install MetaMask to continue");
+      return;
+    }
+
+    try {
+      // Prompt user to connect wallet
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+
+      const signer = await getWalletSigner();
+      if (signer) {
+        setWalletConnected(true);
+        setError("");
+      }
+    } catch (err) {
+      console.error(err);
+      if (err.code === 4001) {
+        setError("Please connect your wallet to continue");
+      } else {
+        setError("Failed to connect wallet");
+      }
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!file) return;
+
+    if (!walletConnected) {
+      try {
+        await connectWallet();
+      } catch (err) {
+        return;
+      }
+    }
 
     try {
       setLoading(true);
@@ -47,30 +84,29 @@ export default function CreateArtwork() {
 
       // Upload image to IPFS
       const imageCID = await uploadImage(file);
-
       // Upload metadata to IPFS
-      const tokenCID = await uploadMetadata(imageCID);
+      const tokenCID = await uploadMetadata(
+        {
+          title: formData.title,
+          artist: formData.artist,
+          year: formData.year,
+          medium: formData.medium,
+          dimensions: formData.dimensions,
+          exhibition: formData.exhibition,
+          location: formData.location,
+          image: imageCID,
+          description: formData.description,
+        },
+        imageCID
+      );
 
       // Connect to Ethereum
       if (!window.ethereum) throw new Error("Please install MetaMask");
-      //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-      //   const signer = provider.getSigner();
 
       const { receipt, txHash, tokenId } = await mintArtNightNFT(
         `https://brown-selective-rodent-822.mypinata.cloud/ipfs/${tokenCID}`
       );
       console.log("Transaction receipt:", receipt, txHash, tokenId);
-      // Get contract instance
-      //   const contract = ArtNightNFTContract(signer);
-
-      // Mint NFT
-      //   const address = await signer.getAddress();
-      //   console.log('Minting NFT to address:', address);
-      //   const tx = await contract.mintNFT(address);
-      //   const receipt = await tx.wait();
-      //   console.log('Transaction receipt:', receipt);
-
-      //   setSuccess(true);
     } catch (err) {
       console.error(err);
       setError(err instanceof Error ? err.message : "Failed to create artwork");
@@ -109,6 +145,20 @@ export default function CreateArtwork() {
         {error && (
           <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400">
             {error}
+          </div>
+        )}
+
+        {!walletConnected && (
+          <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+            <p className="text-blue-600 dark:text-blue-400">
+              Please connect your wallet to create artwork
+            </p>
+            <button
+              onClick={connectWallet}
+              className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            >
+              Connect Wallet
+            </button>
           </div>
         )}
 
@@ -264,8 +314,8 @@ export default function CreateArtwork() {
           <div className="flex justify-end">
             <button
               type="submit"
-              disabled={loading}
-              className="px-6 py-3 bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 rounded-full hover:opacity-90 transition flex items-center"
+              disabled={loading || !walletConnected}
+              className="px-6 py-3 bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 rounded-full hover:opacity-90 transition flex items-center disabled:opacity-50"
             >
               {loading ? (
                 <>

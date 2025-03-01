@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { artworks } from "@/mock";
 import { Metadata } from "next";
+import { getAllNFTArtwork } from "@/web3/lib/api";
 
 export const metadata: Metadata = {
   title: "Gallery | Regenerative Art Collective",
@@ -20,7 +20,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Gallery() {
+export default async function Gallery() {
+  const artworks = await getAllNFTArtwork();
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 py-20 px-4">
       <div className="max-w-7xl mx-auto">

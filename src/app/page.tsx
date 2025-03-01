@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { artworks } from "@/mock";
 import { Metadata } from "next";
+import { getAllNFTArtwork } from "@/web3/lib/api";
 
 export const metadata: Metadata = {
   title: "Regenerative Art Collective",
@@ -20,7 +20,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const artworks = await getAllNFTArtwork();
+
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900">
       {/* Hero Section */}

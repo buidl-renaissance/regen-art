@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { getArtwork } from "@/mock";
 import { Artwork } from "@/types";
 import ArtworkImage from "@/components/artwork/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getNFTArtwork } from "@/web3/lib/api";
 
 export const generateMetadata = async ({ params }: { params: { id: string } }): Promise<Metadata> => {
-  const artwork: Artwork | undefined = getArtwork(Number(params.id));
+  const artwork: Artwork | undefined = await getNFTArtwork(params.id);
   
   if (!artwork) {
     return {
@@ -33,8 +33,10 @@ export const generateMetadata = async ({ params }: { params: { id: string } }): 
   };
 };
 
-export default function ArtworkDetails({ params }: { params: { id: string } }) {
-  const artwork: Artwork | undefined = getArtwork(Number(params.id));
+export default async function ArtworkDetails({ params }: { params: { id: string } }) {
+  // const artwork: Artwork | undefined = getArtwork(Number(params.id));
+  const artwork: Artwork | undefined = await getNFTArtwork(params.id);
+  // console.log(artwork);
 
   if (!artwork) {
     notFound();
