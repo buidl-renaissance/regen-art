@@ -7,7 +7,8 @@ frameConnector.type = "frameConnector" as const;
 export function frameConnector() {
   let connected = true;
 
-  return createConnector<typeof sdk.wallet.ethProvider>((config) => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return createConnector<typeof sdk.wallet.ethProvider>((config: any) => ({
     id: "farcaster",
     name: "Farcaster Wallet",
     type: frameConnector.type,
@@ -15,7 +16,7 @@ export function frameConnector() {
     async setup() {
       this.connect({ chainId: config.chains[0].id });
     },
-    async connect({ chainId } = {}) {
+    async connect({ chainId }: { chainId?: number } = {}) {
       const provider = await this.getProvider();
       const accounts = await provider.request({
         method: "eth_requestAccounts",
@@ -30,7 +31,7 @@ export function frameConnector() {
       connected = true;
 
       return {
-        accounts: accounts.map((x) => getAddress(x)),
+        accounts: accounts.map((x: string) => getAddress(x)),
         chainId: currentChainId,
       };
     },
@@ -43,7 +44,7 @@ export function frameConnector() {
       const accounts = await provider.request({
         method: "eth_requestAccounts",
       });
-      return accounts.map((x) => getAddress(x));
+      return accounts.map((x: string) => getAddress(x));
     },
     async getChainId() {
       const provider = await this.getProvider();
@@ -58,9 +59,9 @@ export function frameConnector() {
       const accounts = await this.getAccounts();
       return !!accounts.length;
     },
-    async switchChain({ chainId }) {
+    async switchChain({ chainId }: { chainId: number }) {
       const provider = await this.getProvider();
-      const chain = config.chains.find((x) => x.id === chainId);
+      const chain = config.chains.find((x: { id: number }) => x.id === chainId);
       if (!chain) throw new SwitchChainError(new ChainNotConfiguredError());
 
       await provider.request({
@@ -69,14 +70,14 @@ export function frameConnector() {
       });
       return chain;
     },
-    onAccountsChanged(accounts) {
+    onAccountsChanged(accounts: string[]) {
       if (accounts.length === 0) this.onDisconnect();
       else
         config.emitter.emit("change", {
           accounts: accounts.map((x) => getAddress(x)),
         });
     },
-    onChainChanged(chain) {
+    onChainChanged(chain: string) {
       const chainId = Number(chain);
       config.emitter.emit("change", { chainId });
     },
