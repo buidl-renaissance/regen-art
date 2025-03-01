@@ -56,9 +56,9 @@ export default function CreateArtwork() {
         setWalletConnected(true);
         setError("");
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error(err);
-      if (err.code === 4001) {
+      if (typeof err === 'object' && err !== null && 'code' in err && err.code === 4001) {
         setError("Please connect your wallet to continue");
       } else {
         setError("Failed to connect wallet");
@@ -74,6 +74,7 @@ export default function CreateArtwork() {
       try {
         await connectWallet();
       } catch (err) {
+        console.error(err);
         return;
       }
     }
@@ -107,9 +108,13 @@ export default function CreateArtwork() {
         `https://brown-selective-rodent-822.mypinata.cloud/ipfs/${tokenCID}`
       );
       console.log("Transaction receipt:", receipt, txHash, tokenId);
-    } catch (err) {
+    } catch (err: unknown) {
       console.error(err);
-      setError(err instanceof Error ? err.message : "Failed to create artwork");
+      if (typeof err === 'object' && err !== null && 'message' in err) {
+        setError((err.message as string));
+      } else {
+        setError("Failed to create artwork");
+      }
     } finally {
       setLoading(false);
     }
