@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/Button";
 import { truncateAddress } from "@/libs/web3/truncateAddress";
 import { base, degen, mainnet, optimism } from "wagmi/chains";
 import { BaseError, UserRejectedRequestError } from "viem";
-import { useSession } from "next-auth/react"
+import { useSession, SessionProvider } from "next-auth/react"
 import { createStore } from 'mipd'
 import { Label } from "@/components/ui/Label";
 
@@ -34,6 +34,14 @@ import { Label } from "@/components/ui/Label";
 export default function Demo(
   { title }: { title?: string } = { title: "Frames v2 Demo" }
 ) {
+  return (
+    <SessionProvider>
+      <DemoContent title={title} />
+    </SessionProvider>
+  );
+}
+
+function DemoContent({ title = "Frames v2 Demo" }) {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const [context, setContext] = useState<Context.FrameContext>();
   const [isContextOpen, setIsContextOpen] = useState(false);
