@@ -75,6 +75,11 @@ export default async function Home() {
             </Link>
           ))}
         </div>
+        <div className="flex justify-center mt-8">
+          <Link href="/artwork/create" className="px-8 py-3 bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 rounded-full hover:opacity-90 transition">
+            Submit A Collaboration
+          </Link>
+        </div>
       </section>
 
       {/* Services Section */}

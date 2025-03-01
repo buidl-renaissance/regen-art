@@ -47,6 +47,32 @@ export const artworks = [
     exhibition: "Art Night Detroit 2025 - Starting a Revolution at Stu 202",
     location: "Russell Industrial Center – DETROIT, MI",
   },
+  {
+    id: 4,
+    title: "Buidlers Unite IRL at ETH DENVER",
+    artist: "A Collective of Regens",
+    year: "2025",
+    image: "https://nyc3.digitaloceanspaces.com/dpop/images/1740843201612-904402412.jpg",
+    description:
+      "A collaborative artwork created at ETH Denver, capturing the intersection of art, blockchain, and community. The canvas is filled with colorful sketches, decentralized tech references, and expressions of creativity, symbolizing the shared ethos of building, innovation, and artistic empowerment. Featuring Ethereum-inspired imagery, phrases like 'BUIDL' and 'Hack on Brother!', and nods to the Detroit creative scene (313), this piece embodies the fusion of Web3 culture and grassroots artistic collaboration.",
+    medium: "Marker on Paper",
+    dimensions: "18\" x 24\"",
+    exhibition: "Art Night Denver 2025 - ETH DENVER",
+    location: "WESTERN NATIONAL CONVENTION CENTER – DENVER, CO",
+  },
+  {
+    id: 5,
+    title: "Wings of Hope: LA Relief & Resilience",
+    artist: "Munera Ziad Kaakouch",
+    description:
+      "Created for a fundraiser supporting victims of the LA fires, this powerful painting by Munera Ziad symbolizes resilience, hope, and unity. The bold 'LA' is uplifted by golden wings, representing the strength of a community rising above hardship. Set against a cool blue mosaic background, the piece conveys both the fragility and endurance of those affected, echoing the spirit of collective support and renewal. This artwork stands as a tribute to those rebuilding their lives, embodying the message that through solidarity, we can all help each other rise.",
+    medium: "Acrylic, Gold Leaf on Canvas",
+    dimensions: "24\" x 36\"",
+    exhibition: "LA Fundraiser at Playground Detroit",
+    location: "DETROIT, MI",
+    year: "2025",
+    image: "https://nyc3.digitaloceanspaces.com/dpop/images/1740843201612-904402412.jpg",
+  },
 ];
 
 export const getArtist = (id: number) => {

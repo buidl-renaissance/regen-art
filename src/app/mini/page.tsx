@@ -120,7 +120,7 @@ export default function GalleryMini() {
 
           {selectedArtwork && (
             <div className="mb-8">
-              <div className="relative w-full h-[80vh] overflow-hidden rounded-lg mb-4">
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg mb-4">
                 <Image
                   src={selectedArtwork.image}
                   alt={selectedArtwork.title}

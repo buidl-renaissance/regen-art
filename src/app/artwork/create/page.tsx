@@ -8,15 +8,16 @@ import { mintCollectiveArt } from "@/libs/web3/CollectiveArt/utils";
 import { uploadMetadata, uploadImage } from "@/libs/web3/ipfs";
 import { getWalletSigner } from "@/libs/web3/connectWallet";
 import { Artwork } from "@/types";
-import { getArtwork } from "@/mock";
+// import { getArtwork } from "@/mock";
 
 export default function CreateArtwork() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [walletConnected, setWalletConnected] = useState(false);
-  const [artwork, ] = useState<Artwork | undefined>(getArtwork(3));
+  const [walletConnected, setWalletConnected] = useState(true);
+  const [artwork, ] = useState<Artwork | undefined>();
+  // const [artwork, ] = useState<Artwork | undefined>(getArtwork(4));
 
   const [formData, setFormData] = useState({
     title: artwork?.title,
@@ -109,6 +110,7 @@ export default function CreateArtwork() {
         "0xa6F865191BE3A1d09b816B336509d376a593aB93"
       );
       console.log("Transaction receipt:", receipt, txHash, tokenId);
+      window.location.href = `/artwork/${tokenId}`;
     } catch (err: unknown) {
       console.error(err);
       if (typeof err === 'object' && err !== null && 'message' in err) {
@@ -154,7 +156,7 @@ export default function CreateArtwork() {
           </div>
         )}
 
-        {!walletConnected && (
+        {/* {!walletConnected && (
           <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
             <p className="text-blue-600 dark:text-blue-400">
               Please connect your wallet to create artwork
@@ -166,7 +168,7 @@ export default function CreateArtwork() {
               Connect Wallet
             </button>
           </div>
-        )}
+        )} */}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

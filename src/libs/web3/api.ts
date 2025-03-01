@@ -1,9 +1,8 @@
-import { ethers } from "ethers";
 import { CollectiveArtContract } from "./CollectiveArt/contract";
 import { Artwork } from "@/types";
-
+import { getProvider } from "./provider";
 export const getAllNFTArtwork = async () => {
-  const provider = new ethers.JsonRpcProvider("https://sepolia.base.org");
+  const provider = getProvider();
 
   const contract = CollectiveArtContract(provider);
   const totalSupply = await contract.artworkCounter();
@@ -24,7 +23,7 @@ export const getNFTArtwork = async (tokenId: string) => {
 
 export const getNFTMetadata = async (tokenId: string) => {
   // Create provider with cache key
-  const provider = new ethers.JsonRpcProvider("https://sepolia.base.org");
+  const provider = getProvider();
   
   const contract = CollectiveArtContract(provider);
 
