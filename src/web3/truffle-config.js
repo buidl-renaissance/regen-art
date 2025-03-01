@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const HDWalletProvider = require('@truffle/hdwallet-provider');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('dotenv').config();
 
 module.exports = {
