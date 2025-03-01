@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: "A Community Gallery & Creative Agency showcasing collaborative works and providing art curation, creative consulting, and project management services.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/digital-renaissance-hands.jpeg",
         width: 1200,
         height: 630,
         alt: "Regenerative Art Collective",
@@ -27,15 +27,15 @@ export default async function Home() {
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center">
-        {/* <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0">
           <Image
-            src="/hero-art.jpg" 
+            src="/digital-renaissance-hands.jpeg" 
             alt="Collaborative Art Piece"
             fill
-            className="object-cover opacity-60"
+            className="object-cover opacity-10"
             priority
           />
-        </div> */}
+        </div>
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-neutral-900 dark:text-neutral-50">
             Regenerative Art Collective
