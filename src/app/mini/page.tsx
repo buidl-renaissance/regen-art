@@ -10,10 +10,10 @@ import { signIn, getCsrfToken } from "next-auth/react";
 
 export default function GalleryMini() {
   const [selectedArtworks, setSelectedArtworks] = useState<Artwork[]>([]);
-  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [, setIsSigningIn] = useState(false);
   const [context, setContext] = useState<Context.FrameContext>();
   const [isContextOpen, setIsContextOpen] = useState(false);
-  const [added, setAdded] = useState(false);
+  const [, setAdded] = useState(false);
 
   const handleSignIn = useCallback(async () => {
     try {
