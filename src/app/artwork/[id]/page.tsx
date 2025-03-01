@@ -33,7 +33,11 @@ export const generateMetadata = async ({ params }: { params: { id: string } }): 
   };
 };
 
-export default async function ArtworkDetails({ params }: { params: { id: string } }) {
+interface ArtworkDetailsProps {
+  params: { id: string };
+}
+
+export default async function ArtworkDetails({ params }: ArtworkDetailsProps) {
   // const artwork: Artwork | undefined = getArtwork(Number(params.id));
   const artwork: Artwork | undefined = await getNFTArtwork(params.id);
   // console.log(artwork);
