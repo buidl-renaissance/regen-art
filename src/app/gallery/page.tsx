@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
-import { getAllNFTArtwork } from "@/web3/lib/api";
+import { getAllNFTArtwork } from "@/libs/web3/api";
 
 export const metadata: Metadata = {
   title: "Gallery | Regenerative Art Collective",

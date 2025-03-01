@@ -3,7 +3,7 @@ import { Artwork } from "@/types";
 import ArtworkImage from "@/components/artwork/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getNFTArtwork } from "@/web3/lib/api";
+import { getNFTArtwork } from "@/libs/web3/api";
 
 export const generateMetadata = async ({ params }: { params: { id: string } }): Promise<Metadata> => {
   const artwork: Artwork | undefined = await getNFTArtwork(params.id);
