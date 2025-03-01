@@ -10,10 +10,12 @@ import { createStore } from "mipd";
 
 export default function GalleryMini() {
   const [selectedArtworks, setSelectedArtworks] = useState<Artwork[]>([]);
+  const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
   const [, setIsSigningIn] = useState(false);
   const [, setContext] = useState<Context.FrameContext>();
   const [, setAdded] = useState(false);
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const [chatMessage, setChatMessage] = useState("");
 
   const handleSignIn = useCallback(async () => {
     try {
@@ -43,6 +45,9 @@ export default function GalleryMini() {
     async function loadArtworks() {
       const allArtworks = await getAllNFTArtwork();
       setSelectedArtworks(allArtworks);
+      if (allArtworks.length > 0) {
+        setSelectedArtwork(allArtworks[0]);
+      }
       console.log("allArtworks", allArtworks);
     }
     loadArtworks();
@@ -66,20 +71,13 @@ export default function GalleryMini() {
       setAdded(context.client.added);
 
       sdk.on("frameAdded", ({ notificationDetails }) => {
-        // setLastEvent(
-        //   `frameAdded${!!notificationDetails ? ", notifications enabled" : ""}`
-        // );
-
         setAdded(true);
         if (notificationDetails) {
-          //   setNotificationDetails(notificationDetails);
         }
       });
 
       sdk.on("frameRemoved", () => {
-        // setLastEvent("frameRemoved");
         setAdded(false);
-        // setNotificationDetails(null);
       });
 
       sdk.on("primaryButtonClicked", () => {
@@ -89,13 +87,10 @@ export default function GalleryMini() {
       console.log("Calling ready");
       sdk.actions.ready({});
 
-      // Set up a MIPD Store, and request Providers.
       const store = createStore();
 
-      // Subscribe to the MIPD Store.
       store.subscribe((providerDetails) => {
         console.log("PROVIDER DETAILS", providerDetails);
-        // => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
       });
     };
     if (sdk && !isSDKLoaded) {
@@ -108,33 +103,107 @@ export default function GalleryMini() {
     }
   }, [isSDKLoaded]);
 
-  return (
-    <div className="bg-neutral-50 dark:bg-neutral-900 p-4">
-      <div className="max-w-lg mx-auto">
-        <h1 className="text-2xl font-bold text-center mb-6 text-neutral-900 dark:text-neutral-50">
-          Featured Works
-        </h1>
+  const handleChatSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would implement the chat functionality
+    console.log("Chat message:", chatMessage);
+    setChatMessage("");
+  };
 
-        <div className="grid grid-cols-2 gap-4">
-          {selectedArtworks.map((artwork) => (
-            <div key={artwork.id} className="space-y-2">
-              <div className="relative aspect-square overflow-hidden rounded-lg">
+  return (
+    <div className="bg-neutral-50 dark:bg-neutral-900 min-h-screen flex flex-col">
+      <div className="flex-1 p-4 pb-24">
+        <div className="max-w-full mx-auto">
+          <h1 className="text-2xl font-bold text-center mb-6 text-neutral-900 dark:text-neutral-50">
+            Regenerative Art Collective
+          </h1>
+
+          {selectedArtwork && (
+            <div className="mb-8">
+              <div className="relative w-full h-[80vh] overflow-hidden rounded-lg mb-4">
                 <Image
-                  src={artwork.image}
-                  alt={artwork.title}
+                  src={selectedArtwork.image}
+                  alt={selectedArtwork.title}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   priority
                 />
               </div>
-              <h3 className="text-sm font-medium text-neutral-900 dark:text-neutral-50">
-                {artwork.title}
-              </h3>
-              <p className="text-xs text-neutral-600 dark:text-neutral-400">
-                {artwork.artist}
-              </p>
+              <div className="space-y-2">
+                <h2 className="text-xl font-medium text-neutral-900 dark:text-neutral-50">
+                  {selectedArtwork.title}
+                </h2>
+                <p className="text-neutral-600 dark:text-neutral-400">
+                  Artist: {selectedArtwork.artist}
+                </p>
+                {selectedArtwork.year && (
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    Year: {selectedArtwork.year}
+                  </p>
+                )}
+                {selectedArtwork.medium && (
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    Medium: {selectedArtwork.medium}
+                  </p>
+                )}
+                {selectedArtwork.dimensions && (
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    Dimensions: {selectedArtwork.dimensions}
+                  </p>
+                )}
+                {selectedArtwork.description && (
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    {selectedArtwork.description}
+                  </p>
+                )}
+                <form onSubmit={handleChatSubmit} className="mt-4">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={chatMessage}
+                      onChange={(e) => setChatMessage(e.target.value)}
+                      placeholder="Ask about this artwork..."
+                      className="flex-1 px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50"
+                    />
+                    <button
+                      type="submit"
+                      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+                    >
+                      Send
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          ))}
+          )}
+        </div>
+      </div>
+
+      <div className="fixed bottom-0 left-0 right-0 bg-neutral-100 dark:bg-neutral-800 p-4 border-t border-neutral-200 dark:border-neutral-700">
+        <div className="overflow-x-auto">
+          <div className="flex gap-4" style={{ minWidth: "min-content" }}>
+            {selectedArtworks.map((artwork) => (
+              <div
+                key={artwork.id}
+                className={`flex-none w-20 h-20 cursor-pointer transition-opacity ${
+                  selectedArtwork?.id === artwork.id
+                    ? "ring-2 ring-blue-500"
+                    : "opacity-70 hover:opacity-100"
+                }`}
+                onClick={() => setSelectedArtwork(artwork)}
+              >
+                <div className="relative w-full h-full overflow-hidden rounded-lg">
+                  <Image
+                    src={artwork.image}
+                    alt={artwork.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
