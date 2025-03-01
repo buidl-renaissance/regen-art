@@ -4,10 +4,10 @@ import { Metadata } from "next";
 import { getAllNFTArtwork } from "@/libs/web3/api";
 
 export const metadata: Metadata = {
-  title: "Regenerative Art Collective",
+  title: "A Regenerative Art Collective",
   description: "A Community Gallery & Creative Agency showcasing collaborative works and providing art curation, creative consulting, and project management services.",
   openGraph: {
-    title: "Regenerative Art Collective",
+    title: "A Regenerative Art Collective",
     description: "A Community Gallery & Creative Agency showcasing collaborative works and providing art curation, creative consulting, and project management services.",
     images: [
       {
@@ -38,10 +38,10 @@ export default async function Home() {
         </div>
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-neutral-900 dark:text-neutral-50">
-            Regenerative Art Collective
+            A Regenerative Art Collective
           </h1>
           <p className="text-xl md:text-2xl text-neutral-800 dark:text-neutral-200 mb-8">
-            A Community Gallery & Creative Agency
+            Community Gallery & Creative Agency
           </p>
           <div className="flex gap-4 justify-center">
             <a href="#gallery" className="px-8 py-3 bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 rounded-full hover:opacity-90 transition">

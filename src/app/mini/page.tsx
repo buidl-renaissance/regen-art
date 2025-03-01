@@ -115,7 +115,7 @@ export default function GalleryMini() {
       <div className="flex-1 p-4 pb-24">
         <div className="max-w-full mx-auto">
           <h1 className="text-2xl font-bold text-center mb-6 text-neutral-900 dark:text-neutral-50">
-            Regenerative Art Collective
+            A Regenerative Art Collective
           </h1>
 
           {selectedArtwork && (
