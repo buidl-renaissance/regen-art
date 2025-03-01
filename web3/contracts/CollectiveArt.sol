@@ -4,39 +4,77 @@ pragma solidity ^0.8.0;
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 
-contract ArtNightNFT is ERC721, ERC721URIStorage {
+contract CollectiveArt is ERC721, ERC721URIStorage {
     struct Artwork {
         uint256 id;
         string tokenURI;
-        address artist;
+        address collective;
     }
 
     // Mapping to store artworks by token ID
     mapping(uint256 => Artwork) public artworks;
     uint256 public artworkCounter;
 
+    // Mapping to store collaborators
+    mapping(address => bool) public collaborators;
+    address[] public collaboratorList;
+
     // Event to be emitted when a new artwork is minted
     event ArtworkMinted(
         uint256 tokenId,
-        address artist,
+        address collective,
         string tokenURI
     );
 
+    // Event for collaborator changes
+    event CollaboratorAdded(address collaborator);
+    event CollaboratorRemoved(address collaborator);
+
     constructor(string memory name, string memory symbol) ERC721(name, symbol) {}
 
+    // Function to add a collaborator
+    function addCollaborator(address collaborator) public {
+        require(!collaborators[collaborator], "Already a collaborator");
+        collaborators[collaborator] = true;
+        collaboratorList.push(collaborator);
+        emit CollaboratorAdded(collaborator);
+    }
+
+    // Function to remove a collaborator
+    function removeCollaborator(address collaborator) public {
+        require(collaborators[collaborator], "Not a collaborator");
+        collaborators[collaborator] = false;
+        
+        // Remove from list
+        for (uint i = 0; i < collaboratorList.length; i++) {
+            if (collaboratorList[i] == collaborator) {
+                collaboratorList[i] = collaboratorList[collaboratorList.length - 1];
+                collaboratorList.pop();
+                break;
+            }
+        }
+        
+        emit CollaboratorRemoved(collaborator);
+    }
+
+    // Function to get all collaborators
+    function getCollaborators() public view returns (address[] memory) {
+        return collaboratorList;
+    }
+
     // Function to mint a new NFT artwork
-    function mintNFT(address artist, string memory uri) public returns (uint256) {
+    function mintNFT(address collective, string memory uri) public returns (uint256) {
         artworkCounter++;
         uint256 tokenId = artworkCounter;
 
         Artwork storage newArtwork = artworks[tokenId];
         newArtwork.id = tokenId;
-        newArtwork.artist = artist;
+        newArtwork.collective = collective;
         newArtwork.tokenURI = uri;
-        _safeMint(artist, tokenId);
+        _safeMint(collective, tokenId);
         _setTokenURI(tokenId, uri);
 
-        emit ArtworkMinted(tokenId, artist, newArtwork.tokenURI);
+        emit ArtworkMinted(tokenId, collective, newArtwork.tokenURI);
         
         return tokenId;
     }
@@ -65,7 +103,7 @@ contract ArtNightNFT is ERC721, ERC721URIStorage {
         return (
             artwork.id,
             artwork.tokenURI,
-            artwork.artist
+            artwork.collective
         );
     }
 
@@ -82,28 +120,9 @@ contract ArtNightNFT is ERC721, ERC721URIStorage {
         return allArtworks;
     }
 
-    // Function to transfer artwork ownership
-    function transferArtwork(address to, uint256 tokenId) public {
-        require(
-            ownerOf(tokenId) == msg.sender,
-            'Only the artwork owner can transfer.'
-        );
-        _transfer(msg.sender, to, tokenId);
-    }
-
     function getTokenURI(uint256 tokenId) public view returns (string memory) {
         return tokenURI(tokenId);
     }
-
-    // function tokenURI(uint256 tokenId) public view virtual override(ERC721, ERC721URIStorage) returns (string memory) {
-    //     return string(abi.encodePacked(super.tokenURI(tokenId)));
-    // }
-
-    // function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, ERC721URIStorage) returns (bool) {
-    //     return super.supportsInterface(interfaceId);
-    // }
-
-        // The following functions are overrides required by Solidity.
 
     function tokenURI(uint256 tokenId)
         public

@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/contracts/ArtNightNFT.sol": {
-      "lastModificationDate": 1740776883642,
-      "contentHash": "52b96ab9663f2bebaa4cb094f809ac3e",
-      "sourceName": "contracts/ArtNightNFT.sol",
+    "/Users/johngulbronson/Detroit/regen-art/web3/contracts/CollectiveArt.sol": {
+      "lastModificationDate": 1740841814572,
+      "contentHash": "142f0145ac46847e3a0ab28345f3160d",
+      "sourceName": "contracts/CollectiveArt.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
@@ -37,11 +37,11 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "ArtNightNFT"
+        "CollectiveArt"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
-      "lastModificationDate": 1740776887653,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
+      "lastModificationDate": 1740785954452,
       "contentHash": "a7951c81f7037d558c6d2f220b0cb38e",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
@@ -84,8 +84,8 @@
         "ERC721"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
-      "lastModificationDate": 1740776887662,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+      "lastModificationDate": 1740785955587,
       "contentHash": "ba4a727732c179b4dfd6f8846c52c856",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
       "solcConfig": {
@@ -125,8 +125,8 @@
         "ERC721URIStorage"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1740776887679,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1740785953026,
       "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -161,8 +161,8 @@
         "Context"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1740776887692,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1740785953027,
       "contentHash": "f4cc092958a3ddec1f4ed4103bfc54dd",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
@@ -200,8 +200,8 @@
         "Strings"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
-      "lastModificationDate": 1740776887518,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
+      "lastModificationDate": 1740785953034,
       "contentHash": "267d92fe4de67b1bdb3302c08f387dbf",
       "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
       "solcConfig": {
@@ -238,46 +238,8 @@
         "IERC721Errors"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1740776887654,
-      "contentHash": "1fdc621cd6747e8985e11fc76ce74511",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC721"
-      ]
-    },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
-      "lastModificationDate": 1740776887722,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+      "lastModificationDate": 1740785954445,
       "contentHash": "7c03c1e37c3dc24eafb76dc2b8a5c3a6",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
@@ -314,8 +276,46 @@
         "ERC165"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
-      "lastModificationDate": 1740776887663,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+      "lastModificationDate": 1740785954452,
+      "contentHash": "1fdc621cd6747e8985e11fc76ce74511",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC721"
+      ]
+    },
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+      "lastModificationDate": 1740785955588,
       "contentHash": "12c206f185cb951213799561fdcaa40d",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
@@ -352,8 +352,8 @@
         "IERC721Metadata"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/token/ERC721/utils/ERC721Utils.sol": {
-      "lastModificationDate": 1740776887667,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/token/ERC721/utils/ERC721Utils.sol": {
+      "lastModificationDate": 1740785955577,
       "contentHash": "f4b67273e290784d0e155f004ae52f0b",
       "sourceName": "@openzeppelin/contracts/token/ERC721/utils/ERC721Utils.sol",
       "solcConfig": {
@@ -391,8 +391,46 @@
         "ERC721Utils"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
-      "lastModificationDate": 1740776887728,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/utils/math/SignedMath.sol": {
+      "lastModificationDate": 1740785954445,
+      "contentHash": "ae3528afb8bdb0a7dcfba5b115ee8074",
+      "sourceName": "@openzeppelin/contracts/utils/math/SignedMath.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SafeCast.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "SignedMath"
+      ]
+    },
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1740785954445,
       "contentHash": "2b2665ae9bdb1af440658741a77fe213",
       "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
       "solcConfig": {
@@ -430,82 +468,8 @@
         "Math"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/utils/math/SignedMath.sol": {
-      "lastModificationDate": 1740776887729,
-      "contentHash": "ae3528afb8bdb0a7dcfba5b115ee8074",
-      "sourceName": "@openzeppelin/contracts/utils/math/SignedMath.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./SafeCast.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "SignedMath"
-      ]
-    },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/utils/Panic.sol": {
-      "lastModificationDate": 1740776887682,
-      "contentHash": "2133dc13536b4a6a98131e431fac59e1",
-      "sourceName": "@openzeppelin/contracts/utils/Panic.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Panic"
-      ]
-    },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/utils/math/SafeCast.sol": {
-      "lastModificationDate": 1740776887728,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/utils/math/SafeCast.sol": {
+      "lastModificationDate": 1740785954445,
       "contentHash": "2adca1150f58fc6f3d1f0a0f22ee7cca",
       "sourceName": "@openzeppelin/contracts/utils/math/SafeCast.sol",
       "solcConfig": {
@@ -540,8 +504,44 @@
         "SafeCast"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1740776887727,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/utils/Panic.sol": {
+      "lastModificationDate": 1740785953027,
+      "contentHash": "2133dc13536b4a6a98131e431fac59e1",
+      "sourceName": "@openzeppelin/contracts/utils/Panic.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Panic"
+      ]
+    },
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1740785954445,
       "contentHash": "bf0119eb2a570f219729ff38b6cd1df8",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
@@ -576,8 +576,8 @@
         "IERC165"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1740776887655,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+      "lastModificationDate": 1740785954451,
       "contentHash": "729ce0904eb533489ffcc3bfe91237d4",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
@@ -612,8 +612,8 @@
         "IERC721Receiver"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/interfaces/IERC4906.sol": {
-      "lastModificationDate": 1740776887513,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/interfaces/IERC4906.sol": {
+      "lastModificationDate": 1740785953033,
       "contentHash": "273c26c9c728a6052d1175ace81d10b4",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC4906.sol",
       "solcConfig": {
@@ -651,8 +651,8 @@
         "IERC4906"
       ]
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/interfaces/IERC165.sol": {
-      "lastModificationDate": 1740776887468,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/interfaces/IERC165.sol": {
+      "lastModificationDate": 1740785953031,
       "contentHash": "f808b485ee0cdc6768ee8385ae5f9a2a",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC165.sol",
       "solcConfig": {
@@ -687,8 +687,8 @@
       ],
       "artifacts": []
     },
-    "/Users/johngulbronson/Detroit/regen-art/src/web3/node_modules/@openzeppelin/contracts/interfaces/IERC721.sol": {
-      "lastModificationDate": 1740776887514,
+    "/Users/johngulbronson/Detroit/regen-art/web3/node_modules/@openzeppelin/contracts/interfaces/IERC721.sol": {
+      "lastModificationDate": 1740785953033,
       "contentHash": "d8d23fc2f55ed934d1a1b91c9afd8526",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC721.sol",
       "solcConfig": {

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { mintArtNightNFT } from "@/libs/web3/ArtNightNFT/utils";
+import { mintCollectiveArt } from "@/libs/web3/CollectiveArt/utils";
 import { uploadMetadata, uploadImage } from "@/libs/web3/ipfs";
 import { getWalletSigner } from "@/libs/web3/connectWallet";
 import { Artwork } from "@/types";
@@ -104,8 +104,9 @@ export default function CreateArtwork() {
       // Connect to Ethereum
       if (!window.ethereum) throw new Error("Please install MetaMask");
 
-      const { receipt, txHash, tokenId } = await mintArtNightNFT(
-        `https://brown-selective-rodent-822.mypinata.cloud/ipfs/${tokenCID}`
+      const { receipt, txHash, tokenId } = await mintCollectiveArt(
+        `https://brown-selective-rodent-822.mypinata.cloud/ipfs/${tokenCID}`,
+        "0xa6F865191BE3A1d09b816B336509d376a593aB93"
       );
       console.log("Transaction receipt:", receipt, txHash, tokenId);
     } catch (err: unknown) {
