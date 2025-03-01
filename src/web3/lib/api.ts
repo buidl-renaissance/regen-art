@@ -53,7 +53,7 @@ export const getNFTMetadata = async (tokenId: string) => {
 
 interface NFTMetadata {
   tokenId: string;
-  title: string;
+  name: string;
   description: string;
   image: string;
   attributes: {
@@ -65,7 +65,7 @@ interface NFTMetadata {
 export const nftToArtwork = async (nft: NFTMetadata): Promise<Artwork> => {
   return {
     id: parseInt(nft.tokenId),
-    title: nft.title,
+    title: nft.name,
     description: nft.description,
     image: nft.image,
     artist: nft.attributes.find(attr => attr.trait_type === 'Artist')?.value || '',
