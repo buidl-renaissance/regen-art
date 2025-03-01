@@ -3,6 +3,7 @@ import { getProvider } from "../provider";
 import { ArtNightNFTContract } from "./contract";
 
 // Function for client-side interaction to create a new property
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const mintArtNightNFT = async (tokenURI: string): Promise<{ receipt: any; txHash: string; tokenId: string | null }> => {
 
   // Need to use a signer since this is a state-changing operation
@@ -31,6 +32,7 @@ export const getTokenURI = async (tokenId: string) => {
 };
 
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getTokenIdFromReceipt = (receipt: any) => {
   // Check for logs in the receipt
   if (receipt && receipt.logs) {

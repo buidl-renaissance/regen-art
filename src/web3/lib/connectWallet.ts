@@ -3,7 +3,13 @@ import { ethers } from 'ethers';
 
 declare global {
   interface Window {
-    ethereum: any;
+    ethereum: {
+      request: (args: { method: string }) => Promise<string[]>;
+      selectedAddress?: string;
+      isMetaMask?: boolean;
+      on: (event: string, callback: (...args: unknown[]) => void) => void;
+      removeListener: (event: string, callback: (...args: unknown[]) => void) => void;
+    };
   }
 }
 
