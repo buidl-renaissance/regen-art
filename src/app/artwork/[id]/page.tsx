@@ -5,8 +5,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getNFTArtwork } from "@/libs/web3/api";
 
-export const generateMetadata = async ({ params }: { params: { id: string } }): Promise<Metadata> => {
-  const artwork: Artwork | undefined = await getNFTArtwork(params.id);
+export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> => {
+  const artwork: Artwork | undefined = await getNFTArtwork((await params).id);
   
   if (!artwork) {
     return {
@@ -33,14 +33,12 @@ export const generateMetadata = async ({ params }: { params: { id: string } }): 
   };
 };
 
-interface ArtworkDetailsProps {
-  params: { id: string };
+type PageProps = {
+  params: Promise<{ id: string }>;
 }
 
-export default async function ArtworkDetails({ params }: ArtworkDetailsProps) {
-  // const artwork: Artwork | undefined = getArtwork(Number(params.id));
-  const artwork: Artwork | undefined = await getNFTArtwork(params.id);
-  // console.log(artwork);
+export default async function ArtworkDetails({ params }: PageProps) {
+  const artwork: Artwork | undefined = await getNFTArtwork((await params).id);
 
   if (!artwork) {
     notFound();
