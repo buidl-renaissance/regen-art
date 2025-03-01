@@ -4,9 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { mintArtNightNFT } from "../../../../web3/lib/ArtNightNFT/utils";
-import { uploadMetadata, uploadImage } from "../../../../web3/lib/ipfs";
-import { getWalletSigner } from "../../../../web3/lib/connectWallet";
+import { mintArtNightNFT } from "@/libs/web3/ArtNightNFT/utils";
+import { uploadMetadata, uploadImage } from "@/libs/web3/ipfs";
+import { getWalletSigner } from "@/libs/web3/connectWallet";
 import { Artwork } from "@/types";
 import { getArtwork } from "@/mock";
 
