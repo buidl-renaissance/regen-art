@@ -17,6 +17,7 @@ export default function CreateArtwork() {
   const [error, setError] = useState("");
   const [walletConnected, setWalletConnected] = useState(true);
   const [artwork, ] = useState<Artwork | undefined>();
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   // const [artwork, ] = useState<Artwork | undefined>(getArtwork(4));
 
   const [formData, setFormData] = useState({
@@ -30,7 +31,41 @@ export default function CreateArtwork() {
     location: artwork?.location,
   });
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const analyzeImage = async (file: File) => {
+    setIsAnalyzing(true);
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const response = await fetch('/api/analyze-image', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (!formData.get('title')) {
+        setFormData(prev => ({
+          ...prev,
+          title: data.title
+        }));
+      }
+
+      if (!formData.get('description')) {
+        setFormData(prev => ({
+          ...prev,
+          description: data.description
+        }));
+      }
+
+    } catch (err) {
+      console.error('Error analyzing image:', err);
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -39,6 +74,7 @@ export default function CreateArtwork() {
         setImagePreview(reader.result as string);
       };
       reader.readAsDataURL(file);
+      await analyzeImage(file);
     }
   };
 
@@ -179,12 +215,19 @@ export default function CreateArtwork() {
                 </label>
                 <div className="relative aspect-square overflow-hidden rounded-lg border-2 border-dashed border-neutral-300 dark:border-neutral-700">
                   {imagePreview ? (
-                    <Image
-                      src={imagePreview}
-                      alt="Preview"
-                      fill
-                      className="object-cover"
-                    />
+                    <>
+                      <Image
+                        src={imagePreview}
+                        alt="Preview"
+                        fill
+                        className="object-cover"
+                      />
+                      {isAnalyzing && (
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                          <div className="text-white">Analyzing image...</div>
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <div className="flex items-center justify-center h-full">
                       <input

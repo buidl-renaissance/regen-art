@@ -1,37 +1,10 @@
 import Link from "next/link";
 import { Artwork } from "@/types";
 import ArtworkImage from "@/components/artwork/image";
-import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getNFTArtwork } from "@/libs/web3/api";
-
-export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> => {
-  const artwork: Artwork | undefined = await getNFTArtwork((await params).id);
-  
-  if (!artwork) {
-    return {
-      title: "Artwork Not Found",
-      description: "The requested artwork could not be found."
-    };
-  }
-
-  return {
-    title: `${artwork.title} | Regenerative Art Collective`,
-    description: artwork.description,
-    openGraph: {
-      title: artwork.title,
-      description: artwork.description,
-      images: [
-        {
-          url: artwork.image,
-          width: 1200,
-          height: 1200,
-          alt: artwork.title,
-        },
-      ],
-    },
-  };
-};
+import Conversation from "./conversation";
+import Content from "./content";
 
 type PageProps = {
   params: Promise<{ id: string }>;
@@ -69,7 +42,9 @@ export default async function ArtworkDetails({ params }: PageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Artwork Image */}
-          <ArtworkImage artwork={artwork} />
+          <div className="lg:sticky lg:top-20 lg:self-start">
+            <ArtworkImage artwork={artwork} />
+          </div>
 
           {/* Artwork Details */}
           <div className="space-y-6">
@@ -128,6 +103,16 @@ export default async function ArtworkDetails({ params }: PageProps) {
                   {artwork.location}
                 </p>
               </div>
+            </div>
+
+            {/* Content Feed */}
+            <div className="mt-8">
+              <Content artwork={artwork} />
+            </div>
+
+            {/* Conversation Component */}
+            <div className="mt-8">
+              <Conversation artwork={artwork} />
             </div>
           </div>
         </div>
