@@ -3,11 +3,7 @@
 import { useState } from "react";
 import { Artwork } from "@/types";
 
-interface ConversationProps {
-  artwork: Artwork;
-}
-
-export default function Conversation({ artwork }: ConversationProps) {
+export default function Conversation({ artwork }: { artwork: Artwork }) {
   const [messages, setMessages] = useState<{text: string, sender: 'user' | 'ai'}[]>([]);
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);

@@ -7,7 +7,7 @@ interface ConversationProps {
   artwork: Artwork;
 }
 
-export default function ArtworkConversation({ artwork }: ConversationProps) {
+const ArtworkConversation = ({ artwork }: ConversationProps) => {
   const [messages, setMessages] = useState<{role: string; content: string}[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -109,3 +109,5 @@ export default function ArtworkConversation({ artwork }: ConversationProps) {
     </div>
   );
 }
+
+export default ArtworkConversation;
