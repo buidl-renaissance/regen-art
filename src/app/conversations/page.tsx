@@ -1,16 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Artwork } from "@/types";
+import { getArtwork } from "@/mock";
 
-interface Props {
-  artwork: Artwork;
-}
-
-const ArtworkConversation = ({ artwork }: Props) => {
+const ArtworkConversation = () => {
   const [messages, setMessages] = useState<{role: string; content: string}[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [artwork, setArtwork] = useState<Artwork | null>(null);
+
+  useEffect(() => {
+    const artwork = getArtwork(4);
+    if (artwork) {
+      setArtwork(artwork);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
