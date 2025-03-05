@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { Artwork } from "@/types";
 
-interface ConversationProps {
+interface Props {
   artwork: Artwork;
 }
 
-const ArtworkConversation = ({ artwork }: ConversationProps) => {
+const ArtworkConversation = ({ artwork }: Props) => {
   const [messages, setMessages] = useState<{role: string; content: string}[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
