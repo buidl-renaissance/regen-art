@@ -31,6 +31,8 @@ const ArtworkConversation = () => {
     setMessages(newMessages);
     setInputMessage("");
 
+    if (!artwork) return;
+
     try {
       // Make API call to AI service
       const response = await fetch("/api/chat", {
