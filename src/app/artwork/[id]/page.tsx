@@ -3,7 +3,7 @@ import { Artwork } from "@/types";
 import ArtworkImage from "@/components/artwork/image";
 import { notFound } from "next/navigation";
 import { getNFTArtwork } from "@/libs/web3/api";
-import Conversation from "./conversation";
+// import Conversation from "./conversation";
 import Content from "./content";
 
 type PageProps = {
@@ -111,9 +111,9 @@ export default async function ArtworkDetails({ params }: PageProps) {
             </div>
 
             {/* Conversation Component */}
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <Conversation artwork={artwork} />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
