@@ -462,7 +462,7 @@ export default function Index() {
 
           <div className="portfolio-item">
             <a
-              href="https://gods.work"
+              href="https://stu.gods.work"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -495,19 +495,6 @@ export default function Index() {
             </a>
           </div>
         </div>
-
-        {/* <div className="portfolio-item">
-          <a href="https://www.instagram.com/bestfooddetroit" target="_blank" rel="noopener noreferrer">
-            <img src="/bestfood.jpeg" alt="Best Food Detroit" />
-            <div className="item-content">
-              <h3>Best Food Detroit</h3>
-              <p>
-                A community-powered media company reaching 2M+ food enthusiasts
-                across 35 local publications.
-              </p>
-            </div>
-          </a>
-        </div> */}
       </section>
 
       <section className="experience-section">
