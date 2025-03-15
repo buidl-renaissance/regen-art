@@ -337,14 +337,30 @@ export default function Index() {
         <div className="portfolio-grid">
           <div className="portfolio-item">
             <a
-              href="https://art.gods.work"
+              href="https://github.com/buidl-renaissance"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src="/regen-art.jpeg"
-                alt="Regenerative Art Gallery"
+                src="/digital-renaissance-hands.jpeg"
+                alt="Buidl Renaissance"
               />
+              <div className="item-content">
+                <h3>Buidl Renaissance</h3>
+                <p>
+                  A collaborative platform empowering developers to create and
+                  share impactful open source projects.
+                </p>
+              </div>
+            </a>
+          </div>
+          <div className="portfolio-item">
+            <a
+              href="https://art.gods.work"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src="/regen-art.jpeg" alt="Regenerative Art Gallery" />
               <div className="item-content">
                 <h3>Regenerative Art Gallery</h3>
                 <p>
@@ -381,29 +397,7 @@ export default function Index() {
               <img src="/penobscot.jpeg" alt="Build Detroit" />
               <div className="item-content">
                 <h3>Build Detroit</h3>
-                <p>
-                  A platform to connect Detroiter's at local events.
-                </p>
-              </div>
-            </a>
-          </div>
-
-          <div className="portfolio-item">
-            <a
-              href="https://github.com/buidl-renaissance"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/digital-renaissance-hands.jpeg"
-                alt="Buidl Renaissance"
-              />
-              <div className="item-content">
-                <h3>Buidl Renaissance</h3>
-                <p>
-                  A collaborative platform empowering developers to create and
-                  share impactful open source projects.
-                </p>
+                <p>A platform to connect Detroiter's at local events.</p>
               </div>
             </a>
           </div>
@@ -418,7 +412,8 @@ export default function Index() {
               <div className="item-content">
                 <h3>Studio 202</h3>
                 <p>
-                  A studio space for Detroit artists to connect, collaborate, and create.
+                  A studio space for Detroit artists to connect, collaborate,
+                  and create.
                 </p>
               </div>
             </a>
