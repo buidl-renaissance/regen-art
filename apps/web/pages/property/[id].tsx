@@ -25,10 +25,7 @@ export default function PropertyDetails() {
   useEffect(() => {
     if (id) {
       (async () => {
-        const property = await getProperty(
-          '0xc36d046616Ae801F1caaEBBb87f1Ca370A2485aa',
-          id as unknown as number
-        );
+        const property = await getProperty(id as unknown as number);
         console.log('property: ', property);
         setProperty(property);
         setLoading(false);
