@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { saveQuestionnaireResponse } from '../../lib/db';
+import { saveQuestionnaireResponse } from '../../../lib/db';
 
 export async function POST(req: Request) {
   try {

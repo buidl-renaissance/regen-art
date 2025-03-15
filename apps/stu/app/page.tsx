@@ -167,7 +167,7 @@ export default function Home() {
           <div className="text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Join?</h2>
             <p className="text-lg md:text-xl mb-8">Become a member today for only $20 per month!</p>
-            <Button asChild size="lg" variant="primary" className="bg-white text-purple-600 hover:bg-purple-100 transition-colors duration-300">
+            <Button asChild size="lg" variant="default" className="bg-white text-purple-600 hover:bg-purple-100 transition-colors duration-300">
               <Link href="/join">Join Now</Link>
             </Button>
           </div>

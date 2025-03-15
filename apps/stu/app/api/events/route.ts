@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { insertEvent } from '@/lib/db'
+import { getEvents, insertEvent } from '../../../lib/db'
 import { writeFile } from 'fs/promises'
 import { join } from 'path'
 
@@ -29,7 +29,7 @@ const publishToBlockchain = async (eventData: any) => {
 export async function POST(req: Request) {
   try {
     const formData = await req.formData()
-    const eventData = Object.fromEntries(formData)
+    const eventData = Object.fromEntries(formData as unknown as Iterable<[string, string]>)
     
     let eventbriteResult = null
     let lumaResult = null

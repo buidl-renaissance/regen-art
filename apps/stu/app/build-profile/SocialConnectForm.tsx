@@ -9,6 +9,8 @@ interface SocialConnectFormProps {
   updateData: (
     data: Partial<{
       socialConnection: 'instagram' | 'linkedin' | 'skip' | null;
+      name: string;
+      handle: string;
     }>
   ) => void;
   onNext: () => void;
