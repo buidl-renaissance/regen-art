@@ -14,6 +14,7 @@ const StyledPage = styled.div`
     color: white;
     position: relative;
     overflow: hidden;
+    padding: 2rem;
 
     &::before {
       content: '';
@@ -40,13 +41,13 @@ const StyledPage = styled.div`
 
   .hero-content {
     max-width: 900px;
-    padding: 3rem;
+    padding: 1.5rem;
     position: relative;
     z-index: 1;
   }
 
   h1 {
-    font-size: 4.5rem;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
     font-weight: 800;
     margin-bottom: 1.5rem;
     background: linear-gradient(45deg, #60a5fa, #a78bfa);
@@ -56,7 +57,7 @@ const StyledPage = styled.div`
   }
 
   .subtitle {
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
     margin-bottom: 2.5rem;
     color: #e2e8f0;
     font-weight: 300;
@@ -64,8 +65,8 @@ const StyledPage = styled.div`
   }
 
   .cta-button {
-    padding: 1.2rem 2.5rem;
-    font-size: 1.3rem;
+    padding: 1rem 2rem;
+    font-size: clamp(1rem, 3vw, 1.3rem);
     background: linear-gradient(45deg, #60a5fa, #a78bfa);
     border: none;
     border-radius: 50px;
@@ -81,8 +82,8 @@ const StyledPage = styled.div`
   }
 
   .profile-image {
-    width: 200px;
-    height: 200px;
+    width: clamp(150px, 30vw, 200px);
+    height: clamp(150px, 30vw, 200px);
     border-radius: 50%;
     margin-bottom: 2rem;
     object-fit: cover;
@@ -93,7 +94,11 @@ const StyledPage = styled.div`
   .portfolio-section,
   .experience-section,
   .contact-section {
-    padding: 6rem 2rem;
+    padding: 4rem 1rem;
+
+    @media (min-width: 768px) {
+      padding: 6rem 2rem;
+    }
   }
 
   .portfolio-section {
@@ -111,9 +116,9 @@ const StyledPage = styled.div`
 
   .section-title {
     text-align: center;
-    font-size: 3rem;
+    font-size: clamp(2rem, 6vw, 3rem);
     font-weight: 700;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     color: #1e293b;
     position: relative;
 
@@ -136,11 +141,19 @@ const StyledPage = styled.div`
 
   .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   .portfolio-item {
@@ -157,9 +170,13 @@ const StyledPage = styled.div`
 
     img {
       width: 100%;
-      height: 240px;
+      height: 200px;
       object-fit: cover;
       transition: transform 0.3s ease;
+
+      @media (min-width: 768px) {
+        height: 240px;
+      }
     }
 
     &:hover img {
@@ -167,32 +184,45 @@ const StyledPage = styled.div`
     }
 
     .item-content {
-      padding: 2rem;
+      padding: 1.5rem;
+
+      @media (min-width: 768px) {
+        padding: 2rem;
+      }
 
       h3 {
         margin: 0 0 1rem 0;
         color: #1e293b;
-        font-size: 1.5rem;
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
         font-weight: 600;
       }
 
       p {
         color: #64748b;
         line-height: 1.7;
-        font-size: 1.1rem;
+        font-size: 1rem;
+
+        @media (min-width: 768px) {
+          font-size: 1.1rem;
+        }
       }
     }
   }
 
   .experience-item {
     max-width: 1000px;
-    margin: 0 auto 3rem;
-    padding: 2rem;
+    margin: 0 auto 2rem;
+    padding: 1.5rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
+
+    @media (min-width: 768px) {
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
 
     &:hover {
       transform: translateY(-4px);
@@ -210,7 +240,7 @@ const StyledPage = styled.div`
         gap: 1rem;
         text-decoration: none;
         color: #60a5fa;
-        font-size: 1.5rem;
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
         font-weight: 600;
         transition: all 0.3s ease;
 
@@ -220,11 +250,16 @@ const StyledPage = styled.div`
         }
 
         img.company-logo {
-          width: 48px;
-          height: 48px;
+          width: 40px;
+          height: 40px;
           border-radius: 12px;
           object-fit: cover;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+          @media (min-width: 768px) {
+            width: 48px;
+            height: 48px;
+          }
         }
       }
     }
@@ -242,7 +277,7 @@ const StyledPage = styled.div`
 
     h3 {
       color: #fff;
-      font-size: 1.6rem;
+      font-size: clamp(1.3rem, 4vw, 1.6rem);
       font-weight: 700;
       margin-bottom: 0.5rem;
       text-align: left;
@@ -251,16 +286,24 @@ const StyledPage = styled.div`
 
     .duration {
       color: #94a3b8;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 500;
       margin-bottom: 1rem;
       text-align: left;
+
+      @media (min-width: 768px) {
+        font-size: 1.1rem;
+      }
     }
 
     .description {
       color: #e2e8f0;
       line-height: 1.8;
-      font-size: 1.1rem;
+      font-size: 1rem;
+
+      @media (min-width: 768px) {
+        font-size: 1.1rem;
+      }
 
       &:hover {
         color: #f8fafc;
@@ -272,10 +315,11 @@ const StyledPage = styled.div`
     max-width: 620px;
     margin: 0 auto;
     text-align: center;
+    padding: 0 1rem;
 
     p {
       color: #1e293b;
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 3vw, 1.2rem);
       margin-bottom: 2rem;
       line-height: 1.7;
     }
@@ -283,13 +327,22 @@ const StyledPage = styled.div`
     .contact-links {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 3rem;
+      gap: 1.5rem;
+      margin-top: 2rem;
+
+      @media (min-width: 768px) {
+        gap: 2rem;
+        margin-top: 3rem;
+      }
 
       a {
         color: #3b82f6;
-        font-size: 2rem;
+        font-size: 1.5rem;
         transition: transform 0.3s ease;
+
+        @media (min-width: 768px) {
+          font-size: 2rem;
+        }
 
         &:hover {
           transform: translateY(-4px);
@@ -297,11 +350,16 @@ const StyledPage = styled.div`
         }
 
         svg {
-          width: 48px;
-          height: 48px;
+          width: 36px;
+          height: 36px;
           display: flex;
           align-items: center;
           justify-content: center;
+
+          @media (min-width: 768px) {
+            width: 48px;
+            height: 48px;
+          }
         }
       }
     }
