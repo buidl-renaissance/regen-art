@@ -1,4 +1,4 @@
-import { getProfile, saveProfile } from '@/lib/db';
+import { getProfile, saveProfile } from '../../../lib/db';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {

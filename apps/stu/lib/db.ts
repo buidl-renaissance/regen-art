@@ -1,7 +1,7 @@
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import { Pool } from 'pg';
-import { Profile } from '@/lib/types';
+import { Profile } from '../lib/types';
 
 let db: any = null;
 
