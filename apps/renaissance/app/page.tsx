@@ -6,7 +6,7 @@ const StyledPage = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
-  
+
   @media (min-width: 768px) {
     padding: 2rem;
   }
@@ -25,19 +25,19 @@ const StyledPage = styled.div`
     margin-bottom: 1.5rem;
     text-align: center;
     color: #1e293b;
-    
+
     @media (min-width: 768px) {
       margin-bottom: 2rem;
     }
   }
 
   .subtitle {
-    font-size: clamp(1.25rem, 4vw, 2.5rem);
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
     font-weight: bold;
     margin-bottom: 1rem;
     text-align: center;
     color: #334155;
-    
+
     @media (min-width: 768px) {
       margin-bottom: 1.5rem;
     }
@@ -47,9 +47,9 @@ const StyledPage = styled.div`
     font-size: clamp(1rem, 3vw, 1.5rem);
     line-height: 1.6;
     max-width: 800px;
-    margin: 1.5rem auto;
+    margin: 0.5rem auto 1.5rem auto;
     color: #334155;
-    
+
     @media (min-width: 768px) {
       margin: 2rem auto;
       line-height: 1.8;
@@ -64,7 +64,7 @@ const StyledPage = styled.div`
     border-radius: 8px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    
+
     @media (min-width: 768px) {
       margin: 3rem auto;
       border-radius: 12px;
@@ -88,7 +88,7 @@ const StyledPage = styled.div`
     );
     margin: 3rem auto;
     border-radius: 2px;
-    
+
     @media (min-width: 768px) {
       width: 60%;
       height: 3px;
@@ -101,7 +101,7 @@ const StyledPage = styled.div`
     max-width: 800px;
     margin: 0 auto 2rem;
     text-align: center;
-    
+
     @media (min-width: 768px) {
       margin: 0 auto 3rem;
     }
@@ -114,7 +114,7 @@ const StyledPage = styled.div`
 
   .feature-item {
     margin-bottom: 1rem;
-    
+
     @media (min-width: 768px) {
       margin-bottom: 1.5rem;
     }
@@ -124,11 +124,84 @@ const StyledPage = styled.div`
     font-size: clamp(1.1rem, 3vw, 1.6rem);
     font-weight: bold;
     text-align: center;
-    margin: 2rem auto;
+    margin: 1rem auto;
     color: #4f46e5;
-    
+
     @media (min-width: 768px) {
       margin: 3rem auto;
+    }
+  }
+
+  .cta-button {
+    padding: 0.85rem 2rem;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    background: linear-gradient(45deg, #60a5fa, #a78bfa);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3),
+      inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: block;
+    margin: 2rem auto;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: all 0.6s ease;
+      z-index: -1;
+    }
+
+    &:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(96, 165, 250, 0.5),
+        inset 0 1px 3px rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.8px;
+
+      &::before {
+        left: 100%;
+      }
+    }
+
+    &:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 2px 10px rgba(96, 165, 250, 0.3);
+    }
+  }
+
+  .cta-container {
+    margin: 3rem auto;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0.5;
+      transform: rotate(0deg);
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0.5;
+      transform: rotate(360deg);
     }
   }
 `;
@@ -139,7 +212,10 @@ export default function Index() {
       <div className="section">
         <h1 className="title">The Digital Renaissance</h1>
         <h2 className="subtitle">A Rebellion on Canvas</h2>
-
+        <p className="story-text" style={{ textAlign: 'center', fontSize: '0.8rem' }}>
+          Art is more than just an expression—it's a movement. A revolution. A
+          story waiting to be told.
+        </p>
         <div className="prolog">
           <img
             src="https://nyc3.digitaloceanspaces.com/dpop/images/1742193049620-737119928.jpg"
@@ -148,34 +224,38 @@ export default function Index() {
           />
 
           <p className="story-text">
-            Art is more than just an expression—it's a movement. A revolution. A
-            story waiting to be told.
-          </p>
-          <p className="story-text">
-            📍 At the heart of Detroit's creative underground, these pieces
-            emerge from the collision of past, present, and future—challenging
-            power, identity, and perception.
+            <i>
+              At the heart of Detroit's creative underground, these pieces
+              emerge from the collision of past, present, and future—challenging
+              power, identity, and perception.
+            </i>
           </p>
 
           <div className="feature-item">
+            <p>
+              <span className="highlight">🔹 "GO TO JAIL"</span>
+            </p>
             <p className="story-text">
-              <span className="highlight">🔹 "GO TO JAIL"</span> – A stark
-              reminder of systemic control and the voices that push back. A
-              symbol of defiance, justice, and the power of speech.
+              A stark reminder of systemic control and the voices that push
+              back. A symbol of defiance, justice, and the power of speech.
             </p>
           </div>
 
           <div className="feature-item">
+            <p>
+              <span className="highlight">🔹 Raw Expression</span>
+            </p>
             <p className="story-text">
-              <span className="highlight">🔹 Raw Expression</span> – The
-              striking portrait of a man with an unfiltered gaze. Emotion,
+              The striking portrait of a man with an unfiltered gaze. Emotion,
               power, and frustration drip from every brushstroke.
             </p>
           </div>
 
           <div className="feature-item">
+            <p>
+              <span className="highlight">🔹 Digital Icons Reimagined</span>
+            </p>
             <p className="story-text">
-              <span className="highlight">🔹 Digital Icons Reimagined</span> –
               The legendary duo (Daft Punk) reborn in shimmering abstraction.
               Their helmets, symbols of digital-era mystique, reflect the
               ever-blurring lines between reality and technology.
@@ -183,9 +263,11 @@ export default function Index() {
           </div>
 
           <div className="feature-item">
+            <p>
+              <span className="highlight">🔹 Fragmented Identity</span>
+            </p>
             <p className="story-text">
-              <span className="highlight">🔹 Fragmented Identity</span> – A
-              portrait dissected, reconstructed, and redefined. Where does the
+              A portrait dissected, reconstructed, and redefined. Where does the
               self begin, and where does it end?
             </p>
           </div>
@@ -196,9 +278,10 @@ export default function Index() {
             tradition and digital evolution.
           </p>
 
-          <p className="cta">
-            🔥 Own a piece of the rebellion. Collect. Connect. Create.
-          </p>
+          <div className="cta-container">
+            <p className="cta">🔥 Own a piece of the rebellion.</p>
+            <p className="cta">Collect. Connect. Create.</p>
+          </div>
         </div>
 
         <div className="divider"></div>
@@ -294,23 +377,9 @@ export default function Index() {
         </p>
         <div className="divider"></div>
         <div className="cta">
-          <button 
-            className="cta-button" 
+          <button
+            className="cta-button"
             onClick={() => window.open('https://art.gods.work', '_blank')}
-            style={{
-              padding: '1rem 2rem',
-              fontSize: 'clamp(1rem, 3vw, 1.3rem)',
-              background: 'linear-gradient(45deg, #60a5fa, #a78bfa)',
-              border: 'none',
-              borderRadius: '50px',
-              color: 'white',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 15px rgba(96, 165, 250, 0.3)',
-              fontWeight: 'bold',
-              margin: '2rem auto',
-              display: 'block'
-            }}
           >
             Join the Revolution
           </button>
