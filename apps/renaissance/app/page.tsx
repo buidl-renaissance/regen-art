@@ -149,12 +149,12 @@ const StyledPage = styled.div`
   }
 
   .feature-item {
-    margin-bottom: 1rem;
+    margin-bottom: 4rem;
     transform: translateY(15px);
     transition: opacity 0.8s ease, transform 0.8s ease;
 
     @media (min-width: 768px) {
-      margin-bottom: 1.5rem;
+      margin-bottom: 3rem;
     }
   }
 
@@ -254,7 +254,7 @@ const StyledPage = styled.div`
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
-    
+
     &.visible {
       opacity: 1;
       transform: translateY(0);
@@ -264,36 +264,47 @@ const StyledPage = styled.div`
 
 export default function Index() {
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   useEffect(() => {
     setIsLoaded(true);
-    
+
     const handleScroll = () => {
       const elements = document.querySelectorAll('.animate-on-scroll');
-      
-      elements.forEach(element => {
+
+      elements.forEach((element) => {
         const elementPosition = element.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-        
+
         if (elementPosition.top < windowHeight * 0.85) {
           element.classList.add('visible');
         }
       });
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     // Trigger once on load
     setTimeout(handleScroll, 100);
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <StyledPage>
       <div className="section">
-        <h1 className={`title animate-on-scroll ${isLoaded ? 'visible' : ''}`}>The Digital Renaissance</h1>
-        <h2 className={`subtitle animate-on-scroll ${isLoaded ? 'visible' : ''}`}>A Rebellion on Canvas</h2>
-        <p className={`story-text animate-on-scroll ${isLoaded ? 'visible' : ''}`} style={{ textAlign: 'center', fontSize: '0.8rem' }}>
+        <h1 className={`title animate-on-scroll ${isLoaded ? 'visible' : ''}`}>
+          The Digital Renaissance
+        </h1>
+        <h2
+          className={`subtitle animate-on-scroll ${isLoaded ? 'visible' : ''}`}
+        >
+          A Rebellion on Canvas
+        </h2>
+        <p
+          className={`story-text animate-on-scroll ${
+            isLoaded ? 'visible' : ''
+          }`}
+          style={{ textAlign: 'center', fontSize: '0.8rem' }}
+        >
           Art is more than just an expression—it's a movement. A revolution. A
           story waiting to be told.
         </p>
@@ -313,6 +324,11 @@ export default function Index() {
           </p>
 
           <div className="feature-item">
+            <img
+              src="https://nyc3.digitaloceanspaces.com/dpop/images/1742237935375-886916373.jpg"
+              className="artwork animate-on-scroll"
+              alt="Go to Jail by Daniel Geanes | ECNTRC"
+            />
             <p className="story-text animate-on-scroll">
               <span className="highlight">🔹 "GO TO JAIL"</span>
             </p>
@@ -323,6 +339,11 @@ export default function Index() {
           </div>
 
           <div className="feature-item">
+            <img
+              src="https://nyc3.digitaloceanspaces.com/dpop/images/1742238888924-13365302.jpg"
+              className="artwork animate-on-scroll"
+              alt="Unshaken – A Portrait of Determination by Daniel Easterly"
+            />
             <p className="story-text animate-on-scroll">
               <span className="highlight">🔹 Raw Expression</span>
             </p>
@@ -333,6 +354,11 @@ export default function Index() {
           </div>
 
           <div className="feature-item">
+            <img
+              src="https://nyc3.digitaloceanspaces.com/dpop/images/1742238267382-21069306.jpg"
+              className="artwork animate-on-scroll"
+              alt="Digital Icons – A Tribute to Daft Punk by Nathan Karinen"
+            />
             <p className="story-text animate-on-scroll">
               <span className="highlight">🔹 Digital Icons Reimagined</span>
             </p>
@@ -344,6 +370,11 @@ export default function Index() {
           </div>
 
           <div className="feature-item">
+            <img
+              src="https://nyc3.digitaloceanspaces.com/dpop/images/1742238440602-66614981.jpg"
+              className="artwork animate-on-scroll"
+              alt="Trippin’ – A Psychedelic Self-Reflection by Daniel Geanes | ECNTRC"
+            />
             <p className="story-text animate-on-scroll">
               <span className="highlight">🔹 Fragmented Identity</span>
             </p>
@@ -366,7 +397,9 @@ export default function Index() {
         </div>
 
         <div className="divider animate-on-scroll"></div>
-        <h2 className="title animate-on-scroll">Chapter 1: The Architects of Sound & Vision</h2>
+        <h2 className="title animate-on-scroll">
+          Chapter 1: The Architects of Sound & Vision
+        </h2>
         <img
           src="https://nyc3.digitaloceanspaces.com/dpop/images/1742193054861-372202014.jpg"
           className="artwork animate-on-scroll"
