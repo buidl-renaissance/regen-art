@@ -495,7 +495,7 @@ export default function Index() {
             className="cta-button"
             onClick={() => window.open('https://art.gods.work', '_blank')}
           >
-            Join the Revolution
+            Join the RenAIssance
           </button>
         </div>
         <div className="divider animate-on-scroll"></div>
