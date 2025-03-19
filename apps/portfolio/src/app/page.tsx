@@ -94,6 +94,13 @@ export default function Index() {
             description="An immersive monthly event fostering connections between artists, collectors, and art enthusiasts."
           />
           <PortfolioItem
+            href="https://pizza.builddetroit.xyz"
+            imageSrc="/pizza-party.jpg"
+            imageAlt="Detroit Bitcoin Pizza Party"
+            title="Detroit Bitcoin Pizza Party"
+            description="The Detroit edition of PizzaDAO’s Global Bitcoin Pizza Party joins forces with Art Night for an unforgettable evening of pizza, music, and interactive art!"
+          />
+          <PortfolioItem
             href="https://builddetroit.xyz"
             imageSrc="/penobscot.jpeg"
             imageAlt="Build Detroit"

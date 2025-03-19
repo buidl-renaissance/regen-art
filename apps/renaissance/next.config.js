@@ -12,7 +12,22 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
-
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'nyc3.digitaloceanspaces.com',
+        port: '',
+        pathname: '/dpop/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dpop.nyc3.digitaloceanspaces.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
   compiler: {
     // For other options, see https://styled-components.com/docs/tooling#babel-plugin
     styledComponents: true,
