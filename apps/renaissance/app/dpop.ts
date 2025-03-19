@@ -51,7 +51,7 @@ export const getUserCID = (): string | null => {
   if (typeof window === "undefined") return null;
   const user = getUser();
   const user_cid = localStorage.getItem("DPoPUserCID");
-  return user_cid ? user_cid : user?.cid;
+  return user_cid ? user_cid : user?.cid ?? null;
 };
 
 export const saveUserCID = (user_cid: string) => {
@@ -107,10 +107,10 @@ export const getProfile = async (id: string) => {
   return result;
 };
 
-export const getUser = (): User => {
+export const getUser = (): User | null => {
   if (typeof window === "undefined") return null;
   const u = localStorage.getItem("DPoPUser");
-  return JSON.parse(u);
+  return u ? JSON.parse(u) : null;
 };
 
 const setUser = (user: User) => {
@@ -184,13 +184,15 @@ export const updateUser = async (params: Partial<User>) => {
 };
 
 export const register = async (params: RegisterParams) => {
-  if (!params?.phone?.length) {
-    delete params.phone;
+  // Create a copy of params to avoid modifying the original object
+  const registrationParams = { ...params };
+  if (!registrationParams.phone?.length) {
+    registrationParams.phone = null;
   }
   const result = await (
     await fetch(`${hostname}/api/register`, {
       method: "POST",
-      body: JSON.stringify(params),
+      body: JSON.stringify(registrationParams),
       headers: { "content-type": "application/json" },
     })
   ).json();
@@ -388,8 +390,8 @@ export const getUserEvents = async (user_cid?: string) => {
 };
 
 export const createContact = async (contact: Contact, user_cid?: string) => {
-  const data = contact;
-  if (user_cid) data["attestator"] = user_cid;
+  const data = {...contact};
+  if (user_cid) (data as any)["attestator"] = user_cid;
   const result = await authorizedRequest(`user`, {
     method: "POST",
     headers: {
@@ -437,14 +439,14 @@ export const submitEventCheckIn = async (
   contact: Contact,
   user_cid: string
 ) => {
-  const data = contact;
-  data["attestator"] = user_cid;
+  const data = {...contact};
+  if (user_cid) (data as any)["attestator"] = user_cid;
   const result = await authorizedRequest(`event/${event}/check-in`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: contact ? JSON.stringify(contact) : null,
+    body: contact ? JSON.stringify(data) : null,
   });
   if (result?.data?.user_cid) storeCheckIn(result.data);
   return result?.data;
@@ -554,12 +556,12 @@ export const getRsvps = async ({ user_id, limit, offset }: RsvpQueryParams) => {
   return result.data;
 };
 
-export const inRSVPs = (rsvps) => {
+export const inRSVPs = (rsvps: any[]) => {
   const userId = getUserId();
   return rsvps.filter((rsvp) => rsvp.user?.id == userId)?.length ? true : false;
 };
 
-export const myRSVP = (rsvps) => {
+export const myRSVP = (rsvps: any[]) => {
   const cid = getUserCID();
   const user = getUser();
   const matches = rsvps.filter(
@@ -589,7 +591,7 @@ export const deleteEventBookmark = async (event: string) => {
   return result.data;
 };
 
-export const parseJwt = (token) => {
+export const parseJwt = (token: string) => {
   const base64Url = token.split(".")[1];
   const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
   const jsonPayload = decodeURIComponent(
