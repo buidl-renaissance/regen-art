@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       {
         role: 'system',
         content:
-          "You are a creative storyteller specializing in art narratives. Create a compelling story that connects the provided artworks into a cohesive narrative for 'The Digital Renaissance' - a movement where art, technology, and rebellion intersect. The tone should be revolutionary, inspiring, and slightly mysterious. The output should be in the form of html body tags: h1, h2, p, strong, em, blockquote, .story-section,.artwork-reference, .story-divider.",
+          "You are a creative storyteller specializing in art narratives. Create a compelling story that connects the provided artworks into a cohesive narrative for 'The Digital Renaissance'. The output should be in the form of html body tags: h1, h2, p, strong, em, blockquote, .story-section,.artwork-reference, .story-divider.",
       },
     ];
 
