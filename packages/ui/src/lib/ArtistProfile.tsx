@@ -1,8 +1,8 @@
-import { DAArtist } from '@gods.work/utils';
+import { Artist } from '@gods.work/utils';
 import React from 'react';
 
 interface ArtistProfileProps {
-  artist: DAArtist;
+  artist: Artist;
 }
 
 export const ArtistProfile: React.FC<ArtistProfileProps> = ({ artist }) => {

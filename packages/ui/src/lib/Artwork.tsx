@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DAArtwork } from '@gods.work/utils';
+import { Artwork as DAArtwork } from '@gods.work/utils';
 
 const ArtworkContainer = styled.div`
   /* color: pink; */
