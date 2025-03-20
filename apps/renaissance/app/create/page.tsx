@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { getArtworks } from '../dpop';
+import { getArtworks } from '@gods.work/utils';
+import { UploadButton } from '@gods.work/ui';
 
 // Types
 interface Artist {
@@ -287,11 +288,93 @@ const CloseButton = styled.button`
   }
 `;
 
+const UploadContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 2rem;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+`;
+
+const UploadText = styled.p`
+  margin-bottom: 1rem;
+  color: #666;
+  text-align: center;
+`;
+
+const ArtworkForm = styled.form`
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+`;
+
+const FormGroup = styled.div`
+  margin-bottom: 1.5rem;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #444;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  
+  &:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  }
+`;
+
+const Textarea = styled.textarea`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  min-height: 100px;
+  resize: vertical;
+  
+  &:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  }
+`;
+
+const UploadedImagePreview = styled.div`
+  margin: 1rem 0;
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 4px;
+  overflow: hidden;
+`;
+
 export default function CreatePage() {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedCount, setSelectedCount] = useState(0);
   const [storyHtml, setStoryHtml] = useState<string | null>(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
+  const [showArtworkForm, setShowArtworkForm] = useState(false);
+  const [artworkTitle, setArtworkTitle] = useState('');
+  const [artworkDescription, setArtworkDescription] = useState('');
+  const [artistName, setArtistName] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -327,6 +410,53 @@ export default function CreatePage() {
 
   const closeStory = () => {
     setStoryHtml(null);
+  };
+
+  const handleUploadComplete = (url: string) => {
+    setUploadedImageUrl(url);
+    setShowArtworkForm(true);
+    // Default values
+    setArtworkTitle('My Artwork');
+    setArtworkDescription('');
+    setArtistName('');
+  };
+
+  const handleUploadError = (error: string) => {
+    console.error('Upload error:', error);
+    alert(`Failed to upload image: ${error}`);
+  };
+
+  const handleArtworkFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const newArtwork: Artwork = {
+      id: Date.now(), // Use timestamp as temporary ID
+      slug: `uploaded-${Date.now()}`,
+      title: artworkTitle || 'Untitled Artwork',
+      description: artworkDescription || 'No description provided',
+      artist: {
+        id: 0,
+        name: artistName || 'Anonymous',
+        slug: 'user-artist',
+        profile_picture: '',
+        bio: 'Custom artwork contributor'
+      },
+      data: {
+        image: uploadedImageUrl!
+      },
+      meta: {},
+      selected: true
+    };
+    
+    setArtworks(prev => [...prev, newArtwork]);
+    setSelectedCount(prev => prev + 1);
+    
+    // Reset form
+    setShowArtworkForm(false);
+    setUploadedImageUrl(null);
+    setArtworkTitle('');
+    setArtworkDescription('');
+    setArtistName('');
   };
 
   const generateStory = async () => {
@@ -372,6 +502,82 @@ export default function CreatePage() {
           intersection of art, technology, and rebellion.
         </Subtitle>
       </Header>
+
+      {!showArtworkForm ? (
+        <UploadContainer>
+          <UploadText>Want to add your own artwork? Upload an image below:</UploadText>
+          <UploadButton 
+            onUploadComplete={handleUploadComplete}
+            onUploadError={handleUploadError}
+            accept="image/*"
+          >
+            Upload Your Artwork
+          </UploadButton>
+        </UploadContainer>
+      ) : (
+        <ArtworkForm onSubmit={handleArtworkFormSubmit}>
+          <h2>Configure Your Artwork</h2>
+          
+          {uploadedImageUrl && (
+            <UploadedImagePreview>
+              <Image
+                src={uploadedImageUrl}
+                alt="Uploaded artwork"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </UploadedImagePreview>
+          )}
+          
+          <FormGroup>
+            <Label htmlFor="artworkTitle">Artwork Title</Label>
+            <Input
+              id="artworkTitle"
+              type="text"
+              value={artworkTitle}
+              onChange={(e) => setArtworkTitle(e.target.value)}
+              placeholder="Enter a title for your artwork"
+              required
+            />
+          </FormGroup>
+          
+          <FormGroup>
+            <Label htmlFor="artistName">Artist Name</Label>
+            <Input
+              id="artistName"
+              type="text"
+              value={artistName}
+              onChange={(e) => setArtistName(e.target.value)}
+              placeholder="Your name or pseudonym"
+            />
+          </FormGroup>
+          
+          <FormGroup>
+            <Label htmlFor="artworkDescription">Description</Label>
+            <Textarea
+              id="artworkDescription"
+              value={artworkDescription}
+              onChange={(e) => setArtworkDescription(e.target.value)}
+              placeholder="Describe your artwork..."
+            />
+          </FormGroup>
+          
+          <ButtonContainer>
+            <ClearButton 
+              type="button" 
+              onClick={() => {
+                setShowArtworkForm(false);
+                setUploadedImageUrl(null);
+              }}
+            >
+              Cancel
+            </ClearButton>
+            <GenerateButton type="submit">
+              Add to Collection
+            </GenerateButton>
+          </ButtonContainer>
+        </ArtworkForm>
+      )}
 
       <ArtworkGrid>
         {artworks.map((artwork) => (
