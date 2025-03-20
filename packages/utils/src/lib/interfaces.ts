@@ -25,7 +25,7 @@ export interface Artwork {
   artist?: Artist;
   collaborators?: Artist[];
   data: ArtworkData;
-  meta: any[];
+  meta: any;
 }
 
 export interface Content {

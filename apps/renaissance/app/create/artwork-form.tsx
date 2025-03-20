@@ -209,7 +209,6 @@ export default function ArtworkForm({ onSuccess }: ArtworkFormProps) {
           <UploadText>Upload your artwork image</UploadText>
 
           <UploadButton
-            endpoint="/api/upload"
             accept="image/*"
             onUploadComplete={handleUploadComplete}
             onUploadError={handleUploadError}
