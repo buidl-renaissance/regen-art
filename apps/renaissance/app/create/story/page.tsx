@@ -324,6 +324,13 @@ export default function StoryPage() {
     });
   };
 
+  const clearImages = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(STORAGE_KEY);
+      setUploadedImages([]);
+    }
+  };
+
   const generateStory = async () => {
     const selectedImages = uploadedImages.filter(img => img.selected);
     
@@ -404,6 +411,11 @@ export default function StoryPage() {
           </ImagesContainer>
           
           <ButtonContainer>
+            <Button 
+              onClick={clearImages}
+            >
+              Clear Images
+            </Button>
             <Button 
               onClick={generateStory}
               disabled={loading || !uploadedImages.some(img => img.selected)}
