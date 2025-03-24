@@ -83,7 +83,7 @@
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
     "stripe": "^17.7.0",
-    "styled-components": "5.3.6",
+    "styled-components": "^6.1.16",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "tslib": "^2.3.0",

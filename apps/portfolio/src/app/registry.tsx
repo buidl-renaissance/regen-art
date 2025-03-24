@@ -18,7 +18,7 @@ export function StyledComponentsRegistry({
 
     // Types are out of date, clearTag is not defined.
     // See: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/65021
-    (styledComponentsStyleSheet.instance as any).clearTag();
+    (styledComponentsStyleSheet.instance as unknown as { clearTag: () => void }).clearTag();
 
     return <>{styles}</>;
   });
@@ -26,7 +26,7 @@ export function StyledComponentsRegistry({
   if (typeof window !== 'undefined') return <>{children}</>;
 
   return (
-    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+    <StyleSheetManager sheet={styledComponentsStyleSheet.instance} shouldForwardProp={(prop) => prop !== 'theme'}>
       {children}
     </StyleSheetManager>
   );
