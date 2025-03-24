@@ -53,8 +53,12 @@ async function getEvent(slug: string): Promise<Event | null> {
   }
 }
 
-export default async function EventPage({ params }: { params: { slug: string } }) {
-  const event = await getEvent(params.slug);
+interface PageProps {
+  params: Promise<{ slug: string }>
+}
+
+export default async function EventPage({ params }: PageProps) {
+  const event = await getEvent((await params).slug);
 
   if (!event) {
     notFound();
@@ -100,4 +104,3 @@ export default async function EventPage({ params }: { params: { slug: string } }
     </div>
   )
 }
-

@@ -1,5 +1,5 @@
-import { DAArtwork, getArtworks } from '@gods.work/utils';
-import { Artwork, Donate } from '@gods.work/ui';
+import { Artwork, getArtworks } from '@gods.work/utils';
+import { ArtworkCard, Donate } from '@gods.work/ui';
 import styled from 'styled-components';
 
 const StyledPage = styled.div`
@@ -40,7 +40,7 @@ const StyledPage = styled.div`
 `;
 
 interface AboutPageProps {
-  artworks: DAArtwork[];
+  artworks: Artwork[];
 }
 
 const AboutPage = ({ artworks }: AboutPageProps) => {
@@ -93,8 +93,8 @@ const AboutPage = ({ artworks }: AboutPageProps) => {
         <div className="works">
           <h2>WORKS</h2>
           {artworks?.length > 0 &&
-            artworks.map((artwork: DAArtwork, i: number) => {
-              return <Artwork artwork={artwork} key={i} />;
+            artworks.map((artwork: Artwork, i: number) => {
+              return <ArtworkCard artwork={artwork} key={i} />;
             })}
         </div>
       </div>
