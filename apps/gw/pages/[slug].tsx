@@ -2,13 +2,13 @@
 
 import styled from 'styled-components';
 
-import { DAArtwork, DAContent, getArtwork } from '@gods.work/utils';
-import { ArtistProfile } from '@gods.work/ui';
+import { Artwork, Content, getArtwork } from '@gods.work/utils';
+// import { ArtistProfile } from '@gods.work/ui';
 // import { getArtwork } from "../../dpop";
 import moment from 'moment';
 
 interface ArtworkPageProps {
-  artwork: DAArtwork;
+  artwork: Artwork;
 }
 
 const ArtworkPage = ({ artwork }: ArtworkPageProps) => {
@@ -20,9 +20,11 @@ const ArtworkPage = ({ artwork }: ArtworkPageProps) => {
         <HeaderTimelineDot />
         <h1 dangerouslySetInnerHTML={{ __html: artwork.title }} />
         {/* <ArtistProfile artist={artwork.artist} /> */}
-        <div className="artist-name">by {artwork.artist.name}</div>
+        {artwork.artist && (
+          <div className="artist-name">by {artwork.artist.name}</div>
+        )}
       </HeaderWrapper>
-      {artwork.content?.map((content: DAContent, i: number) => {
+      {artwork.content?.map((content: Content, i: number) => {
         return (
           <ContentWrapper key={i}>
             <TimelineDot />
