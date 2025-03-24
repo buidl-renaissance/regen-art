@@ -1,35 +1,30 @@
-# **God's Work**
+# Regen Art
 
----
+## Overview
+Regen Art is a platform that combines art with regenerative community initiatives. Through tokenized artwork and community engagement, we aim to create sustainable funding for local projects and artists.
 
-## **Features**
-- **Collaborative Community:** Tools for communities to share knowledge, skills, and opportunities.  
-- **Contracts:** Tools to deploy smart contracts that enable communities and individuals to manage assets.
-- **Community Giveback:** Mechanisms to spearhead initiatives that contribute to funding events and resources for the community.
-- **Transparent Resource Allocation:** All contributions and deployments are managed transparently to ensure accountability.
+## Features
+- **NFT Artwork Gallery**: Discover and collect unique digital art pieces that support community initiatives
+- **Artist Collaborations**: Connect with local and global artists contributing to regenerative causes
+- **Community Funding**: Portion of proceeds from art sales goes directly to community projects
+- **Transparent Impact**: Track how your art purchases contribute to real-world community development
 
----
+## Getting Started
+1. Browse our gallery to discover artwork that resonates with you
+2. Connect your wallet to purchase and collect art pieces
+3. Track the impact of your purchases through our dashboard
+4. Join our community to participate in governance decisions
 
-## **Getting Started**
-To learn more about the project and how you can contribute or get involved, check out our **[Getting Started Guide](./README_GETTING_STARTED.md)**.
+## Community Projects
+Our platform currently supports various community initiatives including:
+- Local housing affordability programs
+- Public art installations
+- Educational workshops
+- Environmental restoration projects
 
----
+## Contributing
+We welcome contributions from artists, developers, and community members. See our [Contributing Guide](./README_CONTRIBUTING.md) for more information.
 
-## **License**
-God's Work is an open-source project under a **Custom License**:
-- **Non-Commercial Use Only:** The project may not be used for commercial purposes without obtaining a license.  
-- **Open Source Contributions Required:** Any modifications or improvements to the project must be made open source.
+## Contact
+For questions, partnerships, or more information, reach out to us at [john@dpop.tech](mailto:john@dpop.tech)
 
-For the full license details, see the [LICENSE](./README_LICENSE.md) file.
-
----
-
-## **Contributing**
-We welcome contributions to the project! Whether you’re an artist, developer, or supporter, you can make an impact. Check out our **[Contributing Guide](./README_CONTRIBUTING.md)** for more information.
-
----
-
-## **Contact**
-For questions, partnerships, or more information, feel free to reach out to us at [john@dpop.tech](mailto:john@dpop.tech).
-
----
