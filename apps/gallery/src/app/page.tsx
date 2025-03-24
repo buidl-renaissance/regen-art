@@ -1,219 +1,124 @@
-'use client';
+import Image from "next/image";
+import Link from "next/link";
+import { Metadata } from "next";
+import { getAllNFTArtwork } from "../libs/web3/api";
 
-import styled from 'styled-components';
-import Hero from './hero';
-import Gallery from './gallery';
-
-const StyledPage = styled.div`
-  margin: 0 auto;
-
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
-  }
-
-  .artwork-card {
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-
-    &:hover {
-      transform: translateY(-5px);
-    }
-  }
-
-  .artwork-image {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-  }
-
-  .artwork-info {
-    padding: 1rem;
-  }
-
-  .artwork-title {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: #333;
-  }
-
-  .artwork-description {
-    font-size: 0.9rem;
-    color: #666;
-  }
-`;
-
-const AboutSection = styled.div`
-  text-align: center;
-  padding: 4rem 2rem;
-  position: relative;
-  background-color: #f5f5f5;
-`;
-
-const AboutTitle = styled.h2`
-  font-size: 3rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-  margin-bottom: 1.5rem;
-  color: #333;
-  position: relative;
-  display: inline-block;
-  padding: 0 70px;
-  
-  &::before,
-  &::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 2px;
-    background: #96885f;
-    position: absolute;
-    top: 50%;
-  }
-
-  &::before {
-    left: 0;
-  }
-
-  &::after {
-    right: 0;
-  }
-`;
-
-const AboutText = styled.p`
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  color: #555;
-`;
-
-const MoreLink = styled.a`
-  padding: 0.5rem 2rem;
-  color: #333;
-  background-color: transparent;
-  border: 4px solid #96885f;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  display: inline-block;
-  text-decoration: none;
-
-  &:hover {
-    background-color: rgba(150, 136, 95, 0.2);
-    transform: translateY(-2px);
-  }
-`;
-
-const ContactSection = styled.div`
-  text-align: center;
-  padding: 4rem 2rem;
-  background-color: #333;
-  color: #fff;
-`;
-
-const ContactTitle = styled.h2`
-  font-size: 3rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-  margin-bottom: 1.5rem;
-  color: #fff;
-  position: relative;
-  display: inline-block;
-  padding: 0 70px;
-  
-  &::before,
-  &::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 2px;
-    background: #96885f;
-    position: absolute;
-    top: 50%;
-  }
-
-  &::before {
-    left: 0;
-  }
-
-  &::after {
-    right: 0;
-  }
-`;
-
-const ContactText = styled.p`
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-`;
-
-const ContactEmail = styled.span`
-  color: #96885f;
-  font-weight: 500;
-  display: block;
-  font-size: 1.4rem;
-  margin-top: 1rem;
-`;
-
-// Sample artwork data
-const artworks = [
-  {
-    id: 1,
-    title: 'Urban Landscape',
-    description: 'Mixed media on canvas, exploring urban environments',
-    image: 'https://api.detroiter.network/uploads/resized/800w/sample1.jpg',
+export const metadata: Metadata = {
+  title: "A Regenerative Art Collective",
+  description: "A Community Gallery & Creative Agency showcasing collaborative works and providing art curation, creative consulting, and project management services.",
+  openGraph: {
+    title: "A Regenerative Art Collective",
+    description: "A Community Gallery & Creative Agency showcasing collaborative works and providing art curation, creative consulting, and project management services.",
+    images: [
+      {
+        url: "/digital-renaissance-hands.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Regenerative Art Collective",
+      },
+    ],
   },
-  {
-    id: 2,
-    title: 'Abstract Composition #3',
-    description: 'Acrylic on canvas, exploring color and form',
-    image: 'https://api.detroiter.network/uploads/resized/800w/sample2.jpg',
-  },
-  {
-    id: 3,
-    title: 'Portrait Study',
-    description: 'Oil on canvas, contemporary portraiture',
-    image: 'https://api.detroiter.network/uploads/resized/800w/sample3.jpg',
-  },
-  {
-    id: 4,
-    title: 'Nature Series #5',
-    description: 'Watercolor on paper, inspired by natural forms',
-    image: 'https://api.detroiter.network/uploads/resized/800w/sample4.jpg',
-  },
-];
+};
 
-export default function Index() {
+export default async function Home() {
+  const artworks = await getAllNFTArtwork();
+
   return (
-    <StyledPage>
-      <Hero />
-      <Gallery />
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/digital-renaissance-hands.jpeg" 
+            alt="Collaborative Art Piece"
+            fill
+            className="object-cover opacity-10"
+            priority
+          />
+        </div>
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-neutral-900 dark:text-neutral-50">
+            A Regenerative Art Collective
+          </h1>
+          <p className="text-xl md:text-2xl text-neutral-800 dark:text-neutral-200 mb-8">
+            Community Gallery & Creative Agency
+          </p>
+          <div className="flex gap-4 justify-center">
+            <a href="#gallery" className="px-8 py-3 bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 rounded-full hover:opacity-90 transition">
+              View Gallery
+            </a>
+            <a href="#services" className="px-8 py-3 border-2 border-neutral-900 dark:border-neutral-50 text-neutral-900 dark:text-neutral-50 rounded-full hover:bg-neutral-900 hover:text-neutral-50 dark:hover:bg-neutral-50 dark:hover:text-neutral-900 transition">
+              Our Services
+            </a>
+          </div>
+        </div>
+      </section>
 
-      <AboutSection>
-        <AboutTitle>About the Artist</AboutTitle>
-        <AboutText>
-          Andrea Burg, a lifelong creator, channels energy-healing and shamanic practices into her art, 
-          intending to serve her soul's journey and contribute to collective healing. Guided by inner wisdom, 
-          her diverse creations, spanning tattooing to mixed media, embody a commitment to transforming emotions, 
-          fostering love, and inspiring a more harmonious world.
-        </AboutText>
-        <MoreLink href="/about">More about the artist</MoreLink>
-      </AboutSection>
+      {/* Gallery Section */}
+      <section id="gallery" className="py-20 px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-neutral-900 dark:text-neutral-50">
+          Collaborative Works
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {artworks.map((item) => (
+            <Link 
+              key={item.id} 
+              href={`/artwork/${item.id}`}
+              className="relative aspect-square overflow-hidden rounded-lg hover:opacity-90 transition cursor-pointer"
+            >
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                className="object-cover"
+              />
+            </Link>
+          ))}
+        </div>
+        <div className="flex justify-center mt-8">
+          <Link href="/artwork/create" className="px-8 py-3 bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 rounded-full hover:opacity-90 transition">
+            Submit A Collaboration
+          </Link>
+        </div>
+      </section>
 
-      <ContactSection>
-        <ContactTitle>Contact</ContactTitle>
-        <ContactText>
-          For inquiries about commissions or available works, please email:
-          <ContactEmail>andrea@burgink.com</ContactEmail>
-        </ContactText>
-      </ContactSection>
-    </StyledPage>
+      {/* Services Section */}
+      <section id="services" className="py-20 px-4 bg-neutral-100 dark:bg-neutral-800">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-neutral-900 dark:text-neutral-50">
+            Our Services
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 bg-white dark:bg-neutral-700 rounded-lg">
+              <h3 className="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-50">Art Curation</h3>
+              <p className="text-neutral-700 dark:text-neutral-200">Expert curation services for galleries, corporate spaces, and private collections.</p>
+            </div>
+            <div className="p-6 bg-white dark:bg-neutral-700 rounded-lg">
+              <h3 className="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-50">Creative Consulting</h3>
+              <p className="text-neutral-700 dark:text-neutral-200">Strategic creative direction and project management for artistic ventures.</p>
+            </div>
+            <div className="p-6 bg-white dark:bg-neutral-700 rounded-lg">
+              <h3 className="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-50">Collaborative Projects</h3>
+              <p className="text-neutral-700 dark:text-neutral-200">Facilitating artistic collaborations and community-driven creative initiatives.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-neutral-900 dark:text-neutral-50">
+            Let&apos;s Create Together
+          </h2>
+          <p className="text-lg mb-8 text-neutral-700 dark:text-neutral-200">
+            Join our collective or collaborate with us on your next creative project.
+          </p>
+          <a href="/contact" className="inline-block px-8 py-3 bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-900 rounded-full hover:opacity-90 transition">
+            Get in Touch
+          </a>
+        </div>
+      </section>
+    </div>
   );
 }
