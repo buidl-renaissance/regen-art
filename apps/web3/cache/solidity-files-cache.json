@@ -1103,6 +1103,45 @@
       "artifacts": [
         "ArtNightNFTMarketplace"
       ]
+    },
+    "/Users/johngulbronson/DetroitArt/gods.work/apps/web3/contracts/CollectiveArt.sol": {
+      "lastModificationDate": 1742841552027,
+      "contentHash": "142f0145ac46847e3a0ab28345f3160d",
+      "sourceName": "contracts/CollectiveArt.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "CollectiveArt"
+      ]
     }
   }
 }

@@ -1,4 +1,4 @@
-const uploadImage = async (image) => {
+export const uploadImage = async (image) => {
   // Create FormData and append image file
   const formData = new FormData();
   formData.append('file', image);
@@ -18,16 +18,16 @@ const uploadImage = async (image) => {
   return imageCID;
 };
 
-const uploadMetadata = async (imageCID) => {
+export const uploadMetadata = async (imageCID) => {
   // Create metadata object
   const metadata = {
-    name: 'Art Night NFT',
-    description: 'A unique NFT from Art Night',
+    name: 'Collective Art',
+    description: 'A unique NFT from Collective Art',
     image: `ipfs://${imageCID}`, // Replace with actual image CID
     attributes: [
       {
-        trait_type: 'Artist',
-        value: 'Art Night Creator',
+        trait_type: 'Collective',
+        value: 'Collective Art',
       },
     ],
   };
