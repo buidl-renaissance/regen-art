@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 
 export const ArtNightNFTContract = (
-  provider: ethers.providers.JsonRpcProvider | ethers.Signer
+  provider: ethers.Provider | ethers.Signer
 ) => {
   return new ethers.Contract('0xCe26f1C7e6D8e3199D333522F1972D5b4FdeBF75', ART_NIGHT_NFT_ABI, provider);
 };

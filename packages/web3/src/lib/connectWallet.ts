@@ -8,7 +8,7 @@ declare global {
 }
 
 export const getWalletProvider = () => {
-    return new ethers.providers.Web3Provider(window.ethereum);
+    return new ethers.BrowserProvider(window.ethereum);
 }
 
 export const getWalletSigner = async () => {

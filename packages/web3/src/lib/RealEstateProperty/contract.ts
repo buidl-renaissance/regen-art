@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 
 export const RealEstatePropertyContract = (
-  provider: ethers.providers.JsonRpcProvider | ethers.Signer
+  provider: ethers.Provider | ethers.Signer
 ) => {
   return new ethers.Contract(
     '0xc36d046616Ae801F1caaEBBb87f1Ca370A2485aa',
