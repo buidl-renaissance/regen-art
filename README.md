@@ -42,7 +42,7 @@ This project is licensed under the MIT License - see below for details:
 
 MIT License
 
-Copyright (c) 2025 Regen Art
+Copyright (c) 2025 DPoP Labs LLC
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
