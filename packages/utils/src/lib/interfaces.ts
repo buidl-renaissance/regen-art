@@ -156,6 +156,7 @@ export interface User {
   email_verified_at: string | null;
   id: number;
   name: string;
+  bio: string | null;
   phone: string | null;
   public_address: string | null;
   public_name: string | null; 

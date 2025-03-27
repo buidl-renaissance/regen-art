@@ -260,7 +260,7 @@ export const getEvents = async ({
   limit,
   offset,
   featured,
-}: EventQueryParams) => {
+} = {} as EventQueryParams) => {
   const params = new URLSearchParams();
   if (type) params.set("type", type);
   if (venue) params.set("venue", venue);
