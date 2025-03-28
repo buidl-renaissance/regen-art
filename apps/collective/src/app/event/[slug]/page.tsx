@@ -24,6 +24,8 @@ export default function EventPage({ event }: EventPageProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageRatio, setImageRatio] = useState(1.5); // Default aspect ratio (3:2)
+  const [imageWidth, setImageWidth] = useState(0);
+  const [imageHeight, setImageHeight] = useState(0);
 
   useEffect(() => {
     const checkIfMobile = () => {
@@ -40,10 +42,12 @@ export default function EventPage({ event }: EventPageProps) {
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
-  const handleImageLoad = (e) => {
-    const img = e.target;
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.target as HTMLImageElement;
     if (img.naturalWidth && img.naturalHeight) {
       setImageRatio(img.naturalWidth / img.naturalHeight);
+      setImageWidth(img.naturalWidth);
+      setImageHeight(img.naturalHeight);
     }
     setImageLoaded(true);
   };
@@ -61,6 +65,8 @@ export default function EventPage({ event }: EventPageProps) {
     );
   }
 
+  const hasImage = !!event.image;
+
   return (
     <Container>
       <CenteredContent>
@@ -71,13 +77,22 @@ export default function EventPage({ event }: EventPageProps) {
         </EventHeader>
 
         <EventContentLayout>
-          <EventImageContainer ratio={imageRatio}>
-            <EventImage
-              src={event.image || '/event-placeholder.jpg'}
-              alt={event.title}
-              onLoad={handleImageLoad}
-            />
-          </EventImageContainer>
+          {hasImage && (
+            <EventImageContainer>
+              <EventImage
+                src={event.image || '/event-placeholder.jpg'}
+                alt={event.title}
+                onLoad={handleImageLoad}
+                width={imageWidth || undefined}
+                height={imageHeight || undefined}
+                style={{
+                  maxWidth: '100%',
+                  height: 'auto',
+                  objectFit: 'contain'
+                }}
+              />
+            </EventImageContainer>
+          )}
 
           <EventDetailsContainer>
 
@@ -104,7 +119,7 @@ export default function EventPage({ event }: EventPageProps) {
                   <EventInfoContent>
                     <EventInfoValue>{event.venue.title}</EventInfoValue>
                     <EventInfoLabel>
-                      {event.venue.geo.address}, {event.venue.geo.city}, {event.venue.geo.state} {event.venue.geo.zip}
+                      {event.venue.geo.address}, {event.venue.geo.city}, {event.venue.geo.state} {event.venue.geo.zipcode}
                     </EventInfoLabel>
                   </EventInfoContent>
                 </EventInfoCard>
@@ -189,28 +204,26 @@ const EventContentLayout = styled.div`
   }
 `;
 
-const EventImageContainer = styled.div<{ ratio: number }>`
+const EventImageContainer = styled.div`
   min-width: 200px;
   max-width: 300px;
-  height: ${props => props.ratio > 1 ? '300px' : '400px'};
   border-radius: 8px;
   overflow: hidden;
 
   @media (max-width: 768px) {
     width: 100%;
     max-width: 100%;
-    height: ${props => props.ratio > 1 ? '180px' : '250px'};
   }
 `;
 
 const EventImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  display: block;
+  border-radius: 8px;
 `;
 
 const EventDetailsContainer = styled.div`
   flex: 1;
+  max-width: 600px;
 `;
 
 const EventInfoSection = styled.div`

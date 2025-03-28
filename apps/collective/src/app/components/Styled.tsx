@@ -18,7 +18,7 @@ const Header = styled.div`
 
 const Title = styled.h1`
   font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   font-weight: 700;
 `;
 
