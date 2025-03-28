@@ -39,7 +39,7 @@ const RSVPButton = ({ eventSlug }: RSVPButtonProps) => {
         onClick={handleRSVP} 
         disabled={isRSVPing || hasRSVPed}
       >
-        {isRSVPing ? 'Processing...' : hasRSVPed ? 'RSVP Confirmed!' : 'RSVP Now'}
+        {isRSVPing ? 'Processing...' : hasRSVPed ? 'Registered' : 'Register'}
       </StyledRSVPButton>
       
       {error && <ErrorMessage>{error}</ErrorMessage>}

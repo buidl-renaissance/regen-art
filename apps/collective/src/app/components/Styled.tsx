@@ -9,7 +9,7 @@ const Container = styled.div`
   color: white;
   font-family: 'Inter', sans-serif;
   background: #121212;
-  padding: 2rem;
+  padding: 1rem;
 `;
 
 const Header = styled.div`
@@ -122,7 +122,12 @@ const TextArea = styled.textarea`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin: 2rem auto;
+  gap: 1rem;
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const BackButton = styled.button`
@@ -155,6 +160,12 @@ const NextButton = styled.button`
   &:hover {
     background: #e62e5c;
   }
+`;
+
+const LoadingMessage = styled.div`
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 3rem 0;
 `;
 
 const ErrorMessage = styled.div`
@@ -193,4 +204,5 @@ export {
   NextButton,
   ErrorMessage,
   SuccessMessage,
+  LoadingMessage,
 };

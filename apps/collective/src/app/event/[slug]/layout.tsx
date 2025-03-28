@@ -12,7 +12,8 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   // Fetch event data
-  const event: DPoPEvent = await getEvent(params.slug);
+  const slug = (await params).slug;
+  const event: DPoPEvent = await getEvent(slug);
 
   return {
     title: `${event.title} | GODS.WORK`,
@@ -26,8 +27,7 @@ export async function generateMetadata(
 }
 
 export default async function EventLayout({ params }: Props) {
-  const event: DPoPEvent = await getEvent(params.slug);
-  return (
-    <EventPage event={event} />
-  );
+  const slug = (await params).slug;
+  const event: DPoPEvent = await getEvent(slug);
+  return <EventPage event={event} />;
 }

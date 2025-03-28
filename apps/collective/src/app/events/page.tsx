@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import EventCard from '../components/EventCard';
-import { Container, Subtitle, Title, Header } from '../components/Styled';
+import { Container, Subtitle, Title, Header, LoadingMessage, ErrorMessage } from '../components/Styled';
 import { getEvents, DPoPEvent } from '@gods.work/utils';
 
 const EventsGrid = styled.div`
@@ -31,44 +31,28 @@ const CreateEventButton = styled.button`
   }
 `;
 
-const LoadingMessage = styled.div`
-  text-align: center;
-  font-size: 1.2rem;
-  margin: 3rem 0;
-`;
+export default function EventsPage({ events: initialEvents }: { events: DPoPEvent[] }) {
+  const [events, setEvents] = useState(initialEvents);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-const ErrorMessage = styled.div`
-  color: #FF3366;
-  text-align: center;
-  font-size: 1.1rem;
-  margin: 1rem 0;
-  padding: 1rem;
-  background: rgba(255, 51, 102, 0.1);
-  border-radius: 4px;
-`;
+//   useEffect(() => {
+//     const fetchEvents = async () => {
+//       try {
+//         setLoading(true);
+//         const eventsData = await getEvents();
+//         setEvents(eventsData);
+//         setError(null);
+//       } catch (err) {
+//         console.error('Error fetching events:', err);
+//         setError('Failed to load events. Please try again later.');
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
 
-export default function Events() {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        setLoading(true);
-        const eventsData = await getEvents();
-        setEvents(eventsData);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching events:', err);
-        setError('Failed to load events. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEvents();
-  }, []);
+//     fetchEvents();
+//   }, []);
 
   return (
     <Container>

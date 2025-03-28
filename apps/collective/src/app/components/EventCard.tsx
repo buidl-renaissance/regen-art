@@ -1,10 +1,9 @@
-import Link from 'next/link';
 import styled from 'styled-components';
 import { DPoPEvent } from '@gods.work/utils';
 import { FaCalendar, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 
 // Format date to be more readable
-const formatDate = (dateString: string) => {
+const formatDate = (dateString: string, showDayOfWeek = false) => {
   const date = new Date(dateString);
   
   // Get month name
@@ -13,6 +12,12 @@ const formatDate = (dateString: string) => {
   // Get day with ordinal suffix
   const day = date.getDate();
   const suffix = getDaySuffix(day);
+  
+  // Add day of week if requested
+  if (showDayOfWeek) {
+    const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
+    return `${dayOfWeek}, ${month} ${day}${suffix}`;
+  }
   
   return `${month} ${day}${suffix}`;
 };

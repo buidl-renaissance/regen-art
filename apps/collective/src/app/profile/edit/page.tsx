@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { getUser, updateUser, isAuthorized } from '@gods.work/utils';
 import {
   Container,
@@ -16,6 +15,7 @@ import {
   ErrorMessage,
   SuccessMessage,
 } from '../../components/Styled';
+import { CenteredContent, ProfileHeader, ProfileTitle } from '../styles';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -182,23 +182,3 @@ export default function EditProfilePage() {
     </Container>
   );
 }
-
-const CenteredContent = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 2rem 1rem;
-`;
-
-const ProfileHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-`;
-
-const ProfileTitle = styled.h1`
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-`;
