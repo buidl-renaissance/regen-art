@@ -12,7 +12,7 @@ import {
   LoadingMessage,
   ErrorMessage,
 } from '../components/Styled';
-import { getEvents, DPoPEvent } from '@gods.work/utils';
+import { DPoPEvent } from '@gods.work/utils';
 
 const ContentWrapper = styled.div`
   max-width: 1200px;
@@ -30,60 +30,6 @@ const EventsGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
   margin-bottom: 3rem;
-`;
-
-const EnhancedHeader = styled(Header)`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 2.5rem;
-  position: relative;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-`;
-
-const HeaderTextContent = styled.div`
-  margin-bottom: 1.5rem;
-
-  @media (min-width: 768px) {
-    flex: 1;
-    margin-bottom: 0;
-    margin-right: 2rem;
-  }
-`;
-
-const CreateEventButton = styled.button`
-  background: #ff3366;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-  align-self: flex-start;
-  box-shadow: 0 2px 8px rgba(255, 51, 102, 0.3);
-
-  &:hover {
-    background: #e62e5c;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 51, 102, 0.4);
-  }
-
-  &:active {
-    transform: translateY(0);
-    box-shadow: 0 1px 4px rgba(255, 51, 102, 0.2);
-  }
-
-  @media (min-width: 768px) {
-    align-self: center;
-  }
 `;
 
 export default function EventsPage({

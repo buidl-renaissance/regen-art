@@ -144,27 +144,27 @@ export default function Join() {
 
   const roles = [
     {
-      id: 'guest',
-      title: 'Guest / Collector',
-      description: 'I\'m here to explore, connect, and collect.',
+      id: 'collector',
+      title: 'Art Collector',
+      description: 'I collect and appreciate creative works.',
       icon: <FaEye className="icon" />
     },
     {
       id: 'artist',
-      title: 'Artist / Vendor',
-      description: 'I\'m showcasing or selling my work.',
+      title: 'Visual Artist',
+      description: 'I create visual art and exhibitions.',
       icon: <FaPaintBrush className="icon" />
     },
     {
-      id: 'performer',
-      title: 'Performer / DJ',
-      description: 'I\'m on the lineup.',
+      id: 'musician',
+      title: 'Musician / Producer',
+      description: 'I create and perform music.',
       icon: <FaHeadphones className="icon" />
     },
     {
       id: 'organizer',
-      title: 'Organizer / Staff',
-      description: 'I\'m working the event.',
+      title: 'Event Organizer',
+      description: 'I organize creative events and experiences.',
       icon: <FaClipboardList className="icon" />
     }
   ];
@@ -183,7 +183,7 @@ export default function Join() {
       <div className="overlay"></div>
       
       <div className="content">
-        <h1>How are you showing up tonight?</h1>
+        <h1>What best describes your creative identity?</h1>
         
         <div className="role-grid">
           {roles.map(role => (
@@ -200,7 +200,7 @@ export default function Join() {
         </div>
         
         <div className="button-container">
-          <button className="continue-button">Next</button>
+          <button className="continue-button">Create Profile</button>
         </div>
       </div>
     </JoinContainer>

@@ -18,7 +18,9 @@ export default async function EventsLayout({
   children: React.ReactNode;
 }) {
   // Load events server-side
-  const events = await getEvents();
+  const events = await getEvents({
+    type: 'Tech',
+  });
   
   return <EventsPage events={events} />;
 }
