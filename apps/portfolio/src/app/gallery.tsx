@@ -3,6 +3,7 @@
 import { FC, useState } from 'react';
 import styled from 'styled-components';
 import ArtworkModal from './artwork-modal';
+import { ArtworkItem } from './interfaces';
 
 const GalleryContainer = styled.div`
   padding: 2rem;
