@@ -151,6 +151,54 @@ const StyledPage = styled.div`
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.2s, transform 0.1s;
+    
+    &:hover {
+      background-color: rgba(255, 51, 102, 0.1);
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+    
+    input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #444;
+      border-radius: 50%;
+      margin: 0;
+      position: relative;
+      
+      &:checked {
+        border-color: #FF3366;
+        
+        &:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 10px;
+          height: 10px;
+          background-color: #FF3366;
+          border-radius: 50%;
+        }
+      }
+      
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 51, 102, 0.3);
+      }
+    }
+    
+    label {
+      margin-bottom: 0;
+      font-weight: normal;
+    }
   }
 
   .submit-button {
