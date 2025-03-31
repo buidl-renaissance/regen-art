@@ -132,30 +132,30 @@ export default function Index() {
     <StyledPage>
       <div className="background">
         <video autoPlay muted loop playsInline>
-          <source src="/event-background.mp4" type="video/mp4" />
+          <source src="https://andreaburg.com/wp-content/uploads/2025/02/tattoo-timelapse-adobe.mp4#t=55,115" type="video/mp4" />
         </video>
       </div>
       <div className="overlay"></div>
       
       <div className="content">
         <div className="top-half">
-          <img src="/logo.svg" alt="Event Logo" className="logo" />
-          <h1 className="event-title">Collective Experience</h1>
-          <div className="event-date">One Night Only — December 31, 2023</div>
-        </div>
-        
-        <div className="bottom-half">
+          {/* <img src="/logo.svg" alt="Event Logo" className="logo" /> */}
+          <h1 className="event-title">Art Night Detroit</h1>
+          {/* <div className="event-date">One Night Only — December 31, 2023</div> */}
           <Link href="/join">
             <button className="cta-button">Get Started</button>
           </Link>
-          <div className="secondary-option">
+          <div className="secondary-option mt-4">
             Already have an account? <span className="sign-in-link">Sign In</span>
           </div>
         </div>
         
-        <div className="footer">
+        {/* <div className="bottom-half">
+        </div> */}
+        
+        {/* <div className="footer">
           Powered by Collective Studio
-        </div>
+        </div> */}
       </div>
     </StyledPage>
   );
