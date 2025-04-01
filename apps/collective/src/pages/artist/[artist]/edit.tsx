@@ -63,7 +63,10 @@ const EditArtistPage = ({ artist }: EditArtistPageProps) => {
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit}>
-          <UploadMedia onUploadComplete={setProfilePicture} />
+          <UploadMedia
+            onUploadComplete={setProfilePicture}
+            mediaUrl={artist.profile_picture}
+          />
 
           <FormField>
             <TextField
@@ -115,12 +118,24 @@ const EditArtistPage = ({ artist }: EditArtistPageProps) => {
   );
 };
 
-export async function getServerSideProps({ params }: { params: { artist: string } }) {
-  const artist = await getArtist(params.artist);
+export const getMetadata = (artist: Artist) => {
+  return {
+    title: `${artist.name} | Edit Artist Profile`,
+    description: artist.bio,
+  };
+};
 
+export async function getServerSideProps({
+  params,
+}: {
+  params: { artist: string };
+}) {
+  const artist = await getArtist(params.artist);
+  const metadata = getMetadata(artist);
   return {
     props: {
       artist,
+      metadata,
     },
   };
 }

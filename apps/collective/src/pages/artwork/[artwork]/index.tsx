@@ -4,6 +4,7 @@ import moment from 'moment';
 import Link from 'next/link';
 import { Artwork, convertDefaultToResized, getArtwork } from '@gods.work/utils';
 import { env } from 'process';
+import { Subtitle, Title } from '../../../app/components/Styled';
 
 const ArtworkPage = ({ artwork }: { artwork: Artwork }) => {
   return (
@@ -17,8 +18,8 @@ const ArtworkPage = ({ artwork }: { artwork: Artwork }) => {
             />
           </div>
           <div className="artwork-details">
-            <h1 dangerouslySetInnerHTML={{ __html: artwork.title }} />
-            <p className="artwork-description">{artwork.description}</p>
+            <Title dangerouslySetInnerHTML={{ __html: artwork.title }} />
+            <Subtitle className="artwork-description">{artwork.description}</Subtitle>
 
             <div className="credits">
               {artwork.artist && (
@@ -237,8 +238,7 @@ const ArtworkHeader = styled.div`
 `;
 
 const PageWrapper = styled.div`
-  background-color: #fafafa;
-  max-width: 700px;
+  max-width: 900px;
   margin: auto;
   h1 {
     font-size: 2rem;
@@ -255,6 +255,7 @@ const PageWrapper = styled.div`
 const ContentWrapper = styled.div`
   border-left: solid 1px #333;
   margin-left: 1rem;
+  max-width: 700px;
   .timestamp {
     font-size: 0.8rem;
     margin-left: 1rem;

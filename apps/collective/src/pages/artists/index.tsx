@@ -1,32 +1,14 @@
-import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { getArtists, Artist } from '@gods.work/utils';
 import { ArtistProfile } from '@gods.work/ui';
 import { Metadata } from 'next';
+import { Header, Subtitle, Title } from '../../app/components/Styled';
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
-`;
-
-const Header = styled.header`
-  margin-bottom: 2rem;
-  text-align: center;
-`;
-
-const Title = styled.h1`
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  color: #333;
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.2rem;
-  color: #666;
-  max-width: 600px;
-  margin: 0 auto;
 `;
 
 const ArtistsGrid = styled.div`

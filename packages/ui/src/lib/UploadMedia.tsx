@@ -5,6 +5,7 @@ import UploadButton from './UploadButton';
 interface UploadMediaProps {
   onUploadComplete?: (url: string) => void;
   onError?: (error: string) => void;
+  mediaUrl?: string;
   accept?: string;
   maxSize?: number; // in MB
   label?: string;
@@ -46,11 +47,12 @@ const LoadingIndicator = styled.div`
 export const UploadMedia: React.FC<UploadMediaProps> = ({
   onUploadComplete,
   onError,
+  mediaUrl,
   accept = 'image/*',
   maxSize = 5, // Default 5MB
   label = 'Upload Media'
 }) => {
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(mediaUrl || null);
   const [error, setError] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 

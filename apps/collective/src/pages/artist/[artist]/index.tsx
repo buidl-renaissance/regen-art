@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Artist } from "../../../interfaces";
-import { getArtist } from "../../../dpop";
-import { ArtworkCard } from "../../../components/ArtworkCard";
-import { ButtonLink } from "../../../components/Styled";
+import { Artist } from "@gods.work/utils";
+import { getArtist } from "@gods.work/utils";
+import { ArtworkCard, ButtonLink } from "@gods.work/ui";
+import { Metadata } from "next";
 
 interface ArtistPageProps {
   artist: Artist;
@@ -20,7 +20,7 @@ const ArtistPage = ({ artist }: ArtistPageProps) => {
           <div className="artist-details">
             <div className="title-row">
               <h1>{artist.name}</h1>
-              <ButtonLink href={`/artists/${artist.slug}/edit`}>Edit</ButtonLink>
+              {/* <ButtonLink href={`/artist/${artist.slug}/edit`}>Edit</ButtonLink> */}
             </div>
             <p className="artist-bio">{artist.bio}</p>
           </div>
@@ -103,12 +103,20 @@ const ArtistWorks = styled.section`
   }
 `;
 
-export async function getServerSideProps({ params }) {
+export const getMetadata = (artist: Artist) => {
+  return {
+    title: `${artist.name} | Art Night Detroit`,
+    description: artist.bio,
+  };
+};
+
+export async function getServerSideProps({ params }: { params: { artist: string } }) {
   const artist = await getArtist(params.artist);
-  
+  const metadata = getMetadata(artist);
   return {
     props: {
-      artist: artist
+      artist: artist,
+      metadata: metadata
     }
   };
 }
