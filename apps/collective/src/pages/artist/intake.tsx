@@ -1,241 +1,20 @@
-'use client';
-
 import { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
-const StyledPage = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  font-family: 'Inter', sans-serif;
-  background-color: #121212;
-  padding: 2rem;
+export const metadata: Metadata = {
+  title: 'Artist Intake | Gods.Work Collective',
+  description: 'Submit your work to be considered for our upcoming art show.',
+};
 
-  .header {
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  .form-container {
-    max-width: 800px;
-    margin: 0 auto;
-    width: 100%;
-    background-color: rgba(30, 30, 30, 0.7);
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-
-  .form-title {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .form-description {
-    margin-bottom: 2rem;
-    text-align: center;
-    opacity: 0.8;
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-  }
-
-  input, textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border-radius: 4px;
-    border: 1px solid #333;
-    background-color: #1e1e1e;
-    color: white;
-    font-family: inherit;
-    font-size: 1rem;
-    
-    &:focus {
-      outline: none;
-      border-color: #FF3366;
-    }
-  }
-
-  textarea {
-    min-height: 120px;
-    resize: vertical;
-  }
-
-  .file-upload {
-    margin-top: 0.5rem;
-    
-    input {
-      display: none;
-    }
-    
-    .upload-button {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background-color: #333;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      
-      &:hover {
-        background-color: #444;
-      }
-    }
-    
-    .file-info {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-  }
-
-  .image-preview {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
-    
-    .preview-item {
-      position: relative;
-      width: 150px;
-      height: 150px;
-      border-radius: 4px;
-      overflow: hidden;
-      
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      
-      .remove-button {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        font-size: 14px;
-        
-        &:hover {
-          background-color: rgba(255, 51, 102, 0.8);
-        }
-      }
-    }
-  }
-
-  .radio-group {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .radio-option {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.2s, transform 0.1s;
-    
-    &:hover {
-      background-color: rgba(255, 51, 102, 0.1);
-    }
-    
-    &:active {
-      transform: scale(0.98);
-    }
-    
-    input[type="radio"] {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 20px;
-      height: 20px;
-      border: 2px solid #444;
-      border-radius: 50%;
-      margin: 0;
-      position: relative;
-      
-      &:checked {
-        border-color: #FF3366;
-        
-        &:after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 10px;
-          height: 10px;
-          background-color: #FF3366;
-          border-radius: 50%;
-        }
-      }
-      
-      &:focus {
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(255, 51, 102, 0.3);
-      }
-    }
-    
-    label {
-      margin-bottom: 0;
-      font-weight: normal;
-    }
-  }
-
-  .submit-button {
-    background: #FF3366;
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-    width: 100%;
-    margin-top: 1rem;
-
-    &:hover {
-      background: #E62E5C;
-    }
-    
-    &:disabled {
-      background: #666;
-      cursor: not-allowed;
-    }
-  }
-
-  .back-link {
-    display: block;
-    text-align: center;
-    margin-top: 1.5rem;
-    color: #FF3366;
-    text-decoration: none;
-    
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
+export async function getServerSideProps() {
+  return {
+    props: {
+      metadata,
+    },
+  };
+}
 
 export default function ArtistIntake() {
   const [formData, setFormData] = useState({
@@ -512,3 +291,236 @@ export default function ArtistIntake() {
     </StyledPage>
   );
 }
+
+const StyledPage = styled.div`
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  background-color: #121212;
+  padding: 2rem;
+
+  .header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    background-color: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .form-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .form-description {
+    margin-bottom: 2rem;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #1e1e1e;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    
+    &:focus {
+      outline: none;
+      border-color: #FF3366;
+    }
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .file-upload {
+    margin-top: 0.5rem;
+    
+    input {
+      display: none;
+    }
+    
+    .upload-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: #333;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      
+      &:hover {
+        background-color: #444;
+      }
+    }
+    
+    .file-info {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  }
+
+  .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    
+    .preview-item {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: 4px;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .remove-button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        
+        &:hover {
+          background-color: rgba(255, 51, 102, 0.8);
+        }
+      }
+    }
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.2s, transform 0.1s;
+    
+    &:hover {
+      background-color: rgba(255, 51, 102, 0.1);
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+    
+    input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #444;
+      border-radius: 50%;
+      margin: 0;
+      position: relative;
+      
+      &:checked {
+        border-color: #FF3366;
+        
+        &:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 10px;
+          height: 10px;
+          background-color: #FF3366;
+          border-radius: 50%;
+        }
+      }
+      
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 51, 102, 0.3);
+      }
+    }
+    
+    label {
+      margin-bottom: 0;
+      font-weight: normal;
+    }
+  }
+
+  .submit-button {
+    background: #FF3366;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    width: 100%;
+    margin-top: 1rem;
+
+    &:hover {
+      background: #E62E5C;
+    }
+    
+    &:disabled {
+      background: #666;
+      cursor: not-allowed;
+    }
+  }
+
+  .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #FF3366;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
