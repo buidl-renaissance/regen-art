@@ -44,8 +44,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 export default function EventPage({ event }: { event: DPoPEvent }) {
   const [isMobile, setIsMobile] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageRatio, setImageRatio] = useState(1.5); // Default aspect ratio (3:2)
   const [imageWidth, setImageWidth] = useState(0);
   const [imageHeight, setImageHeight] = useState(0);
 
@@ -67,11 +65,9 @@ export default function EventPage({ event }: { event: DPoPEvent }) {
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.target as HTMLImageElement;
     if (img.naturalWidth && img.naturalHeight) {
-      setImageRatio(img.naturalWidth / img.naturalHeight);
       setImageWidth(img.naturalWidth);
       setImageHeight(img.naturalHeight);
     }
-    setImageLoaded(true);
   };
 
   if (!event) {
@@ -153,7 +149,7 @@ export default function EventPage({ event }: { event: DPoPEvent }) {
             </EventInfoSection>
 
             <ButtonContainer>
-              <RSVPButton eventSlug={event.slug} />
+              <RSVPButton event={event} />
             </ButtonContainer>
 
             <EventDescription
@@ -176,7 +172,7 @@ export default function EventPage({ event }: { event: DPoPEvent }) {
 
       {isMobile && (
         <MobileRSVPContainer>
-          <RSVPButton eventSlug={event.slug} />
+          <RSVPButton event={event} />
         </MobileRSVPContainer>
       )}
     </Container>

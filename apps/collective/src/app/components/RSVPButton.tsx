@@ -1,14 +1,12 @@
-'use client';
-
 import { useState } from 'react';
 import styled from 'styled-components';
-import { submitEventRsvp } from '@gods.work/utils';
+import { submitEventRsvp, DPoPEvent } from '@gods.work/utils';
 
 interface RSVPButtonProps {
-  eventSlug: string;
+  event: DPoPEvent;
 }
 
-const RSVPButton = ({ eventSlug }: RSVPButtonProps) => {
+const RSVPButton = ({ event }: RSVPButtonProps) => {
   const [isRSVPing, setIsRSVPing] = useState(false);
   const [hasRSVPed, setHasRSVPed] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,9 +15,9 @@ const RSVPButton = ({ eventSlug }: RSVPButtonProps) => {
     try {
       setIsRSVPing(true);
       setError(null);
-      
-      const result = await submitEventRsvp(eventSlug);
-      
+
+      const result = await submitEventRsvp(event.slug);
+
       if (result.success) {
         setHasRSVPed(true);
       } else {
@@ -33,22 +31,32 @@ const RSVPButton = ({ eventSlug }: RSVPButtonProps) => {
     }
   };
 
+  if (event?.url) {
+    return (
+      <StyledRSVPButton
+        as="a"
+        href={event.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View Event Details
+      </StyledRSVPButton>
+    );
+  }
+
   return (
     <>
-      <StyledRSVPButton 
-        onClick={handleRSVP} 
-        disabled={isRSVPing || hasRSVPed}
-      >
+      <StyledRSVPButton onClick={handleRSVP} disabled={isRSVPing || hasRSVPed}>
         {isRSVPing ? 'Processing...' : hasRSVPed ? 'Registered' : 'Register'}
       </StyledRSVPButton>
-      
+
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </>
   );
 };
 
 const StyledRSVPButton = styled.button`
-  background: #FF3366;
+  background: #ff3366;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -57,19 +65,24 @@ const StyledRSVPButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.2s ease;
-  
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+
   &:hover:not(:disabled) {
-    background: #E62E5C;
+    background: #e62e5c;
   }
-  
+
   &:disabled {
-    background: ${props => props.children === 'RSVP Confirmed!' ? '#4CAF50' : '#999'};
-    cursor: ${props => props.children === 'RSVP Confirmed!' ? 'default' : 'not-allowed'};
+    background: ${(props) =>
+      props.children === 'RSVP Confirmed!' ? '#4CAF50' : '#999'};
+    cursor: ${(props) =>
+      props.children === 'RSVP Confirmed!' ? 'default' : 'not-allowed'};
   }
 `;
 
 const ErrorMessage = styled.div`
-  color: #FF3366;
+  color: #ff3366;
   margin-top: 0.5rem;
   font-size: 0.9rem;
 `;

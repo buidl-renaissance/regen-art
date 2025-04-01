@@ -63,23 +63,24 @@ export interface ImageData {
 }
 
 export interface DPoPEvent {
-  id: number;
-  title: string;
-  cid: string;
-  slug: string;
-  host: string | null;
-  venue_id?: number;
-  venue: Venue;
-  start_date: string;
-  end_date: string;
-  event_categories: string[];
   categories: string[];
+  cid: string;
   comments?: DPoPEventComment[];
   content: string;
+  end_date: string;
+  event_categories: string[];
   excerpt: string;
   featured: boolean;
+  host: string | null;
+  id: number;
   image_data: ImageData;
   image: string;
+  slug: string;
+  start_date: string;
+  title: string;
+  url?: string;
+  venue_id?: number;
+  venue: Venue;
 }
 
 
