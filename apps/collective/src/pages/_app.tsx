@@ -2,6 +2,7 @@ import '../app/global.css';
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { DefaultSeo, NextSeo } from "next-seo";
 import { Metadata } from 'next';
 
 // Default metadata for the application
@@ -22,42 +23,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>{pageMetadata.title as string}</title>
-        <meta name="description" content={pageMetadata.description as string} />
-        <meta
-          property="og:title"
-          content={
-            (pageMetadata.openGraph?.title as string) ||
-            (pageMetadata.title as string)
-          }
-        />
-        <meta
-          property="og:description"
-          content={
-            (pageMetadata.openGraph?.description as string) ||
-            (pageMetadata.description as string)
-          }
-        />
-        {pageMetadata.openGraph?.images &&
-          Array.isArray(pageMetadata.openGraph.images) &&
-          pageMetadata.openGraph.images.map((image: any, index: number) => (
-            <meta
-              key={index}
-              property="og:image"
-              content={typeof image === 'string' ? image : image.url}
-            />
-          ))}
-        <meta property="og:url" content={pageMetadata.canonical as string} />
-        <meta
-          property="og:type"
-          content={pageMetadata.openGraph?.type as string}
-        />
-        <meta
-          property="og:site_name"
-          content={pageMetadata.openGraph?.site_name as string}
-        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <NextSeo {...pageMetadata} />
+      <DefaultSeo
+        openGraph={{
+          type: "website",
+          locale: "en_IE",
+        }}
+      />
       <Component {...pageProps} />
     </>
   );

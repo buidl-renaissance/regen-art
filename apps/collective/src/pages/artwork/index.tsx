@@ -47,6 +47,7 @@ export async function getServerSideProps() {
   return {
     props: {
       artworks,
+      metadata,
     },
   };
 }

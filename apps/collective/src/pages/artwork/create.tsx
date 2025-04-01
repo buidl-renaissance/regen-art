@@ -16,6 +16,14 @@ export const metadata: Metadata = {
   description: 'Create a new artwork profile for Art Night Detroit',
 };
 
+export async function getServerSideProps() {
+  return {
+    props: {
+      metadata,
+    },
+  };
+}
+
 const CreateArtworkPage = () => {
   const router = useRouter();
   const [title, setTitle] = useState("");
