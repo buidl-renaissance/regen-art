@@ -5,12 +5,20 @@ import styled from 'styled-components';
 
 const StyledPage = styled.div`
   background-color: #f5f5f5;
+  
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 const InquireContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding: 4rem 2rem;
+  
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const PageTitle = styled.h1`
@@ -43,6 +51,17 @@ const PageTitle = styled.h1`
   &::after {
     right: 0;
   }
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    padding: 0 40px;
+    margin-bottom: 1.5rem;
+    
+    &::before,
+    &::after {
+      width: 30px;
+    }
+  }
 `;
 
 const IntroText = styled.p`
@@ -50,12 +69,22 @@ const IntroText = styled.p`
   margin-bottom: 2rem;
   font-size: 1.2rem;
   line-height: 1.6;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -68,6 +97,11 @@ const Label = styled.label`
   font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
 `;
 
 const Input = styled.input`
@@ -79,6 +113,11 @@ const Input = styled.input`
   &:focus {
     outline: none;
     border-color: #96885f;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0.6rem;
+    font-size: 0.9rem;
   }
 `;
 
@@ -94,6 +133,12 @@ const TextArea = styled.textarea`
     outline: none;
     border-color: #96885f;
   }
+  
+  @media (max-width: 768px) {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    min-height: 120px;
+  }
 `;
 
 const Select = styled.select`
@@ -105,6 +150,11 @@ const Select = styled.select`
   &:focus {
     outline: none;
     border-color: #96885f;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0.6rem;
+    font-size: 0.9rem;
   }
 `;
 
@@ -129,6 +179,13 @@ const SubmitButton = styled.button`
     opacity: 0.6;
     cursor: not-allowed;
   }
+  
+  @media (max-width: 768px) {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-width: 3px;
+    margin-top: 0.5rem;
+  }
 `;
 
 const SuccessMessage = styled.div`
@@ -137,12 +194,30 @@ const SuccessMessage = styled.div`
   padding: 1.5rem;
   text-align: center;
   margin-top: 2rem;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+    margin-top: 1.5rem;
+    
+    h3 {
+      font-size: 1.2rem;
+    }
+    
+    p {
+      font-size: 0.9rem;
+    }
+  }
 `;
 
 const ErrorMessage = styled.div`
   color: #d9534f;
   font-size: 0.9rem;
   margin-top: 0.5rem;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+  }
 `;
 
 const InquirePage: FC = () => {

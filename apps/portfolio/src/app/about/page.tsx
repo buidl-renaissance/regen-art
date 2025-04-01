@@ -5,12 +5,20 @@ import styled from 'styled-components';
 
 const StyledPage = styled.div`
   background-color: #f5f5f5;
+  
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 const AboutContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   padding: 4rem 2rem;
+  
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const PageTitle = styled.h1`
@@ -43,6 +51,17 @@ const PageTitle = styled.h1`
   &::after {
     right: 0;
   }
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    padding: 0 40px;
+    margin-bottom: 1.5rem;
+    
+    &::before,
+    &::after {
+      width: 30px;
+    }
+  }
 `;
 
 const ArtistSection = styled.section`
@@ -53,6 +72,11 @@ const ArtistSection = styled.section`
 
   @media (min-width: 768px) {
     flex-direction: row;
+  }
+  
+  @media (max-width: 768px) {
+    gap: 2rem;
+    margin-bottom: 3rem;
   }
 `;
 
@@ -68,6 +92,11 @@ const ArtistImage = styled.img`
   @media (min-width: 768px) {
     width: 40%;
   }
+  
+  @media (max-width: 768px) {
+    max-width: 100%;
+    border-radius: 6px;
+  }
 `;
 
 const ArtistBio = styled.div`
@@ -78,6 +107,11 @@ const BioHeading = styled.h2`
   font-size: 2rem;
   margin-bottom: 1.5rem;
   color: #333;
+  
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const BioParagraph = styled.p`
@@ -85,16 +119,31 @@ const BioParagraph = styled.p`
   line-height: 1.8;
   margin-bottom: 1.5rem;
   color: #444;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
 `;
 
 const SkillsSection = styled.section`
   margin-bottom: 4rem;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+  }
 `;
 
 const SkillsHeading = styled.h2`
   font-size: 2rem;
   margin-bottom: 1.5rem;
   color: #333;
+  
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const SkillsList = styled.ul`
@@ -103,6 +152,11 @@ const SkillsList = styled.ul`
   gap: 1.5rem;
   list-style: none;
   padding: 0;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
 `;
 
 const SkillItem = styled.li`
@@ -115,28 +169,56 @@ const SkillItem = styled.li`
   &:hover {
     transform: translateY(-5px);
   }
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+    border-radius: 6px;
+    
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
 `;
 
 const SkillTitle = styled.h3`
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
   color: #96885f;
+  
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
 `;
 
 const SkillDescription = styled.p`
   font-size: 1rem;
   line-height: 1.6;
   color: #555;
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
 `;
 
 const ExperienceSection = styled.section`
   margin-bottom: 4rem;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+  }
 `;
 
 const ExperienceHeading = styled.h2`
   font-size: 2rem;
   margin-bottom: 1.5rem;
   color: #333;
+  
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const Timeline = styled.div`
@@ -192,23 +274,43 @@ const TimelineContent = styled.div`
   position: relative;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  
+  @media (max-width: 768px) {
+    padding: 15px;
+    border-radius: 6px;
+  }
 `;
 
 const TimelineDate = styled.div`
   font-weight: bold;
   color: #96885f;
   margin-bottom: 0.5rem;
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
 `;
 
 const TimelineTitle = styled.h3`
   margin: 0 0 10px 0;
   font-size: 1.2rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
 `;
 
 const TimelineText = styled.p`
   margin: 0;
   line-height: 1.6;
   color: #555;
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
 `;
 
 const ContactSection = styled.section`
@@ -219,6 +321,11 @@ const ContactHeading = styled.h2`
   font-size: 2rem;
   margin-bottom: 1.5rem;
   color: #333;
+  
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const ContactText = styled.p`
@@ -228,6 +335,12 @@ const ContactText = styled.p`
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const ContactButton = styled.a`
@@ -245,6 +358,16 @@ const ContactButton = styled.a`
   &:hover {
     background-color: rgba(150, 136, 95, 0.2);
     transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-width: 3px;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
   }
 `;
 

@@ -7,12 +7,19 @@ import { TATTOOS } from '../mock';
 import { ArtworkItem, TattooItem } from '../interfaces';
 
 const StyledPage = styled.div`
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 const TattooContainer = styled.div`
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    padding: 1rem 0.5rem;
+  }
 `;
 
 const TattooTitle = styled.h2`
@@ -21,6 +28,11 @@ const TattooTitle = styled.h2`
   font-size: 2.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const CategoryTabs = styled.div`
@@ -29,6 +41,11 @@ const CategoryTabs = styled.div`
   margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
+  
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const CategoryTab = styled.button<{ active: boolean }>`
@@ -45,12 +62,23 @@ const CategoryTab = styled.button<{ active: boolean }>`
     background-color: ${(props) =>
       props.active ? '#96885f' : 'rgba(150, 136, 95, 0.2)'};
   }
+  
+  @media (max-width: 768px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    border-width: 1px;
+  }
 `;
 
 const TattooGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
 `;
 
 const TattooCard = styled.div`
@@ -65,6 +93,14 @@ const TattooCard = styled.div`
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
+  
+  @media (max-width: 768px) {
+    border-radius: 6px;
+    
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
 `;
 
 const TattooImage = styled.img`
@@ -72,22 +108,40 @@ const TattooImage = styled.img`
   height: 350px;
   object-fit: cover;
   display: block;
+  
+  @media (max-width: 768px) {
+    height: 200px;
+  }
 `;
 
 const TattooInfo = styled.div`
   padding: 1.5rem;
+  
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+  }
 `;
 
 const TattooName = styled.h3`
   margin: 0 0 0.5rem;
   font-size: 1.2rem;
   color: #333;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
 `;
 
 const TattooDescription = styled.p`
   font-size: 0.9rem;
   color: #666;
   line-height: 1.5;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
 `;
 
 const InquirySection = styled.div`
@@ -96,11 +150,22 @@ const InquirySection = styled.div`
   padding: 2rem;
   background-color: #f8f8f8;
   border-radius: 8px;
+  
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+    padding: 1.5rem 1rem;
+    border-radius: 6px;
+  }
 `;
 
 const InquiryTitle = styled.h3`
   margin-bottom: 1rem;
   font-size: 1.8rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const InquiryText = styled.p`
@@ -108,6 +173,11 @@ const InquiryText = styled.p`
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const InquiryButton = styled.button`
@@ -123,6 +193,11 @@ const InquiryButton = styled.button`
   &:hover {
     background-color: #7a6e4e;
     transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
 `;
 

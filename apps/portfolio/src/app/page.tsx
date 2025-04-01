@@ -12,6 +12,12 @@ const StyledPage = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     margin-bottom: 4rem;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
   }
 
   .artwork-card {
@@ -23,27 +29,52 @@ const StyledPage = styled.div`
     &:hover {
       transform: translateY(-5px);
     }
+    
+    @media (max-width: 768px) {
+      border-radius: 6px;
+      
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
   }
 
   .artwork-image {
     width: 100%;
     height: 250px;
     object-fit: cover;
+    
+    @media (max-width: 768px) {
+      height: 180px;
+    }
   }
 
   .artwork-info {
     padding: 1rem;
+    
+    @media (max-width: 768px) {
+      padding: 0.75rem;
+    }
   }
 
   .artwork-title {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     color: #333;
+    
+    @media (max-width: 768px) {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
   }
 
   .artwork-description {
     font-size: 0.9rem;
     color: #666;
+    
+    @media (max-width: 768px) {
+      font-size: 0.8rem;
+    }
   }
 `;
 
@@ -52,6 +83,10 @@ const AboutSection = styled.div`
   padding: 4rem 2rem;
   position: relative;
   background-color: #f5f5f5;
+  
+  @media (max-width: 768px) {
+    padding: 2.5rem 1rem;
+  }
 `;
 
 const AboutTitle = styled.h2`
@@ -83,6 +118,17 @@ const AboutTitle = styled.h2`
   &::after {
     right: 0;
   }
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    padding: 0 40px;
+    margin-bottom: 1rem;
+    
+    &::before,
+    &::after {
+      width: 30px;
+    }
+  }
 `;
 
 const AboutText = styled.p`
@@ -90,6 +136,12 @@ const AboutText = styled.p`
   line-height: 1.6;
   margin-bottom: 2rem;
   color: #555;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const MoreLink = styled.a`
@@ -108,6 +160,12 @@ const MoreLink = styled.a`
     background-color: rgba(150, 136, 95, 0.2);
     transform: translateY(-2px);
   }
+  
+  @media (max-width: 768px) {
+    padding: 0.4rem 1.5rem;
+    font-size: 1rem;
+    border-width: 3px;
+  }
 `;
 
 const ContactSection = styled.div`
@@ -115,6 +173,10 @@ const ContactSection = styled.div`
   padding: 4rem 2rem;
   background-color: #333;
   color: #fff;
+  
+  @media (max-width: 768px) {
+    padding: 2.5rem 1rem;
+  }
 `;
 
 const ContactTitle = styled.h2`
@@ -146,12 +208,29 @@ const ContactTitle = styled.h2`
   &::after {
     right: 0;
   }
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    padding: 0 40px;
+    margin-bottom: 1rem;
+    
+    &::before,
+    &::after {
+      width: 30px;
+    }
+  }
 `;
 
 const ContactText = styled.p`
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 2rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const ContactEmail = styled.span`
@@ -160,35 +239,12 @@ const ContactEmail = styled.span`
   display: block;
   font-size: 1.4rem;
   margin-top: 1rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    margin-top: 0.75rem;
+  }
 `;
-
-// Sample artwork data
-const artworks = [
-  {
-    id: 1,
-    title: 'Urban Landscape',
-    description: 'Mixed media on canvas, exploring urban environments',
-    image: 'https://api.detroiter.network/uploads/resized/800w/sample1.jpg',
-  },
-  {
-    id: 2,
-    title: 'Abstract Composition #3',
-    description: 'Acrylic on canvas, exploring color and form',
-    image: 'https://api.detroiter.network/uploads/resized/800w/sample2.jpg',
-  },
-  {
-    id: 3,
-    title: 'Portrait Study',
-    description: 'Oil on canvas, contemporary portraiture',
-    image: 'https://api.detroiter.network/uploads/resized/800w/sample3.jpg',
-  },
-  {
-    id: 4,
-    title: 'Nature Series #5',
-    description: 'Watercolor on paper, inspired by natural forms',
-    image: 'https://api.detroiter.network/uploads/resized/800w/sample4.jpg',
-  },
-];
 
 export default function Index() {
   return (

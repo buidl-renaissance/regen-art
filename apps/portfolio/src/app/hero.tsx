@@ -47,6 +47,15 @@ const Title = styled.h1`
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.025em;
+  
+  @media (max-width: 768px) {
+    font-size: 3rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const Subtitle = styled.p`
@@ -56,6 +65,16 @@ const Subtitle = styled.p`
   margin: 0 auto 2rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   z-index: 1;
+  
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    max-width: 90%;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const ArtistName = styled.div`
@@ -87,6 +106,26 @@ const ArtistName = styled.div`
   &::after {
     right: 0;
   }
+  
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    padding: 0 50px;
+    
+    &::before,
+    &::after {
+      width: 35px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+    padding: 0 40px;
+    
+    &::before,
+    &::after {
+      width: 25px;
+    }
+  }
 `;
 
 const HeroButtons = styled.div`
@@ -94,6 +133,17 @@ const HeroButtons = styled.div`
   gap: 1rem;
   margin-top: 2rem;
   z-index: 1;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+  }
 `;
 
 const HeroButton = styled.a`
@@ -109,6 +159,20 @@ const HeroButton = styled.a`
   &:hover {
     background-color: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0.4rem 1.5rem;
+    font-size: 1.2rem;
+    border-width: 3px;
+    width: 200px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.3rem 1.2rem;
+    font-size: 1rem;
+    border-width: 2px;
+    width: 180px;
   }
 `;
 

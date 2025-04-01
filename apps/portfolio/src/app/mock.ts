@@ -1,4 +1,4 @@
-import { TattooItem } from './interfaces';
+import { ArtworkItem, TattooItem } from './interfaces';
 export const TATTOOS: TattooItem[] = [
   {
     title: 'Floral Sleeve',
@@ -160,4 +160,98 @@ export const TATTOOS: TattooItem[] = [
       'Hyper-realistic portrait with dimensional shading and lifelike details',
     category: 'Portrait',
   },
+];
+
+export const ARTWORKS: ArtworkItem[] = [
+  {
+    "title": "Handing Meat, Ashby",
+    "filename": "burg_handingmeat_ashby.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/burg_handingmeat_ashby.jpg?fit=695%2C1024&ssl=1",
+    "description": "A surreal performance photograph featuring a figure offering raw meat, evoking themes of ritual and transformation.",
+    "category": "Ritual Performance"
+  },
+  {
+    "title": "Untitled (IMG_0191)",
+    "filename": "IMG_0191.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/IMG_0191.jpg?fit=1024%2C991&ssl=1",
+    "description": "Two figures interact in a dense sculptural environment, drawing on costume and gesture to express tension.",
+    "category": "Sculptural Performance"
+  },
+  {
+    "title": "Untitled (IMG_0187)",
+    "filename": "IMG_0187.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/IMG_0187.jpg?fit=795%2C1024&ssl=1",
+    "description": "A solo figure stands in a constructed scene, dressed in hybrid organic-material costume, mid-performance.",
+    "category": "Sculptural Performance"
+  },
+  {
+    "title": "Untitled (IMG_0172)",
+    "filename": "IMG_0172.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/IMG_0172.jpg?fit=855%2C1024&ssl=1",
+    "description": "Theatrical posture and saturated textures blend human and environmental elements in this performance still.",
+    "category": "Sculptural Performance"
+  },
+  {
+    "title": "Untitled (IMG_0166)",
+    "filename": "IMG_0166.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/IMG_0166.jpg?fit=775%2C1024&ssl=1",
+    "description": "Organic costume and suspended elements create tension between levity and weight, dream and decay.",
+    "category": "Sculptural Performance"
+  },
+  {
+    "title": "Untitled (IMG_0160)",
+    "filename": "IMG_0160.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/IMG_0160.jpg?fit=1024%2C669&ssl=1",
+    "description": "A low-angle shot highlights the sculptural body's confrontation with space and gravity.",
+    "category": "Sculptural Performance"
+  },
+  {
+    "title": "Red Wing Legs, Kilpatrick",
+    "filename": "burg_redwinglegs_kilpatrick-scaled.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/burg_redwinglegs_kilpatrick-scaled.jpg?fit=780%2C1024&ssl=1",
+    "description": "A striking performance piece featuring red wings, exploring flight, constraint, and transformation.",
+    "category": "Body Art"
+  },
+  {
+    "title": "Mountain Life, Vallejo",
+    "filename": "burg_mountainlife_vallejohighres-scaled.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/burg_mountainlife_vallejohighres-scaled.jpg?fit=755%2C1024&ssl=1",
+    "description": "Earth-toned costume and naturalistic surroundings present a mythic figure grounded in place.",
+    "category": "Environmental Performance"
+  },
+  {
+    "title": "Meat, Ashby",
+    "filename": "burg_meat_ashby-scaled.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/burg_meat_ashby-scaled.jpg?fit=710%2C1024&ssl=1",
+    "description": "A raw, corporeal display of meat and body, invoking primal connections to ritual and survival.",
+    "category": "Ritual Performance"
+  },
+  {
+    "title": "Eye in Cloud, Vallejo",
+    "filename": "burg_eyeincloud_vallejo-scaled.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/burg_eyeincloud_vallejo-scaled.jpg?fit=661%2C1024&ssl=1",
+    "description": "A lone figure merges with cloudy surroundings, exploring themes of vision, opacity, and dream-state.",
+    "category": "Environmental Performance"
+  },
+  {
+    "title": "Detroit Girl",
+    "filename": "burg_detroitgirl.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/burg_detroitgirl.jpg?fit=1013%2C1024&ssl=1",
+    "description": "A striking feminine figure wrapped in urban mythos, evoking Detroit identity through surrealism.",
+    "category": "Urban Performance"
+  },
+  {
+    "title": "Albino Crow, Vallejo",
+    "filename": "burg_albinocrow_vallejolowres.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/burg_albinocrow_vallejolowres.jpg?fit=696%2C834&ssl=1",
+    "description": "A haunting, pale avian character suggests death, mutation, and the unseen within the natural world.",
+    "category": "Character Performance"
+  },
+  {
+    "title": "Hanging Trust",
+    "filename": "hangingtrusthighres-scaled.jpg",
+    "url": "https://i0.wp.com/andreaburg.com/wp-content/uploads/2025/02/hangingtrusthighres-scaled.jpg?fit=690%2C1024&ssl=1",
+    "description": "A suspended figure in a vulnerable pose, exploring themes of dependency, support, and faith.",
+    "category": "Body Art"
+  }
 ];
