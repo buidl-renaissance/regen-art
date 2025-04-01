@@ -4,6 +4,8 @@ import {
   Subtitle,
   Title,
   Header,
+  BackLink,
+  BackButtonContainer,
 } from '../../app/components/Styled';
 import { DPoPEvent, getEvents } from '@gods.work/utils';
 import EventsGrid from '../../app/components/events-grid';
@@ -22,10 +24,12 @@ const ContentWrapper = styled.div`
 
 export const metadata: Metadata = {
   title: 'Community Events | Art Night Detroit',
-  description: 'Discover and join creative experiences happening in your community',
+  description:
+    'Discover and join creative experiences happening in your community',
   openGraph: {
     title: 'Community Events | Art Night Detroit',
-    description: 'Discover and join creative experiences happening in your community',
+    description:
+      'Discover and join creative experiences happening in your community',
     type: 'website',
   },
 };
@@ -36,7 +40,7 @@ export async function getServerSideProps() {
     type: 'ArtNight',
     limit: 18,
   });
-  
+
   return {
     props: {
       initialEvents,
@@ -53,6 +57,9 @@ export default function EventsPage({
 }) {
   return (
     <Container>
+      <BackButtonContainer>
+        <BackLink href="/">← Back to Home</BackLink>
+      </BackButtonContainer>
       <ContentWrapper>
         <Header>
           <Title>Upcoming Community Events</Title>

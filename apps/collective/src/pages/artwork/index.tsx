@@ -3,7 +3,13 @@ import styled from '@emotion/styled';
 import { Artwork, getArtworks } from '@gods.work/utils';
 import { ArtworkCard } from '@gods.work/ui';
 import { Metadata } from 'next';
-import { Header, Subtitle, Title } from '../../app/components/Styled';
+import {
+  BackButtonContainer,
+  BackLink,
+  Header,
+  Subtitle,
+  Title,
+} from '../../app/components/Styled';
 
 export const metadata: Metadata = {
   title: 'Artwork | Art Night Detroit',
@@ -14,6 +20,9 @@ export const metadata: Metadata = {
 const ArtworksPage = ({ artworks }: { artworks: Artwork[] }) => {
   return (
     <PageWrapper>
+      <BackButtonContainer>
+        <BackLink href="/">← Back to Home</BackLink>
+      </BackButtonContainer>
       <Header>
         <Title>Artwork</Title>
         <Subtitle>

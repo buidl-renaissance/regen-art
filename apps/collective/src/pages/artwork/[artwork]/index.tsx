@@ -3,7 +3,12 @@ import styled from '@emotion/styled';
 import moment from 'moment';
 import Link from 'next/link';
 import { Artwork, convertDefaultToResized, getArtwork } from '@gods.work/utils';
-import { Subtitle, Title } from '../../../app/components/Styled';
+import {
+  BackLink,
+  BackButtonContainer,
+  Subtitle,
+  Title,
+} from '../../../app/components/Styled';
 import { Metadata } from 'next';
 
 export const getMetadata = (artwork: Artwork): Metadata => {
@@ -22,6 +27,9 @@ export const getMetadata = (artwork: Artwork): Metadata => {
 const ArtworkPage = ({ artwork }: { artwork: Artwork }) => {
   return (
     <PageWrapper>
+      <BackButtonContainer>
+        <BackLink href="/artwork">← Back to Artworks</BackLink>
+      </BackButtonContainer>
       <ArtworkHeader>
         <div className="artwork-grid">
           <div className="artwork-image">

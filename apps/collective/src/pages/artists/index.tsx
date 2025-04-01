@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getArtists, Artist } from '@gods.work/utils';
 import { ArtistProfile } from '@gods.work/ui';
 import { Metadata } from 'next';
-import { Header, Subtitle, Title } from '../../app/components/Styled';
+import { BackLink, BackButtonContainer, Header, Subtitle, Title } from '../../app/components/Styled';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -90,6 +90,9 @@ export async function getServerSideProps() {
 export default function ArtistsPage({ artists }: { artists: Artist[] }) {
   return (
     <Container>
+      <BackButtonContainer>
+        <BackLink href="/">← Back to Home</BackLink>
+      </BackButtonContainer>
       <Header>
         <Title>Artists</Title>
         <Subtitle>

@@ -130,6 +130,11 @@ const ButtonContainer = styled.div`
   }
 `;
 
+const BackButtonContainer = styled.div`
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+`;
+
 const BackButton = styled.button`
   background: transparent;
   border-radius: 4px;
@@ -369,5 +374,6 @@ export {
   Value,
   ErrorDisplay,
   BackLink,
+  BackButtonContainer,
   CenteredContent,
 };

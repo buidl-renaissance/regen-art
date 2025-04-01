@@ -1,9 +1,10 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { Artist, convertDefaultToResized } from "@gods.work/utils";
-import { getArtist } from "@gods.work/utils";
-import { ArtworkCard, ButtonLink } from "@gods.work/ui";
-import { Metadata } from "next";
+import React from 'react';
+import styled from '@emotion/styled';
+import { Artist, convertDefaultToResized } from '@gods.work/utils';
+import { getArtist } from '@gods.work/utils';
+import { ArtworkCard } from '@gods.work/ui';
+import { Metadata } from 'next';
+import { BackButtonContainer, BackLink } from '../../../app/components/Styled';
 
 interface ArtistPageProps {
   artist: Artist;
@@ -12,6 +13,9 @@ interface ArtistPageProps {
 const ArtistPage = ({ artist }: ArtistPageProps) => {
   return (
     <PageWrapper>
+      <BackButtonContainer>
+        <BackLink href="/artists">← Back to Artists</BackLink>
+      </BackButtonContainer>
       <ArtistHeader>
         <div className="artist-grid">
           <div className="artist-image">
@@ -116,14 +120,18 @@ export const getMetadata = (artist: Artist): Metadata => {
   };
 };
 
-export async function getServerSideProps({ params }: { params: { artist: string } }) {
+export async function getServerSideProps({
+  params,
+}: {
+  params: { artist: string };
+}) {
   const artist = await getArtist(params.artist);
   const metadata = getMetadata(artist);
   return {
     props: {
       artist: artist,
-      metadata: metadata
-    }
+      metadata: metadata,
+    },
   };
 }
 
