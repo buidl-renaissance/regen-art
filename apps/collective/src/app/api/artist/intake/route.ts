@@ -13,26 +13,16 @@ export async function POST(request: Request) {
   const client = await pool.connect();
   
   try {
-    const formData = await request.formData();
+    const data = await request.json();
     
     // Extract form fields
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const instagram = formData.get('instagram') as string;
-    const bio = formData.get('bio') as string;
-    const isAvailable = formData.get('isAvailable') as string;
-    const willingToSpeak = formData.get('willingToSpeak') as string;
-    
-    // Handle image files
-    const imageFiles = formData.getAll('images') as File[];
-    const imageUrls: string[] = [];
-    
-    // Process images (in a real app, you'd upload these to a storage service)
-    // For now, we'll just store the file names
-    for (const file of imageFiles) {
-      // In production, upload to cloud storage and store the URL
-      imageUrls.push(file.name);
-    }
+    const name = data.name as string;
+    const email = data.email as string;
+    const instagram = data.instagram as string;
+    const bio = data.bio as string;
+    const isAvailable = data.isAvailable as string;
+    const willingToSpeak = data.willingToSpeak as string;
+    const imageUrls = data.imageUrls as string[] || [];
     
     // Store in database
     const result = await client.query(

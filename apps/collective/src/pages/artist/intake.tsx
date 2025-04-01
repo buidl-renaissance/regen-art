@@ -77,11 +77,27 @@ export default function ArtistIntake() {
     setIsSubmitting(true);
     
     try {
-      // Here you would normally send the data to your backend
-      // For example using fetch or axios
+      // Create the payload with form data and images
+      const payload = {
+        ...formData,
+        imageUrls: images
+      };
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Send the data to your API endpoint
+      const response = await fetch('/api/artist/intake', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to submit artist application');
+      }
+      
+      // Parse the response if needed
+      const result = await response.json();
       
       console.log('Form submitted:', { formData, images });
       setSubmitSuccess(true);
