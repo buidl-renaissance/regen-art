@@ -21,10 +21,10 @@ const ContentWrapper = styled.div`
 `;
 
 export const metadata: Metadata = {
-  title: 'Events | Collective',
+  title: 'Events | Art Night Detroit',
   description: 'Discover and join creative experiences happening in your community',
   openGraph: {
-    title: 'Events | Collective',
+    title: 'Events | Art Night Detroit',
     description: 'Discover and join creative experiences happening in your community',
     type: 'website',
   },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 // Using getServerSideProps for server-side rendering in Next.js Pages Router
 export async function getServerSideProps() {
   const initialEvents = await getEvents({
-    type: 'Tech',
+    type: 'ArtNight',
     limit: 18,
   });
   

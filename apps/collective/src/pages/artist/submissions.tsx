@@ -3,6 +3,7 @@
 import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 interface ArtistSubmission {
   id: number;
@@ -256,6 +257,19 @@ const StyledPage = styled.div`
     border-radius: 8px;
   }
 `;
+
+export const metadata: Metadata = {
+  title: 'Artist Submissions | Art Night Detroit',
+  description: 'View and manage artist submissions for Art Night Detroit',
+};
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      metadata,
+    },
+  };
+}
 
 const ArtistSubmissionsPage: FC = () => {
   const [submissions, setSubmissions] = useState<ArtistSubmission[]>([]);

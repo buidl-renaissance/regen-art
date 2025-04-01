@@ -24,10 +24,10 @@ import {
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Create Event | Collective',
+  title: 'Create Event | Art Night Detroit',
   description: 'Create a new event for your community',
   openGraph: {
-    title: 'Create Event | Collective',
+    title: 'Create Event | Art Night Detroit',
     description: 'Create a new event for your community',
     type: 'website',
   },

@@ -19,7 +19,7 @@ import { GetServerSidePropsContext, Metadata, ResolvingMetadata } from 'next';
 export async function generateMetadata(slug: string): Promise<Metadata> {
   const event: DPoPEvent = await getEvent(slug);
   return {
-    title: `${event.title} | GODS.WORK`,
+    title: `${event.title} | Art Night Detroit`,
     description: event.excerpt || 'Event details',
     openGraph: {
       title: event.title,

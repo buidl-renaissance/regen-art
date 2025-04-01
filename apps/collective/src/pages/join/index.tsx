@@ -11,7 +11,7 @@ import {
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Join | Gods.Work Collective',
+  title: 'Join Art Night Detroit',
   description:
     'Join the collective of creators, artists, and builders shaping the future.',
 };

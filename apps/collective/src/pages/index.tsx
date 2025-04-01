@@ -7,12 +7,12 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Art Night Detroit | GODS.WORK',
-  description: 'Join us for Art Night Detroit - a celebration of creativity and community.',
+  title: 'Art Night Detroit',
+  description: 'Art Night Detroit - Creating a community of creative people to come together on Wednesday nights for the sake of art, since 2018.',
   openGraph: {
-    title: 'Art Night Detroit | GODS.WORK',
-    description: 'Join us for Art Night Detroit - a celebration of creativity and community.',
-    images: ['/images/art-night-detroit.jpg'],
+    title: 'Art Night Detroit',
+    description: 'Art Night Detroit - Creating a community of creative people to come together on Wednesday nights for the sake of art, since 2018.',
+    images: ['https://dpop.nyc3.digitaloceanspaces.com/uploads/resized/800w/oOVcomL9Ybez4Tzt2cFIPSwjZ0o0J88ewsM78ie1.png'],
   },
 };
 

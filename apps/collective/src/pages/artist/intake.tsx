@@ -5,8 +5,13 @@ import { Metadata } from 'next';
 import { uploadMedia } from '@gods.work/utils';
 
 export const metadata: Metadata = {
-  title: 'Artist Intake | Gods.Work Collective',
+  title: 'Artist Intake | Art Night Detroit',
   description: 'Submit your work to be considered for our upcoming art show.',
+  openGraph: {
+    title: 'Art Night Detroit',
+    description: 'Art Night Detroit - Creating a community of creative people to come together on Wednesday nights for the sake of art, since 2018.',
+    images: ['https://dpop.nyc3.digitaloceanspaces.com/uploads/resized/800w/oOVcomL9Ybez4Tzt2cFIPSwjZ0o0J88ewsM78ie1.png'],
+  },
 };
 
 export async function getServerSideProps() {

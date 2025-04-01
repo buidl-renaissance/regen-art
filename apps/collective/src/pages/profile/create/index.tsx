@@ -4,6 +4,7 @@ import { FC, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import UploadProfileImage from '../../../app/components/UploadProfileImage';
+import { Metadata } from 'next';
 
 const CreateProfileContainer = styled.div`
   max-width: 800px;
@@ -127,6 +128,20 @@ const HelpText = styled.p`
     font-size: 0.8rem;
   }
 `;
+
+export const metadata: Metadata = {
+  title: 'Create Profile | Art Night Detroit',
+  description: 'Create your profile to join the Art Night Detroit community',
+};
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      metadata,
+    },
+  };
+}
+
 
 const CreateProfilePage: FC = () => {
   const [handle, setHandle] = useState('');

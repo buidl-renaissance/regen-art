@@ -33,10 +33,10 @@ export async function generateMetadata(slug: string): Promise<Metadata> {
   const profile = await getProfile(slug);
 
   return {
-    title: `${profile?.name || 'Profile'} | GODS.WORK`,
+    title: `${profile?.name || 'Profile'} | Art Night Detroit`,
     description: profile?.bio || 'User profile',
     openGraph: {
-      title: `${profile?.name || 'Profile'} | GODS.WORK`,
+      title: `${profile?.name || 'Profile'} | Art Night Detroit`,
       description: profile?.bio || 'User profile',
       type: 'profile',
     },

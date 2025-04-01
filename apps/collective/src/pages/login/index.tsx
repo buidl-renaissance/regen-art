@@ -4,6 +4,14 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login } from '@gods.work/utils';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Login | Art Night Detroit',
+  description: 'Login to your Art Night Detroit account',
+};
+
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
