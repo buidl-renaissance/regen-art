@@ -21,10 +21,10 @@ const ContentWrapper = styled.div`
 `;
 
 export const metadata: Metadata = {
-  title: 'Events | Art Night Detroit',
+  title: 'Community Events | Art Night Detroit',
   description: 'Discover and join creative experiences happening in your community',
   openGraph: {
-    title: 'Events | Art Night Detroit',
+    title: 'Community Events | Art Night Detroit',
     description: 'Discover and join creative experiences happening in your community',
     type: 'website',
   },
@@ -55,7 +55,7 @@ export default function EventsPage({
     <Container>
       <ContentWrapper>
         <Header>
-          <Title>Upcoming Events</Title>
+          <Title>Upcoming Community Events</Title>
           <Subtitle>
             Discover and join creative experiences happening in your community
           </Subtitle>
