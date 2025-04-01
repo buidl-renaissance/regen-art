@@ -334,11 +334,27 @@ const StyledPage = styled.div`
   color: white;
   font-family: 'Inter', sans-serif;
   background-color: #121212;
-  padding: 2rem;
+  padding: 1rem;
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
 
   .header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     text-align: center;
+
+    @media (min-width: 768px) {
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+
+      @media (min-width: 768px) {
+        font-size: 2.2rem;
+      }
+    }
   }
 
   .form-container {
@@ -347,30 +363,54 @@ const StyledPage = styled.div`
     width: 100%;
     background-color: rgba(30, 30, 30, 0.7);
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1.25rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+    @media (min-width: 768px) {
+      padding: 2rem;
+    }
   }
 
   .form-title {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
     text-align: center;
+
+    @media (min-width: 768px) {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
   }
 
   .form-description {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     text-align: center;
     opacity: 0.8;
+    font-size: 0.9rem;
+
+    @media (min-width: 768px) {
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
   }
 
   .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+
+    @media (min-width: 768px) {
+      margin-bottom: 1.5rem;
+    }
   }
 
   label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
+    font-size: 0.95rem;
+
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
   }
 
   input, textarea {
@@ -381,17 +421,25 @@ const StyledPage = styled.div`
     background-color: #1e1e1e;
     color: white;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 0.95rem;
     
     &:focus {
       outline: none;
       border-color: #FF3366;
     }
+
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
   }
 
   textarea {
-    min-height: 120px;
+    min-height: 100px;
     resize: vertical;
+
+    @media (min-width: 768px) {
+      min-height: 120px;
+    }
   }
 
   .upload-progress {
@@ -409,36 +457,55 @@ const StyledPage = styled.div`
     
     .upload-button {
       display: inline-block;
-      padding: 0.75rem 1.5rem;
+      padding: 0.6rem 1.2rem;
       background-color: #333;
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.2s;
+      font-size: 0.9rem;
       
       &:hover {
         background-color: #444;
+      }
+
+      @media (min-width: 768px) {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
       }
     }
     
     .file-info {
       margin-top: 0.5rem;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       opacity: 0.8;
+
+      @media (min-width: 768px) {
+        font-size: 0.9rem;
+      }
     }
   }
 
   .image-preview {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.75rem;
     margin-top: 1rem;
+    
+    @media (min-width: 768px) {
+      gap: 1rem;
+    }
     
     .preview-item {
       position: relative;
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       border-radius: 4px;
       overflow: hidden;
+      
+      @media (min-width: 768px) {
+        width: 150px;
+        height: 150px;
+      }
       
       img {
         width: 100%;
@@ -450,8 +517,8 @@ const StyledPage = styled.div`
         position: absolute;
         top: 5px;
         right: 5px;
-        width: 24px;
-        height: 24px;
+        width: 22px;
+        height: 22px;
         border-radius: 50%;
         background-color: rgba(0, 0, 0, 0.7);
         color: white;
@@ -464,14 +531,25 @@ const StyledPage = styled.div`
         &:hover {
           background-color: rgba(255, 51, 102, 0.8);
         }
+
+        @media (min-width: 768px) {
+          width: 24px;
+          height: 24px;
+        }
       }
     }
   }
 
   .radio-group {
     display: flex;
-    gap: 1.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
     margin-top: 0.5rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      gap: 1.5rem;
+    }
   }
 
   .radio-option {
@@ -479,7 +557,7 @@ const StyledPage = styled.div`
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 4px;
     transition: background-color 0.2s, transform 0.1s;
     
@@ -494,12 +572,17 @@ const StyledPage = styled.div`
     input[type="radio"] {
       appearance: none;
       -webkit-appearance: none;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border: 2px solid #444;
       border-radius: 50%;
       margin: 0;
       position: relative;
+      
+      @media (min-width: 768px) {
+        width: 20px;
+        height: 20px;
+      }
       
       &:checked {
         border-color: #FF3366;
@@ -510,10 +593,15 @@ const StyledPage = styled.div`
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 10px;
-          height: 10px;
+          width: 9px;
+          height: 9px;
           background-color: #FF3366;
           border-radius: 50%;
+
+          @media (min-width: 768px) {
+            width: 10px;
+            height: 10px;
+          }
         }
       }
       
@@ -526,6 +614,11 @@ const StyledPage = styled.div`
     label {
       margin-bottom: 0;
       font-weight: normal;
+      font-size: 0.9rem;
+
+      @media (min-width: 768px) {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -533,14 +626,19 @@ const StyledPage = styled.div`
     background: #FF3366;
     color: white;
     border: none;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
     font-weight: 600;
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.2s ease;
     width: 100%;
     margin-top: 1rem;
+
+    @media (min-width: 768px) {
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+    }
 
     &:hover {
       background: #E62E5C;
@@ -555,9 +653,15 @@ const StyledPage = styled.div`
   .back-link {
     display: block;
     text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
     color: #FF3366;
     text-decoration: none;
+    font-size: 0.9rem;
+    
+    @media (min-width: 768px) {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+    }
     
     &:hover {
       text-decoration: underline;
