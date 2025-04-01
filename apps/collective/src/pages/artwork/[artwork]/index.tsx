@@ -3,8 +3,21 @@ import styled from '@emotion/styled';
 import moment from 'moment';
 import Link from 'next/link';
 import { Artwork, convertDefaultToResized, getArtwork } from '@gods.work/utils';
-import { env } from 'process';
 import { Subtitle, Title } from '../../../app/components/Styled';
+import { Metadata } from 'next';
+
+export const getMetadata = (artwork: Artwork): Metadata => {
+  return {
+    title: `${artwork.title} | Art Night Detroit`,
+    description: artwork.description,
+    openGraph: {
+      title: `${artwork.title} | Art Night Detroit`,
+      description: artwork.description,
+      images: [{ url: convertDefaultToResized(artwork.data?.image || '') }],
+      url: `https://artnightdetroit.com/artwork/${artwork.slug}`,
+    },
+  };
+};
 
 const ArtworkPage = ({ artwork }: { artwork: Artwork }) => {
   return (
@@ -19,13 +32,15 @@ const ArtworkPage = ({ artwork }: { artwork: Artwork }) => {
           </div>
           <div className="artwork-details">
             <Title dangerouslySetInnerHTML={{ __html: artwork.title }} />
-            <Subtitle className="artwork-description">{artwork.description}</Subtitle>
+            <Subtitle className="artwork-description">
+              {artwork.description}
+            </Subtitle>
 
             <div className="credits">
               {artwork.artist && (
                 <div className="artist-info">
                   <span>By</span>
-                  <Link href={`/artists/${artwork.artist.slug}`}>
+                  <Link href={`/artist/${artwork.artist.slug}`}>
                     <img
                       src={artwork.artist.profile_picture}
                       alt={artwork.artist.name}
@@ -65,56 +80,58 @@ const ArtworkPage = ({ artwork }: { artwork: Artwork }) => {
         </div>
       </ArtworkHeader>
 
-      {artwork.content && artwork.content.length > 0 && artwork.content?.map((content, i: number) => {
-        return (
-          <ContentWrapper key={i}>
-            <Suspense>
-              <div className="timestamp">
-                {moment
-                  .utc(content.timestamp)
-                  .local()
-                  .format('dddd MMMM Do, YYYY – h:mm a')}
-              </div>
-            </Suspense>
-            {content.data.type === 'image/jpeg' && (
-              <>
-                {content.caption && (
-                  <div className="caption">{content.caption}</div>
-                )}
-                <img src={content.data.url} />
-              </>
-            )}
-            {content.data.type === 'video/mp4' && (
-              <>
-                {content.caption && (
-                  <div className="caption">{content.caption}</div>
-                )}
-                <video controls preload="metadata">
-                  <source
-                    src={`${content.data.url}#t=0.1`}
-                    type="video/mp4"
-                  ></source>
-                </video>
-              </>
-            )}
-            {content.data.type === 'youtube' && (
-              <>
-                <iframe
-                  width="100%"
-                  height="400"
-                  src={`https://www.youtube.com/embed/${content.data.youtubeId}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-                {content.caption && (
-                  <div className="caption">{content.caption}</div>
-                )}
-              </>
-            )}
-          </ContentWrapper>
-        );
-      })}
+      {artwork.content &&
+        artwork.content.length > 0 &&
+        artwork.content?.map((content, i: number) => {
+          return (
+            <ContentWrapper key={i}>
+              <Suspense>
+                <div className="timestamp">
+                  {moment
+                    .utc(content.timestamp)
+                    .local()
+                    .format('dddd MMMM Do, YYYY – h:mm a')}
+                </div>
+              </Suspense>
+              {content.data.type === 'image/jpeg' && (
+                <>
+                  {content.caption && (
+                    <div className="caption">{content.caption}</div>
+                  )}
+                  <img src={content.data.url} />
+                </>
+              )}
+              {content.data.type === 'video/mp4' && (
+                <>
+                  {content.caption && (
+                    <div className="caption">{content.caption}</div>
+                  )}
+                  <video controls preload="metadata">
+                    <source
+                      src={`${content.data.url}#t=0.1`}
+                      type="video/mp4"
+                    ></source>
+                  </video>
+                </>
+              )}
+              {content.data.type === 'youtube' && (
+                <>
+                  <iframe
+                    width="100%"
+                    height="400"
+                    src={`https://www.youtube.com/embed/${content.data.youtubeId}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  {content.caption && (
+                    <div className="caption">{content.caption}</div>
+                  )}
+                </>
+              )}
+            </ContentWrapper>
+          );
+        })}
     </PageWrapper>
   );
 };
@@ -279,21 +296,12 @@ export const getServerSideProps = async ({
   res: any;
 }) => {
   const artwork = await getArtwork(query.artwork);
-  const url = `${env.url}/a/${artwork.slug}`;
+  const metadata = getMetadata(artwork);
 
   return {
     props: {
       artwork,
-      meta: {
-        title: `${artwork.title} | Art Night Detroit`,
-        description: artwork.description,
-        canonical: url,
-        openGraph: {
-          url: url,
-          type: 'webpage',
-          site_name: 'Art Night Detroit',
-        },
-      },
+      metadata,
     },
   };
 };

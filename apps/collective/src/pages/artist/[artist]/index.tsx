@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Artist } from "@gods.work/utils";
+import { Artist, convertDefaultToResized } from "@gods.work/utils";
 import { getArtist } from "@gods.work/utils";
 import { ArtworkCard, ButtonLink } from "@gods.work/ui";
 import { Metadata } from "next";
@@ -103,10 +103,16 @@ const ArtistWorks = styled.section`
   }
 `;
 
-export const getMetadata = (artist: Artist) => {
+export const getMetadata = (artist: Artist): Metadata => {
   return {
     title: `${artist.name} | Art Night Detroit`,
     description: artist.bio,
+    openGraph: {
+      title: `${artist.name} | Art Night Detroit`,
+      description: artist.bio,
+      images: [{ url: convertDefaultToResized(artist.profile_picture) }],
+      url: `https://artnightdetroit.com/artist/${artist.slug}`,
+    },
   };
 };
 
