@@ -57,10 +57,10 @@ export default function EventsPage({
 }) {
   return (
     <Container>
-      <BackButtonContainer>
-        <BackLink href="/">← Back to Home</BackLink>
-      </BackButtonContainer>
       <ContentWrapper>
+        <BackButtonContainer>
+          <BackLink href="/">← Back to Home</BackLink>
+        </BackButtonContainer>
         <Header>
           <Title>Upcoming Community Events</Title>
           <Subtitle>
