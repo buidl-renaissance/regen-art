@@ -4,6 +4,67 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Art Night Detroit | GODS.WORK',
+  description: 'Join us for Art Night Detroit - a celebration of creativity and community.',
+  openGraph: {
+    title: 'Art Night Detroit | GODS.WORK',
+    description: 'Join us for Art Night Detroit - a celebration of creativity and community.',
+    images: ['/images/art-night-detroit.jpg'],
+  },
+};
+
+export const getServerSideProps = async () => {
+  return {
+    props: {
+      metadata,
+    },
+  };
+};
+
+export default function Index() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  return (
+    <StyledPage>
+      <div className="background">
+        <video autoPlay muted loop playsInline>
+          <source src="https://andreaburg.com/wp-content/uploads/2025/02/tattoo-timelapse-adobe.mp4#t=55,115" type="video/mp4" />
+        </video>
+      </div>
+      <div className="overlay"></div>
+      
+      <div className="content">
+        <div className="top-half">
+          {/* <img src="/logo.svg" alt="Event Logo" className="logo" /> */}
+          <h1 className="event-title">Art Night Detroit</h1>
+          {/* <div className="event-date">One Night Only — December 31, 2023</div> */}
+          <Link href="/join">
+            <button className="cta-button">Get Started</button>
+          </Link>
+          <div className="secondary-option mt-4">
+            Already have an account? <span className="sign-in-link">Sign In</span>
+          </div>
+        </div>
+        
+        {/* <div className="bottom-half">
+        </div> */}
+        
+        {/* <div className="footer">
+          Powered by Collective Studio
+        </div> */}
+      </div>
+    </StyledPage>
+  );
+}
+
+
 const StyledPage = styled.div`
   height: 100vh;
   width: 100vw;
@@ -120,43 +181,3 @@ const StyledPage = styled.div`
     opacity: 0.7;
   }
 `;
-
-export default function Index() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
-  return (
-    <StyledPage>
-      <div className="background">
-        <video autoPlay muted loop playsInline>
-          <source src="https://andreaburg.com/wp-content/uploads/2025/02/tattoo-timelapse-adobe.mp4#t=55,115" type="video/mp4" />
-        </video>
-      </div>
-      <div className="overlay"></div>
-      
-      <div className="content">
-        <div className="top-half">
-          {/* <img src="/logo.svg" alt="Event Logo" className="logo" /> */}
-          <h1 className="event-title">Art Night Detroit</h1>
-          {/* <div className="event-date">One Night Only — December 31, 2023</div> */}
-          <Link href="/join">
-            <button className="cta-button">Get Started</button>
-          </Link>
-          <div className="secondary-option mt-4">
-            Already have an account? <span className="sign-in-link">Sign In</span>
-          </div>
-        </div>
-        
-        {/* <div className="bottom-half">
-        </div> */}
-        
-        {/* <div className="footer">
-          Powered by Collective Studio
-        </div> */}
-      </div>
-    </StyledPage>
-  );
-}

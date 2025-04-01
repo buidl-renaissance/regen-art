@@ -14,8 +14,9 @@ import {
   NextButton,
   ErrorMessage,
   SuccessMessage,
-} from '../../components/Styled';
-import { CenteredContent, ProfileHeader, ProfileTitle } from '../styles';
+  CenteredContent,
+} from '../../app/components/Styled';
+import { ProfileHeader, ProfileTitle } from '../../app/components/ProfileStyles';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 

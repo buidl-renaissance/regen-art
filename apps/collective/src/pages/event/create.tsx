@@ -20,7 +20,26 @@ import {
   ButtonContainer,
   BackButton,
   NextButton,
-} from '../../components/Styled';
+} from '../../app/components/Styled';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Create Event | Collective',
+  description: 'Create a new event for your community',
+  openGraph: {
+    title: 'Create Event | Collective',
+    description: 'Create a new event for your community',
+    type: 'website',
+  },
+};
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      metadata,
+    },
+  };
+}
 
 export default function CreateEvent() {
   const [flyerImage, setFlyerImage] = useState<string | null>(null);

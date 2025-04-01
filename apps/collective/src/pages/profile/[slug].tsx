@@ -3,11 +3,19 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Container } from '../../components/Styled';
-import { getRsvps } from '@gods.work/utils';
-import EventCard from '../../components/EventCard';
 import {
+  Container,
   CenteredContent,
+  ErrorDisplay,
+  LoadingMessage,
+  SectionTitle,
+  EventGrid,
+  EventGridItem,
+  EmptyState,
+} from '../../app/components/Styled';
+import { getProfile, getRsvps } from '@gods.work/utils';
+import EventCard from '../../app/components/EventCard';
+import {
   ProfileHeader,
   ProfileImage,
   ProfilePlaceholder,
@@ -16,14 +24,34 @@ import {
   ProfileOrganization,
   ProfileBio,
   ProfileSection,
-  SectionTitle,
-  EventGrid,
-  EventGridItem,
-  EmptyState,
-  LoadingMessage,
-  ErrorDisplay,
-} from '../styles';
+} from '../../app/components/ProfileStyles';
+import { GetServerSidePropsContext } from 'next';
+import { Metadata } from 'next';
 
+export async function generateMetadata(slug: string): Promise<Metadata> {
+  // Fetch profile data
+  const profile = await getProfile(slug);
+
+  return {
+    title: `${profile?.name || 'Profile'} | GODS.WORK`,
+    description: profile?.bio || 'User profile',
+    openGraph: {
+      title: `${profile?.name || 'Profile'} | GODS.WORK`,
+      description: profile?.bio || 'User profile',
+      type: 'profile',
+    },
+  };
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const slug = context.params?.slug as string;
+  const profile = await getProfile(slug);
+  const metadata = await generateMetadata(slug);
+
+  return {
+    props: { profile, metadata },
+  };
+}
 export default function ProfilePage({ profile }: { profile: any }) {
   const [user, setUser] = useState<any>(profile);
   const [rsvps, setRsvps] = useState<any[]>([]);
@@ -64,20 +92,24 @@ export default function ProfilePage({ profile }: { profile: any }) {
         <ProfileHeader>
           <ProfileImage>
             {user?.profile_picture ? (
-              <Image 
-                src={user.profile_picture} 
-                alt={user.name || 'Profile'} 
-                width={100} 
+              <Image
+                src={user.profile_picture}
+                alt={user.name || 'Profile'}
+                width={100}
                 height={100}
                 style={{ borderRadius: '50%', objectFit: 'cover' }}
               />
             ) : (
-              <ProfilePlaceholder>{user?.name ? user.name.charAt(0).toUpperCase() : '?'}</ProfilePlaceholder>
+              <ProfilePlaceholder>
+                {user?.name ? user.name.charAt(0).toUpperCase() : '?'}
+              </ProfilePlaceholder>
             )}
           </ProfileImage>
           <ProfileTitle>{user.name}</ProfileTitle>
           {user?.email && <ProfileEmail>{user.email}</ProfileEmail>}
-          {user?.organization && <ProfileOrganization>{user.organization}</ProfileOrganization>}
+          {user?.organization && (
+            <ProfileOrganization>{user.organization}</ProfileOrganization>
+          )}
           {user?.bio && <ProfileBio>{user.bio}</ProfileBio>}
         </ProfileHeader>
 

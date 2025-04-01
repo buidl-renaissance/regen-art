@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { getRsvps, getBookmarks, isAuthorized, logout } from '@gods.work/utils';
-import { Container } from '../components/Styled';
+import { Container } from '../../app/components/Styled';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useUser } from '../hooks/useUser';
+import { useUser } from '../../app/hooks/useUser';
 import Image from 'next/image';
-import EventCard from '../components/EventCard';
+import EventCard from '../../app/components/EventCard';
 import {
-  CenteredContent,
   ProfileHeader,
   ProfileImage,
   ProfilePlaceholder,
@@ -17,16 +16,19 @@ import {
   ProfileEmail,
   ProfileOrganization,
   ProfileBio,
-  ButtonGroup,
+  ProfileSection,
+} from '../../app/components/ProfileStyles';
+import {
+  CenteredContent,
+  LoadingMessage,
   EditButton,
   LogoutButton,
-  ProfileSection,
+  ButtonGroup,
   SectionTitle,
   EventGrid,
   EventGridItem,
   EmptyState,
-  LoadingMessage,
-} from './styles';
+} from '../../app/components/Styled';
 
 export default function ProfilePage() {
   const { user, loading, error } = useUser();

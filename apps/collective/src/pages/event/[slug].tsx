@@ -2,25 +2,47 @@
 
 import styled from 'styled-components';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import { DPoPEvent } from '@gods.work/utils';
+import { DPoPEvent, getEvent } from '@gods.work/utils';
 import {
   Container,
   ButtonContainer,
   BackButton,
-} from '../../components/Styled';
+} from '../../app/components/Styled';
 import Link from 'next/link';
-import { formatDate, formatTime } from '../../components/EventCard';
-import RSVPButton from '../../components/RSVPButton';
-import { CalendarBox } from '../../components/CalendarBox';
-import { ErrorMessage } from '../../components/Styled';
-import { BackLink } from '../../profile/styles';
+import { formatDate, formatTime } from '../../app/components/EventCard';
+import RSVPButton from '../../app/components/RSVPButton';
+import { CalendarBox } from '../../app/components/CalendarBox';
+import { ErrorMessage, BackLink } from '../../app/components/Styled';
 import { useEffect, useState } from 'react';
+import { GetServerSidePropsContext, Metadata, ResolvingMetadata } from 'next';
 
-interface EventPageProps {
-  event: DPoPEvent;
+export async function generateMetadata(slug: string): Promise<Metadata> {
+  const event: DPoPEvent = await getEvent(slug);
+  return {
+    title: `${event.title} | GODS.WORK`,
+    description: event.excerpt || 'Event details',
+    openGraph: {
+      title: event.title,
+      description: event.excerpt || 'Event details',
+      images: event.image ? [event.image] : [],
+    },
+  };
 }
 
-export default function EventPage({ event }: EventPageProps) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const slug = context.params?.slug as string;
+  const event: DPoPEvent = await getEvent(slug);
+  const metadata: Metadata = await generateMetadata(slug);
+
+  return {
+    props: {
+      event,
+      metadata,
+    },
+  };
+}
+
+export default function EventPage({ event }: { event: DPoPEvent }) {
   const [isMobile, setIsMobile] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageRatio, setImageRatio] = useState(1.5); // Default aspect ratio (3:2)
@@ -88,14 +110,13 @@ export default function EventPage({ event }: EventPageProps) {
                 style={{
                   maxWidth: '100%',
                   height: 'auto',
-                  objectFit: 'contain'
+                  objectFit: 'contain',
                 }}
               />
             </EventImageContainer>
           )}
 
           <EventDetailsContainer>
-
             <EventTitle>{event.title}</EventTitle>
 
             <EventInfoSection>
@@ -119,7 +140,8 @@ export default function EventPage({ event }: EventPageProps) {
                   <EventInfoContent>
                     <EventInfoValue>{event.venue.title}</EventInfoValue>
                     <EventInfoLabel>
-                      {event.venue.geo.address}, {event.venue.geo.city}, {event.venue.geo.state} {event.venue.geo.zipcode}
+                      {event.venue.geo.address}, {event.venue.geo.city},{' '}
+                      {event.venue.geo.state} {event.venue.geo.zipcode}
                     </EventInfoLabel>
                   </EventInfoContent>
                 </EventInfoCard>
