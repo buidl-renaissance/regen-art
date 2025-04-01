@@ -17,22 +17,46 @@ export const metadata: Metadata = {
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const pageMetadata = pageProps.metadata || metadata;
-  
+
   return (
     <>
       <Head>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>{pageMetadata.title as string}</title>
         <meta name="description" content={pageMetadata.description as string} />
-        <meta property="og:title" content={(pageMetadata.openGraph?.title as string) || (pageMetadata.title as string)} />
-        <meta property="og:description" content={(pageMetadata.openGraph?.description as string) || (pageMetadata.description as string)} />
-        {pageMetadata.openGraph?.images && Array.isArray(pageMetadata.openGraph.images) && 
+        <meta
+          property="og:title"
+          content={
+            (pageMetadata.openGraph?.title as string) ||
+            (pageMetadata.title as string)
+          }
+        />
+        <meta
+          property="og:description"
+          content={
+            (pageMetadata.openGraph?.description as string) ||
+            (pageMetadata.description as string)
+          }
+        />
+        {pageMetadata.openGraph?.images &&
+          Array.isArray(pageMetadata.openGraph.images) &&
           pageMetadata.openGraph.images.map((image: any, index: number) => (
-            <meta key={index} property="og:image" content={typeof image === 'string' ? image : image.url} />
-          ))
-        }
+            <meta
+              key={index}
+              property="og:image"
+              content={typeof image === 'string' ? image : image.url}
+            />
+          ))}
         <meta property="og:url" content={pageMetadata.canonical as string} />
-        <meta property="og:type" content={pageMetadata.openGraph?.type as string} />
-        <meta property="og:site_name" content={pageMetadata.openGraph?.site_name as string} />
+        <meta
+          property="og:type"
+          content={pageMetadata.openGraph?.type as string}
+        />
+        <meta
+          property="og:site_name"
+          content={pageMetadata.openGraph?.site_name as string}
+        />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />
     </>
