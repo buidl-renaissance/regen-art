@@ -9,6 +9,7 @@ interface UploadButtonProps {
   multiple?: boolean;
   children?: React.ReactNode;
   uploadUrl?: string;
+  disabled?: boolean;
 }
 
 const StyledButton = styled.button`
@@ -60,6 +61,7 @@ export const UploadButton: React.FC<UploadButtonProps> = ({
   accept = 'image/*',
   multiple = false,
   children = 'Upload Image',
+  disabled = false,
 }) => {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -113,7 +115,7 @@ export const UploadButton: React.FC<UploadButtonProps> = ({
     <>
       <StyledButton 
         onClick={handleClick} 
-        disabled={isUploading}
+        disabled={disabled || isUploading}
         className={className}
         type="button"
       >

@@ -5,3 +5,4 @@ export * from './lib/useWallet';
 export * from './lib/TransferShares';
 export * from './lib/PropertyList';
 export * from './lib/UploadButton';
+export * from './lib/UploadMedia';
