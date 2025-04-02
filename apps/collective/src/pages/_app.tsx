@@ -4,6 +4,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { DefaultSeo, NextSeo } from "next-seo";
 import { Metadata } from 'next';
+import { Analytics } from "@vercel/analytics/react";
 
 // Default metadata for the application
 export const metadata: Metadata = {
@@ -33,6 +34,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
       <Component {...pageProps} />
+      <Analytics />
     </>
   );
 }

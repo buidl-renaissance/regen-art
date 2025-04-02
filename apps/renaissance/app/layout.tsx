@@ -1,5 +1,6 @@
 import './global.css';
 import { StyledComponentsRegistry } from './registry';
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: 'The Digital Renaissance | A Rebellion on Canvas',
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <Analytics />
       </body>
     </html>
   );

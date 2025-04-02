@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ProfileBubble } from './components/profile-bubble'
 import { ScrollManager } from './components/scroll-manager'
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         {children}
         <ProfileBubble />
       </body>
+      <Analytics />
     </html>
   )
 }

@@ -1,6 +1,7 @@
 import './global.css';
 import { StyledComponentsRegistry } from './registry';
 import { Teko } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 
 const teko = Teko({
   subsets: ['latin'],
@@ -10,11 +11,13 @@ const teko = Teko({
 
 export const metadata = {
   title: 'Andrea Burg | Artist Gallery',
-  description: 'Contemporary artist exploring the intersection of traditional techniques and modern themes. View artwork, tattoos, and more.',
+  description:
+    'Contemporary artist exploring the intersection of traditional techniques and modern themes. View artwork, tattoos, and more.',
   keywords: 'Andrea Burg, artist, gallery, artwork, tattoos, contemporary art',
   openGraph: {
     title: 'Andrea Burg | Artist Gallery',
-    description: 'Contemporary artist exploring the intersection of traditional techniques and modern themes',
+    description:
+      'Contemporary artist exploring the intersection of traditional techniques and modern themes',
     images: ['/og-image.jpg'],
   },
 };
@@ -29,6 +32,7 @@ export default function RootLayout({
       <body className={teko.className}>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
+      <Analytics />
     </html>
   );
 }
