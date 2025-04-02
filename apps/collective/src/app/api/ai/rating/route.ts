@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 import { zodResponseFormat } from "openai/helpers/zod";
 
@@ -13,13 +13,10 @@ const RatingSchema = z.object({
   rating: z.number().nullable(),
 });
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
+export async function POST(request: Request) {
   try {
-    const { text, projectContext } = req.body;
+    const body = await request.json();
+    const { text, projectContext } = body;
 
     // Build system message with project context if provided
     let systemMessage = "You are a helpful AI assistant.";
@@ -41,17 +38,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const rating = completion.choices[0].message.parsed;
 
     // Return response with message ID for maintaining conversation history
-    return res.status(200).json({
+    return NextResponse.json({
       rating,
     });
 
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Chat API Error:", error);
-    return res.status(500).json({ 
-      error: "Failed to get response from ChatGPT",
-      detail: error.message
-    });
+    return NextResponse.json(
+      { 
+        error: "Failed to get response from ChatGPT",
+        detail: error instanceof Error ? error.message : String(error)
+      },
+      { status: 500 }
+    );
   }
-};
-
-export default handler;
+}
