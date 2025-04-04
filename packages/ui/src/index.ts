@@ -7,3 +7,4 @@ export * from './lib/PropertyList';
 export * from './lib/UploadButton';
 export * from './lib/UploadMedia';
 export * from './lib/ButtonLink';
+export * from './lib/VenueSearch';

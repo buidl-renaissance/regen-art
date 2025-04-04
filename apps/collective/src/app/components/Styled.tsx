@@ -119,6 +119,14 @@ const TextArea = styled.textarea`
   }
 `;
 
+const Button = styled.button`
+  background: #ff3366;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -344,36 +352,37 @@ const CenteredContent = styled.div`
 `;
 
 export {
-  Container,
-  Header,
-  Title,
-  Subtitle,
-  FormContainer,
-  UploadSection,
-  UploadIcon,
-  UploadText,
-  UploadSubtext,
-  PreviewImage,
-  FormGroup,
-  Label,
-  Input,
-  TextArea,
-  ButtonContainer,
   BackButton,
-  NextButton,
-  ErrorMessage,
-  SuccessMessage,
-  LoadingMessage,
+  BackButtonContainer,
+  BackLink,
+  Button,
+  ButtonContainer,
   ButtonGroup,
+  CenteredContent,
+  Container,
   EditButton,
-  LogoutButton,
-  SectionTitle,
+  EmptyState,
+  ErrorDisplay,
+  ErrorMessage,
   EventGrid,
   EventGridItem,
-  EmptyState,
+  FormContainer,
+  FormGroup,
+  Header,
+  Input,
+  Label,
+  LoadingMessage,
+  LogoutButton,
+  NextButton,
+  PreviewImage,
+  SectionTitle,
+  Subtitle,
+  SuccessMessage,
+  TextArea,
+  Title,
+  UploadIcon,
+  UploadSection,
+  UploadSubtext,
+  UploadText,
   Value,
-  ErrorDisplay,
-  BackLink,
-  BackButtonContainer,
-  CenteredContent,
 };

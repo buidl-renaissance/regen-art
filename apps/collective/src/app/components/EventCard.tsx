@@ -1,72 +1,43 @@
 import styled from 'styled-components';
 import { DPoPEvent } from '@gods.work/utils';
 import { FaCalendar, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
-
-// Format date to be more readable
-const formatDate = (dateString: string, showDayOfWeek = false) => {
-  const date = new Date(dateString);
-  
-  // Get month name
-  const month = date.toLocaleString('en-US', { month: 'long' });
-  
-  // Get day with ordinal suffix
-  const day = date.getDate();
-  const suffix = getDaySuffix(day);
-  
-  // Add day of week if requested
-  if (showDayOfWeek) {
-    const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
-    return `${dayOfWeek}, ${month} ${day}${suffix}`;
-  }
-  
-  return `${month} ${day}${suffix}`;
-};
-
-export const formatTime = (startDateString: string, endDateString: string) => {
-  const startDate = new Date(startDateString);
-  const endDate = new Date(endDateString);
-
-  // Get time in 12-hour format
-  const timeOptions: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
-  const startTime = startDate.toLocaleString('en-US', timeOptions).toLowerCase();
-  const endTime = endDate.toLocaleString('en-US', timeOptions).toLowerCase();
-  
-  return `${startTime} - ${endTime}`;
-};
-
-// Helper function to get day suffix (st, nd, rd, th)
-const getDaySuffix = (day: number): string => {
-  if (day > 3 && day < 21) return 'th';
-  switch (day % 10) {
-    case 1: return 'st';
-    case 2: return 'nd';
-    case 3: return 'rd';
-    default: return 'th';
-  }
-};
+import { formatDate, formatTime } from '@gods.work/utils';
+import { useEffect, useState } from 'react';
 
 interface EventCardProps {
   event: DPoPEvent;
 }
 
 const EventCard = ({ event }: EventCardProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <EventCardContainer className="event-card">
       <EventImage style={{ backgroundImage: `url(${event.image})` }} />
       <EventContent>
-        <EventTitle>{event.title}</EventTitle>
+        <EventTitle dangerouslySetInnerHTML={{ __html: event.title }} />
         <EventInfoGrid>
           <EventInfo>
             <FaCalendar />
-            <span style={{ marginRight: '0.5rem' }}>{formatDate(event.start_date)}</span>
+            <span style={{ marginRight: '0.5rem' }}>
+              {formatDate(event.start_date)}
+            </span>
             <FaClock />
             <span>{formatTime(event.start_date, event.end_date)}</span>
           </EventInfo>
           {event.venue && (
             <EventInfo>
               <FaMapMarkerAlt />
-              {event.venue?.title}
+              <span dangerouslySetInnerHTML={{ __html: event.venue?.title }} />
             </EventInfo>
+          )}
+          {/* For some reason there is a hydration error when the excerpt is rendered on the server. */}
+          {event.excerpt && isMounted && (
+            <EventExcerpt dangerouslySetInnerHTML={{ __html: event.excerpt }} />
           )}
         </EventInfoGrid>
       </EventContent>
@@ -81,7 +52,7 @@ const EventCardContainer = styled.div`
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: row;
-  height: 120px;
+  height: 220px;
 
   &:hover {
     transform: translateY(-3px);
@@ -90,8 +61,8 @@ const EventCardContainer = styled.div`
 `;
 
 const EventImage = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 250px;
+  height: 100%;
   flex-shrink: 0;
   background-size: cover;
   background-position: center;
@@ -100,25 +71,25 @@ const EventImage = styled.div`
   &::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
     right: 0;
-    height: 40%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.7), transparent);
   }
 `;
 
 const EventContent = styled.div`
-  padding: 0.75rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   flex: 1;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 const EventTitle = styled.h2`
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
   font-weight: 600;
   line-height: 1.3;
   display: -webkit-box;
@@ -130,13 +101,14 @@ const EventTitle = styled.h2`
 const EventInfoGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.25rem;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 `;
 
 const EventInfo = styled.div`
   display: flex;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   opacity: 0.8;
   white-space: nowrap;
   overflow: hidden;
@@ -146,15 +118,20 @@ const EventInfo = styled.div`
   svg {
     margin-right: 0.4rem;
     flex-shrink: 0;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 `;
 
+const EventExcerpt = styled.p`
+  font-size: 0.875rem;
+  line-height: 1.4;
+  opacity: 0.7;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-top: auto;
+`;
+
 export default EventCard;
-export {
-  formatDate,
-  EventImage,
-  EventContent,
-  EventTitle,
-  EventInfo,
-};
+export { formatDate, EventImage, EventContent, EventTitle, EventInfo };

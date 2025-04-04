@@ -9,7 +9,7 @@ import {
   BackButton,
 } from '../../app/components/Styled';
 import Link from 'next/link';
-import { formatDate, formatTime } from '../../app/components/EventCard';
+import { formatDate, formatTime } from '@gods.work/utils';
 import RSVPButton from '../../app/components/RSVPButton';
 import { CalendarBox } from '../../app/components/CalendarBox';
 import { ErrorMessage, BackLink } from '../../app/components/Styled';
@@ -89,9 +89,7 @@ export default function EventPage({ event }: { event: DPoPEvent }) {
     <Container>
       <CenteredContent>
         <EventHeader>
-          <Link href="/events" passHref>
-            <BackLink>← Back to Events</BackLink>
-          </Link>
+          <BackLink href="/events">← Back to Events</BackLink>
         </EventHeader>
 
         <EventContentLayout>
@@ -117,31 +115,39 @@ export default function EventPage({ event }: { event: DPoPEvent }) {
 
             <EventInfoSection>
               <EventInfoCard>
-                <CalendarBox date={event.start_date} />
-                <EventInfoContent>
-                  <EventInfoLabel>
-                    {formatDate(event.start_date, true)}
-                  </EventInfoLabel>
-                  <EventInfoValue>
-                    {formatTime(event.start_date, event.end_date)}
-                  </EventInfoValue>
-                </EventInfoContent>
-              </EventInfoCard>
-
-              {event.venue && (
-                <EventInfoCard>
-                  <EventInfoIcon>
-                    <FaMapMarkerAlt />
-                  </EventInfoIcon>
+                <EventInfoContainer>
+                  <EventIconContainer>
+                    <CalendarBox date={event.start_date} />
+                  </EventIconContainer>
                   <EventInfoContent>
-                    <EventInfoValue>{event.venue.title}</EventInfoValue>
                     <EventInfoLabel>
-                      {event.venue.geo.address}, {event.venue.geo.city},{' '}
-                      {event.venue.geo.state} {event.venue.geo.zipcode}
+                      {formatDate(event.start_date, true)}
                     </EventInfoLabel>
+                    <EventInfoValue>
+                      {formatTime(event.start_date, event.end_date)}
+                    </EventInfoValue>
                   </EventInfoContent>
-                </EventInfoCard>
-              )}
+                </EventInfoContainer>
+                {event.venue && (
+                  <>
+                    <EventInfoDivider />
+                    <EventInfoContainer>
+                      <EventIconContainer>
+                        <EventInfoIcon>
+                          <FaMapMarkerAlt />
+                        </EventInfoIcon>
+                      </EventIconContainer>
+                      <EventInfoContent>
+                        <EventInfoValue>{event.venue.title}</EventInfoValue>
+                        <EventInfoLabel>
+                          {event.venue.geo.address}, {event.venue.geo.city},{' '}
+                          {event.venue.geo.state} {event.venue.geo.zipcode}
+                        </EventInfoLabel>
+                      </EventInfoContent>
+                    </EventInfoContainer>
+                  </>
+                )}
+              </EventInfoCard>
               {/* <EventInfoItem>
                 <FaUsers />
                 <span>{rsvpCount} attending</span>
@@ -259,12 +265,12 @@ const EventInfoSection = styled.div`
 
 const EventInfoCard = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   background: rgba(255, 255, 255, 0.05);
   padding: 1.25rem;
   border-radius: 8px;
   transition: transform 0.2s ease, background 0.2s ease;
-  align-items: center;
 
   &:hover {
     background: rgba(255, 255, 255, 0.08);
@@ -301,9 +307,30 @@ const EventInfoIcon = styled.div`
   }
 `;
 
+const EventIconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const EventInfoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 const EventInfoContent = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+`;
+
+const EventInfoDivider = styled.div`
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0.75rem 0;
+  width: 100%;
 `;
 
 const EventInfoLabel = styled.span`

@@ -8,7 +8,7 @@ import EventCard from './EventCard';
 
 const EventsGridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 2rem;
   margin-bottom: 3rem;
 `;
@@ -40,7 +40,7 @@ interface EventsGridProps {
   eventType?: string;
 }
 
-const EventsGrid: React.FC<EventsGridProps> = ({ events: initialEvents, eventType = 'Tech' }) => {
+const EventsGrid: React.FC<EventsGridProps> = ({ events: initialEvents, eventType = 'ArtNight' }) => {
   const [events, setEvents] = useState<DPoPEvent[]>(initialEvents);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(initialEvents.length >= 18);

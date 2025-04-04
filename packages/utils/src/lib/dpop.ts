@@ -243,7 +243,7 @@ export const createEvent = async (event: Partial<DPoPEvent>) => {
 export const updateEvent = async (event: Partial<DPoPEvent>) => {
   const result = await (
     await fetch(`${hostname}/api/event/${event.id}`, {
-      method: "PUT",
+      method: "POST",
       body: JSON.stringify(event),
       headers: {
         "Content-Type": "application/json",
