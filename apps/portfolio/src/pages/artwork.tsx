@@ -2,9 +2,9 @@
 
 import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import ArtworkModal from '../artwork-modal';
-import { ARTWORKS } from '../mock';
-import { ArtworkItem } from '../interfaces';
+import ArtworkModal from '../components/artwork-modal';
+import { ARTWORKS } from '../../lib/mock';
+import { ArtworkItem } from '../../lib/interfaces';
 
 const StyledPage = styled.div`
   @media (max-width: 768px) {

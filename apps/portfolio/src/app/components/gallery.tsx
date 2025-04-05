@@ -3,8 +3,8 @@
 import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ArtworkModal from './artwork-modal';
-import { ArtworkItem } from './interfaces';
-import { ARTWORKS } from './mock';
+import { ArtworkItem } from '../interfaces';
+import { ARTWORKS } from '../mock';
 
 interface GalleryProps {
   title?: string;

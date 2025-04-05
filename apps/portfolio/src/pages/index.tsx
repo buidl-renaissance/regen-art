@@ -1,8 +1,8 @@
 'use client';
 
 import styled from 'styled-components';
-import Hero from './hero';
-import Gallery from './gallery';
+import Hero from '../app/components/hero';
+import Gallery from '../app/components/gallery';
 
 const StyledPage = styled.div`
   margin: 0 auto;
@@ -256,7 +256,7 @@ export default function Index() {
         <AboutTitle>About the Artist</AboutTitle>
         <AboutText>
           Andrea Burg, a lifelong creator, channels energy-healing and shamanic practices into her art, 
-          intending to serve her soul's journey and contribute to collective healing. Guided by inner wisdom, 
+          intending to serve her soul&apos;s journey and contribute to collective healing. Guided by inner wisdom, 
           her diverse creations, spanning tattooing to mixed media, embody a commitment to transforming emotions, 
           fostering love, and inspiring a more harmonious world.
         </AboutText>

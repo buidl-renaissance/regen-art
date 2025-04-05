@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ArtworkItem } from './interfaces';
+import { ArtworkItem } from '../interfaces';
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;

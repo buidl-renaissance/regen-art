@@ -1,5 +1,5 @@
 import './global.css';
-import { StyledComponentsRegistry } from './registry';
+import { StyledComponentsRegistry } from './components/registry';
 import { Teko } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 

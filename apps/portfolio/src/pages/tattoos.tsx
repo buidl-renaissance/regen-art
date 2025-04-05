@@ -2,9 +2,9 @@
 
 import { FC, useState } from 'react';
 import styled from 'styled-components';
-import ArtworkModal from '../artwork-modal';
-import { TATTOOS } from '../mock';
-import { ArtworkItem, TattooItem } from '../interfaces';
+import ArtworkModal from '../components/artwork-modal';
+import { TATTOOS } from '../../lib/mock';
+import { ArtworkItem, TattooItem } from '../../lib/interfaces';
 
 const StyledPage = styled.div`
   @media (max-width: 768px) {
