@@ -163,6 +163,7 @@ export interface User {
   public_name: string | null; 
   organization: string | null;
   profile_picture: string | null;
+  last_login: string | null;
   data: {
     instagram?: string | null;
     linkedin?: string | null;

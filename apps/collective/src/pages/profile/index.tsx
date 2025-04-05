@@ -30,6 +30,12 @@ import {
   EmptyState,
 } from '../../app/components/Styled';
 
+export const getServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};
+
 export default function ProfilePage() {
   const { user, loading, error } = useUser();
   const [rsvps, setRsvps] = useState<any[]>([]);
