@@ -5,6 +5,8 @@ import Head from 'next/head';
 import { DefaultSeo, NextSeo } from 'next-seo';
 import { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
+import { StyleSheetManager } from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
 
 // Default metadata for the application
 export const metadata: Metadata = {
@@ -36,7 +38,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           locale: 'en_IE',
         }}
       />
-      <Component {...pageProps} />
+      <StyleSheetManager shouldForwardProp={isPropValid}>
+        <Component {...pageProps} />
+      </StyleSheetManager>
       <Analytics />
     </>
   );
