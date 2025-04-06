@@ -58,10 +58,15 @@ export async function handleStripeWebhook(
         sig,
         webhookSecret
       );
-    } catch (err) {
-      console.log(`❌ Error message: ${err.message}`);
-      console.log('Error details:', err);
-      return res.status(400).send(`Webhook Error: ${err.message}`);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.log(`❌ Error message: ${err.message}`);
+        console.log('Error details:', err);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+      } else {
+        console.error('Unknown error:', err);
+        return res.status(500).send('Internal server error');
+      }
     }
 
     // Successfully constructed event
