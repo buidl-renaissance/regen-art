@@ -3,6 +3,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import Tickets from '../../app/components/tickets';
 
 const StyledPage = styled.div`
   background-color: #f5f5f5;
@@ -278,9 +279,12 @@ const ArtsForTheEarthPage: FC = () => {
           <EventTitle>Arts For The Earth</EventTitle>
           <EventSubtitle>Burg Ink Production</EventSubtitle>
           <EventDescription>
-            Life is a precious gift, and our source of endless beauty, abundance, and diversity is all created from our Mother Earth. As a community, we have the power to come together in celebration, expressing gratitude, sharing creativity, and deepening our connection to the Earth and one another. This gathering is a heartfelt offering, a space to experience the joy of creation, strengthen our bonds, and support organizations dedicated to protecting and restoring the planet. Through art, music, and collective energy, we uplift and inspire, fostering a deeper commitment to the well-being of our world for generations to come. Let's dance, create, and celebrate the magic of being alive together.
-            <br /><br />
-            Our planet needs us to Share Love! By protecting our waters and being Guardians of the land, we are protecting the source of All life.
+            <p>
+              Life is a precious gift, and our source of endless beauty, abundance, and diversity is all created from our Mother Earth. As a community, we have the power to come together in celebration, expressing gratitude, sharing creativity, and deepening our connection to the Earth and one another. This gathering is a heartfelt offering, a space to experience the joy of creation, strengthen our bonds, and support organizations dedicated to protecting and restoring the planet. Through art, music, and collective energy, we uplift and inspire, fostering a deeper commitment to the well-being of our world for generations to come. Let&apos;s dance, create, and celebrate the magic of being alive together.
+            </p>
+            <p>
+              Our planet needs us to Share Love! By protecting our waters and being Guardians of the land, we are protecting the source of All life.
+            </p>
           </EventDescription>
         </EventHeader>
 
@@ -354,7 +358,7 @@ const ArtsForTheEarthPage: FC = () => {
                   <ExperienceItem>Tattoo Art – Artists offering tattooing, with proceeds supporting the cause.</ExperienceItem>
                   <ExperienceItem>Gallery Exhibition – A breathtaking and inspiring collection of artwork honoring nature.</ExperienceItem>
                   <ExperienceItem>Live Painting – Artists creating in real time, sharing their creative process.</ExperienceItem>
-                  <ExperienceItem>Kids' & Adult Crafts – Dedicated craft stations for all ages to engage in hands-on creativity.</ExperienceItem>
+                  <ExperienceItem>Kids&apos; & Adult Crafts – Dedicated craft stations for all ages to engage in hands-on creativity.</ExperienceItem>
                   <ExperienceItem>Community Canvas – A collaborative art piece where everyone can contribute.</ExperienceItem>
                   <ExperienceItem>Mural Painting – A large-scale artwork created during the event to honor the planet.</ExperienceItem>
                 </ExperienceList>
@@ -447,7 +451,7 @@ const ArtsForTheEarthPage: FC = () => {
               <TicketPrice>$250</TicketPrice>
               <TicketDescription>
                 $50 automatically donated to the cause<br />
-                Remaining amount distributed at the artist's discretion
+                Remaining amount distributed at the artist&apos;s discretion
               </TicketDescription>
               <Button href="/inquire">Purchase Tickets</Button>
             </TicketCard>
@@ -487,20 +491,20 @@ const ArtsForTheEarthPage: FC = () => {
               <BeneficiaryTitle>Water Protection & Conservation - 80%</BeneficiaryTitle>
               <BeneficiaryDescription>
                 <strong>Water Protectors Network</strong> – Advocating for clean water, Indigenous water rights, and environmental justice.
-                <BeneficiaryPercentage>60% of total funds</BeneficiaryPercentage>
               </BeneficiaryDescription>
+              <BeneficiaryPercentage>60% of total funds</BeneficiaryPercentage>
               <BeneficiaryDescription>
                 <strong>Friends of the Rouge</strong> – Dedicated to restoring, protecting, and enhancing the Rouge River watershed, engaging the community in conservation efforts.
-                <BeneficiaryPercentage>20% of total funds</BeneficiaryPercentage>
               </BeneficiaryDescription>
+              <BeneficiaryPercentage>20% of total funds</BeneficiaryPercentage>
             </BeneficiaryCard>
             
             <BeneficiaryCard>
               <BeneficiaryTitle>Tree Planting & Conservation - 20%</BeneficiaryTitle>
               <BeneficiaryDescription>
                 <strong>Greening of Detroit</strong> – Focused on planting trees, educating communities, and providing hands-on opportunities for people to contribute to a greener city.
-                <BeneficiaryPercentage>20% of total funds</BeneficiaryPercentage>
               </BeneficiaryDescription>
+              <BeneficiaryPercentage>20% of total funds</BeneficiaryPercentage>
             </BeneficiaryCard>
           </BeneficiariesSection>
         </Section>
@@ -514,6 +518,12 @@ const ArtsForTheEarthPage: FC = () => {
             <Button as={Link} href="/inquire">Contact Us To Participate</Button>
           </div>
         </Section>
+
+        <Section>
+          <SectionTitle>Ticket Information</SectionTitle>
+          <Tickets />
+        </Section>
+
       </EventContainer>
     </StyledPage>
   );

@@ -1,10 +1,10 @@
 'use client';
 
-import { FC, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import ArtworkModal from '../components/artwork-modal';
-import { ARTWORKS } from '../../lib/mock';
-import { ArtworkItem } from '../../lib/interfaces';
+import ArtworkModal from '../app/components/artwork-modal';
+import { ARTWORKS } from '../app/mock';
+import { ArtworkItem } from '../app/interfaces';
 
 const StyledPage = styled.div`
   @media (max-width: 768px) {
