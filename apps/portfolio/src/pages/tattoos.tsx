@@ -5,12 +5,8 @@ import styled from 'styled-components';
 import ArtworkModal from '../app/components/artwork-modal';
 import { TATTOOS } from '../app/mock';
 import { Artwork } from '@gods.work/utils';
-import { ArtworkCard } from '@/packages/ui/src/lib/ArtworkCard';
-import { ArtworkCardClickableContainer } from '@/packages/ui/src/lib/ArtworkCard';
-import PageLayout, {
-  PageContainer,
-  PageContainerFullWidth,
-} from '../app/components/page-layout';
+import { ArtworkCard, ArtworkCardClickableContainer } from '@gods.work/ui';
+import PageLayout, { PageContainer } from '../app/components/page-layout';
 
 const tattoos: Artwork[] = TATTOOS;
 
