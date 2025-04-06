@@ -3,7 +3,6 @@
 import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ArtworkModal from './artwork-modal';
-import { ArtworkItem } from '../interfaces';
 import { Artwork } from '@gods.work/utils';
 import { ArtworkCardClickableContainer, ArtworkCard } from '@gods.work/ui';
 

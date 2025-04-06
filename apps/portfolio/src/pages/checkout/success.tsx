@@ -71,7 +71,7 @@ const ReturnButton = styled(Link)`
   }
 `;
 
-const SuccessPage = () => {
+export default function CheckoutSuccess() {
   const router = useRouter();
   const { session_id } = router.query;
   const [session, setSession] = useState<CheckoutSession | null>(null);
@@ -149,5 +149,3 @@ const SuccessPage = () => {
     </SuccessContainer>
   );
 };
-
-export default SuccessPage;

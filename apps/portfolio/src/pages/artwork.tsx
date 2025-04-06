@@ -3,29 +3,23 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ArtworkModal from '../app/components/artwork-modal';
-import { ArtworkFormModal, ArtworkCard, ArtworkCardClickableContainer } from '@gods.work/ui';
+import {
+  ArtworkFormModal,
+  ArtworkCard,
+  ArtworkCardClickableContainer,
+} from '@gods.work/ui';
 import { Artwork } from '@/packages/utils/src/lib/interfaces';
 import { getArtworks } from '@/packages/utils/src/lib/dpop';
-
-const StyledPage = styled.div`
-  @media (max-width: 768px) {
-    padding: 0 1rem;
-  }
-`;
-
-const ArtworkTitle = styled.h1`
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
-`;
+import Link from 'next/link';
+import { FaArrowLeft } from 'react-icons/fa';
+import PageLayout from '../app/components/page-layout';
 
 const ArtworkContainer = styled.div`
-  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  
+
   @media (max-width: 768px) {
-    padding: 1rem 0.5rem;
+    padding: 0 0.5rem;
   }
 `;
 
@@ -35,7 +29,7 @@ const CategoryTabs = styled.div`
   margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
-  
+
   @media (max-width: 768px) {
     gap: 0.5rem;
     margin-bottom: 1.5rem;
@@ -56,7 +50,7 @@ const CategoryTab = styled.button<{ active: boolean }>`
     background-color: ${(props) =>
       props.active ? '#96885f' : 'rgba(150, 136, 95, 0.2)'};
   }
-  
+
   @media (max-width: 768px) {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
@@ -68,7 +62,7 @@ const ArtworkGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;
@@ -94,11 +88,11 @@ const AddArtworkCard = styled.div`
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     background-color: rgba(150, 136, 95, 0.1);
   }
-  
+
   @media (max-width: 768px) {
     border-radius: 6px;
     height: 200px;
-    
+
     &:hover {
       transform: translateY(-3px);
     }
@@ -129,22 +123,32 @@ export default function ArtworkPage({ artworks }: { artworks: Artwork[] }) {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     // Initial check
     checkMobile();
-    
+
     // Add event listener
     window.addEventListener('resize', checkMobile);
-    
+
     // Cleanup
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-  
-  const categories = ['all', ...new Set(artworks?.map(artwork => artwork.data?.category).filter((a: string | undefined) => a))];
 
-  const filteredArtwork = selectedCategory === 'all'
-    ? visibleArtworks
-    : visibleArtworks.filter(artwork => artwork.data?.category === selectedCategory);
+  const categories = [
+    'all',
+    ...new Set(
+      artworks
+        ?.map((artwork) => artwork.data?.category)
+        .filter((a: string | undefined) => a)
+    ),
+  ];
+
+  const filteredArtwork =
+    selectedCategory === 'all'
+      ? visibleArtworks
+      : visibleArtworks.filter(
+          (artwork) => artwork.data?.category === selectedCategory
+        );
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
@@ -171,10 +175,14 @@ export default function ArtworkPage({ artworks }: { artworks: Artwork[] }) {
   };
 
   return (
-    <StyledPage>
+    <PageLayout 
+      title="Artwork"
+      backLink={{
+        href: "/",
+        text: "Back to Home"
+      }}
+    >
       <ArtworkContainer>
-        <ArtworkTitle>Artwork</ArtworkTitle>
-        
         {/* <CategoryTabs>
           {categories.map(category => (
             <CategoryTab
@@ -186,10 +194,13 @@ export default function ArtworkPage({ artworks }: { artworks: Artwork[] }) {
             </CategoryTab>
           ))}
         </CategoryTabs> */}
-        
+
         <ArtworkGrid>
           {filteredArtwork.map((artwork) => (
-            <ArtworkCardClickableContainer key={artwork.id} onClick={() => openModal(artwork)}>
+            <ArtworkCardClickableContainer
+              key={artwork.id}
+              onClick={() => openModal(artwork)}
+            >
               <ArtworkCard artwork={artwork} />
             </ArtworkCardClickableContainer>
           ))}
@@ -199,12 +210,12 @@ export default function ArtworkPage({ artworks }: { artworks: Artwork[] }) {
           </AddArtworkCard>
         </ArtworkGrid>
       </ArtworkContainer>
-      
+
       {selectedArtwork && (
         <ArtworkModal
           isOpen={!!selectedArtwork}
           onClose={closeModal}
-          currentImage={selectedArtwork}
+          currentArtwork={selectedArtwork}
           artworks={filteredArtwork}
           currentIndex={filteredArtwork.indexOf(selectedArtwork)}
           onNavigate={handleNavigate}
@@ -216,7 +227,7 @@ export default function ArtworkPage({ artworks }: { artworks: Artwork[] }) {
         onClose={() => setIsModalOpen(false)}
         onSuccess={handleArtworkCreated}
       />
-    </StyledPage>
+    </PageLayout>
   );
 }
 

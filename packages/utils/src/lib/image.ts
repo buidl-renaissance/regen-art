@@ -22,7 +22,7 @@ export const convertImageUrl = (
  * @returns The converted URL with tiles format
  */
 export const convertResizedToTiles = (url: string): string => {
-  return convertImageUrl(url, 'uploads/resized/800w', 'uploads/resized/tiles');
+  return convertImageUrl(url, '.com/uploads/resized/800w', '.com/uploads/resized/tiles');
 };
 
 /**
@@ -32,7 +32,7 @@ export const convertResizedToTiles = (url: string): string => {
  * @returns The converted URL with 800w format
  */
 export const convertTilesToResized = (url: string): string => {
-  return convertImageUrl(url, 'uploads/resized/tiles', 'uploads/resized/800w');
+  return convertImageUrl(url, '.com/uploads/resized/tiles', '.com/uploads/resized/800w');
 };
 
 /**
@@ -42,7 +42,7 @@ export const convertTilesToResized = (url: string): string => {
  * @returns The converted URL with 800w format
  */
 export const convertDefaultToResized = (url: string): string => {
-  return convertImageUrl(url, 'uploads', 'uploads/resized/800w');
+  return convertImageUrl(url, '.com/uploads', '.com/uploads/resized/800w');
 };
 
 /**
@@ -52,7 +52,7 @@ export const convertDefaultToResized = (url: string): string => {
  * @returns The converted URL with tiles format
  */
 export const convertDefaultToTiles = (url: string): string => {
-  return convertImageUrl(url, 'uploads', 'uploads/resized/tiles');
+  return convertImageUrl(url, '.com/uploads', '.com/uploads/resized/tiles');
 };
 
 /**
@@ -62,7 +62,7 @@ export const convertDefaultToTiles = (url: string): string => {
  * @returns The converted URL with default format
  */
 export const convertResizedToDefault = (url: string): string => {
-  return convertImageUrl(url, 'uploads/resized/800w', 'uploads');
+  return convertImageUrl(url, '.com/uploads/resized/800w', '.com/uploads');
 };
 
 /**
@@ -72,6 +72,6 @@ export const convertResizedToDefault = (url: string): string => {
  * @returns The converted URL with default format
  */
 export const convertTilesToDefault = (url: string): string => {
-  return convertImageUrl(url, 'uploads/resized/tiles', 'uploads');
+  return convertImageUrl(url, '.com/uploads/resized/tiles', '.com/uploads');
 };
 
