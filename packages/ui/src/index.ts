@@ -8,3 +8,6 @@ export * from './lib/UploadButton';
 export * from './lib/UploadMedia';
 export * from './lib/ButtonLink';
 export * from './lib/VenueSearch';
+export * from './lib/ArtworkForm';
+export * from './lib/Modal';
+export * from './lib/ArtworkFormModal';

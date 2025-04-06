@@ -14,6 +14,7 @@ export interface Artist {
 export interface ArtworkData {
   image?: string;
   collaborator_ids?: number[];
+  category?: string;
 }
 
 export interface Artwork {

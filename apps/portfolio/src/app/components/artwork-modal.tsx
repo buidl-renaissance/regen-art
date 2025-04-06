@@ -2,7 +2,9 @@
 
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ArtworkItem } from '../interfaces';
+import { Artwork } from '@gods.work/utils';
+import { convertDefaultToResized } from '@gods.work/utils';
+
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -129,8 +131,8 @@ const NavigationButton = styled.button`
 interface ArtworkModalProps {
   isOpen: boolean;
   onClose: () => void;
-  currentImage: ArtworkItem | null;
-  artworks: ArtworkItem[];
+  currentImage: Artwork | null;
+  artworks: Artwork[];
   currentIndex: number;
   onNavigate: (direction: 'prev' | 'next') => void;
 }
@@ -177,13 +179,13 @@ const ArtworkModal: FC<ArtworkModalProps> = ({
       onClick={onClose}
     >
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <ModalImage src={currentImage.url} alt={currentImage.title} />
+        <ModalImage src={convertDefaultToResized(currentImage.data?.image ?? '')} alt={currentImage.title} />
         <CloseButton onClick={onClose}>×</CloseButton>
         
         <ImageInfo>
           <ImageTitle>{currentImage.title}</ImageTitle>
           <ImageDescription>{currentImage.description}</ImageDescription>
-          <ImageCategory>{currentImage.category}</ImageCategory>
+          <ImageCategory>{currentImage.data?.category}</ImageCategory>
         </ImageInfo>
         
         {currentIndex > 0 && (

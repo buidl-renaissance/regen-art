@@ -340,8 +340,18 @@ export const createArtwork = async (artwork: Partial<Artwork>) => {
   return result;
 };
 
-export const getArtworks = async () => {
-  const result = await (await fetch(`${hostname}/api/artwork`)).json();
+interface ArtworkQueryParams {    
+  artist_id?: number;
+  limit?: number;
+  offset?: number;
+}
+
+export const getArtworks = async ({ artist_id, limit, offset }: ArtworkQueryParams) => {
+  const params = new URLSearchParams();
+  if (artist_id) params.set("artist_id", artist_id.toString());
+  params.set("limit", limit?.toString() ?? "100");
+  params.set("offset", offset?.toString() ?? "0");
+  const result = await (await fetch(`${hostname}/api/artwork?${params.toString()}`)).json();
   return result.data;
 };
 
