@@ -87,7 +87,7 @@ export async function handleStripeWebhook(
         await updateCheckoutSession(session.id, 'completed');
 
         // Create purchased tickets
-        const userId = event.data.object.customer_details.email || 'unknown'; // In a real app, map this to your user system
+        const userId = event.data.object?.customer_details?.email || 'unknown'; // In a real app, map this to your user system
 
         if (!checkoutSession.items || !Array.isArray(checkoutSession.items)) {
           console.error('Invalid checkout session items:', checkoutSession.items);
