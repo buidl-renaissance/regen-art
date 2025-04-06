@@ -3,6 +3,9 @@
 import styled from 'styled-components';
 import Hero from '../app/components/hero';
 import Gallery from '../app/components/gallery';
+import { Artwork, getArtworks } from '@gods.work/utils';
+import { Metadata } from 'next';
+
 
 const StyledPage = styled.div`
   margin: 0 auto;
@@ -246,11 +249,11 @@ const ContactEmail = styled.span`
   }
 `;
 
-export default function Index() {
+export default function Index({ artworks }: { artworks: Artwork[] }) {
   return (
     <StyledPage>
       <Hero />
-      <Gallery />
+      <Gallery title="Artwork" artworks={artworks} />
 
       <AboutSection>
         <AboutTitle>About the Artist</AboutTitle>
@@ -273,3 +276,35 @@ export default function Index() {
     </StyledPage>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Andrea Burg | Artist & Energy Healer',
+  description: 'Andrea Burg is a lifelong creator who channels energy-healing and shamanic practices into her art, intending to serve her soul\'s journey and contribute to collective healing.',
+  openGraph: {
+    title: 'Andrea Burg | Artist & Energy Healer',
+    description: 'Explore the transformative art of Andrea Burg, combining shamanic practices with creative expression.',
+    images: [
+      {
+        url: '/images/andrea-burg-og.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Andrea Burg Artwork',
+      }
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Andrea Burg | Artist & Energy Healer',
+    description: 'Explore the transformative art of Andrea Burg, combining shamanic practices with creative expression.',
+    images: ['/images/andrea-burg-og.jpg'],
+  },
+};
+
+export const getServerSideProps = async () => {
+  const artworks = await getArtworks({
+    artist_id: parseInt(process.env.DPOP_ARTIST_ID ?? '0'),
+    limit: 100,
+  });
+  return { props: { artworks, metadata } };
+};

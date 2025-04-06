@@ -4,22 +4,23 @@ import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ArtworkModal from './artwork-modal';
 import { ArtworkItem } from '../interfaces';
-import { ARTWORKS } from '../mock';
+import { Artwork } from '@gods.work/utils';
+import { ArtworkCardClickableContainer, ArtworkCard } from '@gods.work/ui';
+
 
 interface GalleryProps {
   title?: string;
+  artworks: Artwork[];
 }
 
-const artworks = ARTWORKS;
-
-const Gallery: FC<GalleryProps> = ({ title = 'Performance Art' }) => {
+const Gallery: FC<GalleryProps> = ({ title = 'Performance Art', artworks }) => {
   const categories = [
     'All',
-    ...new Set(artworks.map((artwork) => artwork.category)),
+    ...new Set(artworks.map((artwork) => artwork.data?.category)),
   ];
   const [activeCategory, setActiveCategory] = useState('All');
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState<ArtworkItem | null>(null);
+  const [currentArtwork, setCurrentArtwork] = useState<Artwork | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -41,10 +42,10 @@ const Gallery: FC<GalleryProps> = ({ title = 'Performance Art' }) => {
   const filteredArtworks =
     activeCategory === 'All'
       ? artworks
-      : artworks.filter((artwork) => artwork.category === activeCategory);
+      : artworks.filter((artwork) => artwork.data?.category === activeCategory);
 
-  const handleArtworkClick = (artwork: ArtworkItem, index: number) => {
-    setCurrentImage(artwork);
+  const handleArtworkClick = (artwork: Artwork, index: number) => {
+    setCurrentArtwork(artwork);
     setCurrentIndex(index);
     setModalOpen(true);
   };
@@ -53,7 +54,7 @@ const Gallery: FC<GalleryProps> = ({ title = 'Performance Art' }) => {
     const newIndex = direction === 'prev' ? currentIndex - 1 : currentIndex + 1;
     if (newIndex >= 0 && newIndex < filteredArtworks.length) {
       setCurrentIndex(newIndex);
-      setCurrentImage(filteredArtworks[newIndex]);
+      setCurrentArtwork(filteredArtworks[newIndex]);
     }
   };
 
@@ -64,36 +65,29 @@ const Gallery: FC<GalleryProps> = ({ title = 'Performance Art' }) => {
   return (
     <GalleryContainer>
       <GalleryTitle>{title}</GalleryTitle>
-      <CategoryTabs>
+      {/* <CategoryTabs>
         {categories.map((category, index) => (
           <CategoryTab
             key={index}
             active={activeCategory === category}
-            onClick={() => setActiveCategory(category)}
+            onClick={() => setActiveCategory(category ?? 'All')}
           >
             {category}
           </CategoryTab>
         ))}
-      </CategoryTabs>
+      </CategoryTabs> */}
       <GalleryGrid>
-        {filteredArtworks.map((artwork, index) => (
-          <ArtworkCard
-            key={index}
-            onClick={() => handleArtworkClick(artwork, index)}
-          >
-            <ArtworkImage src={artwork.url} alt={artwork.title} />
-            <ArtworkInfo>
-              <ArtworkTitle>{artwork.title}</ArtworkTitle>
-              <ArtworkDescription>{artwork.description}</ArtworkDescription>
-            </ArtworkInfo>
-          </ArtworkCard>
+        {filteredArtworks.map((artwork: Artwork, index: number) => (
+          <ArtworkCardClickableContainer key={index} onClick={() => handleArtworkClick(artwork, index)}>
+            <ArtworkCard artwork={artwork} />
+          </ArtworkCardClickableContainer>
         ))}
       </GalleryGrid>
 
       <ArtworkModal
         isOpen={modalOpen}
         onClose={handleCloseModal}
-        currentImage={currentImage}
+        currentArtwork={currentArtwork}
         artworks={filteredArtworks}
         currentIndex={currentIndex}
         onNavigate={handleNavigate}
@@ -170,68 +164,5 @@ const GalleryGrid = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;
-  }
-`;
-
-const ArtworkCard = styled.div`
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #fff;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  @media (max-width: 768px) {
-    border-radius: 6px;
-    
-    &:hover {
-      transform: translateY(-3px);
-    }
-  }
-`;
-
-const ArtworkImage = styled.img`
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-  display: block;
-  
-  @media (max-width: 768px) {
-    height: 200px;
-  }
-`;
-
-const ArtworkInfo = styled.div`
-  padding: 1.5rem;
-  
-  @media (max-width: 768px) {
-    padding: 0.8rem;
-  }
-`;
-
-const ArtworkTitle = styled.h3`
-  margin: 0 0 0.5rem;
-  font-size: 1.2rem;
-  color: #333;
-  
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    margin: 0 0 0.3rem;
-  }
-`;
-
-const ArtworkDescription = styled.p`
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.5;
-  
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-    line-height: 1.4;
   }
 `;

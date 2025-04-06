@@ -131,7 +131,7 @@ const NavigationButton = styled.button`
 interface ArtworkModalProps {
   isOpen: boolean;
   onClose: () => void;
-  currentImage: Artwork | null;
+  currentArtwork: Artwork | null;
   artworks: Artwork[];
   currentIndex: number;
   onNavigate: (direction: 'prev' | 'next') => void;
@@ -140,7 +140,7 @@ interface ArtworkModalProps {
 const ArtworkModal: FC<ArtworkModalProps> = ({
   isOpen,
   onClose,
-  currentImage,
+  currentArtwork,
   artworks,
   currentIndex,
   onNavigate
@@ -171,7 +171,7 @@ const ArtworkModal: FC<ArtworkModalProps> = ({
     }
   }, [isOpen, onClose, onNavigate]);
   
-  if (!isOpen || !currentImage) return null;
+  if (!isOpen || !currentArtwork) return null;
   
   return (
     <ModalOverlay 
@@ -179,13 +179,13 @@ const ArtworkModal: FC<ArtworkModalProps> = ({
       onClick={onClose}
     >
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <ModalImage src={convertDefaultToResized(currentImage.data?.image ?? '')} alt={currentImage.title} />
+        <ModalImage src={convertDefaultToResized(currentArtwork.data?.image ?? '')} alt={currentArtwork.title} />
         <CloseButton onClick={onClose}>×</CloseButton>
         
         <ImageInfo>
-          <ImageTitle>{currentImage.title}</ImageTitle>
-          <ImageDescription>{currentImage.description}</ImageDescription>
-          <ImageCategory>{currentImage.data?.category}</ImageCategory>
+          <ImageTitle>{currentArtwork.title}</ImageTitle>
+          <ImageDescription>{currentArtwork.description}</ImageDescription>
+          <ImageCategory>{currentArtwork.data?.category}</ImageCategory>
         </ImageInfo>
         
         {currentIndex > 0 && (
