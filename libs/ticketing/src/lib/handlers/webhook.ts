@@ -97,6 +97,11 @@ export async function handleStripeWebhook(
         for (const item of checkoutSession.items) {
           const ticketType = await getTicketType(item.ticketTypeId);
 
+          if (!ticketType) {
+            console.error('Ticket type not found:', item.ticketTypeId);
+            continue;
+          }
+
           // Create purchased tickets for each item
           for (let i = 0; i < item.quantity; i++) {
             await createPurchasedTicket({
