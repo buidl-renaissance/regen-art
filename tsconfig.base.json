@@ -18,11 +18,11 @@
       "@/*": ["./*"],
       "@gods.work/hooks": ["libs/hooks/src/index.ts"],
       "@gods.work/shadcn": ["libs/shadcn/src/index.ts"],
-      "@gods.work/the-word": ["packages/the-word/src/index.ts"],
+      "@gods.work/the-word": ["libs/the-word/src/index.ts"],
       "@gods.work/ticketing": ["libs/ticketing/src/index.ts"],
-      "@gods.work/ui": ["packages/ui/src/index.ts"],
-      "@gods.work/utils": ["packages/utils/src/index.ts"],
-      "@gods.work/web3": ["packages/web3/src/index.ts"],
+      "@gods.work/ui": ["libs/ui/src/index.ts"],
+      "@gods.work/utils": ["libs/utils/src/index.ts"],
+      "@gods.work/web3": ["libs/web3/src/index.ts"],
       "@libs/shadcn-ui": ["libs/shadcn-ui/src/index.ts"],
       "@libs/shadcn-ui/*": ["libs/shadcn-ui/src/*"]
     }

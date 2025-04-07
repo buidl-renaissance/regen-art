@@ -11,3 +11,4 @@ export * from './lib/VenueSearch';
 export * from './lib/ArtworkForm';
 export * from './lib/Modal';
 export * from './lib/ArtworkFormModal';
+export * from './lib/ArtistSearch';

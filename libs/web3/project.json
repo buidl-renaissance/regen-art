@@ -1,7 +1,7 @@
 {
   "name": "web3",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/web3/src",
+  "sourceRoot": "libs/web3/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -9,10 +9,10 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/web3",
-        "main": "packages/web3/src/index.ts",
-        "tsConfig": "packages/web3/tsconfig.lib.json",
-        "assets": ["packages/web3/*.md"]
+        "outputPath": "dist/libs/web3",
+        "main": "libs/web3/src/index.ts",
+        "tsConfig": "libs/web3/tsconfig.lib.json",
+        "assets": ["libs/web3/*.md"]
       }
     }
   }

@@ -8,10 +8,8 @@ import {
   ArtworkCard,
   ArtworkCardClickableContainer,
 } from '@gods.work/ui';
-import { Artwork } from '@/packages/utils/src/lib/interfaces';
-import { getArtworks } from '@/packages/utils/src/lib/dpop';
-import Link from 'next/link';
-import { FaArrowLeft } from 'react-icons/fa';
+import { Artwork } from '@gods.work/utils';
+import { getArtworks } from '@gods.work/utils';
 import PageLayout from '../app/components/page-layout';
 
 const ArtworkContainer = styled.div`
