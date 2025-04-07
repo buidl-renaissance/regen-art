@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
 const CreateProfileContainer = styled.div`
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
   color: #f5f5f5;
   font-family: monospace;
   min-height: 100vh;
 
   @media (max-width: 768px) {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem;
   }
 `;
 
@@ -78,6 +78,13 @@ const Input = styled.input`
     box-shadow: 0 0 0 2px rgba(150, 136, 95, 0.25);
   }
 
+  &:disabled {
+    background-color: #2a2a2a;
+    color: #888;
+    cursor: not-allowed;
+    border-color: #3a3a3a;
+  }
+
   @media (max-width: 768px) {
     padding: 0.7rem;
     font-size: 0.9rem;
@@ -103,7 +110,7 @@ const SubmitButton = styled.button`
   letter-spacing: 0.05em;
   transition: all 0.3s ease;
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
 
   &:hover {
     background-color: #7a6e4e;
@@ -123,7 +130,7 @@ const SubmitButton = styled.button`
   @media (max-width: 768px) {
     padding: 0.7rem 1.2rem;
     font-size: 0.9rem;
-    margin-top: 1.2rem;
+    margin-top: 0rem;
   }
 `;
 

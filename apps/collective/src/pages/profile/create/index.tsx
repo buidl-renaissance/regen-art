@@ -1,8 +1,7 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import UploadProfileImage from '../../../app/components/UploadProfileImage';
 import { Metadata } from 'next';
 import {
   CreateProfileContainer,
@@ -13,9 +12,9 @@ import {
   Input,
   ErrorMessage,
   SubmitButton,
-  HelpText
+  HelpText,
 } from '../../../app/components/ProfileStyles';
-
+// import UploadProfileImage from '../../../app/components/UploadProfileImage';
 
 export const metadata: Metadata = {
   title: 'Create Profile | Art Night Detroit',
@@ -31,31 +30,39 @@ export async function getServerSideProps() {
   };
 }
 
-
 const CreateProfilePage: FC = () => {
   const [handle, setHandle] = useState('');
+  // const [profileImage, setProfileImage] = useState('');
   const [error, setError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [isSubmitting, ] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    // Load username from localStorage if it exists
+    const storedHandle = localStorage.getItem('handle');
+    if (storedHandle) {
+      setHandle(storedHandle);
+      setError(validateHandle(storedHandle));
+    }
+  }, []);
 
   const validateHandle = (value: string) => {
     if (!value) {
       return 'Handle is required';
     }
-    
+
     if (value.length < 3) {
       return 'Handle must be at least 3 characters';
     }
-    
+
     if (value.length > 30) {
       return 'Handle must be less than 30 characters';
     }
-    
+
     if (!/^[a-zA-Z0-9_]+$/.test(value)) {
       return 'Handle can only contain letters, numbers, and underscores';
     }
-    
+
     return '';
   };
 
@@ -65,52 +72,43 @@ const CreateProfilePage: FC = () => {
     setError(validateHandle(value));
   };
 
-  const handleImageChange = (file: File) => {
-    setProfileImage(file);
-  };
+  // const handleImageChange = (imageUrl: string) => {
+  //   setProfileImage(imageUrl);
+  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const validationError = validateHandle(handle);
     if (validationError) {
       setError(validationError);
       return;
     }
-    
-    setIsSubmitting(true);
-    
-    try {
-      // Here you would typically make an API call to create the profile
-      // For example:
-      // const formData = new FormData();
-      // formData.append('handle', handle);
-      // if (profileImage) {
-      //   formData.append('profileImage', profileImage);
-      // }
-      // await createProfile(formData);
-      
-      // Simulate API call with timeout
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Redirect to the profile page or dashboard
-      router.push('/profile/' + handle);
-    } catch (err) {
-      setError('Failed to create profile. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+
+    // Simulate API call with timeout
+    localStorage.setItem('handle', handle);
+    // if (profileImage) {
+    //   localStorage.setItem('profileImage', profileImage);
+    // }
+
+    router.push('/profile/create/details');
   };
 
   return (
     <CreateProfileContainer>
       <PageTitle>Create Your Profile</PageTitle>
-      
+
       <FormContainer>
         <form onSubmit={handleSubmit}>
-          <UploadProfileImage onImageChange={handleImageChange} />
-          
           <FormGroup>
+
+          {/* <FormGroup>
+            <UploadProfileImage
+              currentImage={profileImage}
+              onImageChange={handleImageChange}
+            />
+          </FormGroup> */}
+
             <Label htmlFor="handle">Username / Handle</Label>
             <Input
               id="handle"
@@ -121,14 +119,17 @@ const CreateProfilePage: FC = () => {
               disabled={isSubmitting}
             />
             <HelpText>
-              This will be your unique DPoP identifier.
-              Choose wisely as it cannot be changed later.
+              This will be your unique DPoP identifier. Choose wisely as it
+              cannot be changed later.
             </HelpText>
             {error && <ErrorMessage>{error}</ErrorMessage>}
           </FormGroup>
-          
-          <SubmitButton type="submit" disabled={!!error || !handle || isSubmitting}>
-            {isSubmitting ? 'Creating...' : 'Create Profile'}
+
+          <SubmitButton
+            type="submit"
+            disabled={!!error || !handle || isSubmitting}
+          >
+            {isSubmitting ? 'Creating...' : 'Setup Profile'}
           </SubmitButton>
         </form>
       </FormContainer>

@@ -6,15 +6,15 @@ import Image from 'next/image';
 import { FaCamera, FaUpload } from 'react-icons/fa';
 
 interface UploadProfileImageProps {
-  onImageChange: (file: File) => void;
-  initialImage?: string | null;
+  currentImage?: string;
+  onImageChange: (imageUrl: string) => void;
 }
 
 const ProfileImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
+  margin: 2rem 0;
 `;
 
 const ImagePreview = styled.div`
@@ -97,9 +97,25 @@ const ErrorMessage = styled.p`
   margin-top: 0.5rem;
 `;
 
-const UploadProfileImage: FC<UploadProfileImageProps> = ({ onImageChange, initialImage }) => {
-  const [imagePreview, setImagePreview] = useState<string | null>(initialImage || null);
+const LoadingSpinner = styled.div`
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 2px solid white;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
+const UploadProfileImage: FC<UploadProfileImageProps> = ({ onImageChange, currentImage }) => {
+  const [imagePreview, setImagePreview] = useState<string | null>(currentImage || null);
   const [error, setError] = useState<string>('');
+  const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -128,7 +144,7 @@ const UploadProfileImage: FC<UploadProfileImageProps> = ({ onImageChange, initia
     }
   };
   
-  const handleFile = (file: File) => {
+  const handleFile = async (file: File) => {
     // Validate file type
     if (!file.type.match('image.*')) {
       setError('Please select an image file');
@@ -143,18 +159,31 @@ const UploadProfileImage: FC<UploadProfileImageProps> = ({ onImageChange, initia
     
     // Clear any previous errors
     setError('');
+    setIsUploading(true);
     
-    // Pass the file to parent component
-    onImageChange(file);
-    
-    // Create preview
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      if (event.target?.result) {
-        setImagePreview(event.target.result as string);
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const response = await fetch('https://api.detroiter.network/api/upload-media', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Upload failed');
       }
-    };
-    reader.readAsDataURL(file);
+
+      const data = await response.json();
+      setImagePreview(data.url);
+      onImageChange(data.url);
+    } catch (error) {
+      console.error('Upload error:', error);
+      setError(error instanceof Error ? error.message : 'Failed to upload image');
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
@@ -181,9 +210,18 @@ const UploadProfileImage: FC<UploadProfileImageProps> = ({ onImageChange, initia
         )}
       </ImagePreview>
       
-      <UploadButton onClick={handleImageClick}>
-        <FaUpload />
-        {imagePreview ? 'Change Photo' : 'Upload Photo'}
+      <UploadButton onClick={handleImageClick} disabled={isUploading}>
+        {isUploading ? (
+          <>
+            <LoadingSpinner />
+            Uploading...
+          </>
+        ) : (
+          <>
+            <FaUpload />
+            {imagePreview ? 'Change Photo' : 'Upload Photo'}
+          </>
+        )}
       </UploadButton>
       
       <HiddenInput

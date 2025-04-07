@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState, ChangeEvent, FormEvent } from 'react';
+import { FC, useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
@@ -20,11 +20,13 @@ import {
   ButtonContainer,
   TextArea,
 } from '../../../app/components/ProfileStyles';
-
+import UploadProfileImage from '../../../app/components/UploadProfileImage';
 
 const ProfileDetails: FC = () => {
   const router = useRouter();
+  const [username, setUsername] = useState<string>('');
   const [formData, setFormData] = useState({
+    profileImage: '',
     name: '',
     bio: '',
     twitter: '',
@@ -33,7 +35,20 @@ const ProfileDetails: FC = () => {
     github: '',
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  useEffect(() => {
+    // Check if username exists in localStorage
+    const storedHandle = localStorage.getItem('handle');
+    if (!storedHandle) {
+      // Redirect back to create profile page if username not set
+      router.push('/profile/create');
+      return;
+    }
+    setUsername(storedHandle);
+  }, [router]);
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -41,20 +56,45 @@ const ProfileDetails: FC = () => {
     }));
   };
 
+  const handleImageChange = (imageUrl: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      profileImage: imageUrl,
+    }));
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     // Save profile details to state or API
-    console.log('Profile details:', formData);
+    console.log('Profile details:', { ...formData, username });
     // Navigate to next step
     router.push('/profile/create/preferences');
   };
 
   return (
     <CreateProfileContainer>
-      <PageTitle>Create Your Profile</PageTitle>
-      
+      <PageTitle>Setup Your Profile</PageTitle>
+
       <FormContainer>
         <form onSubmit={handleSubmit}>
+          <FormGroup>
+            <UploadProfileImage
+              currentImage={formData.profileImage}
+              onImageChange={handleImageChange}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <Label htmlFor="handle">Username / Handle</Label>
+            <Input
+              id="handle"
+              name="handle"
+              type="text"
+              value={username}
+              disabled
+            />
+          </FormGroup>
+
           <FormGroup>
             <Label htmlFor="name">Name</Label>
             <Input
@@ -65,7 +105,7 @@ const ProfileDetails: FC = () => {
               onChange={handleChange}
             />
           </FormGroup>
-          
+
           <FormGroup>
             <Label htmlFor="bio">Bio</Label>
             <TextArea
@@ -76,9 +116,7 @@ const ProfileDetails: FC = () => {
               placeholder="Tell us about yourself, your interests, and your expertise"
             />
           </FormGroup>
-          
-          <SectionTitle>Social Media</SectionTitle>
-          
+
           <FormGroup>
             <Label htmlFor="twitter">Twitter</Label>
             <SocialInputContainer>
@@ -94,7 +132,7 @@ const ProfileDetails: FC = () => {
               />
             </SocialInputContainer>
           </FormGroup>
-          
+
           <FormGroup>
             <Label htmlFor="instagram">Instagram</Label>
             <SocialInputContainer>
@@ -110,7 +148,7 @@ const ProfileDetails: FC = () => {
               />
             </SocialInputContainer>
           </FormGroup>
-          
+
           <FormGroup>
             <Label htmlFor="linkedin">LinkedIn</Label>
             <SocialInputContainer>
@@ -126,7 +164,7 @@ const ProfileDetails: FC = () => {
               />
             </SocialInputContainer>
           </FormGroup>
-          
+
           <FormGroup>
             <Label htmlFor="github">GitHub</Label>
             <SocialInputContainer>
@@ -142,7 +180,7 @@ const ProfileDetails: FC = () => {
               />
             </SocialInputContainer>
           </FormGroup>
-          
+
           <ButtonContainer>
             <Button type="button" onClick={() => router.back()}>
               Back
