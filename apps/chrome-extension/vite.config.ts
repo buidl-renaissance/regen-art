@@ -13,8 +13,10 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
-        content: path.resolve(__dirname, 'src/content.ts'),
-        contentRA: path.resolve(__dirname, 'src/content/ra.ts'),
+        artclvb_artwork: path.resolve(__dirname, 'src/content/artclvb_artwork.ts'),
+        artclvb_artist: path.resolve(__dirname, 'src/content/artclvb_artist.ts'),
+        ra_events: path.resolve(__dirname, 'src/content/ra_events.ts'),
+        ra_event: path.resolve(__dirname, 'src/content/ra_event.ts'),
         background: path.resolve(__dirname, 'src/background.ts'),
       },
       output: {

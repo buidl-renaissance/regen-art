@@ -89,6 +89,30 @@ export interface DPoPEvent {
   venue: Venue;
 }
 
+export interface RAEventData {
+  id: string;
+  title: string;
+  url: string;
+  date: string;
+  status: string;
+  data: {
+    date?: string;
+    start_time?: string;
+    end_time?: string;
+    venue?: string;
+    venue_url?: string;
+    lineup?: any;
+    description?: string;
+    image_url?: string;
+    source?: string;
+    ticket_url?: string;
+    attendee_count?: string;
+    is_ticketed?: boolean;
+    ticket_prices?: any;
+  };
+  created_at?: string;
+  updated_at?: string;
+}
 
 export interface Member {
   id: number;

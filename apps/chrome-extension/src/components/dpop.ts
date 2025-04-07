@@ -14,6 +14,7 @@ import {
   Content,
   EventConnection,
   Project,
+  RAEventData,
 } from "./interfaces";
 
 export type {
@@ -226,6 +227,26 @@ export interface EventQueryParams {
   featured?: boolean;
   ids?: string;
 }
+
+export const postRAEvents = async (events: Partial<RAEventData>[]) => {
+  const result = await (
+    await fetch(`${hostname}/api/events/ra/all`, {
+      method: "POST",
+      body: JSON.stringify(events),
+    })
+  ).json();
+  return result.data;
+};
+
+export const postRAEvent = async (event: Partial<RAEventData>) => {
+  const result = await (
+    await fetch(`${hostname}/api/events/ra`, {
+      method: "POST",
+      body: JSON.stringify(event),
+    })
+  ).json();
+  return result.data;
+};
 
 export const createEvent = async (event: Partial<DPoPEvent>) => {
   const result = await (

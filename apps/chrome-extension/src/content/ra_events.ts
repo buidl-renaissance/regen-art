@@ -1,5 +1,5 @@
 // Function to extract event data from Resident Advisor event pages
-export function extractRAEventData() {
+export function extractRAEventsData() {
   console.log('Extracting Resident Advisor event data');
   
   // Find all event listing cards on the page
@@ -23,6 +23,13 @@ export function extractRAEventData() {
       const linkElement = card.querySelector('[data-pw-test-id="event-title-link"]');
       const url = linkElement?.getAttribute('href') || '';
       const fullUrl = url.startsWith('http') ? url : `https://ra.co${url}`;
+      
+      // Extract event ID from URL
+      let eventId = '';
+      if (url) {
+        const urlParts = url.split('/');
+        eventId = urlParts[urlParts.length - 1];
+      }
       
       // Extract event date - primarily from the grouped header heading
       let dateText = '';
@@ -77,15 +84,24 @@ export function extractRAEventData() {
       const isTicketed = card.querySelector('[data-test-id="ticketed-event"]') !== null;
       
       return {
+        id: eventId,
         title,
         url: fullUrl,
         date: dateText,
-        lineup,
-        venue,
-        venueUrl: fullVenueUrl,
-        imageUrl,
-        attendeeCount,
-        isTicketed
+        status: 'scraped',
+        data: {
+          start_time: '',
+          end_time: '',
+          venue,
+          venue_url: fullVenueUrl,
+          lineup,
+          description: '',
+          image_url: imageUrl,
+          source: 'resident advisor',
+          ticket_url: '',
+          attendee_count: attendeeCount,
+          is_ticketed: isTicketed
+        }
       };
     } catch (error) {
       console.error('Error extracting event data:', error);
@@ -105,9 +121,10 @@ export function isResidentAdvisorPage() {
 // Message handler for Chrome extension communication
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log('Received message:', message, sender, sendResponse);
-  if (message.type === 'EXTRACT_RA_EVENT_DATA') {
-    const events = extractRAEventData();
+  if (message.type === 'EXTRACT_RA_EVENTS_DATA') {
+    const events = extractRAEventsData();
     sendResponse(events);
     return true; // Keep the message channel open for async response
   }
 });
+

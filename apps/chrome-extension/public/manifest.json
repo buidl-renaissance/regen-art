@@ -8,12 +8,20 @@
     },
     "content_scripts": [
       {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
+        "matches": ["https://app.artclvb.xyz/artwork/"],
+        "js": ["artclvb_artwork.js"]
       },
       {
-        "matches": ["https://ra.co/*"],
-        "js": ["contentRa.js"]
+        "matches": ["https://app.artclvb.xyz/artist/"],
+        "js": ["artclvb_artist.js"]
+      },
+      {
+        "matches": ["https://ra.co/events/us/detroit"],
+        "js": ["ra_events.js"]
+      },
+      {
+        "matches": ["https://ra.co/events/*"],
+        "js": ["ra_event.js"]
       }
     ],
     "background": {

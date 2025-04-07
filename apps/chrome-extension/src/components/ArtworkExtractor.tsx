@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createArtwork } from '../components/dpop';
 import { Artwork } from '../components/interfaces';
 import Button from './Button';
+import { getCurrentPageUrl, isArtclvbArtworkPage } from '../utils/is-url';
 
 interface ArtworkData {
   title: string;
@@ -19,11 +20,19 @@ interface ArtworkData {
 
 const ArtworkExtractor: React.FC = () => {
   const [artworkData, setArtworkData] = useState<ArtworkData | null>(null);
+  const [shouldShow, setShouldShow] = useState<boolean>(false);
 
-  // const handleArtistSelect = (artist: Artist) => {
-  //   console.log('Selected artist:', artist);
-  // };
+  useEffect(() => {
+    const checkPage = async () => {
+      const url = await getCurrentPageUrl();
+      if (isArtclvbArtworkPage(url)) {
+        setShouldShow(true);
+      }
+    };
+    checkPage();
+  }, []);
 
+  
   useEffect(() => {
     chrome.runtime.onMessage.addListener(
       (message: { type: string; data: ArtworkData }) => {
@@ -81,6 +90,10 @@ const ArtworkExtractor: React.FC = () => {
     console.log('Artwork created:', artwork);
     alert('Artwork saved successfully: ' + artwork.title);
   };
+
+  if (!shouldShow) {
+    return null;
+  }
 
   return (
     <>
