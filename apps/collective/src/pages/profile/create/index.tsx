@@ -1,133 +1,21 @@
 'use client';
 
-import { FC, useState, useRef } from 'react';
-import styled from 'styled-components';
+import { FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import UploadProfileImage from '../../../app/components/UploadProfileImage';
 import { Metadata } from 'next';
+import {
+  CreateProfileContainer,
+  PageTitle,
+  FormContainer,
+  FormGroup,
+  Label,
+  Input,
+  ErrorMessage,
+  SubmitButton,
+  HelpText
+} from '../../../app/components/ProfileStyles';
 
-const CreateProfileContainer = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: #1a1a1a;
-  color: #f5f5f5;
-  
-  @media (max-width: 768px) {
-    padding: 1.5rem 1rem;
-  }
-`;
-
-const PageTitle = styled.h1`
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #f5f5f5;
-  
-  @media (max-width: 768px) {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const FormContainer = styled.div`
-  background-color: #2a2a2a;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-    border-radius: 6px;
-  }
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: 1.5rem;
-  
-  @media (max-width: 768px) {
-    margin-bottom: 1.2rem;
-  }
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  font-size: 1rem;
-  color: #f5f5f5;
-  
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-  }
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #444;
-  border-radius: 4px;
-  font-size: 1rem;
-  background-color: #333;
-  color: #f5f5f5;
-  
-  &:focus {
-    outline: none;
-    border-color: #96885f;
-    box-shadow: 0 0 0 2px rgba(150, 136, 95, 0.2);
-  }
-  
-  @media (max-width: 768px) {
-    padding: 0.6rem;
-    font-size: 0.9rem;
-  }
-`;
-
-const ErrorMessage = styled.p`
-  color: #e53e3e;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-`;
-
-const SubmitButton = styled.button`
-  padding: 0.75rem 1.5rem;
-  background-color: #96885f;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  width: 100%;
-  margin-top: 1rem;
-
-  &:hover {
-    background-color: #7a6e4e;
-  }
-  
-  &:disabled {
-    background-color: #444;
-    cursor: not-allowed;
-  }
-  
-  @media (max-width: 768px) {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-  }
-`;
-
-const HelpText = styled.p`
-  font-size: 0.875rem;
-  color: #aaa;
-  margin-top: 0.5rem;
-  
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-  }
-`;
 
 export const metadata: Metadata = {
   title: 'Create Profile | Art Night Detroit',
@@ -138,6 +26,7 @@ export async function getServerSideProps() {
   return {
     props: {
       metadata,
+      theme: 'dark',
     },
   };
 }
@@ -232,7 +121,7 @@ const CreateProfilePage: FC = () => {
               disabled={isSubmitting}
             />
             <HelpText>
-              This will be your unique identifier in the collective.
+              This will be your unique DPoP identifier.
               Choose wisely as it cannot be changed later.
             </HelpText>
             {error && <ErrorMessage>{error}</ErrorMessage>}

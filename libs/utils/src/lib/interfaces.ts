@@ -58,7 +58,7 @@ export interface ImageData {
   file: string;
   width: number;
   height: number;
-  "mime-type": string;
+  'mime-type': string;
   filesize: number;
   url: string;
 }
@@ -84,6 +84,30 @@ export interface DPoPEvent {
   venue: Venue;
 }
 
+export interface RAEventData {
+  id: string;
+  title: string;
+  url: string;
+  date: string;
+  status: string;
+  data: {
+    date?: string;
+    start_time?: string;
+    end_time?: string;
+    venue?: string;
+    venue_url?: string;
+    lineup?: any;
+    description?: string;
+    image_url?: string;
+    source?: string;
+    ticket_url?: string;
+    attendee_count?: string;
+    is_ticketed?: boolean;
+    ticket_prices?: any;
+  };
+  created_at?: string;
+  updated_at?: string;
+}
 
 export interface Member {
   id: number;
@@ -161,7 +185,7 @@ export interface User {
   bio: string | null;
   phone: string | null;
   public_address: string | null;
-  public_name: string | null; 
+  public_name: string | null;
   organization: string | null;
   profile_picture: string | null;
   last_login: string | null;
@@ -180,7 +204,6 @@ export interface ContentSignature {
   signature: string;
   address: string;
 }
-
 
 export interface EventConnection {
   id: number;

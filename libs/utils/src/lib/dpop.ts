@@ -274,6 +274,28 @@ export const getEvents = async ({
   return result.data;
 };
 
+/** RA Events */
+
+type RAEventsParams = {
+  limit?: number;
+  offset?: number;
+  status?: string;
+}
+
+export const getRAEvents = async ({ limit, offset, status }: RAEventsParams) => {
+  const params = new URLSearchParams();
+  if (limit) params.set("limit", limit.toString());
+  if (offset) params.set("offset", offset.toString());
+  if (status) params.set("status", status);
+  const result = await (await fetch(`${hostname}/api/events/ra?${params.toString()}`)).json();
+  return result.data;
+};
+
+export const getRAEvent = async (id: string) => {
+  const result = await (await fetch(`${hostname}/api/events/ra/${id}`)).json();
+  return result.data;
+};
+
 /** Artists */
 export const getArtists = async () => {
   const result = await (await fetch(`${hostname}/api/artists`)).json();

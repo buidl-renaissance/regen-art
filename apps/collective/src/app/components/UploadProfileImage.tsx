@@ -3,6 +3,7 @@
 import { FC, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
+import { FaCamera, FaUpload } from 'react-icons/fa';
 
 interface UploadProfileImageProps {
   onImageChange: (file: File) => void;
@@ -22,12 +23,19 @@ const ImagePreview = styled.div`
   border-radius: 50%;
   background-color: #333;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
   margin-bottom: 1rem;
   border: 2px solid #444;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: #3a3a3a;
+  }
   
   @media (max-width: 768px) {
     width: 120px;
@@ -44,6 +52,9 @@ const UploadButton = styled.button`
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 
   &:hover {
     background-color: #7a6e4e;
@@ -59,9 +70,25 @@ const HiddenInput = styled.input`
   display: none;
 `;
 
+const PlaceholderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+`;
+
+const PlaceholderIcon = styled.div`
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+  color: #ddd;
+`;
+
 const PlaceholderText = styled.span`
-  color: #777;
-  font-size: 0.9rem;
+  color: #ddd;
+  font-size: 0.7rem;
+  text-align: center;
+  padding: 0 0.6rem;
 `;
 
 const ErrorMessage = styled.p`
@@ -145,11 +172,17 @@ const UploadProfileImage: FC<UploadProfileImageProps> = ({ onImageChange, initia
             style={{ objectFit: 'cover' }} 
           />
         ) : (
-          <PlaceholderText>Drop image here or click to upload</PlaceholderText>
+          <PlaceholderContainer>
+            <PlaceholderIcon>
+              <FaCamera />
+            </PlaceholderIcon>
+            <PlaceholderText>Drop image here or click to upload</PlaceholderText>
+          </PlaceholderContainer>
         )}
       </ImagePreview>
       
       <UploadButton onClick={handleImageClick}>
+        <FaUpload />
         {imagePreview ? 'Change Photo' : 'Upload Photo'}
       </UploadButton>
       
@@ -166,4 +199,3 @@ const UploadProfileImage: FC<UploadProfileImageProps> = ({ onImageChange, initia
 };
 
 export default UploadProfileImage;
-
