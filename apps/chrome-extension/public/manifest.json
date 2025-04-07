@@ -10,6 +10,10 @@
       {
         "matches": ["<all_urls>"],
         "js": ["content.js"]
+      },
+      {
+        "matches": ["https://ra.co/*"],
+        "js": ["contentRa.js"]
       }
     ],
     "background": {

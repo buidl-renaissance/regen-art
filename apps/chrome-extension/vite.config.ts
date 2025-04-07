@@ -8,12 +8,14 @@ export default defineConfig({
     react(),
   ],
   build: {
-    outDir: 'build',
+    outDir: path.resolve(__dirname, 'dist/apps/chrome-extension'),
+    emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: 'apps/chrome-extension/index.html',
-        content: 'apps/chrome-extension/src/content.ts',
-        background: 'apps/chrome-extension/src/background.ts',
+        main: path.resolve(__dirname, 'index.html'),
+        content: path.resolve(__dirname, 'src/content.ts'),
+        contentRA: path.resolve(__dirname, 'src/content/ra.ts'),
+        background: path.resolve(__dirname, 'src/background.ts'),
       },
       output: {
         entryFileNames: '[name].js',
