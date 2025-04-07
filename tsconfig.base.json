@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
+      "@gods.work/auth": ["libs/auth/src/index.ts"],
       "@gods.work/hooks": ["libs/hooks/src/index.ts"],
       "@gods.work/shadcn": ["libs/shadcn/src/index.ts"],
       "@gods.work/the-word": ["libs/the-word/src/index.ts"],

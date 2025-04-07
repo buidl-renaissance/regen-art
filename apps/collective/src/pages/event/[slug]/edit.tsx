@@ -15,7 +15,7 @@ import dynamic from 'next/dynamic';
 import { Container, CenteredContent } from '../../../app/components/Styled';
 import { Button, BackButton } from '../../../app/components/Styled';
 import { ErrorMessage } from '../../../app/components/Styled';
-import { useAuth } from '../../../app/hooks/useAuth';
+import { useAuth } from '@gods.work/auth';
 import { DPoPEvent, getEvent, updateEvent } from '@gods.work/utils';
 import { UploadMedia, VenueSearch } from '@gods.work/ui';
 

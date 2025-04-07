@@ -121,7 +121,7 @@ export default function CreateEventSeries() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -129,7 +129,7 @@ export default function CreateEventSeries() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
@@ -153,7 +153,7 @@ export default function CreateEventSeries() {
         router.push('/events');
       }, 2000);
     } catch (err) {
-      setError(err.message || 'An error occurred while creating the event series');
+      setError(err instanceof Error ? err.message : 'An error occurred while creating the event series');
     } finally {
       setIsSubmitting(false);
     }

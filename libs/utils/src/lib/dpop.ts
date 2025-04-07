@@ -346,7 +346,7 @@ interface ArtworkQueryParams {
   offset?: number;
 }
 
-export const getArtworks = async ({ artist_id, limit, offset }: ArtworkQueryParams) => {
+export const getArtworks = async ({ artist_id, limit, offset } = {} as ArtworkQueryParams) => {
   const params = new URLSearchParams();
   if (artist_id) params.set("artist_id", artist_id.toString());
   params.set("limit", limit?.toString() ?? "100");

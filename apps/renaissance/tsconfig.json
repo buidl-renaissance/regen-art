@@ -30,7 +30,7 @@
     "../../dist/apps/renaissance/.next/types/**/*.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-, "../../packages/utils/src/lib/dpop.ts", "../../packages/utils/src/lib/interfaces.ts"  ],
+  ],
   "exclude": [
     "node_modules",
     "jest.config.ts",

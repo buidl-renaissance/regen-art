@@ -25,7 +25,6 @@ const RichTextEditor = ({
   height = '300px',
 }: RichTextEditorProps) => {
   const [mounted, setMounted] = useState(false);
-  const quillRef = useRef<any>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -65,7 +64,6 @@ const RichTextEditor = ({
   return (
     <EditorContainer height={height}>
       <ReactQuill
-        ref={quillRef}
         theme="snow"
         value={value || ''}
         onChange={onChange}

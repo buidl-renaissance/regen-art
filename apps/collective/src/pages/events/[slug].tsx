@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { DPoPEvent, getEventBySlug, getRelatedEvents } from '@gods.work/utils';
+import { DPoPEvent, getEvent } from '@gods.work/utils';
 import { Metadata } from 'next';
 import {
   Container,
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
 
 export async function getServerSideProps({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  const event = await getEventBySlug(slug);
+  const event = await getEvent(slug);
   
   if (!event) {
     return {
@@ -81,12 +81,9 @@ export async function getServerSideProps({ params }: { params: { slug: string } 
     };
   }
 
-  const relatedEvents = await getRelatedEvents(event.id, 6);
-
   return {
     props: {
       event,
-      relatedEvents,
       metadata: {
         ...metadata,
         title: `${event.title} | Art Night Detroit`,
@@ -104,10 +101,8 @@ export async function getServerSideProps({ params }: { params: { slug: string } 
 
 export default function EventPage({ 
   event, 
-  relatedEvents 
 }: { 
   event: DPoPEvent; 
-  relatedEvents: DPoPEvent[] 
 }) {
   const router = useRouter();
 
@@ -124,31 +119,31 @@ export default function EventPage({
         
         <EventHeader>
           <EventTitle>{event.title}</EventTitle>
-          <p>{new Date(event.startDate).toLocaleDateString()} - {event.location}</p>
+          <p>{new Date(event.start_date).toLocaleDateString()} - {event.venue.title}</p>
         </EventHeader>
         
         <EventDetails>
           <div>
-            <EventDescription dangerouslySetInnerHTML={{ __html: event.description || '' }} />
+            <EventDescription dangerouslySetInnerHTML={{ __html: event.content || '' }} />
             {event.url && (
               <a href={event.url} target="_blank" rel="noopener noreferrer">
                 Learn more or register →
               </a>
             )}
           </div>
-          {event.imageUrl && (
+          {event.image && (
             <div>
-              <EventImage src={event.imageUrl} alt={event.title} />
+              <EventImage src={event.image} alt={event.title} />
             </div>
           )}
         </EventDetails>
         
-        {relatedEvents.length > 0 && (
+        {/* {relatedEvents.length > 0 && (
           <RelatedEventsSection>
             <SectionTitle>Related Events</SectionTitle>
             <EventsGrid events={relatedEvents} eventType={event.type} />
           </RelatedEventsSection>
-        )}
+        )} */}
       </EventContainer>
       <Analytics />
     </Container>

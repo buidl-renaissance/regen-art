@@ -99,7 +99,6 @@ const AddText = styled.p`
 
 export async function getServerSideProps() {
   const artworks = await getArtworks();
-
   return {
     props: {
       artworks,
