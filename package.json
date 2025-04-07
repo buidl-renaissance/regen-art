@@ -52,6 +52,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "axios": "^1.6.0",
     "chatgpt": "^5.2.5",
+    "chrome": "^0.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",

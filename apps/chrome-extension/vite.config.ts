@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react'
 import path from 'path';
 // import { viteStaticCopy } from 'vite-plugin-static-copy';
 
-
 export default defineConfig({
   plugins: [
     react(),
@@ -13,6 +12,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'apps/chrome-extension/index.html',
+        content: 'apps/chrome-extension/src/content.ts',
+        background: 'apps/chrome-extension/src/background.ts',
+      },
+      output: {
+        entryFileNames: '[name].js',
       },
     },
   },

@@ -15,6 +15,11 @@ export interface ArtworkData {
   image?: string;
   collaborator_ids?: number[];
   category?: string;
+  medium?: string;
+  dimensions?: string;
+  price?: string;
+  description?: string;
+  source?: string;
 }
 
 export interface Artwork {
