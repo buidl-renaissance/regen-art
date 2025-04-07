@@ -117,12 +117,6 @@ function extractArtworkData() {
 
       console.log('Extracted artwork data:', artworkData);
 
-      // Send data to background script
-      chrome.runtime.sendMessage({
-        type: 'ARTWORK_DATA',
-        data: artworkData,
-      });
-
       return artworkData;
     } catch (error) {
       console.error('Error extracting artwork data:', error);

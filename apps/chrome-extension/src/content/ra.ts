@@ -24,10 +24,34 @@ export function extractRAEventData() {
       const url = linkElement?.getAttribute('href') || '';
       const fullUrl = url.startsWith('http') ? url : `https://ra.co${url}`;
       
-      // Extract event date
-      // Find the date from the grouped header heading above the event card
-      const dateSection = card.closest('.idxCtw')?.querySelector('[data-testid="grouped-header-heading"] span');
-      const dateText = dateSection?.textContent?.trim() || '';
+      // Extract event date - primarily from the grouped header heading
+      let dateText = '';
+      
+      // Look for the date in the parent element's h3 tag
+      const parentElement = card.parentElement;
+      if (parentElement) {
+        const headings = parentElement.getElementsByTagName('h3');
+        if (headings && headings.length > 0) {
+          dateText = headings[0].innerText.trim() || '';
+          console.log('Found date in parent heading:', dateText);
+        }
+      }
+      
+      // Fallback: Look for date within the card itself if grouped header approach failed
+      if (!dateText) {
+        const dateElement = card.querySelector('[data-testid="date-details"]');
+        if (dateElement) {
+          dateText = dateElement.textContent?.trim() || '';
+        }
+      }
+      
+      // Last resort: Look for any element with date-related attributes
+      if (!dateText) {
+        const possibleDateElements = card.querySelectorAll('[data-test-id*="date"], [data-testid*="date"], [aria-label*="date"]');
+        if (possibleDateElements.length > 0) {
+          dateText = possibleDateElements[0].textContent?.trim() || '';
+        }
+      }
       
       // Extract artists/lineup
       const lineupElement = card.querySelector('[data-test-id="artists-lineup"]');
@@ -42,7 +66,7 @@ export function extractRAEventData() {
       const fullVenueUrl = venueUrl.startsWith('http') ? venueUrl : `https://ra.co${venueUrl}`;
       
       // Extract image URL
-      const imageElement = card.querySelector('.ResponsiveImage__InnerImage-sc-rd6x9h-1');
+      const imageElement = card.querySelector('img');
       const imageUrl = imageElement?.getAttribute('src') || '';
       
       // Extract attendee count if available
@@ -78,15 +102,12 @@ export function isResidentAdvisorPage() {
   return document.location.href.includes('ra.co');
 }
 
-// Initialize event extraction if on RA page
-if (isResidentAdvisorPage()) {
-  console.log('Resident Advisor page detected');
-  
-  // Wait for the page to fully load before extracting data
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const events = extractRAEventData();
-      console.log(`Extracted ${events.length} events from Resident Advisor`);
-    }, 1500); // Give the page a moment to fully render
-  });
-}
+// Message handler for Chrome extension communication
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log('Received message:', message, sender, sendResponse);
+  if (message.type === 'EXTRACT_RA_EVENT_DATA') {
+    const events = extractRAEventData();
+    sendResponse(events);
+    return true; // Keep the message channel open for async response
+  }
+});
