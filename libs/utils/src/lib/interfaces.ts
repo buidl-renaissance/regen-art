@@ -100,6 +100,11 @@ export interface DPoPEvent {
   venue: Venue;
 }
 
+export interface Event extends DPoPEvent {
+  created_at: string;
+  updated_at: string;
+}
+
 export interface RAEventData {
   id: string;
   title: string;

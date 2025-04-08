@@ -13,3 +13,6 @@ export * from './lib/Modal';
 export * from './lib/ArtworkFormModal';
 export * from './lib/ArtistSearch';
 export * from './lib/Styled';
+export * from './lib/ProfileEditForm';
+export * from './lib/ProfileView';
+export * from './lib/ProfileStyles';

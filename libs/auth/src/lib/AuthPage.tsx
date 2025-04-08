@@ -1,6 +1,5 @@
 import React from 'react';
 import { AuthView } from './AuthView';
-import { Container } from '@gods.work/ui';
 
 export const AuthPage: React.FC = () => {
   const [handle, setHandle] = React.useState<string>('');
@@ -13,8 +12,6 @@ export const AuthPage: React.FC = () => {
     }
   }, []);
   return (
-    <Container>
-      <AuthView handle={handle} />
-    </Container>
+    <AuthView handle={handle} />
   );
 };

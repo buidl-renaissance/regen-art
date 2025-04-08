@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useClient } from '@gods.work/auth';
-import { QRCodeAuthentication } from '@/libs/auth/src/lib/QRCodeAuthentication';
+import { QRCodeAuthentication } from '@gods.work/auth';
 import { ProfileData } from '@gods.work/utils';
 import Link from 'next/link';
-import { SubmitButton } from './ProfileStyles';
+import { ProfileButton } from './ProfileStyles';
 // import { ArtworkCard } from '@/libs/ui/src/lib/ArtworkCard';
 import ArtworkGallery from './ArtworkGallery';
 import { FaTwitter, FaInstagram, FaGithub, FaGlobe } from 'react-icons/fa';
@@ -314,7 +314,7 @@ const SocialLink = styled.a`
   }
 `;
 
-const VerifyButton = styled(SubmitButton)`
+const VerifyButton = styled(ProfileButton)`
   display: inline-block;
   text-decoration: none;
   text-align: center;

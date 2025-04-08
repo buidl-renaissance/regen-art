@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ProfileContainer = styled.div`
+export const ProfileContainer = styled.div`
   background-color: #2a2a2a;
   color: #f5f5f5;
   font-family: monospace;
@@ -15,7 +15,7 @@ const ProfileContainer = styled.div`
   }
 `;
 
-const CreateProfileContainer = styled.div`
+export const CreateProfileContainer = styled.div`
   background-color: #2a2a2a;
   color: #f5f5f5;
   font-family: monospace;
@@ -27,7 +27,7 @@ const CreateProfileContainer = styled.div`
   }
 `;
 
-const PageTitle = styled.h1`
+export const PageTitle = styled.h1`
   text-align: center;
   margin-bottom: 2rem;
   font-size: 1.5rem;
@@ -43,7 +43,7 @@ const PageTitle = styled.h1`
   }
 `;
 
-const FormContainer = styled.div`
+export const ProfileFormContainer = styled.div`
   padding: 2rem;
   min-height: 100vh;
   margin: auto;
@@ -53,7 +53,7 @@ const FormContainer = styled.div`
   } */
 `;
 
-const FormGroup = styled.div`
+export const ProfileFormGroup = styled.div`
   margin-bottom: 0.8rem;
 
   @media (max-width: 768px) {
@@ -61,7 +61,7 @@ const FormGroup = styled.div`
   }
 `;
 
-const Label = styled.label`
+export const ProfileLabel = styled.label`
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -74,7 +74,7 @@ const Label = styled.label`
   }
 `;
 
-const Input = styled.input`
+export const ProfileInput = styled.input`
   width: 100%;
   padding: 0.8rem;
   border: 1px solid #444;
@@ -102,13 +102,7 @@ const Input = styled.input`
   }
 `;
 
-const ErrorMessage = styled.p`
-  color: #e53e3e;
-  font-size: 0.85rem;
-  margin-top: 0.5rem;
-`;
-
-const SubmitButton = styled.button`
+export const ProfileSubmitButton = styled.button`
   padding: 0.8rem 1.5rem;
   background-color: #96885f;
   color: white;
@@ -144,7 +138,7 @@ const SubmitButton = styled.button`
   }
 `;
 
-const HelpText = styled.p`
+export const ProfileHelpText = styled.p`
   font-size: 0.75rem;
   color: #aaa;
   margin-top: 0.5rem;
@@ -155,7 +149,7 @@ const HelpText = styled.p`
   }
 `;
 
-const ProfileHeader = styled.div`
+export const ProfileHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,7 +164,7 @@ const ProfileHeader = styled.div`
   }
 `;
 
-const ProfileImage = styled.div`
+export const ProfileImage = styled.div`
   width: 90px;
   height: 90px;
   border-radius: 50%;
@@ -188,7 +182,7 @@ const ProfileImage = styled.div`
   }
 `;
 
-const ProfilePlaceholder = styled.div`
+export const ProfilePlaceholder = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -204,7 +198,7 @@ const ProfilePlaceholder = styled.div`
   }
 `;
 
-const ProfileTitle = styled.h1`
+export const ProfileTitle = styled.h1`
   font-size: 2rem;
   font-weight: 700;
   margin: 0.4rem 0;
@@ -215,7 +209,7 @@ const ProfileTitle = styled.h1`
   }
 `;
 
-const ProfileEmail = styled.p`
+export const ProfileEmail = styled.p`
   font-size: 1rem;
   color: #cccccc;
   margin: 0.2rem 0;
@@ -225,7 +219,7 @@ const ProfileEmail = styled.p`
   }
 `;
 
-const ProfileOrganization = styled.p`
+export const ProfileOrganization = styled.p`
   font-size: 1rem;
   color: #cccccc;
   margin: 0.2rem 0;
@@ -235,7 +229,7 @@ const ProfileOrganization = styled.p`
   }
 `;
 
-const ProfileBio = styled.p`
+export const ProfileBio = styled.p`
   font-size: 0.95rem;
   color: #dddddd;
   margin: 0.8rem 0;
@@ -248,7 +242,7 @@ const ProfileBio = styled.p`
   }
 `;
 
-const ProfileSection = styled.section`
+export const ProfileSection = styled.section`
   margin-bottom: 2rem;
 
   @media (max-width: 768px) {
@@ -256,7 +250,7 @@ const ProfileSection = styled.section`
   }
 `;
 
-const ProfileInfo = styled.div`
+export const ProfileInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -266,7 +260,7 @@ const ProfileInfo = styled.div`
   }
 `;
 
-const ProfileInfoItem = styled.div`
+export const ProfileInfoItem = styled.div`
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -278,7 +272,7 @@ const ProfileInfoItem = styled.div`
   }
 `;
 
-const TextArea = styled.textarea`
+export const ProfileTextArea = styled.textarea`
   width: 100%;
   padding: 0.8rem;
   border: 1px solid #444;
@@ -302,7 +296,7 @@ const TextArea = styled.textarea`
   }
 `;
 
-const SectionTitle = styled.h2`
+export const ProfileSectionTitle = styled.h2`
   font-size: 1.4rem;
   margin: 2rem 0 1rem;
   color: #f5f5f5;
@@ -313,11 +307,11 @@ const SectionTitle = styled.h2`
   }
 `;
 
-const SocialInputContainer = styled.div`
+export const SocialInputContainer = styled.div`
   position: relative;
 `;
 
-const SocialIcon = styled.div`
+export const SocialIcon = styled.div`
   position: absolute;
   left: 12px;
   top: 50%;
@@ -326,11 +320,11 @@ const SocialIcon = styled.div`
   font-size: 1.1rem;
 `;
 
-const SocialInput = styled(Input)`
+export const SocialInput = styled(ProfileInput)`
   padding-left: 2.5rem;
 `;
 
-const ButtonContainer = styled.div`
+export const ProfileButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
@@ -340,7 +334,7 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const Button = styled.button<{ primary?: boolean }>`
+export const ProfileButton = styled.button<{ primary?: boolean }>`
   padding: 0.8rem 1.5rem;
   border: ${(props) => (props.primary ? 'none' : '1px solid #666')};
   border-radius: 4px;
@@ -372,32 +366,3 @@ const Button = styled.button<{ primary?: boolean }>`
   }
 `;
 
-export {
-  ProfileBio,
-  ProfileEmail,
-  ProfileHeader,
-  ProfileImage,
-  ProfileInfo,
-  ProfileInfoItem,
-  ProfileOrganization,
-  ProfilePlaceholder,
-  ProfileSection,
-  ProfileTitle,
-  ProfileContainer,
-  CreateProfileContainer,
-  PageTitle,
-  FormContainer,
-  FormGroup,
-  Label,
-  Input,
-  ErrorMessage,
-  SubmitButton,
-  HelpText,
-  SocialInputContainer,
-  SocialIcon,
-  SocialInput,
-  ButtonContainer,
-  SectionTitle,
-  TextArea,
-  Button,
-};

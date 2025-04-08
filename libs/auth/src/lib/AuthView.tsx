@@ -1,8 +1,8 @@
-import { formatDate } from '@/libs/utils/src/lib/datetime';
+import React, { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 
-import React, { useEffect, useState } from 'react';
-import { getOrCreateHotWallet, signMessage } from '@gods.work/utils';
+import { formatDate, getOrCreateHotWallet, signMessage } from '@gods.work/utils';
 
 import { useClient } from './hooks/useClient';
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ProfileData } from '@gods.work/utils';
+import { ProfileData } from './interfaces';
 
 export const useProfile = () => {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FaUpload } from 'react-icons/fa';
 
-const Container = styled.div`
+export const Container = styled.div`
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -12,29 +12,29 @@ const Container = styled.div`
   padding: 1rem;
 `;
 
-const Header = styled.div`
+export const Header = styled.div`
   margin-bottom: 3rem;
 `;
 
-const Title = styled.h1`
+export const Title = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
 `;
 
-const Subtitle = styled.p`
+export const Subtitle = styled.p`
   font-size: 1.2rem;
   margin-bottom: 2rem;
   opacity: 0.8;
 `;
 
-const FormContainer = styled.div`
+export const FormContainer = styled.div`
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
 `;
 
-const UploadSection = styled.div`
+export const UploadSection = styled.div`
   background: rgba(255, 255, 255, 0.05);
   border: 2px dashed rgba(255, 255, 255, 0.2);
   border-radius: 8px;
@@ -52,40 +52,40 @@ const UploadSection = styled.div`
   }
 `;
 
-const UploadIcon = styled(FaUpload)`
+export const UploadIcon = styled(FaUpload)`
   font-size: 3rem;
   margin-bottom: 1rem;
   color: #ff3366;
 `;
 
-const UploadText = styled.p`
+export const UploadText = styled.p`
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
 `;
 
-const UploadSubtext = styled.p`
+export const UploadSubtext = styled.p`
   font-size: 0.9rem;
   opacity: 0.7;
 `;
 
-const PreviewImage = styled.img`
+export const PreviewImage = styled.img`
   max-width: 100%;
   max-height: 400px;
   border-radius: 8px;
   margin-top: 1rem;
 `;
 
-const FormGroup = styled.div`
+export const FormGroup = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   width: 100%;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -101,7 +101,7 @@ const Input = styled.input`
   }
 `;
 
-const TextArea = styled.textarea`
+export const TextArea = styled.textarea`
   background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -119,7 +119,7 @@ const TextArea = styled.textarea`
   }
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   background: #ff3366;
   color: white;
   border: none;
@@ -127,7 +127,7 @@ const Button = styled.button`
   font-size: 1rem;
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 2rem auto;
@@ -138,12 +138,12 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const BackButtonContainer = styled.div`
+export const BackButtonContainer = styled.div`
   margin-bottom: 1rem;
   margin-top: 1rem;
 `;
 
-const BackButton = styled.button`
+export const BackButton = styled.button`
   background: transparent;
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -159,7 +159,7 @@ const BackButton = styled.button`
   }
 `;
 
-const NextButton = styled.button`
+export const NextButton = styled.button`
   background: #ff3366;
   color: white;
   border: none;
@@ -175,13 +175,13 @@ const NextButton = styled.button`
   }
 `;
 
-const LoadingMessage = styled.div`
+export const LoadingMessage = styled.div`
   text-align: center;
   font-size: 1.2rem;
   margin: 3rem 0;
 `;
 
-const ErrorMessage = styled.div`
+export const ErrorMessage = styled.div`
   color: #ff3366;
   background: rgba(255, 51, 102, 0.1);
   padding: 0.75rem;
@@ -189,7 +189,7 @@ const ErrorMessage = styled.div`
   margin-bottom: 1rem;
 `;
 
-const SuccessMessage = styled.div`
+export const SuccessMessage = styled.div`
   color: #4caf50;
   background: rgba(76, 175, 80, 0.1);
   padding: 0.75rem;
@@ -197,7 +197,7 @@ const SuccessMessage = styled.div`
   margin-bottom: 1rem;
 `;
 
-const ButtonGroup = styled.div`
+export const ButtonGroup = styled.div`
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
@@ -210,7 +210,7 @@ const ButtonGroup = styled.div`
   }
 `;
 
-const EditButton = styled.button`
+export const EditButton = styled.button`
   background-color: #4a90e2;
   color: white;
   border: none;
@@ -230,7 +230,7 @@ const EditButton = styled.button`
   }
 `;
 
-const LogoutButton = styled.button`
+export const LogoutButton = styled.button`
   background-color: #ff3366;
   color: white;
   border: none;
@@ -250,7 +250,13 @@ const LogoutButton = styled.button`
   }
 `;
 
-const SectionTitle = styled.h2`
+export const Section = styled.section`
+  margin-bottom: 3rem;
+  border-left: 3px solid #444;
+  padding-left: 1.5rem;
+`;
+
+export const SectionTitle = styled.h2`
   font-size: 1.75rem;
   font-weight: 600;
   margin-top: 0;
@@ -265,7 +271,7 @@ const SectionTitle = styled.h2`
   }
 `;
 
-const EventGrid = styled.div`
+export const EventGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 1.5rem;
@@ -276,7 +282,7 @@ const EventGrid = styled.div`
   }
 `;
 
-const EventGridItem = styled.div`
+export const EventGridItem = styled.div`
   transition: transform 0.2s ease;
 
   &:hover {
@@ -290,7 +296,7 @@ const EventGridItem = styled.div`
   }
 `;
 
-const EmptyState = styled.p`
+export const EmptyState = styled.p`
   color: #aaaaaa;
   font-style: italic;
   text-align: center;
@@ -303,7 +309,7 @@ const EmptyState = styled.p`
   }
 `;
 
-const Value = styled.span`
+export const Value = styled.span`
   color: #aaaaaa;
 
   @media (max-width: 768px) {
@@ -311,7 +317,7 @@ const Value = styled.span`
   }
 `;
 
-const ErrorDisplay = styled.div`
+export const ErrorDisplay = styled.div`
   text-align: center;
   color: #ff3366;
   margin: 3rem 0;
@@ -323,7 +329,7 @@ const ErrorDisplay = styled.div`
   }
 `;
 
-const BackLink = styled.a`
+export const BackLink = styled.a`
   color: #ff3366;
   text-decoration: none;
   display: inline-block;
@@ -340,7 +346,7 @@ const BackLink = styled.a`
   }
 `;
 
-const CenteredContent = styled.div`
+export const CenteredContent = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   width: 100%;
@@ -350,39 +356,3 @@ const CenteredContent = styled.div`
     padding: 0 0.5rem;
   }
 `;
-
-export {
-  BackButton,
-  BackButtonContainer,
-  BackLink,
-  Button,
-  ButtonContainer,
-  ButtonGroup,
-  CenteredContent,
-  Container,
-  EditButton,
-  EmptyState,
-  ErrorDisplay,
-  ErrorMessage,
-  EventGrid,
-  EventGridItem,
-  FormContainer,
-  FormGroup,
-  Header,
-  Input,
-  Label,
-  LoadingMessage,
-  LogoutButton,
-  NextButton,
-  PreviewImage,
-  SectionTitle,
-  Subtitle,
-  SuccessMessage,
-  TextArea,
-  Title,
-  UploadIcon,
-  UploadSection,
-  UploadSubtext,
-  UploadText,
-  Value,
-};

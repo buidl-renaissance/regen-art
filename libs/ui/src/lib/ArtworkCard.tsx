@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Artwork, convertDefaultToResized } from '@gods.work/utils';
-import Link from 'next/link';
 
 const ArtworkContainer = styled.div`
   border-radius: 8px;

@@ -6,19 +6,19 @@ import { FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 import {
   CreateProfileContainer,
   PageTitle,
-  Button,
-  FormContainer,
-  FormGroup,
-  Label,
-  Input,
+  ProfileFormContainer,
+  ProfileFormGroup,
+  ProfileLabel,
+  ProfileInput,
   SocialInputContainer,
   SocialIcon,
   SocialInput,
-  ButtonContainer,
-  TextArea,
+  ProfileButtonContainer,
+  ProfileButton,
+  ProfileTextArea,
 } from './ProfileStyles';
 import UploadProfileImage from './UploadProfileImage';
-import { useProfile } from '../hooks/useProfile';
+import { useProfile } from '@gods.work/utils';
 
 const ProfileEditForm: FC = () => {
   const router = useRouter();
@@ -111,53 +111,53 @@ const ProfileEditForm: FC = () => {
 
   return (
     <CreateProfileContainer>
-      <FormContainer>
+      <ProfileFormContainer>
         <PageTitle>Edit Your Profile</PageTitle>
 
         <form onSubmit={handleSubmit}>
-          <FormGroup>
+          <ProfileFormGroup>
             <UploadProfileImage
               currentImage={formData.profileImage}
               onImageChange={handleImageChange}
             />
-          </FormGroup>
+          </ProfileFormGroup>
 
-          <FormGroup>
-            <Label htmlFor="handle">Username / Handle</Label>
-            <Input
+          <ProfileFormGroup>
+            <ProfileLabel htmlFor="handle">Username / Handle</ProfileLabel>
+            <ProfileInput
               id="handle"
               name="handle"
               type="text"
               value={username}
               disabled
             />
-          </FormGroup>
+          </ProfileFormGroup>
 
-          <FormGroup>
-            <Label htmlFor="name">Name</Label>
-            <Input
+          <ProfileFormGroup>
+            <ProfileLabel htmlFor="name">Name</ProfileLabel>
+            <ProfileInput
               id="name"
               name="name"
               type="text"
               value={formData.name}
               onChange={handleChange}
             />
-          </FormGroup>
+          </ProfileFormGroup>
 
-          <FormGroup>
-            <Label htmlFor="bio">Bio</Label>
-            <TextArea
+          <ProfileFormGroup>
+            <ProfileLabel htmlFor="bio">Bio</ProfileLabel>
+            <ProfileTextArea
               id="bio"
               name="bio"
               value={formData.bio}
               onChange={handleChange}
               placeholder="Tell us about yourself, your interests, and your expertise"
             />
-          </FormGroup>
+          </ProfileFormGroup>
 
-          <FormGroup>
-            <Label htmlFor="website">Website</Label>
-            <Input
+          <ProfileFormGroup>
+            <ProfileLabel htmlFor="website">Website</ProfileLabel>
+            <ProfileInput
               id="website"
               name="website"
               type="text"
@@ -165,10 +165,10 @@ const ProfileEditForm: FC = () => {
               onChange={handleChange}
               placeholder="https://yourwebsite.com"
             />
-          </FormGroup>
+          </ProfileFormGroup>
 
-          <FormGroup>
-            <Label htmlFor="twitter">Twitter</Label>
+          <ProfileFormGroup>
+            <ProfileLabel htmlFor="twitter">Twitter</ProfileLabel>
             <SocialInputContainer>
               <SocialIcon>
                 <FaTwitter />
@@ -182,10 +182,10 @@ const ProfileEditForm: FC = () => {
                 placeholder="username"
               />
             </SocialInputContainer>
-          </FormGroup>
+          </ProfileFormGroup>
 
-          <FormGroup>
-            <Label htmlFor="instagram">Instagram</Label>
+          <ProfileFormGroup>
+            <ProfileLabel htmlFor="instagram">Instagram</ProfileLabel>
             <SocialInputContainer>
               <SocialIcon>
                 <FaInstagram />
@@ -199,10 +199,10 @@ const ProfileEditForm: FC = () => {
                 placeholder="username"
               />
             </SocialInputContainer>
-          </FormGroup>
+          </ProfileFormGroup>
 
-          <FormGroup>
-            <Label htmlFor="linkedin">LinkedIn</Label>
+          <ProfileFormGroup>
+            <ProfileLabel htmlFor="linkedin">LinkedIn</ProfileLabel>
             <SocialInputContainer>
               <SocialIcon>
                 <FaLinkedin />
@@ -216,10 +216,10 @@ const ProfileEditForm: FC = () => {
                 placeholder="username"
               />
             </SocialInputContainer>
-          </FormGroup>
+          </ProfileFormGroup>
 
-          <FormGroup>
-            <Label htmlFor="github">GitHub</Label>
+          <ProfileFormGroup>
+            <ProfileLabel htmlFor="github">GitHub</ProfileLabel>
             <SocialInputContainer>
               <SocialIcon>
                 <FaGithub />
@@ -233,18 +233,18 @@ const ProfileEditForm: FC = () => {
                 placeholder="username"
               />
             </SocialInputContainer>
-          </FormGroup>
+          </ProfileFormGroup>
 
-          <ButtonContainer>
-            <Button type="button" onClick={() => router.back()}>
+          <ProfileButtonContainer>
+            <ProfileButton type="button" onClick={() => router.back()}>
               Cancel
-            </Button>
-            <Button type="submit" primary>
+            </ProfileButton>
+            <ProfileButton type="submit" primary>
               Save Changes
-            </Button>
-          </ButtonContainer>
+            </ProfileButton>
+          </ProfileButtonContainer>
         </form>
-      </FormContainer>
+      </ProfileFormContainer>
     </CreateProfileContainer>
   );
 };
