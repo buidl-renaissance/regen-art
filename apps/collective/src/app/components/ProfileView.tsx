@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { SubmitButton } from './ProfileStyles';
 // import { ArtworkCard } from '@/libs/ui/src/lib/ArtworkCard';
 import ArtworkGallery from './ArtworkGallery';
+import { FaTwitter, FaInstagram, FaGithub, FaGlobe } from 'react-icons/fa';
 
 interface ProfileViewProps {
   profileData: ProfileData;
@@ -72,6 +73,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
             target="_blank"
             rel="noopener noreferrer"
           >
+            <FaGlobe style={{ marginRight: '8px' }} />
             {profileData.website}
           </ProfileLink>
         </ProfileSection>
@@ -87,7 +89,8 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                   href={`https://twitter.com/${profileData.socialLinks.twitter}`}
                   target="_blank"
                 >
-                  Twitter: @{profileData.socialLinks.twitter}
+                  <FaTwitter style={{ marginRight: '8px' }} />
+                  @{profileData.socialLinks.twitter}
                 </SocialLink>
               )}
               {profileData.socialLinks.instagram && (
@@ -95,7 +98,8 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                   href={`https://instagram.com/${profileData.socialLinks.instagram}`}
                   target="_blank"
                 >
-                  Instagram: @{profileData.socialLinks.instagram}
+                  <FaInstagram style={{ marginRight: '8px' }} />
+                  @{profileData.socialLinks.instagram}
                 </SocialLink>
               )}
               {profileData.socialLinks.github && (
@@ -103,7 +107,8 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                   href={`https://github.com/${profileData.socialLinks.github}`}
                   target="_blank"
                 >
-                  GitHub: {profileData.socialLinks.github}
+                  <FaGithub style={{ marginRight: '8px' }} />
+                  {profileData.socialLinks.github}
                 </SocialLink>
               )}
             </SocialLinksContainer>
@@ -127,7 +132,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
         </QRCodeWrapper>
       </QRCodeContainer>
 
-      {profileData.artworks && (
+      {profileData.artworks && profileData.artworks.length > 0 && (
         <ArtworkGallery artworks={profileData.artworks} />
       )}
     </ProfileContainer>
@@ -278,7 +283,8 @@ const ProfileLink = styled.a`
   color: #6c9fff;
   text-decoration: none;
   word-break: break-all;
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 0.25rem 0;
 
   &:hover {
@@ -297,7 +303,8 @@ const SocialLinksContainer = styled.div`
 const SocialLink = styled.a`
   color: #6c9fff;
   text-decoration: none;
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
