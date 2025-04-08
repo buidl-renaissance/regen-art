@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 const CreateProfileContainer = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* max-width: 600px; */
+  /* margin: 0 auto; */
+  /* padding: 2rem; */
   /* background-color: #1a1a1a; */
   color: #f5f5f5;
   font-family: monospace;
   min-height: 100vh;
 
   @media (max-width: 768px) {
-    padding: 1.5rem;
+    padding: 0rem;
+    border-radius: 0;
   }
 `;
 
@@ -32,12 +33,13 @@ const PageTitle = styled.h1`
 
 const FormContainer = styled.div`
   background-color: #2a2a2a;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  /* border-radius: 8px; */
+  /* padding: 2rem; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); */
+  height: 100vh;
 
   @media (max-width: 768px) {
-    padding: 1.5rem;
+    padding: 0rem;
     border-radius: 6px;
   }
 `;
@@ -110,7 +112,6 @@ const SubmitButton = styled.button`
   letter-spacing: 0.05em;
   transition: all 0.3s ease;
   width: 100%;
-  margin-top: 0.5rem;
 
   &:hover {
     background-color: #7a6e4e;

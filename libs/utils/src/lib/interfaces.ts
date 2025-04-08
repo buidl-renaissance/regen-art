@@ -17,6 +17,19 @@ export interface ArtworkData {
   category?: string;
 }
 
+export interface ProfileData {
+  handle: string;
+  profileImage?: string;
+  bio?: string;
+  website?: string;
+  socialLinks?: { 
+    twitter?: string;
+    instagram?: string;
+    github?: string;
+  };
+  artworks?: Artwork[];
+}
+
 export interface Artwork {
   id: number;
   slug: string;

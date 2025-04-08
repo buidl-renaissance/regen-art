@@ -7,11 +7,11 @@ import { getOrCreateHotWallet } from '@gods.work/utils';
  */
 export const useClient = () => {
   const [clientId, setClientId] = useState<string>('');
-  const [username, setUsername] = useState<string>('');
+  const [handle, setHandle] = useState<string>('');
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('dpop_username');
-    setUsername(storedUsername || 'anonymous');
+    const storedHandle = localStorage.getItem('handle');
+    setHandle(storedHandle || 'anonymous');
   }, []);
 
   useEffect(() => {
@@ -24,26 +24,26 @@ export const useClient = () => {
     // If there's a stored client ID, check if it's still valid for this wallet
     if (storedClientId) {
       const parts = storedClientId.split(':');
-      if (parts.length >= 2 && parts[0] === address && parts[1] === username) {
+      if (parts.length >= 2 && parts[0] === address && parts[1] === handle) {
         setClientId(storedClientId);
         return;
       }
     }
     
     // Generate a new client ID using the wallet address and a timestamp for uniqueness
-    const generatedClientId = `DPoP:${username}:${address}`;
+    const generatedClientId = `DPoP:${handle}:${address}`;
     
     // Store the new client ID
     localStorage.setItem('dpop_client_id', generatedClientId);
     setClientId(generatedClientId);
-  }, [username]);
+  }, [handle]);
 
   /**
    * Regenerate the client ID with the current wallet address
    */
   const regenerateClientId = () => {
     const { address } = getOrCreateHotWallet();
-    const newClientId = `DPoP:${username}:${address}`;
+    const newClientId = `DPoP:${handle}:${address}`;
     localStorage.setItem('dpop_client_id', newClientId);
     setClientId(newClientId);
     return newClientId;

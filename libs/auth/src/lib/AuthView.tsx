@@ -2,16 +2,21 @@ import { formatDate } from '@/libs/utils/src/lib/datetime';
 import styled from 'styled-components';
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from './hooks/useAuth';
 import { getOrCreateHotWallet, signMessage } from '@gods.work/utils';
 
 import { useClient } from './hooks/useClient';
-import { useUsername } from './hooks/useUsername';
 
 import { QRCodeAuthentication } from './QRCodeAuthentication';
-import { UsernameFormComponent } from './UsernameFormComponent';
 
-export const AuthView: React.FC = () => {
+interface AuthProps {
+  handle: string;
+  onAuth: (handle: string) => void;
+}
+
+export const AuthView: React.FC<AuthProps> = ({
+  handle,
+  onAuth
+}: AuthProps) => {
   const [status, setStatus] = useState<'waiting' | 'success' | 'error'>(
     'waiting'
   );
@@ -20,10 +25,8 @@ export const AuthView: React.FC = () => {
   );
   const [webhookId, setWebhookId] = useState<string>('');
   const [qrData, setQRData] = useState<string>('');
-  const [showQRCode, setShowQRCode] = useState<boolean>(false);
-  const { user } = useAuth();
+  const [showQRCode, ] = useState<boolean>(false);
   const { clientId } = useClient();
-  const { username, setUsername } = useUsername();
 
   useEffect(() => {
     const { wallet, address, phrase } = getOrCreateHotWallet();
@@ -33,7 +36,7 @@ export const AuthView: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (clientId && webhookId && username && !qrData) {
+    if (clientId && webhookId && handle && !qrData) {
       const generateQRData = async () => {
         const client_sig = await signMessage(clientId);
         console.log('Generating QR Data w/ Sig', client_sig);
@@ -42,14 +45,14 @@ export const AuthView: React.FC = () => {
             webhookId,
             client_id: clientId,
             client_sig,
-            username,
+            handle,
             timestamp: Date.now(),
           })
         );
       };
       generateQRData();
     }
-  }, [clientId, webhookId, username, qrData]);
+  }, [clientId, webhookId, handle, qrData]);
 
   // Generate a unique webhook ID and public key on component mount
   useEffect(() => {
@@ -98,34 +101,21 @@ export const AuthView: React.FC = () => {
       } else if (data.type === 'authenticated') {
         console.log('Register response received');
         console.log('Authenticated: ', data);
-        window.location.href = '/profile';
+        onAuth(data.handle);
       }
     };
   };
 
-  const handleUsernameSubmit = () => {
-    setShowQRCode(true);
-  };
-
   return (
     <AuthContainer>
-      {!showQRCode ? (
-        <UsernameFormComponent
-          username={username}
-          setUsername={setUsername}
-          onSubmit={handleUsernameSubmit}
-        />
-      ) : (
-        <QRCodeAuthentication
-          username={username}
-          clientId={clientId}
-          qrData={qrData}
-          status={status}
-          statusMessage={statusMessage}
-        />
-      )}
-
-      {/* <UserInfo user={user} /> */}
+      <QRCodeAuthentication
+        handle={handle}
+        clientId={clientId}
+        qrData={qrData}
+        status={status}
+        statusMessage={statusMessage}
+        instructions="Scan this QR code with your DPoP-compatible mobile app to authenticate securely without sharing your password."
+      />
     </AuthContainer>
   );
 };
@@ -133,7 +123,7 @@ export const AuthView: React.FC = () => {
 const AuthContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;

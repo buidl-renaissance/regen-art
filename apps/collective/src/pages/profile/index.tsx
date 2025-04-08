@@ -1,150 +1,180 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { getRsvps, getBookmarks, isAuthorized, logout } from '@gods.work/utils';
-import { Container } from '../../app/components/Styled';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useUser } from '../../app/hooks/useUser';
-import Image from 'next/image';
-import EventCard from '../../app/components/EventCard';
+import { FC, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { Metadata } from 'next';
 import {
-  ProfileHeader,
-  ProfileImage,
-  ProfilePlaceholder,
-  ProfileTitle,
-  ProfileEmail,
-  ProfileOrganization,
-  ProfileBio,
-  ProfileSection,
+  CreateProfileContainer,
+  PageTitle,
+  FormContainer,
+  FormGroup,
+  Label,
+  Input,
+  ErrorMessage,
+  SubmitButton,
+  HelpText,
 } from '../../app/components/ProfileStyles';
-import {
-  CenteredContent,
-  LoadingMessage,
-  EditButton,
-  LogoutButton,
-  ButtonGroup,
-  SectionTitle,
-  EventGrid,
-  EventGridItem,
-  EmptyState,
-} from '../../app/components/Styled';
+import styled from 'styled-components';
+import { useClient } from '@gods.work/auth';
+import Link from 'next/link';
+import { ProfileView } from '../../app/components/ProfileView';
+import { ProfileData } from '@/libs/utils/src/lib/interfaces';
+// import UploadProfileImage from '../../../app/components/UploadProfileImage';
 
-export const getServerSideProps = async () => {
-  return {
-    props: {},
-  };
+export const metadata: Metadata = {
+  title: 'Create Profile | Art Night Detroit',
+  description: 'Create your profile to join the Art Night Detroit community',
 };
 
-export default function ProfilePage() {
-  const { user, loading, error } = useUser();
-  const [rsvps, setRsvps] = useState<any[]>([]);
-  const [bookmarks, setBookmarks] = useState<any[]>([]);
+export async function getServerSideProps() {
+  return {
+    props: {
+      metadata,
+      theme: 'dark',
+    },
+  };
+}
+
+const ProfilePage: FC = () => {
+  const [handle, setHandle] = useState('');
+  // const [profileImage, setProfileImage] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting] = useState(false);
+  const [hasExistingProfile, setHasExistingProfile] = useState(false);
+  const [profileData, setProfileData] = useState<any>(null);
   const router = useRouter();
+  const { clientId } = useClient();
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!isAuthorized()) {
-        router.push('/login');
-        return;
+    // Load profile data from localStorage if it exists
+    const storedHandle = localStorage.getItem('handle');
+    if (storedHandle) {
+      setHandle(storedHandle);
+      setError(validateHandle(storedHandle));
+      setHasExistingProfile(true);
+
+      // Load all profile data from localStorage
+      const storedProfileData = localStorage.getItem('profileData');
+      if (storedProfileData) {
+        try {
+          const parsedData = JSON.parse(storedProfileData) as ProfileData;
+          setProfileData(parsedData);
+        } catch (e) {
+          console.error('Error parsing profile data:', e);
+          // Fallback to basic profile data if parsing fails
+          setProfileData({ handle: storedHandle });
+        }
+      } else {
+        // If no stored profile data, use basic profile with handle only
+        setProfileData({ handle: storedHandle });
       }
+    }
+  }, []);
 
-      try {
-        const rsvpsData = await getRsvps({});
-        setRsvps(rsvpsData);
+  const validateHandle = (value: string) => {
+    if (!value) {
+      return 'Handle is required';
+    }
 
-        const bookmarksData = await getBookmarks();
-        setBookmarks(bookmarksData);
-      } catch (error) {
-        console.error('Error fetching profile data:', error);
-      }
-    };
+    if (value.length < 3) {
+      return 'Handle must be at least 3 characters';
+    }
 
-    fetchData();
-  }, [router]);
+    if (value.length > 30) {
+      return 'Handle must be less than 30 characters';
+    }
 
-  const handleLogout = () => {
-    logout();
+    if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+      return 'Handle can only contain letters, numbers, and underscores';
+    }
+
+    return '';
   };
 
-  if (loading) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setHandle(value);
+    setError(validateHandle(value));
+  };
+
+  // const handleImageChange = (imageUrl: string) => {
+  //   setProfileImage(imageUrl);
+  // };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const validationError = validateHandle(handle);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    // Simulate API call with timeout
+    localStorage.setItem('handle', handle);
+    // if (profileImage) {
+    //   localStorage.setItem('profileImage', profileImage);
+    // }
+
+    router.push('/profile/verify');
+  };
+
+  if (hasExistingProfile) {
     return (
-      <Container>
-        <CenteredContent>
-          <LoadingMessage>Loading profile...</LoadingMessage>
-        </CenteredContent>
-      </Container>
+      <CreateProfileContainer>
+        <FormContainer>
+          <ProfileView
+            profileData={profileData as ProfileData}
+            showVerifyButton={true}
+            onEditProfile={() => {
+              router.push('/profile/edit');
+            }}
+          />
+        </FormContainer>
+      </CreateProfileContainer>
     );
   }
 
   return (
-    <Container>
-      <CenteredContent>
-        <ProfileHeader>
-          <ProfileImage>
-            {user?.profile_picture ? (
-              <Image
-                src={user.profile_picture}
-                alt={user.name || 'Profile'}
-                width={100}
-                height={100}
-                style={{ borderRadius: '50%', objectFit: 'cover' }}
-              />
-            ) : (
-              <ProfilePlaceholder>
-                {user?.name ? user.name.charAt(0).toUpperCase() : '?'}
-              </ProfilePlaceholder>
-            )}
-          </ProfileImage>
-          <ProfileTitle>{user?.name || 'My Profile'}</ProfileTitle>
-          {user?.email && <ProfileEmail>{user.email}</ProfileEmail>}
-          {user?.organization && (
-            <ProfileOrganization>{user.organization}</ProfileOrganization>
-          )}
-          {user?.bio && <ProfileBio>{user.bio}</ProfileBio>}
+    <CreateProfileContainer>
+      <PageTitle>Create Your Profile</PageTitle>
 
-          <ButtonGroup>
-            <EditButton onClick={() => router.push('/profile/edit')}>
-              Edit Profile
-            </EditButton>
-            <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
-          </ButtonGroup>
-        </ProfileHeader>
+      <FormContainer>
+        <form onSubmit={handleSubmit}>
+          <FormGroup>
+            {/* <FormGroup>
+            <UploadProfileImage
+              currentImage={profileImage}
+              onImageChange={handleImageChange}
+            />
+          </FormGroup> */}
 
-        <ProfileSection>
-          <SectionTitle>My RSVPs</SectionTitle>
-          {rsvps.length > 0 ? (
-            <EventGrid>
-              {rsvps.map((rsvp) => (
-                <EventGridItem key={rsvp.id}>
-                  <Link href={`/event/${rsvp.event?.slug}`} passHref>
-                    <EventCard event={rsvp.event} />
-                  </Link>
-                </EventGridItem>
-              ))}
-            </EventGrid>
-          ) : (
-            <EmptyState>You haven&apos;t RSVPed to any events yet.</EmptyState>
-          )}
-        </ProfileSection>
+            <Label htmlFor="handle">Username / Handle</Label>
+            <Input
+              id="handle"
+              type="text"
+              value={handle}
+              onChange={handleChange}
+              placeholder="Enter your unique handle"
+              disabled={isSubmitting}
+            />
+            <HelpText>
+              This will be your unique DPoP identifier. Choose wisely as it
+              cannot be changed later.
+            </HelpText>
+            {error && <ErrorMessage>{error}</ErrorMessage>}
+          </FormGroup>
 
-        <ProfileSection>
-          <SectionTitle>My Bookmarks</SectionTitle>
-          {bookmarks.length > 0 ? (
-            <EventGrid>
-              {bookmarks.map((bookmark) => (
-                <EventGridItem key={bookmark.id}>
-                  <Link href={`/event/${bookmark.event?.slug}`} passHref>
-                    <EventCard event={bookmark.event} />
-                  </Link>
-                </EventGridItem>
-              ))}
-            </EventGrid>
-          ) : (
-            <EmptyState>You haven&apos;t bookmarked any events yet.</EmptyState>
-          )}
-        </ProfileSection>
-      </CenteredContent>
-    </Container>
+          <SubmitButton
+            type="submit"
+            disabled={!!error || !handle || isSubmitting}
+          >
+            {isSubmitting ? 'Creating...' : 'Setup Profile'}
+          </SubmitButton>
+        </form>
+      </FormContainer>
+    </CreateProfileContainer>
   );
-}
+};
+
+export default ProfilePage;

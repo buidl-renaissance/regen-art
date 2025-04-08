@@ -8,7 +8,6 @@ import type { Metadata } from 'next';
 import {
   CreateProfileContainer,
   PageTitle,
-  SectionTitle,
   Button,
   FormContainer,
   FormGroup,
@@ -19,8 +18,8 @@ import {
   SocialInput,
   ButtonContainer,
   TextArea,
-} from '../../../app/components/ProfileStyles';
-import UploadProfileImage from '../../../app/components/UploadProfileImage';
+} from '../../app/components/ProfileStyles';
+import UploadProfileImage from '../../app/components/UploadProfileImage';
 
 const ProfileDetails: FC = () => {
   const router = useRouter();
@@ -67,8 +66,21 @@ const ProfileDetails: FC = () => {
     e.preventDefault();
     // Save profile details to state or API
     console.log('Profile details:', { ...formData, username });
+    localStorage.setItem(
+      'profileData',
+      JSON.stringify({
+        ...formData,
+        handle: username,
+        socialLinks: {
+          twitter: formData.twitter,
+          instagram: formData.instagram,
+          linkedin: formData.linkedin,
+          github: formData.github,
+        },
+      })
+    );
     // Navigate to next step
-    router.push('/profile/create/preferences');
+    router.push('/profile');
   };
 
   return (
