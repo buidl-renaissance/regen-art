@@ -17,3 +17,4 @@ export * from './lib/UploadButton';
 export * from './lib/UploadMedia';
 export * from './lib/useWallet';
 export * from './lib/VenueSearch';
+export * from './lib/ComingSoon';

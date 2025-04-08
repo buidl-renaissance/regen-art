@@ -5,6 +5,7 @@ import { ProjectCard, ProjectStatus } from '@gods.work/projects';
 import { Project } from '@gods.work/projects';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
+import { ComingSoon } from '@gods.work/ui';
 
 export async function getServerSideProps() {
   // In a real implementation, you would fetch this data from your API
@@ -97,6 +98,14 @@ const ProjectsPage = ({ projects }: { projects: Project[] }) => {
       setFilteredProjects(projects.filter(project => project.category === activeCategory));
     }
   }, [activeCategory, projects]);
+
+  
+  return (
+    <Container>
+      <ComingSoon />
+    </Container>
+  )
+  
 
   return (
     <Container>

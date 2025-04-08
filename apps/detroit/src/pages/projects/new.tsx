@@ -3,6 +3,7 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
+import { ComingSoon } from '@gods.work/ui';
 
 const NewProject = () => {
   const [formData, setFormData] = useState({
@@ -12,14 +13,14 @@ const NewProject = () => {
     location: '',
     contactEmail: '',
     imageUrl: '',
-    websiteUrl: ''
+    websiteUrl: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -28,8 +29,16 @@ const NewProject = () => {
     // Here you would typically send the data to your backend
     console.log('Form submitted:', formData);
     // For now, just show an alert
-    alert('Project submitted successfully! (This is a placeholder - actual submission functionality coming soon)');
+    alert(
+      'Project submitted successfully! (This is a placeholder - actual submission functionality coming soon)'
+    );
   };
+
+  return (
+    <Container>
+      <ComingSoon />
+    </Container>
+  );
 
   return (
     <Container>
@@ -47,8 +56,8 @@ const NewProject = () => {
 
       <PageTitle>Launch Your Project</PageTitle>
       <PageDescription>
-        Share your creative initiative with Detroit&apos;s community. Fill out the form below
-        to get started with your project.
+        Share your creative initiative with Detroit&apos;s community. Fill out
+        the form below to get started with your project.
       </PageDescription>
 
       <FormContainer onSubmit={handleSubmit}>
@@ -171,7 +180,7 @@ const BackLink = styled(Link)`
   margin-bottom: 2rem;
   text-decoration: none;
   transition: color 0.2s ease;
-  
+
   &:hover {
     color: #64b5f6;
     text-decoration: underline;
@@ -206,7 +215,7 @@ const FormGroup = styled.div`
 const FormRow = styled.div`
   display: flex;
   gap: 1.5rem;
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 1.5rem;
@@ -226,7 +235,7 @@ const Input = styled.input`
   background-color: #1e1e1e;
   color: #f5f5f5;
   font-family: 'Courier New', monospace;
-  
+
   &:focus {
     outline: none;
     border-color: #90caf9;
@@ -242,7 +251,7 @@ const TextArea = styled.textarea`
   color: #f5f5f5;
   font-family: 'Courier New', monospace;
   resize: vertical;
-  
+
   &:focus {
     outline: none;
     border-color: #90caf9;
@@ -257,7 +266,7 @@ const Select = styled.select`
   background-color: #1e1e1e;
   color: #f5f5f5;
   font-family: 'Courier New', monospace;
-  
+
   &:focus {
     outline: none;
     border-color: #90caf9;
@@ -277,7 +286,7 @@ const SubmitButton = styled.button`
   transition: all 0.2s ease;
   font-family: 'Courier New', monospace;
   margin-top: 1rem;
-  
+
   &:hover {
     background-color: #64b5f6;
     transform: translateY(-2px);
