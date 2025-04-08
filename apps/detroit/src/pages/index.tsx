@@ -112,7 +112,7 @@ const Home = () => {
                 Have an idea for a community initiative? Use our platform to organize,
                 promote, and grow your creative project in Detroit.
               </ProjectDescription>
-              <ProjectLink href="/project/new">
+              <ProjectLink href="/projects/new">
                 Get Started →
               </ProjectLink>
             </ProjectContent>

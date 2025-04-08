@@ -15,7 +15,7 @@ const NewProject = () => {
     websiteUrl: ''
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -47,7 +47,7 @@ const NewProject = () => {
 
       <PageTitle>Launch Your Project</PageTitle>
       <PageDescription>
-        Share your creative initiative with Detroit's community. Fill out the form below
+        Share your creative initiative with Detroit&apos;s community. Fill out the form below
         to get started with your project.
       </PageDescription>
 
