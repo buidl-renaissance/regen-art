@@ -24,7 +24,7 @@ const NewProject = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Here you would typically send the data to your backend
     console.log('Form submitted:', formData);
@@ -80,7 +80,10 @@ const NewProject = () => {
             id="description"
             name="description"
             value={formData.description}
-            onChange={handleChange}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              const { name, value } = e.target;
+              setFormData((prev) => ({ ...prev, [name]: value }));
+            }}
             required
             placeholder="Describe your project, its goals, and how it benefits the community"
             rows={5}
@@ -94,7 +97,10 @@ const NewProject = () => {
               id="category"
               name="category"
               value={formData.category}
-              onChange={handleChange}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                const { name, value } = e.target;
+                setFormData((prev) => ({ ...prev, [name]: value }));
+              }}
               required
             >
               <option value="">Select a category</option>
