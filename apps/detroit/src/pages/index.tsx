@@ -260,7 +260,7 @@ const HeroDescription = styled.p`
   margin-right: auto;
 
   @media (max-width: 480px) {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 1.5rem;
   }
 `;
@@ -318,7 +318,7 @@ const SectionTitle = styled.h2`
 `;
 
 const Paragraph = styled.p`
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.6;
   color: #f5f5f5;
   margin-bottom: 2rem;
@@ -533,7 +533,7 @@ const CTADescription = styled.p`
   font-family: 'Courier New', monospace;
 
   @media (max-width: 480px) {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 1.5rem;
   }
 `;
@@ -557,7 +557,7 @@ const PrimaryButton = styled(Link)`
   padding: 0.875rem 1.75rem;
   border-radius: 6px;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: all 0.2s ease;
   font-family: 'Courier New', monospace;
 
@@ -584,7 +584,7 @@ const SecondaryButton = styled(Link)`
   border: 2px solid #90caf9;
   border-radius: 6px;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: all 0.2s ease;
   font-family: 'Courier New', monospace;
 
