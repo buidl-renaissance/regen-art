@@ -4,6 +4,7 @@ import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Metadata } from 'next';
 import {
+  ProfileContainer,
   CreateProfileContainer,
   PageTitle,
   FormContainer,
@@ -14,9 +15,7 @@ import {
   SubmitButton,
   HelpText,
 } from '../../app/components/ProfileStyles';
-import styled from 'styled-components';
 import { useClient } from '@gods.work/auth';
-import Link from 'next/link';
 import { ProfileView } from '../../app/components/ProfileView';
 import { ProfileData } from '@/libs/utils/src/lib/interfaces';
 // import UploadProfileImage from '../../../app/components/UploadProfileImage';
@@ -121,17 +120,13 @@ const ProfilePage: FC = () => {
 
   if (hasExistingProfile) {
     return (
-      <CreateProfileContainer>
-        <FormContainer>
-          <ProfileView
-            profileData={profileData as ProfileData}
-            showVerifyButton={true}
-            onEditProfile={() => {
-              router.push('/profile/edit');
-            }}
-          />
-        </FormContainer>
-      </CreateProfileContainer>
+      <ProfileContainer>
+        <ProfileView
+          profileData={profileData as ProfileData}
+          showVerifyButton={true}
+          showEditProfile={true}
+        />
+      </ProfileContainer>
     );
   }
 
@@ -178,3 +173,4 @@ const ProfilePage: FC = () => {
 };
 
 export default ProfilePage;
+

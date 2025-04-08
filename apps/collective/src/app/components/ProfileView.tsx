@@ -5,19 +5,19 @@ import { QRCodeAuthentication } from '@/libs/auth/src/lib/QRCodeAuthentication';
 import { ProfileData } from '@gods.work/utils';
 import Link from 'next/link';
 import { SubmitButton } from './ProfileStyles';
-import { ArtworkCard } from '@/libs/ui/src/lib/ArtworkCard';
+// import { ArtworkCard } from '@/libs/ui/src/lib/ArtworkCard';
 import ArtworkGallery from './ArtworkGallery';
 
 interface ProfileViewProps {
   profileData: ProfileData;
   showVerifyButton?: boolean;
-  onEditProfile?: () => void;
+  showEditProfile?: boolean;
 }
 
 export const ProfileView: React.FC<ProfileViewProps> = ({
   profileData,
   showVerifyButton = false,
-  onEditProfile,
+  showEditProfile = false,
 }: ProfileViewProps) => {
   const { clientId } = useClient();
 
@@ -39,10 +39,12 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
             <ProfileInfoContent>
               <ProfileName>@{profileData.handle}</ProfileName>
               <ButtonContainer>
-                {onEditProfile && (
-                  <EditProfileButton onClick={onEditProfile}>
-                    Edit Profile
-                  </EditProfileButton>
+                {showEditProfile && (
+                  <Link href="/profile/edit" passHref>
+                    <EditProfileButton>
+                      Edit Profile
+                    </EditProfileButton>
+                  </Link>
                 )}
                 {showVerifyButton && (
                   <Link href="/profile/verify" passHref>

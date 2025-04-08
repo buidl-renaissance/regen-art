@@ -4,11 +4,11 @@ import { FC } from 'react';
 import type { Metadata } from 'next';
 import ProfileEditForm from '../../app/components/ProfileEditForm';
 
-const EditProfile: FC = () => {
+const SetupProfile: FC = () => {
   return <ProfileEditForm />;
 };
 
-export default EditProfile;
+export default SetupProfile;
 
 export const metadata: Metadata = {
   title: 'Edit Profile | Art Night Detroit',

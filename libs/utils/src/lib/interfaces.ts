@@ -19,12 +19,15 @@ export interface ArtworkData {
 
 export interface ProfileData {
   handle: string;
+  name?: string;
   profileImage?: string;
   bio?: string;
   website?: string;
+  organization?: string;
   socialLinks?: { 
     twitter?: string;
     instagram?: string;
+    linkedin?: string;
     github?: string;
   };
   artworks?: Artwork[];

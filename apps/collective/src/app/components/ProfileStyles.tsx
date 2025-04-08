@@ -1,10 +1,22 @@
 import styled from 'styled-components';
 
+const ProfileContainer = styled.div`
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  font-family: monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  @media (max-width: 768px) {
+    padding: 0rem;
+  }
+`;
+
 const CreateProfileContainer = styled.div`
-  /* max-width: 600px; */
-  /* margin: 0 auto; */
-  /* padding: 2rem; */
-  /* background-color: #1a1a1a; */
+  background-color: #2a2a2a;
   color: #f5f5f5;
   font-family: monospace;
   min-height: 100vh;
@@ -32,16 +44,13 @@ const PageTitle = styled.h1`
 `;
 
 const FormContainer = styled.div`
-  background-color: #2a2a2a;
-  /* border-radius: 8px; */
-  /* padding: 2rem; */
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); */
-  height: 100vh;
-
-  @media (max-width: 768px) {
+  padding: 2rem;
+  min-height: 100vh;
+  margin: auto;
+  max-width: 800px;
+  /* @media (max-width: 768px) {
     padding: 0rem;
-    border-radius: 6px;
-  }
+  } */
 `;
 
 const FormGroup = styled.div`
@@ -152,7 +161,7 @@ const ProfileHeader = styled.div`
   align-items: center;
   text-align: center;
   margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
   @media (max-width: 768px) {
@@ -279,13 +288,13 @@ const TextArea = styled.textarea`
   font-size: 0.95rem;
   min-height: 120px;
   resize: vertical;
-  
+
   &:focus {
     outline: none;
     border-color: #666;
     box-shadow: 0 0 0 2px rgba(102, 102, 102, 0.3);
   }
-  
+
   @media (max-width: 768px) {
     padding: 0.7rem;
     font-size: 0.9rem;
@@ -297,7 +306,7 @@ const SectionTitle = styled.h2`
   font-size: 1.4rem;
   margin: 2rem 0 1rem;
   color: #f5f5f5;
-  
+
   @media (max-width: 768px) {
     font-size: 1.2rem;
     margin: 1.5rem 0 0.8rem;
@@ -325,7 +334,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
-  
+
   @media (max-width: 768px) {
     margin-top: 1.8rem;
   }
@@ -333,30 +342,30 @@ const ButtonContainer = styled.div`
 
 const Button = styled.button<{ primary?: boolean }>`
   padding: 0.8rem 1.5rem;
-  border: ${props => props.primary ? 'none' : '1px solid #666'};
+  border: ${(props) => (props.primary ? 'none' : '1px solid #666')};
   border-radius: 4px;
-  background-color: ${props => props.primary ? '#3a86ff' : 'transparent'};
-  color: ${props => props.primary ? '#fff' : '#f5f5f5'};
+  background-color: ${(props) => (props.primary ? '#3a86ff' : 'transparent')};
+  color: ${(props) => (props.primary ? '#fff' : '#f5f5f5')};
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  
+
   &:hover {
-    background-color: ${props => props.primary ? '#2a76ef' : '#333'};
+    background-color: ${(props) => (props.primary ? '#2a76ef' : '#333')};
     transform: translateY(-2px);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
-  
+
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
   }
-  
+
   @media (max-width: 768px) {
     padding: 0.7rem 1.2rem;
     font-size: 0.9rem;
@@ -374,6 +383,7 @@ export {
   ProfilePlaceholder,
   ProfileSection,
   ProfileTitle,
+  ProfileContainer,
   CreateProfileContainer,
   PageTitle,
   FormContainer,
@@ -389,5 +399,5 @@ export {
   ButtonContainer,
   SectionTitle,
   TextArea,
-  Button
+  Button,
 };

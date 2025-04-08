@@ -1,10 +1,8 @@
 'use client';
 
 import { FC, useState, ChangeEvent, FormEvent, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 import { FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
-import type { Metadata } from 'next';
 import {
   CreateProfileContainer,
   PageTitle,
@@ -18,16 +16,19 @@ import {
   SocialInput,
   ButtonContainer,
   TextArea,
-} from '../../app/components/ProfileStyles';
-import UploadProfileImage from '../../app/components/UploadProfileImage';
+} from './ProfileStyles';
+import UploadProfileImage from './UploadProfileImage';
+import { useProfile } from '../hooks/useProfile';
 
-const ProfileDetails: FC = () => {
+const ProfileEditForm: FC = () => {
   const router = useRouter();
+  const { profileData, saveProfile } = useProfile();
   const [username, setUsername] = useState<string>('');
   const [formData, setFormData] = useState({
     profileImage: '',
     name: '',
     bio: '',
+    website: '',
     twitter: '',
     instagram: '',
     linkedin: '',
@@ -35,15 +36,30 @@ const ProfileDetails: FC = () => {
   });
 
   useEffect(() => {
-    // Check if username exists in localStorage
-    const storedHandle = localStorage.getItem('handle');
-    if (!storedHandle) {
-      // Redirect back to create profile page if username not set
-      router.push('/profile/create');
-      return;
+    // Load existing profile data if available
+    if (profileData) {
+      setUsername(profileData.handle);
+      setFormData({
+        profileImage: profileData.profileImage || '',
+        name: profileData.name || '',
+        bio: profileData.bio || '',
+        website: profileData.website || '',
+        twitter: profileData.socialLinks?.twitter || '',
+        instagram: profileData.socialLinks?.instagram || '',
+        linkedin: profileData.socialLinks?.linkedin || '',
+        github: profileData.socialLinks?.github || '',
+      });
+    } else {
+      // Check if username exists in localStorage
+      const storedHandle = localStorage.getItem('handle');
+      if (!storedHandle) {
+        // Redirect back to create profile page if username not set
+        router.push('/profile/create');
+        return;
+      }
+      setUsername(storedHandle);
     }
-    setUsername(storedHandle);
-  }, [router]);
+  }, [profileData, router]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -64,30 +80,40 @@ const ProfileDetails: FC = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // Save profile details to state or API
-    console.log('Profile details:', { ...formData, username });
-    localStorage.setItem(
-      'profileData',
-      JSON.stringify({
-        ...formData,
-        handle: username,
-        socialLinks: {
-          twitter: formData.twitter,
-          instagram: formData.instagram,
-          linkedin: formData.linkedin,
-          github: formData.github,
-        },
-      })
-    );
-    // Navigate to next step
+    
+    const updatedProfile = {
+      handle: username,
+      name: formData.name,
+      bio: formData.bio,
+      profileImage: formData.profileImage,
+      website: formData.website,
+      socialLinks: {
+        twitter: formData.twitter,
+        instagram: formData.instagram,
+        linkedin: formData.linkedin,
+        github: formData.github,
+      },
+      // Preserve any existing data
+      organization: profileData?.organization || '',
+      artworks: profileData?.artworks || [],
+    };
+    
+    // Use the saveProfile function from useProfile hook
+    if (saveProfile) {
+      saveProfile(updatedProfile);
+    } else {
+      localStorage.setItem('profileData', JSON.stringify(updatedProfile));
+    }
+    
+    // Navigate back to profile page
     router.push('/profile');
   };
 
   return (
     <CreateProfileContainer>
-      <PageTitle>Setup Your Profile</PageTitle>
-
       <FormContainer>
+        <PageTitle>Edit Your Profile</PageTitle>
+
         <form onSubmit={handleSubmit}>
           <FormGroup>
             <UploadProfileImage
@@ -130,6 +156,18 @@ const ProfileDetails: FC = () => {
           </FormGroup>
 
           <FormGroup>
+            <Label htmlFor="website">Website</Label>
+            <Input
+              id="website"
+              name="website"
+              type="text"
+              value={formData.website}
+              onChange={handleChange}
+              placeholder="https://yourwebsite.com"
+            />
+          </FormGroup>
+
+          <FormGroup>
             <Label htmlFor="twitter">Twitter</Label>
             <SocialInputContainer>
               <SocialIcon>
@@ -141,6 +179,7 @@ const ProfileDetails: FC = () => {
                 type="text"
                 value={formData.twitter}
                 onChange={handleChange}
+                placeholder="username"
               />
             </SocialInputContainer>
           </FormGroup>
@@ -157,6 +196,7 @@ const ProfileDetails: FC = () => {
                 type="text"
                 value={formData.instagram}
                 onChange={handleChange}
+                placeholder="username"
               />
             </SocialInputContainer>
           </FormGroup>
@@ -173,6 +213,7 @@ const ProfileDetails: FC = () => {
                 type="text"
                 value={formData.linkedin}
                 onChange={handleChange}
+                placeholder="username"
               />
             </SocialInputContainer>
           </FormGroup>
@@ -189,16 +230,17 @@ const ProfileDetails: FC = () => {
                 type="text"
                 value={formData.github}
                 onChange={handleChange}
+                placeholder="username"
               />
             </SocialInputContainer>
           </FormGroup>
 
           <ButtonContainer>
             <Button type="button" onClick={() => router.back()}>
-              Back
+              Cancel
             </Button>
             <Button type="submit" primary>
-              Continue
+              Save Changes
             </Button>
           </ButtonContainer>
         </form>
@@ -207,18 +249,4 @@ const ProfileDetails: FC = () => {
   );
 };
 
-export default ProfileDetails;
-
-export const metadata: Metadata = {
-  title: 'Create Profile | Art Night Detroit',
-  description: 'Create your profile to join the Art Night Detroit community',
-};
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      metadata,
-      theme: 'dark',
-    },
-  };
-}
+export default ProfileEditForm;
