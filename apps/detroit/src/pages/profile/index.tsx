@@ -7,18 +7,17 @@ import {
   ProfileContainer,
   CreateProfileContainer,
   PageTitle,
-  FormContainer,
   FormGroup,
   Label,
   Input,
   ErrorMessage,
-  SubmitButton,
-  HelpText,
-} from '../../../../../libs/ui/src/lib/ProfileStyles';
+  ProfileHelpText,
+  ProfileSubmitButton,
+  ProfileFormContainer,
+} from '@gods.work/ui';
 import { useClient } from '@gods.work/auth';
-import { ProfileView } from '../../../../../libs/ui/src/lib/ProfileView';
-import { ProfileData } from '@/libs/utils/src/lib/interfaces';
-// import UploadProfileImage from '../../../app/components/UploadProfileImage';
+import { ProfileView } from '@gods.work/ui';
+import { ProfileData } from '@gods.work/utils';
 
 export const metadata: Metadata = {
   title: 'Create Profile | Art Night Detroit',
@@ -134,7 +133,7 @@ const ProfilePage: FC = () => {
     <CreateProfileContainer>
       <PageTitle>Create Your Profile</PageTitle>
 
-      <FormContainer>
+      <ProfileFormContainer>
         <form onSubmit={handleSubmit}>
           <FormGroup>
             {/* <FormGroup>
@@ -153,21 +152,21 @@ const ProfilePage: FC = () => {
               placeholder="Enter your unique handle"
               disabled={isSubmitting}
             />
-            <HelpText>
+            <ProfileHelpText>
               This will be your unique DPoP identifier. Choose wisely as it
               cannot be changed later.
-            </HelpText>
+            </ProfileHelpText>
             {error && <ErrorMessage>{error}</ErrorMessage>}
           </FormGroup>
 
-          <SubmitButton
+          <ProfileSubmitButton
             type="submit"
             disabled={!!error || !handle || isSubmitting}
           >
             {isSubmitting ? 'Creating...' : 'Setup Profile'}
-          </SubmitButton>
+          </ProfileSubmitButton>
         </form>
-      </FormContainer>
+      </ProfileFormContainer>
     </CreateProfileContainer>
   );
 };

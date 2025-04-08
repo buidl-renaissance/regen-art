@@ -8,7 +8,7 @@ interface EventCardProps {
   event: DPoPEvent;
 }
 
-const EventCard = ({ event }: EventCardProps) => {
+export const EventCard = ({ event }: EventCardProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -133,5 +133,4 @@ const EventExcerpt = styled.p`
   margin-top: auto;
 `;
 
-export default EventCard;
 export { formatDate, EventImage, EventContent, EventTitle, EventInfo };

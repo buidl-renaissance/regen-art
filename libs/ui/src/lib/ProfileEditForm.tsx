@@ -20,7 +20,7 @@ import {
 import UploadProfileImage from './UploadProfileImage';
 import { useProfile } from '@gods.work/utils';
 
-const ProfileEditForm: FC = () => {
+export const ProfileEditForm: FC = () => {
   const router = useRouter();
   const { profileData, saveProfile } = useProfile();
   const [username, setUsername] = useState<string>('');
@@ -248,5 +248,3 @@ const ProfileEditForm: FC = () => {
     </CreateProfileContainer>
   );
 };
-
-export default ProfileEditForm;

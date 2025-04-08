@@ -12,9 +12,9 @@ import {
   EventGrid,
   EventGridItem,
   EmptyState,
-} from '../../app/components/Styled';
+} from '@gods.work/ui';
 import { getProfile, getRsvps } from '@gods.work/utils';
-import EventCard from '../../../../../libs/ui/src/lib/EventCard';
+import { EventCard } from '@gods.work/ui';
 import {
   ProfileHeader,
   ProfileImage,
@@ -24,7 +24,7 @@ import {
   ProfileOrganization,
   ProfileBio,
   ProfileSection,
-} from '../../../../../libs/ui/src/lib/ProfileStyles';
+} from '@gods.work/ui';
 import { GetServerSidePropsContext } from 'next';
 import { Metadata } from 'next';
 

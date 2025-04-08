@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { DPoPEvent, getEvents } from '@gods.work/utils';
-import EventCard from '../../../../../libs/ui/src/lib/EventCard';
+import { EventCard } from '@gods.work/ui';
 
 const EventsGridContainer = styled.div`
   display: grid;

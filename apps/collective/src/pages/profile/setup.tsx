@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 import type { Metadata } from 'next';
-import ProfileEditForm from '../../app/components/ProfileEditForm';
+import { ProfileEditForm } from '@gods.work/ui';
 
 const SetupProfile: FC = () => {
   return <ProfileEditForm />;

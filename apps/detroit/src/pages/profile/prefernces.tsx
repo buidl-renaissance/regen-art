@@ -8,12 +8,12 @@ import QRCode from 'react-qr-code';
 import {
   CreateProfileContainer,
   PageTitle,
-  FormContainer,
   FormGroup,
   Label,
   Input,
-  SubmitButton,
-} from '../../../../../libs/ui/src/lib/ProfileStyles';
+  ProfileSubmitButton,
+  ProfileFormContainer,
+} from '@gods.work/ui';
 
 const PreferencesPage: FC = () => {
   const router = useRouter();
@@ -115,7 +115,7 @@ const PreferencesPage: FC = () => {
     <CreateProfileContainer>
       <PageTitle>Profile Preferences</PageTitle>
 
-      <FormContainer>
+      <ProfileFormContainer>
         <form onSubmit={handleSubmit}>
           <FormGroup>
             <Label htmlFor="handle">Your Handle</Label>
@@ -213,9 +213,9 @@ const PreferencesPage: FC = () => {
             </QRCodeWrapper>
           </QRSection>
 
-          <SubmitButton type="submit">Save Preferences</SubmitButton>
+          <ProfileSubmitButton type="submit">Save Preferences</ProfileSubmitButton>
         </form>
-      </FormContainer>
+      </ProfileFormContainer>
     </CreateProfileContainer>
   );
 };
