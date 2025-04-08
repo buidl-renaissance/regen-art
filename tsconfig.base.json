@@ -17,6 +17,7 @@
     "paths": {
       "@/*": ["./*"],
       "@gods.work/auth": ["libs/auth/src/index.ts"],
+      "@gods.work/community": ["libs/community/src/index.ts"],
       "@gods.work/hooks": ["libs/hooks/src/index.ts"],
       "@gods.work/projects": ["libs/projects/src/index.ts"],
       "@gods.work/shadcn": ["libs/shadcn/src/index.ts"],
