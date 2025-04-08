@@ -26,10 +26,17 @@ const darkTheme = createTheme({
   },
 });
 
+// Create a light theme
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+  },
+});
+
 export default function MyApp({ Component, pageProps }: AppProps) {
   const pageMetadata = pageProps.metadata || metadata;
   // Fix: Ensure theme is properly created and not just a string
-  const theme = pageProps.theme && typeof pageProps.theme === 'object' ? pageProps.theme : darkTheme;
+  const theme = pageProps.theme && typeof pageProps.theme === 'string' ? (pageProps.theme === 'dark' ? darkTheme : lightTheme) : lightTheme;
 
   return (
     <>
