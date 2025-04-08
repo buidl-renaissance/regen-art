@@ -10,7 +10,7 @@ import { QRCodeAuthentication } from './QRCodeAuthentication';
 
 interface AuthProps {
   handle: string;
-  onAuth: (handle: string) => void;
+  onAuth?: (handle: string) => void;
 }
 
 export const AuthView: React.FC<AuthProps> = ({
@@ -101,7 +101,7 @@ export const AuthView: React.FC<AuthProps> = ({
       } else if (data.type === 'authenticated') {
         console.log('Register response received');
         console.log('Authenticated: ', data);
-        onAuth(data.handle);
+        onAuth?.(data.handle);
       }
     };
   };

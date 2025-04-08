@@ -378,7 +378,7 @@ const RAEventsAdmin = () => {
                 <p><strong>Date:</strong> {selectedEvent.date}</p>
                 <p><strong>Time:</strong> {selectedEvent.data.start_time} - {selectedEvent.data.end_time}</p>
                 <p><strong>Venue:</strong> {selectedEvent.data.venue}</p>
-                <p><strong>Lineup:</strong> {selectedEvent.data.lineup?.map(artist => artist.name).join(', ')}</p>
+                <p><strong>Lineup:</strong> {selectedEvent.data.lineup?.map((artist: any) => artist.name).join(', ')}</p>
                 <div>
                   <h3>Description</h3>
                   <p>{selectedEvent.data.description}</p>
