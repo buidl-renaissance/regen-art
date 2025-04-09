@@ -1,6 +1,6 @@
 import React from 'react';
-import Head from 'next/head';
 import styled from 'styled-components';
+import PageLayout from '../components/PageLayout';
 // import Link from 'next/link';
 
 // Styled Components
@@ -98,29 +98,16 @@ const PrimaryButton = styled.a`
   background: #00ff99;
   color: #0d0d0d;
   font-weight: bold;
-  margin: 10px;
+  margin: 1rem auto;
   border-radius: 5px;
-  text-decoration: none;
-  
-  @media (max-width: 768px) {
-    margin: 15px auto;
-  }
+  text-decoration: none;  
+  margin-right: 1rem;
 `;
 
-const SecondaryButton = styled.a`
-  display: inline-block;
-  padding: 10px 20px;
+const SecondaryButton = styled(PrimaryButton)`
   background: none;
   border: 2px solid #00ff99;
   color: #00ff99;
-  font-weight: bold;
-  margin: 10px;
-  border-radius: 5px;
-  text-decoration: none;
-  
-  @media (max-width: 768px) {
-    margin: 15px auto;
-  }
 `;
 
 const Section = styled.section`
@@ -197,24 +184,11 @@ const Copyright = styled.p``;
 
 export default function DPoPInfo() {
   return (
-    <>
-      <Head>
-        <title>DPoP.tech - Proof of Possession</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      
-      <Container>
-        {/* Header */}
-        <Header>
-          <Logo>DPoP.tech</Logo>
-          <Nav>
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/docs">Docs</NavLink>
-            <NavLink href="/why">Why DPoP</NavLink>
-            <NavLink href="/community">Community</NavLink>
-            <NavLink href="https://github.com/buidl-renaissance/dpop" target="_blank" rel="noopener noreferrer">GitHub</NavLink>
-          </Nav>
-        </Header>
+    <PageLayout
+      title="DPoP.tech - Proof of Possession"
+      description="An OAuth extension that puts you in charge. No more trusting middlemen with your keys—prove possession, not promises."
+    >
+
 
         {/* Hero */}
         <Hero>
@@ -262,23 +236,6 @@ export default function DPoPInfo() {
           <SecondaryButton href="#">Join the Discord</SecondaryButton>
         </Section>
 
-        {/* Footer */}
-        <Footer>
-          <FooterLinks>
-            <a href="#">Docs</a> | 
-            <a href="#">Blog</a> | 
-            <a href="#">Contact</a> | 
-            <a href="#">Privacy Policy</a>
-          </FooterLinks>
-          <FooterLinks>
-            <a href="#">X</a> | 
-            <a href="#">GitHub</a> | 
-            <a href="#">Discord</a> | 
-            <a href="#">PGP Key</a>
-          </FooterLinks>
-          <Copyright>DPoP.tech – Possession is Power. Licensed under MIT.</Copyright>
-        </Footer>
-      </Container>
-    </>
+    </PageLayout>
   );
 }

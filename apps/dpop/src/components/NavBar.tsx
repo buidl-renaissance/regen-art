@@ -9,7 +9,7 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid #00ff99;
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
     padding: 15px;
@@ -36,7 +36,7 @@ const NavLink = styled.a`
   font-size: 14px;
   color: #00ff99;
   text-decoration: none;
-  
+
   @media (max-width: 768px) {
     margin: 5px;
     font-size: 12px;
@@ -52,21 +52,13 @@ const NavBar: React.FC<HeaderProps> = ({ currentPath }) => {
     <Header>
       <Logo>DPoP.tech</Logo>
       <Nav>
-        <Link href="/" passHref>
-          <NavLink>Home</NavLink>
-        </Link>
-        <Link href="/docs" passHref>
-          <NavLink>Docs</NavLink>
-        </Link>
-        <Link href="/why" passHref>
-          <NavLink>Why DPoP</NavLink>
-        </Link>
-        <Link href="/community" passHref>
-          <NavLink>Community</NavLink>
-        </Link>
-        <NavLink 
-          href="https://github.com/buidl-renaissance/dpop" 
-          target="_blank" 
+        <NavLink href="/">Home</NavLink>
+        <NavLink href="/docs">Docs</NavLink>
+        <NavLink href="/why">Why DPoP</NavLink>
+        <NavLink href="/community">Community</NavLink>
+        <NavLink
+          href="https://github.com/buidl-renaissance/dpop"
+          target="_blank"
           rel="noopener noreferrer"
         >
           GitHub
