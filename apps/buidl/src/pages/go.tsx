@@ -100,7 +100,7 @@ export default function GoBuildDetroit() {
           <p>Let's build it. Together.</p>
         </Manifesto>
         
-        <CTAButton href="/projects/new">Start Building</CTAButton>
+        <CTAButton href="https://github.com/buidl-renaissance/regen-art/">Start Building</CTAButton>
       </Section>
     </Container>
   );
