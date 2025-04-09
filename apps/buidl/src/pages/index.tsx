@@ -24,9 +24,7 @@ const BuidlPage = () => {
       <Hero>
         <HeroContent>
           <HeroTitle>BUIDL Detroit</HeroTitle>
-          <HeroSubtitle>
-            Build Detroit&apos;s Digital Future
-          </HeroSubtitle>
+          <HeroSubtitle>Build Detroit&apos;s Digital Future</HeroSubtitle>
           <HeroDescription>
             Join our community of developers, designers, and creators building
             open-source tools that empower Detroit&apos;s creative ecosystem.
@@ -147,11 +145,11 @@ const BuidlPage = () => {
               <StepTitle>Join Our Community</StepTitle>
             </StepHeader>
             <StepDescription>
-              Connect with our developer community on Discord and GitHub to
-              meet collaborators and learn about our development process.
+              Connect with our developer community on Discord and GitHub to meet
+              collaborators and learn about our development process.
             </StepDescription>
             <StepAction>
-              <StepLink href="/join">
+              <StepLink href="https://discord.gg/kSuS9kdgTk">
                 Join Discord <StepLinkArrow>→</StepLinkArrow>
               </StepLink>
             </StepAction>
@@ -164,14 +162,11 @@ const BuidlPage = () => {
             </StepHeader>
             <StepDescription>
               Browse our active projects and find one that matches your skills
-              and interests. Each project has detailed documentation to help
-              you get started.
+              and interests. Each project has detailed documentation to help you
+              get started.
             </StepDescription>
             <StepAction>
-              <StepLink
-                href="https://github.com/godswork/detroit"
-                target="_blank"
-              >
+              <StepLink href="/projects" target="_blank">
                 Explore Projects <StepLinkArrow>→</StepLinkArrow>
               </StepLink>
             </StepAction>
@@ -188,7 +183,7 @@ const BuidlPage = () => {
               of all sizes!
             </StepDescription>
             <StepAction>
-              <StepLink href="/docs/contributing">
+              <StepLink href="/contributing">
                 Contribution Guide <StepLinkArrow>→</StepLinkArrow>
               </StepLink>
             </StepAction>
@@ -403,7 +398,7 @@ const StepsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
@@ -417,7 +412,7 @@ const StepCard = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -477,7 +472,7 @@ const StepLink = styled(Link)`
 const StepLinkArrow = styled.span`
   margin-left: 0.5rem;
   transition: transform 0.2s;
-  
+
   ${StepLink}:hover & {
     transform: translateX(3px);
   }
