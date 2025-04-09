@@ -77,7 +77,7 @@ export default function GoBuildDetroit() {
             <StepNumber>2</StepNumber>
             <div>
               <h3>Get Matched with Resources</h3>
-              <p>We'll connect you with what you need—whether it's funding, collaborators, or just advice from someone who's done it before.</p>
+              <p>We&apos;ll connect you with what you need—whether it&apos;s funding, collaborators, or just advice from someone who&apos;s done it before.</p>
             </div>
           </ProcessStep>
           
@@ -85,7 +85,7 @@ export default function GoBuildDetroit() {
             <StepNumber>3</StepNumber>
             <div>
               <h3>Launch and Grow</h3>
-              <p>We'll help you tell your story, grow your community, and scale your impact.</p>
+              <p>We&apos;ll help you tell your story, grow your community, and scale your impact.</p>
             </div>
           </ProcessStep>
         </ProcessSteps>
@@ -260,8 +260,10 @@ const ProcessStep = styled.div`
   display: flex;
   margin-bottom: 3rem;
   align-items: flex-start;
-  
+  font-family: 'Courier New', monospace;
+
   h3 {
+    margin-top: 0;
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
   }
