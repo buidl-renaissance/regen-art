@@ -57,24 +57,22 @@ const BuidlPage = () => {
               <ProjectTitle>Community Platform</ProjectTitle>
             </ProjectHeader>
             <ProjectDescription>
-              A full-stack application for managing Detroit's creative
+              A full-stack application for managing Detroit&apos;s creative
               communities, events, and projects. Built with Next.js, TypeScript,
               and Knex.js.
             </ProjectDescription>
             <TechStack>
               <TechTag>Next.js</TechTag>
-              <TechTag>TypeScript</TechTag>
-              <TechTag>Knex.js</TechTag>
-              <TechTag>Styled Components</TechTag>
+              <TechTag>DPoP Auth</TechTag>
             </TechStack>
             <ProjectActions>
               <ProjectLink
-                href="https://github.com/godswork/detroit/tree/main/libs/community"
+                href="https://github.com/build-detroit/regen-art/tree/main/apps/collective"
                 target="_blank"
               >
                 View Code
               </ProjectLink>
-              <ProjectLink href="/projects/community">Get Involved</ProjectLink>
+              <ProjectLink href="/renaissance">Join the Renaissance</ProjectLink>
             </ProjectActions>
           </ProjectCard>
 
@@ -90,14 +88,12 @@ const BuidlPage = () => {
               showcase their work and connect with the community.
             </ProjectDescription>
             <TechStack>
-              <TechTag>React</TechTag>
-              <TechTag>TypeScript</TechTag>
+              <TechTag>Next.js</TechTag>
               <TechTag>DPoP Auth</TechTag>
-              <TechTag>IPFS</TechTag>
             </TechStack>
             <ProjectActions>
               <ProjectLink
-                href="https://github.com/godswork/detroit/tree/main/apps/detroit/src/pages/profile"
+                href="https://github.com/buidl-renaissance/regen-art/tree/main/apps/portfolio"
                 target="_blank"
               >
                 View Code
@@ -118,14 +114,12 @@ const BuidlPage = () => {
               sharing and transparent distribution to artists and venues.
             </ProjectDescription>
             <TechStack>
-              <TechTag>Node.js</TechTag>
-              <TechTag>Express</TechTag>
+              <TechTag>Knex.js</TechTag>
               <TechTag>SQLite/MySQL</TechTag>
-              <TechTag>Web3</TechTag>
             </TechStack>
             <ProjectActions>
               <ProjectLink
-                href="https://github.com/godswork/detroit/tree/main/libs/ticketing"
+                href="https://github.com/buidl-renaissance/regen-art/tree/main/libs/ticketing"
                 target="_blank"
               >
                 View Code
