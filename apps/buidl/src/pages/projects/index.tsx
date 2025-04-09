@@ -6,6 +6,7 @@ import { Project } from '@gods.work/projects';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
 import { ComingSoon } from '@gods.work/ui';
+import router from 'next/router';
 
 export async function getServerSideProps() {
   // In a real implementation, you would fetch this data from your API
@@ -20,7 +21,8 @@ export async function getServerSideProps() {
       imageUrl: '/images/projects/art-wall.jpg',
       websiteUrl: 'https://communityartwall.org',
       status: ProjectStatus.ACTIVE,
-      tags: ['mural', 'community', 'public art']
+      tags: ['mural', 'community', 'public art'],
+      slug: 'community-art-wall'
     },
     {
       id: '2',
@@ -30,7 +32,8 @@ export async function getServerSideProps() {
       location: 'Midtown',
       imageUrl: '/images/projects/tech-mentorship.jpg',
       status: ProjectStatus.ACTIVE,
-      tags: ['education', 'coding', 'youth']
+      tags: ['education', 'coding', 'youth'],
+      slug: 'tech-mentorship-program'
     },
     {
       id: '3',
@@ -41,7 +44,8 @@ export async function getServerSideProps() {
       imageUrl: '/images/projects/urban-garden.jpg',
       websiteUrl: 'https://detroitgrows.org',
       status: ProjectStatus.ACTIVE,
-      tags: ['gardening', 'sustainability', 'food']
+      tags: ['gardening', 'sustainability', 'food'],
+      slug: 'urban-garden-initiative'
     },
     {
       id: '4',
@@ -50,7 +54,8 @@ export async function getServerSideProps() {
       category: 'Music',
       location: 'Corktown',
       status: ProjectStatus.ACTIVE,
-      tags: ['music', 'production', 'education']
+      tags: ['music', 'production', 'education'],
+      slug: 'music-production-workshop'
     },
     {
       id: '5',
@@ -60,7 +65,8 @@ export async function getServerSideProps() {
       location: 'Various Locations',
       imageUrl: '/images/projects/cleanup.jpg',
       status: ProjectStatus.ACTIVE,
-      tags: ['cleanup', 'environment', 'community']
+      tags: ['cleanup', 'environment', 'community'],
+      slug: 'neighborhood-cleanup-collective'
     },
     {
       id: '6',
@@ -69,7 +75,8 @@ export async function getServerSideProps() {
       category: 'Education',
       location: 'Downtown',
       status: ProjectStatus.ACTIVE,
-      tags: ['youth', 'leadership', 'education']
+      tags: ['youth', 'leadership', 'education'],
+      slug: 'youth-leadership-academy'
     }
   ];
 
@@ -116,7 +123,7 @@ const ProjectsPage = ({ projects }: { projects: Project[] }) => {
 
       <Header>
         <Title>Community Projects</Title>
-        <Subtitle>Explore initiatives shaping Detroit's future</Subtitle>
+        <Subtitle>Explore initiatives shaping Detroit&apos;s future</Subtitle>
         <CreateProjectButton href="/projects/new">
           <FaPlus style={{ marginRight: '8px' }} /> Create Project
         </CreateProjectButton>
@@ -138,15 +145,10 @@ const ProjectsPage = ({ projects }: { projects: Project[] }) => {
         {filteredProjects.map(project => (
           <ProjectCard
             key={project.id}
-            id={project.id || ''}
-            title={project.title}
-            description={project.description}
-            category={project.category}
-            location={project.location}
-            imageUrl={project.imageUrl}
-            websiteUrl={project.websiteUrl}
-            slug={project.id}
-            onClick={() => {}}
+            project={project}
+            onClick={() => {
+              router.push(`/projects/${project.slug}`);
+            }}
           />
         ))}
       </ProjectsGrid>
