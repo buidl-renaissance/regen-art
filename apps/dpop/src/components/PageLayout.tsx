@@ -32,6 +32,9 @@ const Footer = styled.footer`
   border-top: 2px solid #00ff99;
   font-size: 14px;
   margin-top: auto;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
 
   @media (max-width: 768px) {
     padding: 15px;

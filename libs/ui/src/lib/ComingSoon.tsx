@@ -1,11 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const ComingSoon: React.FC = () => {
+interface ComingSoonProps {
+    message?: string;
+    description?: string;
+}
+
+export const ComingSoon: React.FC<ComingSoonProps> = ({
+    message = "Coming Soon",
+    description = "We're working on something awesome. Check back later!"
+}) => {
   return (
     <Container>
-      <Message>Coming Soon</Message>
-      <Description>We're working on something awesome. Check back later!</Description>
+      <Message>{message}</Message>
+      <Description>{description}</Description>
     </Container>
   );
 };

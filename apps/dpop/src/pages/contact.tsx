@@ -70,7 +70,7 @@ const SubmitButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   font-family: 'Courier New', monospace;
-  
+
   &:hover {
     background: #00cc77;
   }
@@ -118,7 +118,7 @@ const ContactMethodTitle = styled.h3`
 const ContactMethodLink = styled.a`
   color: #e0e0e0;
   text-decoration: none;
-  
+
   &:hover {
     color: #00ff99;
     text-decoration: underline;
@@ -130,38 +130,42 @@ export default function Contact() {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
-  const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
+  const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(
+    null
+  );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       setSubmitStatus('error');
       return;
     }
-    
+
     // In a real implementation, you would send the form data to your backend
     // For now, we'll just simulate a successful submission
     setSubmitStatus('success');
-    
+
     // Reset form after successful submission
     if (submitStatus === 'success') {
       setFormData({
         name: '',
         email: '',
         subject: '',
-        message: ''
+        message: '',
       });
     }
   };
@@ -174,90 +178,104 @@ export default function Contact() {
       <ContactContainer>
         <ContactTitle>Get in Touch</ContactTitle>
         <ContactDescription>
-          Have questions about DPoP? Want to integrate it into your project? 
-          We're here to help. Fill out the form below or reach out through our other channels.
+          Have questions about DPoP? Want to integrate it into your project?
+          We're here to help. Fill out the form below or reach out through our
+          other channels.
         </ContactDescription>
-        
+
         {submitStatus === 'success' && (
           <SuccessMessage>
-            Your message has been sent successfully. We'll get back to you soon!
+            Your message has been sent successfully. We&apos;ll get back to you
+            soon!
           </SuccessMessage>
         )}
-        
+
         {submitStatus === 'error' && (
           <ErrorMessage>
             Please fill out all required fields before submitting.
           </ErrorMessage>
         )}
-        
+
         <ContactForm onSubmit={handleSubmit}>
           <FormGroup>
             <Label htmlFor="name">Name *</Label>
-            <Input 
-              type="text" 
-              id="name" 
-              name="name" 
+            <Input
+              type="text"
+              id="name"
+              name="name"
               value={formData.name}
               onChange={handleChange}
-              required 
+              required
             />
           </FormGroup>
-          
+
           <FormGroup>
             <Label htmlFor="email">Email *</Label>
-            <Input 
-              type="email" 
-              id="email" 
-              name="email" 
+            <Input
+              type="email"
+              id="email"
+              name="email"
               value={formData.email}
               onChange={handleChange}
-              required 
+              required
             />
           </FormGroup>
-          
+
           <FormGroup>
             <Label htmlFor="subject">Subject</Label>
-            <Input 
-              type="text" 
-              id="subject" 
-              name="subject" 
+            <Input
+              type="text"
+              id="subject"
+              name="subject"
               value={formData.subject}
               onChange={handleChange}
             />
           </FormGroup>
-          
+
           <FormGroup>
             <Label htmlFor="message">Message *</Label>
-            <TextArea 
-              id="message" 
-              name="message" 
+            <TextArea
+              id="message"
+              name="message"
               value={formData.message}
               onChange={handleChange}
-              required 
+              required
             />
           </FormGroup>
-          
+
           <SubmitButton type="submit">Send Message</SubmitButton>
         </ContactForm>
-        
+
         <ContactInfo>
           <ContactMethod>
             <ContactMethodTitle>Discord</ContactMethodTitle>
-            <ContactMethodLink href="https://discord.gg/kSuS9kdgTk" target="_blank" rel="noopener noreferrer">
+            <ContactMethodLink
+              href="https://discord.gg/kSuS9kdgTk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Join our community
             </ContactMethodLink>
           </ContactMethod>
-          
+
           <ContactMethod>
             <ContactMethodTitle>GitHub</ContactMethodTitle>
-            <ContactMethodLink href="https://github.com/buidl-renaissance/dpop" target="_blank" rel="noopener noreferrer">
+            <ContactMethodLink
+              href="https://github.com/buidl-renaissance/dpop"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Report issues or contribute
             </ContactMethodLink>
           </ContactMethod>
-          
+
           <ContactMethod>
             <ContactMethodTitle>Twitter</ContactMethodTitle>
-            <ContactMethodLink href="https://x.com/WiredInSamurai" target="_blank" rel="noopener noreferrer">
+            <ContactMethodLink
+              href="https://x.com/WiredInSamurai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Follow for updates
             </ContactMethodLink>
           </ContactMethod>

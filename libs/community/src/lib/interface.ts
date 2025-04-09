@@ -8,7 +8,8 @@ export enum CommunityRole {
 export enum CommunityStatus {
   ACTIVE = 'active',
   INACTIVE = 'inactive',
-  ARCHIVED = 'archived'
+  ARCHIVED = 'archived',
+  PENDING = 'pending'
 }
 
 export interface Community {
