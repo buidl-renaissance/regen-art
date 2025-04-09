@@ -5,17 +5,24 @@ export const ComingSoon: React.FC = () => {
   return (
     <Container>
       <Message>Coming Soon</Message>
+      <Description>We're working on something awesome. Check back later!</Description>
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  min-height: 60vh;
   width: 100%;
-  padding: 2rem;
+  padding: 1.5rem;
+  
+  @media (max-width: 768px) {
+    min-height: 50vh;
+    padding: 1rem;
+  }
 `;
 
 const Message = styled.h2`
@@ -24,4 +31,22 @@ const Message = styled.h2`
   color: #f5f5f5;
   text-align: center;
   text-transform: uppercase;
+  margin-bottom: 1rem;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+const Description = styled.p`
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  color: #cccccc;
+  text-align: center;
+  max-width: 80%;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    max-width: 90%;
+  }
 `;

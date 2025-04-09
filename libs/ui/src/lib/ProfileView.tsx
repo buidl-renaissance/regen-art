@@ -7,18 +7,20 @@ import Link from 'next/link';
 import { ProfileButton } from './ProfileStyles';
 // import { ArtworkCard } from '@/libs/ui/src/lib/ArtworkCard';
 import ArtworkGallery from './ArtworkGallery';
-import { FaTwitter, FaInstagram, FaGithub, FaGlobe } from 'react-icons/fa';
+import { FaTwitter, FaInstagram, FaGithub, FaGlobe, FaPlus } from 'react-icons/fa';
 
 interface ProfileViewProps {
   profileData: ProfileData;
   showVerifyButton?: boolean;
   showEditProfile?: boolean;
+  isCurrentUser?: boolean;
 }
 
 export const ProfileView: React.FC<ProfileViewProps> = ({
   profileData,
   showVerifyButton = false,
   showEditProfile = false,
+  isCurrentUser = false,
 }: ProfileViewProps) => {
   const { clientId } = useClient();
 
@@ -31,20 +33,28 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
       <ProfileHeader>
         <ProfileInfoContainer>
           <ProfileImageAndInfoWrapper>
-            {profileData.profileImage && (
+            {profileData.profileImage ? (
               <ProfileImage
                 src={profileData.profileImage}
                 alt={profileData.handle}
               />
+            ) : (
+              isCurrentUser && (
+                <EmptyProfileImage>
+                  <Link href="/profile/edit" passHref>
+                    <AddImageButton>
+                      <FaPlus />
+                    </AddImageButton>
+                  </Link>
+                </EmptyProfileImage>
+              )
             )}
             <ProfileInfoContent>
               <ProfileName>@{profileData.handle}</ProfileName>
               <ButtonContainer>
                 {showEditProfile && (
                   <Link href="/profile/edit" passHref>
-                    <EditProfileButton>
-                      Edit Profile
-                    </EditProfileButton>
+                    <EditProfileButton>Edit Profile</EditProfileButton>
                   </Link>
                 )}
                 {showVerifyButton && (
@@ -58,14 +68,25 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
         </ProfileInfoContainer>
       </ProfileHeader>
 
-      {profileData.bio && (
+      {profileData.bio ? (
         <ProfileSection>
           <SectionTitle>About</SectionTitle>
           <ProfileBio>{profileData.bio}</ProfileBio>
         </ProfileSection>
+      ) : (
+        isCurrentUser && (
+          <ProfileSection>
+            <SectionTitle>About</SectionTitle>
+            <EmptySection>
+              <Link href="/profile/edit" passHref>
+                <AddButton>Add bio <FaPlus style={{ marginLeft: '5px' }} /></AddButton>
+              </Link>
+            </EmptySection>
+          </ProfileSection>
+        )
       )}
 
-      {profileData.website && (
+      {profileData.website ? (
         <ProfileSection>
           <SectionTitle>Website</SectionTitle>
           <ProfileLink
@@ -77,43 +98,65 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
             {profileData.website}
           </ProfileLink>
         </ProfileSection>
+      ) : (
+        isCurrentUser && (
+          <ProfileSection>
+            <SectionTitle>Website</SectionTitle>
+            <EmptySection>
+              <Link href="/profile/edit" passHref>
+                <AddButton>Add website <FaPlus style={{ marginLeft: '5px' }} /></AddButton>
+              </Link>
+            </EmptySection>
+          </ProfileSection>
+        )
       )}
 
       {profileData.socialLinks &&
-        Object.values(profileData.socialLinks).some((link) => link) && (
+      Object.values(profileData.socialLinks).some((link) => link) ? (
+        <ProfileSection>
+          <SectionTitle>Social Links</SectionTitle>
+          <SocialLinksContainer>
+            {profileData.socialLinks.twitter && (
+              <SocialLink
+                href={`https://twitter.com/${profileData.socialLinks.twitter}`}
+                target="_blank"
+              >
+                <FaTwitter style={{ marginRight: '8px' }} />@
+                {profileData.socialLinks.twitter}
+              </SocialLink>
+            )}
+            {profileData.socialLinks.instagram && (
+              <SocialLink
+                href={`https://instagram.com/${profileData.socialLinks.instagram}`}
+                target="_blank"
+              >
+                <FaInstagram style={{ marginRight: '8px' }} />@
+                {profileData.socialLinks.instagram}
+              </SocialLink>
+            )}
+            {profileData.socialLinks.github && (
+              <SocialLink
+                href={`https://github.com/${profileData.socialLinks.github}`}
+                target="_blank"
+              >
+                <FaGithub style={{ marginRight: '8px' }} />
+                {profileData.socialLinks.github}
+              </SocialLink>
+            )}
+          </SocialLinksContainer>
+        </ProfileSection>
+      ) : (
+        isCurrentUser && (
           <ProfileSection>
             <SectionTitle>Social Links</SectionTitle>
-            <SocialLinksContainer>
-              {profileData.socialLinks.twitter && (
-                <SocialLink
-                  href={`https://twitter.com/${profileData.socialLinks.twitter}`}
-                  target="_blank"
-                >
-                  <FaTwitter style={{ marginRight: '8px' }} />
-                  @{profileData.socialLinks.twitter}
-                </SocialLink>
-              )}
-              {profileData.socialLinks.instagram && (
-                <SocialLink
-                  href={`https://instagram.com/${profileData.socialLinks.instagram}`}
-                  target="_blank"
-                >
-                  <FaInstagram style={{ marginRight: '8px' }} />
-                  @{profileData.socialLinks.instagram}
-                </SocialLink>
-              )}
-              {profileData.socialLinks.github && (
-                <SocialLink
-                  href={`https://github.com/${profileData.socialLinks.github}`}
-                  target="_blank"
-                >
-                  <FaGithub style={{ marginRight: '8px' }} />
-                  {profileData.socialLinks.github}
-                </SocialLink>
-              )}
-            </SocialLinksContainer>
+            <EmptySection>
+              <Link href="/profile/edit" passHref>
+                <AddButton>Add social links <FaPlus style={{ marginLeft: '5px' }} /></AddButton>
+              </Link>
+            </EmptySection>
           </ProfileSection>
-        )}
+        )
+      )}
 
       <QRCodeContainer>
         <QRCodeWrapper>
@@ -132,8 +175,19 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
         </QRCodeWrapper>
       </QRCodeContainer>
 
-      {profileData.artworks && profileData.artworks.length > 0 && (
+      {profileData.artworks && profileData.artworks.length > 0 ? (
         <ArtworkGallery artworks={profileData.artworks} />
+      ) : (
+        isCurrentUser && (
+          <ProfileSection>
+            <SectionTitle>Artwork Gallery</SectionTitle>
+            <EmptySection>
+              <Link href="/profile/artwork/add" passHref>
+                <AddButton>Add artwork <FaPlus style={{ marginLeft: '5px' }} /></AddButton>
+              </Link>
+            </EmptySection>
+          </ProfileSection>
+        )
       )}
     </ProfileContainer>
   );
@@ -179,6 +233,41 @@ const ProfileInfoContainer = styled.div`
   } */
 `;
 
+const ProfileCompletionSection = styled.div`
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+`;
+
+const ProfileCompletionTitle = styled.h2`
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+`;
+
+const ProfileCompletionList = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+const ProfileCompletionItem = styled.li<{ completed: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: ${({ completed }) => completed ? '#4CAF50' : '#ccc'};
+`;
+
+const ProfileCompletionItemIcon = styled.div<{ completed: boolean }>`
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: ${({ completed }) => completed ? '#4CAF50' : '#ccc'};
+`;
+
+const ProfileCompletionItemText = styled.span`
+  font-size: 0.9rem;
+`;
+
 const ProfileImageAndInfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -219,6 +308,65 @@ const ProfileImage = styled.img`
   @media (max-width: 480px) {
     width: 80px;
     height: 80px;
+  }
+`;
+
+const EmptyProfileImage = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #2a2a2a;
+  border: 3px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  @media (max-width: 480px) {
+    width: 80px;
+    height: 80px;
+  }
+`;
+
+const AddImageButton = styled.a`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f5f5f5;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: #6c9fff;
+  }
+`;
+
+const EmptySection = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+`;
+
+const AddButton = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #6c9fff;
+  border: 1px dashed #6c9fff;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: monospace;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  
+  &:hover {
+    background-color: rgba(108, 159, 255, 0.1);
   }
 `;
 
@@ -322,7 +470,7 @@ const VerifyButton = styled(ProfileButton)`
   padding: 0.3rem 0.6rem;
   background-color: #4caf50;
   border: 1px solid #4caf50;
-  
+
   &:hover {
     background-color: #45a049;
   }
