@@ -11,8 +11,12 @@ export const getAllNFTArtwork = async () => {
 
   const artworks: Artwork[] = [];
   for (let i = 1; i <= Number(totalSupply.toString()); i++) {
-    const artwork = await getNFTArtwork(i.toString());
-    artworks.push(artwork);
+    try {
+      const artwork = await getNFTArtwork(i.toString());
+      artworks.push(artwork);
+    } catch (error) {
+      console.error("Error fetching NFT artwork:", error);
+    }
   }
   return artworks;
 }
