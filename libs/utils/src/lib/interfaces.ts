@@ -1,3 +1,10 @@
+export interface SocialLinks {
+  twitter?: string;
+  instagram?: string;
+  linkedin?: string;
+  github?: string;
+}
+
 export interface Artist {
   id: number;
   name: string;
@@ -5,7 +12,9 @@ export interface Artist {
   slug: string;
   profile_picture: string;
   bio: string;
+  socialLinks?: SocialLinks;
   artwork?: Artwork[];
+  tags?: string[];
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
@@ -17,6 +26,36 @@ export interface ArtworkData {
   category?: string;
 }
 
+export interface Company extends ProfileData {
+  description: string;
+  industry?: string;
+  foundedYear?: number;
+  size?: string;
+  location?: string;
+  logo?: string;
+  services?: string[];
+  contactEmail?: string;
+  phoneNumber?: string;
+}
+
+export interface WorkExperience {
+  id: number;
+  title: string;
+  company: Company;
+  location: string;
+  description: string;
+}
+
+export interface CreatorPortfolio {
+  id: number;
+  profile: ProfileData;
+  artistProfile?: Artist;
+  artwork?: Artwork[];
+  projects?: Project[];
+  workExperience?: WorkExperience[];
+  tags?: string[];
+}
+
 export interface ProfileData {
   handle: string;
   name?: string;
@@ -24,13 +63,7 @@ export interface ProfileData {
   bio?: string;
   website?: string;
   organization?: string;
-  socialLinks?: { 
-    twitter?: string;
-    instagram?: string;
-    linkedin?: string;
-    github?: string;
-  };
-  artworks?: Artwork[];
+  socialLinks?: SocialLinks;
 }
 
 export interface Artwork {
