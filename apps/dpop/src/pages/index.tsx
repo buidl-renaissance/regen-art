@@ -195,7 +195,7 @@ export default function DPoPInfo() {
           <HeroTitle>DPoP: Demonstrating Proof of Possession</HeroTitle>
           <HeroDescription>An OAuth extension that puts you in charge. No more trusting middlemen with your keys—prove possession, not promises.</HeroDescription>
           <PrimaryButton href="/profile">Get Started with DPoP</PrimaryButton>
-          <SecondaryButton href="/dpop/whitepaper">Read the Whitepaper</SecondaryButton>
+          <SecondaryButton href="/whitepaper">Read the Whitepaper</SecondaryButton>
         </Hero>
 
         {/* Problem Statement */}
@@ -219,7 +219,7 @@ export default function DPoPInfo() {
         <Section>
           <SectionTitle>Under the Hood</SectionTitle>
           <SectionText>DPoP adds a possession check to OAuth flows. Your client signs requests with a private key, and servers verify it with your public key. No leaks, no compromises.</SectionText>
-          <SecondaryButton href="#">Dive into the Specs</SecondaryButton>
+          <SecondaryButton href="/docs">Dive into the Specs</SecondaryButton>
         </Section>
 
         {/* Why DPoP Matters */}
@@ -232,8 +232,8 @@ export default function DPoPInfo() {
         <Section>
           <SectionTitle>Join the Resistance</SectionTitle>
           <SectionText>Developers, cryptographers, and freedom fighters—DPoP is open-source and ready for you. Fork it, break it, build it better.</SectionText>
-          <PrimaryButton href="#">Contribute on GitHub</PrimaryButton>
-          <SecondaryButton href="#">Join the Discord</SecondaryButton>
+          <PrimaryButton href="https://github.com/buidl-renaissance/dpop" target="_blank" rel="noopener noreferrer">Contribute on GitHub</PrimaryButton>
+          <SecondaryButton href="https://discord.gg/kSuS9kdgTk" target="_blank" rel="noopener noreferrer">Join the Discord</SecondaryButton>
         </Section>
 
     </PageLayout>

@@ -19,7 +19,7 @@ const VerifyPage: React.FC = () => {
 
   const handleAuth = (handle: string) => {
     localStorage.setItem('handle', handle);
-    router.push('/profile/create/details');
+    router.push('/profile/details');
   };
 
   return (

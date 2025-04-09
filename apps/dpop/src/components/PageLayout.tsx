@@ -79,12 +79,34 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         {/* Footer */}
         <Footer>
           <FooterLinks>
-            <a href="#">Docs</a> |<a href="#">Blog</a> |<a href="#">Contact</a>{' '}
-            |<a href="#">Privacy Policy</a>
+            <a href="/docs">Docs</a> |<a href="/blog">Blog</a> |<a href="/contact">Contact</a>{' '}
+            |<a href="/privacy">Privacy Policy</a>
           </FooterLinks>
           <FooterLinks>
-            <a href="#">X</a> |<a href="#">GitHub</a> |<a href="#">Discord</a> |
-            <a href="#">PGP Key</a>
+            <a
+              href="https://x.com/WiredInSamurai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              X
+            </a>{' '}
+            |
+            <a
+              href="https://github.com/buidl-renaissance/dpop"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>{' '}
+            |
+            <a
+              href="https://discord.gg/kSuS9kdgTk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Discord
+            </a>{' '}
+            |<a href="#">PGP Key</a>
           </FooterLinks>
           <Copyright>
             DPoP.tech – Possession is Power. Licensed under MIT.
