@@ -4,8 +4,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { FaCalendarAlt, FaPalette, FaProjectDiagram } from 'react-icons/fa';
 import { ArtworkCard, EventCard } from '@gods.work/ui';
-// import { ProjectCard } from '@/libs/ui/src/lib/ProjectCard';
-import { Artwork, Project, Event, getArtworks, getEvents } from '@gods.work/utils';
+import { ProjectCard, Project } from '@gods.work/projects';
+import { Artwork, Event, getArtworks, getEvents } from '@gods.work/utils';
 import { Container, Section, SectionTitle } from '@gods.work/ui';
 
 export async function getServerSideProps() {
@@ -13,7 +13,7 @@ export async function getServerSideProps() {
   // This is just mock data for demonstration
   const featuredArtworks = await getArtworks();
 //   const featuredProjects = await getFeaturedProjects();
-  const featuredProjects = [];
+  const featuredProjects: Project[] = [];
   const upcomingEvents = await getEvents();
 
   return {
@@ -59,7 +59,7 @@ export default function GalleryPage({
 
       <Header>
         <Title>Community Gallery</Title>
-        <Subtitle>Showcasing Detroit's Creative Ecosystem</Subtitle>
+        <Subtitle>Showcasing Detroit&apos;s Creative Ecosystem</Subtitle>
       </Header>
 
       <TabContainer>
@@ -100,7 +100,6 @@ export default function GalleryPage({
               <EventCard 
                 key={event.id}
                 event={event}
-                formatDate={formatDate}
               />
             ))}
           </CardGrid>

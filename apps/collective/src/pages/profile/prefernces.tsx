@@ -12,8 +12,8 @@ import {
   FormGroup,
   Label,
   Input,
-  SubmitButton,
-} from '../../../../../libs/ui/src/lib/ProfileStyles';
+  ProfileSubmitButton,
+} from '@gods.work/ui';
 
 const PreferencesPage: FC = () => {
   const router = useRouter();
@@ -213,7 +213,7 @@ const PreferencesPage: FC = () => {
             </QRCodeWrapper>
           </QRSection>
 
-          <SubmitButton type="submit">Save Preferences</SubmitButton>
+          <ProfileSubmitButton type="submit">Save Preferences</ProfileSubmitButton>
         </form>
       </FormContainer>
     </CreateProfileContainer>

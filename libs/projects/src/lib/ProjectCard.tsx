@@ -2,31 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { FaMapMarkerAlt, FaExternalLinkAlt } from 'react-icons/fa';
+import { Project } from './interfaces';
 
 interface ProjectCardProps {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  location?: string;
-  imageUrl?: string;
-  websiteUrl?: string;
-  slug?: string;
+  project: Project;
   onClick?: () => void;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
-  id,
-  title,
-  description,
-  category,
-  location,
-  imageUrl,
-  websiteUrl,
-  slug,
+  project,
   onClick,
 }) => {
-  const truncateDescription = (text: string, maxLength: number = 120) => {
+  const truncateDescription = (text: string, maxLength = 120) => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
   };
@@ -34,32 +21,32 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <CardContainer onClick={onClick}>
       <CardImageContainer>
-        {imageUrl ? (
-          <CardImage src={imageUrl} alt={title} />
+        {project.imageUrl ? (
+          <CardImage src={project.imageUrl} alt={project.title} />
         ) : (
           <PlaceholderImage>
-            <CategoryLabel>{category}</CategoryLabel>
+            <CategoryLabel>{project.category}</CategoryLabel>
           </PlaceholderImage>
         )}
       </CardImageContainer>
       <CardContent>
-        <CardTitle>{title}</CardTitle>
-        {location && (
+        <CardTitle>{project.title}</CardTitle>
+        {project.location && (
           <LocationContainer>
             <FaMapMarkerAlt />
-            <LocationText>{location}</LocationText>
+            <LocationText>{project.location}</LocationText>
           </LocationContainer>
         )}
-        <CardDescription>{truncateDescription(description)}</CardDescription>
+        <CardDescription>{truncateDescription(project.description)}</CardDescription>
         <CardFooter>
-          <CategoryBadge>{category}</CategoryBadge>
-          {websiteUrl && (
-            <WebsiteLink href={websiteUrl} target="_blank" rel="noopener noreferrer">
+          <CategoryBadge>{project.category}</CategoryBadge>
+          {project.websiteUrl && (
+            <WebsiteLink href={project.websiteUrl} target="_blank" rel="noopener noreferrer">
               <FaExternalLinkAlt />
             </WebsiteLink>
           )}
-          {slug && (
-            <ViewDetailsLink href={`/projects/${slug}`}>
+          {project.slug && (
+            <ViewDetailsLink href={`/projects/${project.slug}`}>
               View Details
             </ViewDetailsLink>
           )}
