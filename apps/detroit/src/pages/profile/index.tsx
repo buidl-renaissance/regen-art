@@ -131,9 +131,9 @@ const ProfilePage: FC = () => {
 
   return (
     <CreateProfileContainer>
-      <PageTitle>Create Your Profile</PageTitle>
-
       <ProfileFormContainer>
+        <PageTitle>Create Your Profile</PageTitle>
+
         <form onSubmit={handleSubmit}>
           <FormGroup>
             {/* <FormGroup>
@@ -172,4 +172,3 @@ const ProfilePage: FC = () => {
 };
 
 export default ProfilePage;
-
