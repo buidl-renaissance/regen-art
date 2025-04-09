@@ -31,10 +31,11 @@ const Footer = styled.footer`
   text-align: center;
   border-top: 2px solid #00ff99;
   font-size: 14px;
-  margin-top: auto;
   width: 100%;
-  position: sticky;
-  bottom: 0;
+  
+  /* Footer will be at the bottom if content doesn't fill viewport */
+  /* But will appear naturally below content if page is longer than viewport */
+  margin-top: auto;
 
   @media (max-width: 768px) {
     padding: 15px;
