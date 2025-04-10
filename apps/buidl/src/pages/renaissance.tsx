@@ -60,27 +60,27 @@ const Home = () => {
             <FeatureIcon>
               <FaTools />
             </FeatureIcon>
-            <FeatureTitle>Community Platform</FeatureTitle>
+            <FeatureTitle>Community Infrastructure</FeatureTitle>
             <FeatureDescription>
-              A full-stack system for managing Detroit&apos;s creative communities, events, and collaborative projects. Open-source, modular, and ready to scale with your contributions.
+              A full-stack system for managing Detroit&apos;s creative communities. Open-source, modular, and ready to scale with your contributions. Build platforms that enable creators to find collaborators, manage projects, and share resources within the Detroit creative ecosystem.
             </FeatureDescription>
           </FeatureCard>
           <FeatureCard>
             <FeatureIcon>
               <FaIdCard />
             </FeatureIcon>
-            <FeatureTitle>Creator Portfolios</FeatureTitle>
+            <FeatureTitle>Creator Economy</FeatureTitle>
             <FeatureDescription>
-              Help us power on-chain digital identity and showcase tools for creators. From web3-native portfolios to verifiable credentials, you'll be building infrastructure that empowers artists to own their narrative.
+              Help us power on-chain digital identity and showcase tools for creators. From web3-native portfolios to verifiable credentials and digital galleries, you&apos;ll be building infrastructure that empowers artists to share their work, connect with the community, and own their narrative.
             </FeatureDescription>
           </FeatureCard>
           <FeatureCard>
             <FeatureIcon>
-              <FaTicketAlt />
+              <FaCalendarAlt />
             </FeatureIcon>
-            <FeatureTitle>Decentralized Ticketing</FeatureTitle>
+            <FeatureTitle>Events & Experiences</FeatureTitle>
             <FeatureDescription>
-              Design and deploy a transparent ticketing protocol for community events with automated revenue sharing for artists, organizers, and venues.
+              Design and deploy transparent ticketing protocols with automated revenue sharing for artists, organizers, and venues. Build tools for organizing, promoting, and documenting local events that bring people together and strengthen Detroit&apos;s creative community.
             </FeatureDescription>
           </FeatureCard>
         </FeatureGrid>
