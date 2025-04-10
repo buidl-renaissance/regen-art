@@ -8,7 +8,18 @@ import {
   FaLaptopCode,
   FaGithub,
   FaComments,
+  FaDiscord,
 } from 'react-icons/fa';
+import {
+  CTAButtons,
+  CTAContent,
+  CTAText,
+  CTATitle,
+  SocialLinks,
+  SocialLink,
+  CTASection,
+} from '../components/Styles';
+import { FaXTwitter } from 'react-icons/fa6';
 
 const BuidlPage = () => {
   return (
@@ -72,7 +83,7 @@ const BuidlPage = () => {
               >
                 View Code
               </ProjectLink>
-              <ProjectLink href="/renaissance">Join the Renaissance</ProjectLink>
+              <ProjectLink href="/community">Learn More</ProjectLink>
             </ProjectActions>
           </ProjectCard>
 
@@ -98,7 +109,7 @@ const BuidlPage = () => {
               >
                 View Code
               </ProjectLink>
-              <ProjectLink href="/projects/profiles">Get Involved</ProjectLink>
+              <ProjectLink href="/profiles">Learn More</ProjectLink>
             </ProjectActions>
           </ProjectCard>
 
@@ -124,7 +135,7 @@ const BuidlPage = () => {
               >
                 View Code
               </ProjectLink>
-              <ProjectLink href="/projects/ticketing">Get Involved</ProjectLink>
+              <ProjectLink href="/ticketing">Learn More</ProjectLink>
             </ProjectActions>
           </ProjectCard>
         </ProjectGrid>
@@ -184,6 +195,37 @@ const BuidlPage = () => {
           </StepCard>
         </StepsContainer>
       </Section>
+
+      <CTASection>
+        <CTAContent>
+          <CTATitle>Buidl the Renaissance</CTATitle>
+          <CTAText>
+            Detroit is a city of builders and visionaries. By contributing,
+            you&apos;re not just coding—you&apos;re helping shape a regenerative
+            creative economy from the ground up.
+          </CTAText>
+          <CTAButtons>
+            <PrimaryButton href="/renaissance">Get Started</PrimaryButton>
+            <SocialLinks>
+              <SocialLink
+                href="https://github.com/buidl-renaissance"
+                target="_blank"
+              >
+                <FaGithub />
+              </SocialLink>
+              <SocialLink href="https://discord.gg/kSuS9kdgTk" target="_blank">
+                <FaDiscord />
+              </SocialLink>
+              <SocialLink
+                href="https://twitter.com/builddetroit"
+                target="_blank"
+              >
+                <FaXTwitter />
+              </SocialLink>
+            </SocialLinks>
+          </CTAButtons>
+        </CTAContent>
+      </CTASection>
     </Container>
   );
 };

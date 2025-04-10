@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import styled from 'styled-components';
 import Link from 'next/link';
 import { FaGithub, FaGlobe, FaTwitter, FaLinkedin, FaPlus } from 'react-icons/fa';
 import { getArtists, Artist, CreatorPortfolio } from '@gods.work/utils';
-import ProfileCard from '../../components/ProfileCard';
+import ProfileCard from '../components/ProfileCard';
+import {
+  Container,
+  Hero,
+  HeroContent,
+  HeroTitle,
+  HeroSubtitle,
+  Section,
+  SectionTitle,
+  CallToAction,
+  CTAContent,
+  CTATitle,
+  CTAText,
+  CTAButton
+} from '../components/Styles';
+import styled from 'styled-components';
 
 // Mock data for creator profiles
 const CREATORS: CreatorPortfolio[] = [
@@ -140,49 +154,6 @@ export default function CreatorProfiles({ artists }: { artists: Artist[] }) {
 }
 
 // Styled Components
-const Container = styled.div`
-  max-width: 100%;
-  overflow-x: hidden;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-`;
-
-const Hero = styled.section`
-  background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-  color: #fff;
-  padding: 5rem 2rem;
-  
-  @media (min-width: 768px) {
-    padding: 6rem 2rem;
-  }
-`;
-
-const HeroContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const HeroTitle = styled.h1`
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-  
-  @media (min-width: 768px) {
-    font-size: 4rem;
-  }
-`;
-
-const HeroSubtitle = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 400;
-  margin-bottom: 2rem;
-  color: #b6e0ff; /* Improved contrast from #90caf9 */
-  
-  @media (min-width: 768px) {
-    font-size: 1.5rem;
-  }
-`;
-
 const CreateProfileButton = styled(Link)`
   display: inline-flex;
   align-items: center;
@@ -198,26 +169,6 @@ const CreateProfileButton = styled(Link)`
     background: #005ea2; /* Darker hover state */
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-`;
-
-const Section = styled.section`
-  padding: 4rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  
-  @media (min-width: 768px) {
-    padding: 5rem 2rem;
-  }
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  
-  @media (min-width: 768px) {
-    font-size: 2.5rem;
   }
 `;
 
@@ -415,48 +366,5 @@ const ViewProfileButton = styled(Link)`
   &:hover {
     background: #3a97e8;
     color: #ffffff;
-  }
-`;
-
-const CallToAction = styled.section`
-  background: linear-gradient(135deg, #0f0f0f 0%, #222 100%);
-  color: #fff;
-  padding: 5rem 2rem;
-`;
-
-const CTAContent = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const CTATitle = styled.h2`
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-`;
-
-const CTAText = styled.p`
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  color: #d0d0d0;
-`;
-
-const CTAButton = styled(Link)`
-  display: inline-block;
-  background: #3a97e8;
-  color: #ffffff;
-  text-align: center;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background: #2a87d8;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
   }
 `;

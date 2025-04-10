@@ -6,16 +6,13 @@ import {
   FaDiscord,
   FaGithub,
   FaUsers,
-  FaPalette,
   FaCalendarAlt,
-  FaProjectDiagram,
   FaTools,
   FaIdCard,
-  FaTicketAlt,
-  FaLightbulb,
 } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { ProjectsGallery } from '../components/ProjectsGallery';
+import { SocialLinks, SocialLink, CTASection, CTAContent, CTATitle, CTADescription, CTAButtons } from '../components/Styles';
 
 const Home = () => {
   return (
@@ -27,7 +24,7 @@ const Home = () => {
         </title>
         <meta
           name="description"
-          content="Open-source platform built to serve Detroit's creative communities through events, artist showcases, and community projects."
+          content="Open-source platform built to serve Detroit&apos;s creative communities through events, artist showcases, and community projects."
         />
       </Head>
 
@@ -35,7 +32,7 @@ const Home = () => {
         <HeroContent>
           <HeroTitle>Build the Renaissance in Detroit</HeroTitle>
           <HeroSubtitle>
-            We're inviting developers to help launch a new era of decentralized tools that empower artists, communities, and culture.
+            We&apos;re inviting developers to help launch a new era of decentralized tools that empower artists, communities, and culture.
           </HeroSubtitle>
           <HeroDescription>
             Join us in creating infrastructure that powers a regenerative creative economy from the ground up.
@@ -53,7 +50,7 @@ const Home = () => {
           Join the Renaissance. Build what matters.
         </SectionTitle>
         <Paragraph>
-          Detroit is a city of builders and visionaries. By contributing, you're not just coding—you're helping shape a regenerative creative economy from the ground up.
+          Detroit is a city of builders and visionaries. By contributing, you&apos;re not just coding—you&apos;re helping shape a regenerative creative economy from the ground up.
         </Paragraph>
         <FeatureGrid>
           <FeatureCard>
@@ -92,7 +89,7 @@ const Home = () => {
         <CTAContent>
           <CTATitle>Why It Matters</CTATitle>
           <CTADescription>
-            Detroit is a city of builders and visionaries. By contributing, you're not just coding—you're helping shape a regenerative creative economy from the ground up.
+            Detroit is a city of builders and visionaries. By contributing, you&apos;re not just coding—you&apos;re helping shape a regenerative creative economy from the ground up.
           </CTADescription>
           <CTAButtons>
             <PrimaryButton href="/profile">Create Your Profile</PrimaryButton>
@@ -337,69 +334,6 @@ const FeatureDescription = styled.p`
   }
 `;
 
-const CTASection = styled.section`
-  background-color: #1e1e1e;
-  padding: 4rem 2rem;
-  margin: 5rem 0;
-  border-radius: 8px;
-  text-align: center;
-  
-  @media (max-width: 768px) {
-    padding: 3rem 1.5rem;
-    margin: 4rem 0;
-  }
-  
-  @media (max-width: 480px) {
-    padding: 2.5rem 1.25rem;
-    margin: 3rem 0;
-  }
-`;
-
-const CTAContent = styled.div`
-  max-width: 700px;
-  margin: 0 auto;
-`;
-
-const CTATitle = styled.h2`
-  font-size: 2.2rem;
-  color: #f5f5f5;
-  margin-bottom: 1.5rem;
-  font-family: 'Courier New', monospace;
-
-  @media (max-width: 768px) {
-    font-size: 1.8rem;
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-  }
-`;
-
-const CTADescription = styled.p`
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #cccccc;
-  margin-bottom: 2rem;
-  font-family: 'Courier New', monospace;
-
-  @media (max-width: 480px) {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const CTAButtons = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  
-  @media (max-width: 480px) {
-    gap: 1.25rem;
-  }
-`;
-
 const PrimaryButton = styled(Link)`
   display: inline-block;
   background-color: #90caf9;
@@ -450,33 +384,6 @@ const SecondaryButton = styled(Link)`
     text-align: center;
     padding: 0.625rem 1.25rem;
     font-size: 1rem;
-  }
-`;
-
-const SocialLinks = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
-  
-  @media (max-width: 480px) {
-    gap: 1.25rem;
-    margin-top: 0.5rem;
-  }
-`;
-
-const SocialLink = styled.a`
-  color: #f5f5f5;
-  font-size: 1.5rem;
-  transition: color 0.2s ease, transform 0.2s ease;
-
-  &:hover {
-    color: #90caf9;
-    transform: translateY(-3px);
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 1.3rem;
   }
 `;
 
