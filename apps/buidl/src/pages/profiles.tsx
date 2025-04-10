@@ -27,14 +27,14 @@ const CREATORS: CreatorPortfolio[] = [
     profile: {
       handle: 'Andrea Burg',
       name: 'Andrea Burg',
-      profileImage: '/images/creators/andrea.jpg',
+      profileImage: 'https://nyc3.digitaloceanspaces.com/dpop/profile-pictures/1739516638587-546917813.jpg',
       bio: 'Creating vibrant murals that tell Detroit\'s stories through color and form. Specializing in community-driven art projects.',
       website: 'https://artist-portfolio-beige.vercel.app/',
       socialLinks: {
         twitter: 'https://twitter.com/andreaburg',
         instagram: 'https://instagram.com/burg.ink',
-        linkedin: 'https://linkedin.com/in/andreaburg',
-        github: 'https://github.com/andreaburg'
+        // linkedin: 'https://linkedin.com/in/andreaburg',
+        // github: 'https://github.com/andreaburg'
       }
     },
     tags: ['Murals', 'Public Art', 'Tattoos', 'Community Engagement'],
@@ -44,14 +44,14 @@ const CREATORS: CreatorPortfolio[] = [
     profile: {
       handle: 'WiredInSamurai',
       name: 'WiredInSamurai',
-      profileImage: '/images/creators/maya.jpg',
-      bio: '',
-      website: 'https://mayajohnsonart.com',
+      profileImage: 'https://dpop.nyc3.digitaloceanspaces.com/wiredinsamurai.jpg',
+      bio: 'A multidisciplinary creator exploring the space between traditional and digital mediums, developing software that empowers creative communities through connection, storytelling, and systems where creativity becomes a collective act.',
+      website: 'https://portfolio.gods.work',
       socialLinks: {
-        twitter: 'https://twitter.com/mayajart',
-        linkedin: 'https://linkedin.com/in/mayajohnsonart',
-        github: '',
-        instagram: ''
+        twitter: 'https://twitter.com/WiredInSamurai',
+        linkedin: 'https://www.linkedin.com/in/john-gulbronson-a285285b/',
+        github: 'https://github.com/johngulb',
+        instagram: 'https://instagram.com/wiredinsamurai'
       }
     },
     tags: ['Murals', 'Public Art', 'Community Engagement'],
