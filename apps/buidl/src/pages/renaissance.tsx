@@ -9,6 +9,10 @@ import {
   FaPalette,
   FaCalendarAlt,
   FaProjectDiagram,
+  FaTools,
+  FaIdCard,
+  FaTicketAlt,
+  FaLightbulb,
 } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { ProjectsGallery } from '../components/ProjectsGallery';
@@ -29,13 +33,12 @@ const Home = () => {
 
       <Hero>
         <HeroContent>
-          <HeroTitle>Renaissance City</HeroTitle>
+          <HeroTitle>Build the Renaissance in Detroit</HeroTitle>
           <HeroSubtitle>
-            Empowering Detroit&apos;s Creative Communities
+            We're inviting developers to help launch a new era of decentralized tools that empower artists, communities, and culture.
           </HeroSubtitle>
           <HeroDescription>
-            An open-source platform connecting artists, events, and community
-            projects to build a thriving creative ecosystem in Detroit.
+            Join us in creating infrastructure that powers a regenerative creative economy from the ground up.
           </HeroDescription>
           <HeroCTA>
             <PrimaryButton href="/profile">Create Your Profile</PrimaryButton>
@@ -47,43 +50,37 @@ const Home = () => {
       <Section>
         <SectionTitle>
           <FaUsers style={{ marginRight: '12px' }} />
-          Our Mission
+          Join the Renaissance. Build what matters.
         </SectionTitle>
         <Paragraph>
-          Renaissance City is building digital infrastructure for local creative
-          communities. We provide tools for artists to showcase their work,
-          organizers to coordinate events, and community members to discover and
-          support local talent.
+          Detroit is a city of builders and visionaries. By contributing, you're not just coding—you're helping shape a regenerative creative economy from the ground up.
         </Paragraph>
         <FeatureGrid>
           <FeatureCard>
             <FeatureIcon>
-              <FaPalette />
+              <FaTools />
             </FeatureIcon>
-            <FeatureTitle>Artist Showcases</FeatureTitle>
+            <FeatureTitle>Community Platform</FeatureTitle>
             <FeatureDescription>
-              Digital galleries and profiles for artists to share their work and
-              connect with the community.
+              A full-stack system for managing Detroit&apos;s creative communities, events, and collaborative projects. Open-source, modular, and ready to scale with your contributions.
             </FeatureDescription>
           </FeatureCard>
           <FeatureCard>
             <FeatureIcon>
-              <FaCalendarAlt />
+              <FaIdCard />
             </FeatureIcon>
-            <FeatureTitle>Community Events</FeatureTitle>
+            <FeatureTitle>Creator Portfolios</FeatureTitle>
             <FeatureDescription>
-              Tools for organizing, promoting, and documenting local events that
-              bring people together.
+              Help us power on-chain digital identity and showcase tools for creators. From web3-native portfolios to verifiable credentials, you'll be building infrastructure that empowers artists to own their narrative.
             </FeatureDescription>
           </FeatureCard>
           <FeatureCard>
             <FeatureIcon>
-              <FaProjectDiagram />
+              <FaTicketAlt />
             </FeatureIcon>
-            <FeatureTitle>Collaborative Projects</FeatureTitle>
+            <FeatureTitle>Decentralized Ticketing</FeatureTitle>
             <FeatureDescription>
-              Infrastructure for community-driven initiatives that create
-              lasting impact.
+              Design and deploy a transparent ticketing protocol for community events with automated revenue sharing for artists, organizers, and venues.
             </FeatureDescription>
           </FeatureCard>
         </FeatureGrid>
@@ -93,10 +90,9 @@ const Home = () => {
 
       <CTASection>
         <CTAContent>
-          <CTATitle>Join the Renaissance</CTATitle>
+          <CTATitle>Why It Matters</CTATitle>
           <CTADescription>
-            Create your profile, connect with other creators, and help build
-            Detroit&apos;s creative future.
+            Detroit is a city of builders and visionaries. By contributing, you're not just coding—you're helping shape a regenerative creative economy from the ground up.
           </CTADescription>
           <CTAButtons>
             <PrimaryButton href="/profile">Create Your Profile</PrimaryButton>
@@ -485,5 +481,3 @@ const SocialLink = styled.a`
 `;
 
 export default Home;
-
-
