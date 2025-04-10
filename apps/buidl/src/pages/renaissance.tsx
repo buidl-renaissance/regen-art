@@ -12,19 +12,27 @@ import {
 } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { ProjectsGallery } from '../components/ProjectsGallery';
-import { SocialLinks, SocialLink, CTASection, CTAContent, CTATitle, CTADescription, CTAButtons } from '../components/Styles';
+import {
+  SocialLinks,
+  SocialLink,
+  CTASection,
+  CTAContent,
+  CTATitle,
+  CTADescription,
+  CTAButtons,
+  StepAction,
+  StepLink,
+  StepLinkArrow,
+} from '../components/Styles';
 
 const Home = () => {
   return (
     <Container>
       <Head>
-        <title>
-          Renaissance City - Community Software for Detroit&apos;s Creative
-          Ecosystem
-        </title>
+        <title>Renaissance City - Detroit&apos;s Creative Ecosystem</title>
         <meta
           name="description"
-          content="Open-source platform built to serve Detroit&apos;s creative communities through events, artist showcases, and community projects."
+          content="Open-source platform for Detroit's creative communities."
         />
       </Head>
 
@@ -32,13 +40,14 @@ const Home = () => {
         <HeroContent>
           <HeroTitle>Build the Renaissance in Detroit</HeroTitle>
           <HeroSubtitle>
-            We&apos;re inviting developers to help launch a new era of decentralized tools that empower artists, communities, and culture.
+            Join us in creating infrastructure for a regenerative creative
+            economy
           </HeroSubtitle>
-          <HeroDescription>
-            Join us in creating infrastructure that powers a regenerative creative economy from the ground up.
-          </HeroDescription>
+          {/* <HeroDescription>
+            Join us in creating infrastructure for a regenerative creative economy.
+          </HeroDescription> */}
           <HeroCTA>
-            <PrimaryButton href="/profile">Create Your Profile</PrimaryButton>
+            <PrimaryButton href="/profile">Create Profile</PrimaryButton>
             <SecondaryButton href="/readme">ReadMe</SecondaryButton>
           </HeroCTA>
         </HeroContent>
@@ -47,10 +56,11 @@ const Home = () => {
       <Section>
         <SectionTitle>
           <FaUsers style={{ marginRight: '12px' }} />
-          Join the Renaissance. Build what matters.
+          Join the Renaissance
         </SectionTitle>
         <Paragraph>
-          Detroit is a city of builders and visionaries. By contributing, you&apos;re not just coding—you&apos;re helping shape a regenerative creative economy from the ground up.
+          Detroit is a city of builders. By contributing, you&apos;re helping
+          shape a regenerative creative economy.
         </Paragraph>
         <FeatureGrid>
           <FeatureCard>
@@ -59,8 +69,14 @@ const Home = () => {
             </FeatureIcon>
             <FeatureTitle>Community Infrastructure</FeatureTitle>
             <FeatureDescription>
-              A full-stack system for managing Detroit&apos;s creative communities. Open-source, modular, and ready to scale with your contributions. Build platforms that enable creators to find collaborators, manage projects, and share resources within the Detroit creative ecosystem.
+              Open-source systems for Detroit&apos;s creative communities. Build
+              platforms for creators to find collaborators and share resources.
             </FeatureDescription>
+            <StepAction>
+              <StepLink href="/community">
+                Learn More <StepLinkArrow>→</StepLinkArrow>
+              </StepLink>
+            </StepAction>
           </FeatureCard>
           <FeatureCard>
             <FeatureIcon>
@@ -68,8 +84,14 @@ const Home = () => {
             </FeatureIcon>
             <FeatureTitle>Creator Economy</FeatureTitle>
             <FeatureDescription>
-              Help us power on-chain digital identity and showcase tools for creators. From web3-native portfolios to verifiable credentials and digital galleries, you&apos;ll be building infrastructure that empowers artists to share their work, connect with the community, and own their narrative.
+              On-chain digital identity and showcase tools for creators. Build
+              infrastructure that empowers artists to share work and connect.
             </FeatureDescription>
+            <StepAction>
+              <StepLink href="/profiles">
+                Learn More <StepLinkArrow>→</StepLinkArrow>
+              </StepLink>
+            </StepAction>
           </FeatureCard>
           <FeatureCard>
             <FeatureIcon>
@@ -77,8 +99,14 @@ const Home = () => {
             </FeatureIcon>
             <FeatureTitle>Events & Experiences</FeatureTitle>
             <FeatureDescription>
-              Design and deploy transparent ticketing protocols with automated revenue sharing for artists, organizers, and venues. Build tools for organizing, promoting, and documenting local events that bring people together and strengthen Detroit&apos;s creative community.
+              Transparent ticketing with automated revenue sharing. Build tools
+              for organizing and promoting local events.
             </FeatureDescription>
+            <StepAction>
+              <StepLink href="/ticketing">
+                Learn More <StepLinkArrow>→</StepLinkArrow>
+              </StepLink>
+            </StepAction>
           </FeatureCard>
         </FeatureGrid>
       </Section>
@@ -89,10 +117,11 @@ const Home = () => {
         <CTAContent>
           <CTATitle>Why It Matters</CTATitle>
           <CTADescription>
-            Detroit is a city of builders and visionaries. By contributing, you&apos;re not just coding—you&apos;re helping shape a regenerative creative economy from the ground up.
+            Detroit is a city of visionaries. Your code helps shape a
+            regenerative creative economy.
           </CTADescription>
           <CTAButtons>
-            <PrimaryButton href="/profile">Create Your Profile</PrimaryButton>
+            <PrimaryButton href="/profile">Create Profile</PrimaryButton>
             <SocialLinks>
               <SocialLink
                 href="https://github.com/buidl-renaissance"
@@ -124,12 +153,11 @@ const Container = styled.div`
   font-family: 'Courier New', monospace;
   background-color: #121212;
   color: #f5f5f5;
-  
+
   @media (max-width: 480px) {
     padding: 0 1rem;
   }
 `;
-
 const Hero = styled.div`
   display: flex;
   align-items: center;
@@ -137,20 +165,21 @@ const Hero = styled.div`
   min-height: 80vh;
   text-align: center;
   padding: 3rem 0;
-  
+
+  @media (max-width: 768px) {
+    min-height: 75vh;
+    padding: 2.5rem 0;
+  }
+
   @media (max-width: 480px) {
-    padding: 2rem 1rem;
     min-height: 70vh;
+    padding: 2rem 0;
   }
 `;
 
 const HeroContent = styled.div`
   max-width: 800px;
   padding: 0 1rem;
-  
-  @media (max-width: 480px) {
-    padding: 0;
-  }
 `;
 
 const HeroTitle = styled.h1`
@@ -158,14 +187,15 @@ const HeroTitle = styled.h1`
   color: #f5f5f5;
   margin-bottom: 1rem;
   font-family: 'Courier New', monospace;
+  font-weight: bold;
   letter-spacing: -1px;
 
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 `;
 
@@ -181,7 +211,7 @@ const HeroSubtitle = styled.h2`
   }
 
   @media (max-width: 480px) {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
   }
 `;
 
@@ -194,9 +224,13 @@ const HeroDescription = styled.p`
   margin-left: auto;
   margin-right: auto;
 
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+
   @media (max-width: 480px) {
     font-size: 1rem;
-    margin-bottom: 1.5rem;
+    line-height: 1.5;
   }
 `;
 
@@ -205,6 +239,11 @@ const HeroCTA = styled.div`
   justify-content: center;
   gap: 1rem;
   margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    gap: 0.875rem;
+    margin-top: 1.75rem;
+  }
 
   @media (max-width: 480px) {
     flex-direction: column;
@@ -220,11 +259,11 @@ const Section = styled.section`
   &:first-of-type {
     margin-top: 0;
   }
-  
+
   @media (max-width: 768px) {
     margin: 4rem 0;
   }
-  
+
   @media (max-width: 480px) {
     margin: 3rem 0;
   }
@@ -277,7 +316,7 @@ const FeatureGrid = styled.div`
     gap: 1.5rem;
     margin-top: 2rem;
   }
-  
+
   @media (max-width: 480px) {
     gap: 1.25rem;
     margin-top: 1.5rem;
@@ -294,7 +333,7 @@ const FeatureCard = styled.div`
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
-  
+
   @media (max-width: 480px) {
     padding: 1.5rem;
   }
@@ -304,7 +343,7 @@ const FeatureIcon = styled.div`
   font-size: 2.5rem;
   color: #90caf9;
   margin-bottom: 1.5rem;
-  
+
   @media (max-width: 480px) {
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -316,7 +355,7 @@ const FeatureTitle = styled.h3`
   color: #f5f5f5;
   margin-bottom: 1rem;
   font-family: 'Courier New', monospace;
-  
+
   @media (max-width: 480px) {
     font-size: 1.2rem;
     margin-bottom: 0.75rem;
@@ -328,7 +367,7 @@ const FeatureDescription = styled.p`
   line-height: 1.5;
   color: #cccccc;
   font-family: 'Courier New', monospace;
-  
+
   @media (max-width: 480px) {
     font-size: 0.95rem;
   }
