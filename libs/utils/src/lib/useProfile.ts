@@ -26,7 +26,6 @@ export const useProfile = () => {
               github: '',
             },
             profileImage: parsedProfile.profileImage || '',
-            artworks: parsedProfile.artworks || [],
           });
         }
       } catch (error) {

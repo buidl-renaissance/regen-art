@@ -95,7 +95,6 @@ export const ProfileEditForm: FC = () => {
       },
       // Preserve any existing data
       organization: profileData?.organization || '',
-      artworks: profileData?.artworks || [],
     };
     
     // Use the saveProfile function from useProfile hook

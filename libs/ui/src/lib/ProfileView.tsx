@@ -6,7 +6,7 @@ import { ProfileData } from '@gods.work/utils';
 import Link from 'next/link';
 import { ProfileButton } from './ProfileStyles';
 // import { ArtworkCard } from '@/libs/ui/src/lib/ArtworkCard';
-import ArtworkGallery from './ArtworkGallery';
+// import ArtworkGallery from './ArtworkGallery';
 import { FaTwitter, FaInstagram, FaGithub, FaGlobe, FaPlus } from 'react-icons/fa';
 
 interface ProfileViewProps {
@@ -175,7 +175,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
         </QRCodeWrapper>
       </QRCodeContainer>
 
-      {profileData.artworks && profileData.artworks.length > 0 ? (
+      {/* {profileData.artworks && profileData.artworks.length > 0 ? (
         <ArtworkGallery artworks={profileData.artworks} />
       ) : (
         isCurrentUser && (
@@ -188,7 +188,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
             </EmptySection>
           </ProfileSection>
         )
-      )}
+      )} */}
     </ProfileContainer>
   );
 };
