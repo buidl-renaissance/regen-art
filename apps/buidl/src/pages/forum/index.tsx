@@ -10,6 +10,13 @@ import {
   FaLightbulb,
   FaPlus,
 } from 'react-icons/fa';
+import {
+  StepContent,
+  StepDescription,
+  StepLink,
+  StepNumber,
+  StepTitle,
+} from '../../components/Styles';
 
 const ForumPage = () => {
   return (
@@ -30,8 +37,8 @@ const ForumPage = () => {
           </HeroSubtitle>
           <HeroDescription>
             A space for developers, designers, and creators to share ideas, ask
-            questions, and collaborate on projects that strengthen Detroit's
-            digital infrastructure.
+            questions, and collaborate on projects that strengthen
+            Detroit&apos;s digital infrastructure.
           </HeroDescription>
           <HeroCTA>
             <PrimaryButton href="/forum/new">
@@ -100,52 +107,76 @@ const ForumPage = () => {
       </Section>
 
       <Section>
-        <SectionTitle>
-          <FaLightbulb style={{ marginRight: '12px' }} />
-          Get Involved
-        </SectionTitle>
-        <StepsContainer>
-          <Step>
-            <StepNumber>1</StepNumber>
-            <StepContent>
-              <StepTitle>Create Your Profile</StepTitle>
-              <StepDescription>
-                Join the BUIDL Detroit community by creating your developer
-                profile. Share your skills, interests, and the projects
-                you&apos;re working on.
-              </StepDescription>
-              <StepLink href="/profile">Create Profile →</StepLink>
-            </StepContent>
-          </Step>
-          <Step>
-            <StepNumber>2</StepNumber>
-            <StepContent>
-              <StepTitle>Join the Conversation</StepTitle>
-              <StepDescription>
-                Introduce yourself in the community forum, ask questions, and
-                share your knowledge with other Detroit builders.
-              </StepDescription>
-              <StepLink href="/forum/categories/introductions">
-                Introduce Yourself →
-              </StepLink>
-            </StepContent>
-          </Step>
-          <Step>
-            <StepNumber>3</StepNumber>
-            <StepContent>
-              <StepTitle>Contribute to Projects</StepTitle>
-              <StepDescription>
-                Find open-source projects that match your skills and interests,
-                or propose new ideas for community collaboration.
-              </StepDescription>
-              <StepLink href="/projects">Explore Projects →</StepLink>
-            </StepContent>
-          </Step>
-        </StepsContainer>
+        <SectionContainer>
+          <SectionTitle>
+            <FaLightbulb style={{ marginRight: '12px' }} />
+            Get Involved
+          </SectionTitle>
+          <StepsContainer>
+            <Step>
+              <StepNumber>1</StepNumber>
+              <StepContent>
+                <StepTitle>Create Your Profile</StepTitle>
+                <StepDescription>
+                  Join the BUIDL Detroit community by creating your developer
+                  profile. Share your skills, interests, and the projects
+                  you&apos;re working on.
+                </StepDescription>
+                <StepLink href="/profile">Create Profile →</StepLink>
+              </StepContent>
+            </Step>
+            <Step>
+              <StepNumber>2</StepNumber>
+              <StepContent>
+                <StepTitle>Join the Conversation</StepTitle>
+                <StepDescription>
+                  Introduce yourself in the community forum, ask questions, and
+                  share your knowledge with other Detroit builders.
+                </StepDescription>
+                <StepLink href="/forum/categories/introductions">
+                  Introduce Yourself →
+                </StepLink>
+              </StepContent>
+            </Step>
+            <Step>
+              <StepNumber>3</StepNumber>
+              <StepContent>
+                <StepTitle>Contribute to Projects</StepTitle>
+                <StepDescription>
+                  Find open-source projects that match your skills and
+                  interests, or propose new ideas for community collaboration.
+                </StepDescription>
+                <StepLink href="/projects">Explore Projects →</StepLink>
+              </StepContent>
+            </Step>
+          </StepsContainer>
+        </SectionContainer>
       </Section>
     </Container>
   );
 };
+
+export const SectionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+`;
+
+export const StepsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+`;
+
+export const Step = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-bottom: 1rem;
+`;
 
 // Mock data for recent threads
 const recentThreads = [
@@ -498,62 +529,6 @@ const CategoryDescription = styled.p`
 const CategoryStats = styled.div`
   font-size: 0.8rem;
   color: #a0a0a0;
-`;
-
-const StepsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
-const Step = styled.div`
-  display: flex;
-  gap: 1.5rem;
-
-  @media (max-width: 480px) {
-    flex-direction: column;
-    gap: 1rem;
-  }
-`;
-
-const StepNumber = styled.div`
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background-color: #3498db;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  flex-shrink: 0;
-`;
-
-const StepContent = styled.div`
-  flex: 1;
-`;
-
-const StepTitle = styled.h3`
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
-`;
-
-const StepDescription = styled.p`
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #c0c0c0;
-  margin-bottom: 1rem;
-`;
-
-const StepLink = styled(Link)`
-  color: #3498db;
-  text-decoration: none;
-  font-weight: 500;
-
-  &:hover {
-    text-decoration: underline;
-  }
 `;
 
 export default ForumPage;
