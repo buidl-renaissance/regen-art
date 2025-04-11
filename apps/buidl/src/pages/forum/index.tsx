@@ -58,9 +58,10 @@ const ForumPage = () => {
         </SectionTitle>
         <ThreadGrid>
           {recentThreads.map((thread) => (
-            <ThreadCard key={thread.id}>
-              <ThreadHeader>
-                <ThreadTitle>{thread.title}</ThreadTitle>
+            <Link href={`/forum/${thread.id}`} key={thread.id}>
+              <ThreadCard>
+                <ThreadHeader>
+                  <ThreadTitle>{thread.title}</ThreadTitle>
                 <ThreadMeta>
                   <ThreadAuthor>{thread.author}</ThreadAuthor>
                   <ThreadDate>{thread.date}</ThreadDate>
@@ -73,14 +74,15 @@ const ForumPage = () => {
                   <ThreadStat>{thread.replies} replies</ThreadStat>
                   <ThreadStat>{thread.views} views</ThreadStat>
                 </ThreadStats>
-              </ThreadFooter>
-            </ThreadCard>
+                </ThreadFooter>
+              </ThreadCard>
+            </Link>
           ))}
         </ThreadGrid>
         <MoreLink href="/forum/all">View all discussions →</MoreLink>
       </Section>
 
-      <Section>
+      {/* <Section>
         <SectionTitle>
           <FaUsers style={{ marginRight: '12px' }} />
           Active Communities
@@ -104,7 +106,7 @@ const ForumPage = () => {
             </CategoryCard>
           ))}
         </CategoryGrid>
-      </Section>
+      </Section> */}
 
       <Section>
         <SectionContainer>
@@ -409,6 +411,10 @@ const ThreadCard = styled.div`
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    h3 {
+      color: #3498db;
+      text-decoration: underline;
+    }
   }
 `;
 
