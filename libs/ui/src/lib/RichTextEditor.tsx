@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
@@ -18,7 +18,7 @@ interface RichTextEditorProps {
   height?: string;
 }
 
-const RichTextEditor = ({
+export const RichTextEditor = ({
   value,
   onChange,
   placeholder = 'Write something...',
@@ -158,5 +158,3 @@ const EditorLoading = styled.div`
   color: rgba(255, 255, 255, 0.7);
   font-style: italic;
 `;
-
-export default RichTextEditor;

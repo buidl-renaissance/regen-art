@@ -4,9 +4,6 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import {
   FaComments,
-  FaUsers,
-  FaCode,
-  FaLaptopCode,
   FaLightbulb,
   FaPlus,
 } from 'react-icons/fa';
@@ -17,8 +14,23 @@ import {
   StepNumber,
   StepTitle,
 } from '../../components/Styles';
+import { ForumThread, getThreads } from '@gods.work/forum';
+import { ThreadGrid } from '../../components/ThreadGrid';
 
-const ForumPage = () => {
+interface ForumPageProps {
+  threads: ForumThread[];
+}
+
+export const getServerSideProps = async () => {
+  const threads = await getThreads();
+  return {
+    props: { threads },
+  };
+};
+
+const ForumPage = ({
+  threads,
+}: ForumPageProps) => {
   return (
     <Container>
       <Head>
@@ -56,29 +68,7 @@ const ForumPage = () => {
           <FaComments style={{ marginRight: '12px' }} />
           Recent Discussions
         </SectionTitle>
-        <ThreadGrid>
-          {recentThreads.map((thread) => (
-            <Link href={`/forum/${thread.id}`} key={thread.id}>
-              <ThreadCard>
-                <ThreadHeader>
-                  <ThreadTitle>{thread.title}</ThreadTitle>
-                <ThreadMeta>
-                  <ThreadAuthor>{thread.author}</ThreadAuthor>
-                  <ThreadDate>{thread.date}</ThreadDate>
-                </ThreadMeta>
-              </ThreadHeader>
-              <ThreadPreview>{thread.preview}</ThreadPreview>
-              <ThreadFooter>
-                <ThreadCategory>{thread.category}</ThreadCategory>
-                <ThreadStats>
-                  <ThreadStat>{thread.replies} replies</ThreadStat>
-                  <ThreadStat>{thread.views} views</ThreadStat>
-                </ThreadStats>
-                </ThreadFooter>
-              </ThreadCard>
-            </Link>
-          ))}
-        </ThreadGrid>
+        <ThreadGrid threads={threads} />
         <MoreLink href="/forum/all">View all discussions →</MoreLink>
       </Section>
 
@@ -180,101 +170,9 @@ export const Step = styled.div`
   margin-bottom: 1rem;
 `;
 
-// Mock data for recent threads
-const recentThreads = [
-  {
-    id: 1,
-    title: 'Building a Community Events API',
-    author: 'devDetroit',
-    date: '2 hours ago',
-    preview:
-      "I'm working on an API to aggregate community events across Detroit. Looking for feedback on the data model...",
-    category: 'Project Collaboration',
-    replies: 12,
-    views: 87,
-  },
-  {
-    id: 2,
-    title: 'React vs. Svelte for Community Projects',
-    author: 'techBuilder',
-    date: 'Yesterday',
-    preview:
-      "What are people's thoughts on using Svelte instead of React for new community projects? I've been experimenting with...",
-    category: 'Technical Discussion',
-    replies: 24,
-    views: 156,
-  },
-  {
-    id: 3,
-    title: 'Introducing Myself: Frontend Dev from Eastern Market',
-    author: 'newCoder313',
-    date: '2 days ago',
-    preview:
-      "Hey everyone! I'm a frontend developer based in Eastern Market. I specialize in React and have been working on...",
-    category: 'Introductions',
-    replies: 8,
-    views: 42,
-  },
-  {
-    id: 4,
-    title: 'Detroit Digital Inclusion Hackathon',
-    author: 'communityOrg',
-    date: '3 days ago',
-    preview:
-      "We're organizing a hackathon focused on digital inclusion projects for Detroit neighborhoods. Looking for participants and mentors...",
-    category: 'Events',
-    replies: 18,
-    views: 203,
-  },
-];
-
-// Mock data for forum categories
-const forumCategories = [
-  {
-    id: 1,
-    title: 'Project Collaboration',
-    slug: 'project-collaboration',
-    description:
-      "Find collaborators or join existing projects building Detroit's digital infrastructure.",
-    icon: <FaCode />,
-    threads: 42,
-    posts: 187,
-  },
-  {
-    id: 2,
-    title: 'Technical Discussions',
-    slug: 'technical-discussions',
-    description:
-      'Discuss technologies, frameworks, and technical challenges in your projects.',
-    icon: <FaLaptopCode />,
-    threads: 68,
-    posts: 312,
-  },
-  {
-    id: 3,
-    title: 'Community Announcements',
-    slug: 'community-announcements',
-    description:
-      'Updates, events, and important information for the BUIDL Detroit community.',
-    icon: <FaUsers />,
-    threads: 24,
-    posts: 96,
-  },
-  {
-    id: 4,
-    title: 'Ideas & Proposals',
-    slug: 'ideas-proposals',
-    description:
-      'Share your ideas for new projects or improvements to existing community tools.',
-    icon: <FaLightbulb />,
-    threads: 37,
-    posts: 145,
-  },
-];
-
 // Styled components
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 1.5rem;
 `;
@@ -393,81 +291,6 @@ const SectionTitle = styled.h2`
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
-`;
-
-const ThreadGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-`;
-
-const ThreadCard = styled.div`
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  padding: 1.5rem;
-  transition: transform 0.2s, box-shadow 0.2s;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    h3 {
-      color: #3498db;
-      text-decoration: underline;
-    }
-  }
-`;
-
-const ThreadHeader = styled.div`
-  margin-bottom: 1rem;
-`;
-
-const ThreadTitle = styled.h3`
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
-  color: #f5f5f5;
-`;
-
-const ThreadMeta = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: #a0a0a0;
-`;
-
-const ThreadAuthor = styled.span``;
-
-const ThreadDate = styled.span``;
-
-const ThreadPreview = styled.p`
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #c0c0c0;
-  margin-bottom: 1rem;
-`;
-
-const ThreadFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const ThreadCategory = styled.span`
-  background-color: #2c2c2c;
-  color: #3498db;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-`;
-
-const ThreadStats = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
-const ThreadStat = styled.span`
-  font-size: 0.9rem;
-  color: #a0a0a0;
 `;
 
 const MoreLink = styled(Link)`

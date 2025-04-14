@@ -21,7 +21,7 @@ import { UploadMedia, VenueSearch } from '@gods.work/ui';
 
 // Dynamically import the rich text editor to avoid SSR issues
 const RichTextEditor = dynamic(
-  () => import('../../../app/components/RichTextEditor'),
+  () => import('../../../../../../libs/ui/src/lib/RichTextEditor'),
   {
     ssr: false,
   }

@@ -18,6 +18,7 @@ import {
   SocialLinks,
   SocialLink,
   CTASection,
+  SectionContainer,
 } from '../components/Styles';
 import { FaXTwitter } from 'react-icons/fa6';
 
@@ -55,145 +56,149 @@ const BuidlPage = () => {
       </Hero>
 
       <Section>
-        <SectionTitle>
-          <FaCode style={{ marginRight: '12px' }} />
-          Our Projects
-        </SectionTitle>
-        <ProjectGrid>
-          <ProjectCard>
-            <ProjectHeader>
-              <ProjectIcon>
-                <FaUsers />
-              </ProjectIcon>
-              <ProjectTitle>Community Platform</ProjectTitle>
-            </ProjectHeader>
-            <ProjectDescription>
-              A full-stack application for managing Detroit&apos;s creative
-              communities, events, and projects. Built with Next.js, TypeScript,
-              and Knex.js.
-            </ProjectDescription>
-            <TechStack>
-              <TechTag>Next.js</TechTag>
-              <TechTag>DPoP Auth</TechTag>
-            </TechStack>
-            <ProjectActions>
-              <ProjectLink
-                href="https://github.com/build-detroit/regen-art/tree/main/apps/collective"
-                target="_blank"
-              >
-                View Code
-              </ProjectLink>
-              <ProjectLink href="/community">Learn More</ProjectLink>
-            </ProjectActions>
-          </ProjectCard>
+        <SectionContainer size="large">
+          <SectionTitle>
+            <FaCode style={{ marginRight: '12px' }} />
+            Our Projects
+          </SectionTitle>
+          <ProjectGrid>
+            <ProjectCard>
+              <ProjectHeader>
+                <ProjectIcon>
+                  <FaUsers />
+                </ProjectIcon>
+                <ProjectTitle>Community Platform</ProjectTitle>
+              </ProjectHeader>
+              <ProjectDescription>
+                A full-stack application for managing Detroit&apos;s creative
+                communities, events, and projects. Built with Next.js,
+                TypeScript, and Knex.js.
+              </ProjectDescription>
+              <TechStack>
+                <TechTag>Next.js</TechTag>
+                <TechTag>DPoP Auth</TechTag>
+              </TechStack>
+              <ProjectActions>
+                <ProjectLink
+                  href="https://github.com/build-detroit/regen-art/tree/main/apps/collective"
+                  target="_blank"
+                >
+                  View Code
+                </ProjectLink>
+                <ProjectLink href="/community">Learn More</ProjectLink>
+              </ProjectActions>
+            </ProjectCard>
 
-          <ProjectCard>
-            <ProjectHeader>
-              <ProjectIcon>
-                <FaLaptopCode />
-              </ProjectIcon>
-              <ProjectTitle>Creator Portfolios</ProjectTitle>
-            </ProjectHeader>
-            <ProjectDescription>
-              Digital identity and portfolio system for artists and creators to
-              showcase their work and connect with the community.
-            </ProjectDescription>
-            <TechStack>
-              <TechTag>Next.js</TechTag>
-              <TechTag>DPoP Auth</TechTag>
-            </TechStack>
-            <ProjectActions>
-              <ProjectLink
-                href="https://github.com/buidl-renaissance/regen-art/tree/main/apps/portfolio"
-                target="_blank"
-              >
-                View Code
-              </ProjectLink>
-              <ProjectLink href="/profiles">Learn More</ProjectLink>
-            </ProjectActions>
-          </ProjectCard>
+            <ProjectCard>
+              <ProjectHeader>
+                <ProjectIcon>
+                  <FaLaptopCode />
+                </ProjectIcon>
+                <ProjectTitle>Creator Portfolios</ProjectTitle>
+              </ProjectHeader>
+              <ProjectDescription>
+                Digital identity and portfolio system for artists and creators
+                to showcase their work and connect with the community.
+              </ProjectDescription>
+              <TechStack>
+                <TechTag>Next.js</TechTag>
+                <TechTag>DPoP Auth</TechTag>
+              </TechStack>
+              <ProjectActions>
+                <ProjectLink
+                  href="https://github.com/buidl-renaissance/regen-art/tree/main/apps/portfolio"
+                  target="_blank"
+                >
+                  View Code
+                </ProjectLink>
+                <ProjectLink href="/profiles">Learn More</ProjectLink>
+              </ProjectActions>
+            </ProjectCard>
 
-          <ProjectCard>
-            <ProjectHeader>
-              <ProjectIcon>
-                <FaCode />
-              </ProjectIcon>
-              <ProjectTitle>Event Ticketing</ProjectTitle>
-            </ProjectHeader>
-            <ProjectDescription>
-              Decentralized ticketing system for community events with revenue
-              sharing and transparent distribution to artists and venues.
-            </ProjectDescription>
-            <TechStack>
-              <TechTag>Knex.js</TechTag>
-              <TechTag>SQLite/MySQL</TechTag>
-            </TechStack>
-            <ProjectActions>
-              <ProjectLink
-                href="https://github.com/buidl-renaissance/regen-art/tree/main/libs/ticketing"
-                target="_blank"
-              >
-                View Code
-              </ProjectLink>
-              <ProjectLink href="/ticketing">Learn More</ProjectLink>
-            </ProjectActions>
-          </ProjectCard>
-        </ProjectGrid>
+            <ProjectCard>
+              <ProjectHeader>
+                <ProjectIcon>
+                  <FaCode />
+                </ProjectIcon>
+                <ProjectTitle>Event Ticketing</ProjectTitle>
+              </ProjectHeader>
+              <ProjectDescription>
+                Decentralized ticketing system for community events with revenue
+                sharing and transparent distribution to artists and venues.
+              </ProjectDescription>
+              <TechStack>
+                <TechTag>Knex.js</TechTag>
+                <TechTag>SQLite/MySQL</TechTag>
+              </TechStack>
+              <ProjectActions>
+                <ProjectLink
+                  href="https://github.com/buidl-renaissance/regen-art/tree/main/libs/ticketing"
+                  target="_blank"
+                >
+                  View Code
+                </ProjectLink>
+                <ProjectLink href="/ticketing">Learn More</ProjectLink>
+              </ProjectActions>
+            </ProjectCard>
+          </ProjectGrid>
+        </SectionContainer>
       </Section>
 
       <Section>
-        <SectionTitle>How to Get Involved</SectionTitle>
-        <StepsContainer>
-          <StepCard>
-            <StepHeader>
-              <StepNumber>1</StepNumber>
-              <StepTitle>Join Our Community</StepTitle>
-            </StepHeader>
-            <StepDescription>
-              Connect with our developer community on Discord and GitHub to meet
-              collaborators and learn about our development process.
-            </StepDescription>
-            <StepAction>
-              <StepLink href="https://discord.gg/kSuS9kdgTk">
-                Join Discord <StepLinkArrow>→</StepLinkArrow>
-              </StepLink>
-            </StepAction>
-          </StepCard>
+        <SectionContainer size="large">
+          <SectionTitle>How to Get Involved</SectionTitle>
+          <StepsContainer>
+            <StepCard>
+              <StepHeader>
+                <StepNumber>1</StepNumber>
+                <StepTitle>Join Our Community</StepTitle>
+              </StepHeader>
+              <StepDescription>
+                Connect with our developer community on Discord and GitHub to
+                meet collaborators and learn about our development process.
+              </StepDescription>
+              <StepAction>
+                <StepLink href="https://discord.gg/kSuS9kdgTk">
+                  Join Discord <StepLinkArrow>→</StepLinkArrow>
+                </StepLink>
+              </StepAction>
+            </StepCard>
 
-          <StepCard>
-            <StepHeader>
-              <StepNumber>2</StepNumber>
-              <StepTitle>Pick a Project</StepTitle>
-            </StepHeader>
-            <StepDescription>
-              Browse our active projects and find one that matches your skills
-              and interests. Each project has detailed documentation to help you
-              get started.
-            </StepDescription>
-            <StepAction>
-              <StepLink href="/projects" target="_blank">
-                Explore Projects <StepLinkArrow>→</StepLinkArrow>
-              </StepLink>
-            </StepAction>
-          </StepCard>
+            <StepCard>
+              <StepHeader>
+                <StepNumber>2</StepNumber>
+                <StepTitle>Pick a Project</StepTitle>
+              </StepHeader>
+              <StepDescription>
+                Browse our active projects and find one that matches your skills
+                and interests. Each project has detailed documentation to help
+                you get started.
+              </StepDescription>
+              <StepAction>
+                <StepLink href="/projects" target="_blank">
+                  Explore Projects <StepLinkArrow>→</StepLinkArrow>
+                </StepLink>
+              </StepAction>
+            </StepCard>
 
-          <StepCard>
-            <StepHeader>
-              <StepNumber>3</StepNumber>
-              <StepTitle>Start Contributing</StepTitle>
-            </StepHeader>
-            <StepDescription>
-              Set up your local development environment, pick an issue to work
-              on, and submit your first pull request. We welcome contributions
-              of all sizes!
-            </StepDescription>
-            <StepAction>
-              <StepLink href="/contributing">
-                Contribution Guide <StepLinkArrow>→</StepLinkArrow>
-              </StepLink>
-            </StepAction>
-          </StepCard>
-        </StepsContainer>
+            <StepCard>
+              <StepHeader>
+                <StepNumber>3</StepNumber>
+                <StepTitle>Start Contributing</StepTitle>
+              </StepHeader>
+              <StepDescription>
+                Set up your local development environment, pick an issue to work
+                on, and submit your first pull request. We welcome contributions
+                of all sizes!
+              </StepDescription>
+              <StepAction>
+                <StepLink href="/contributing">
+                  Contribution Guide <StepLinkArrow>→</StepLinkArrow>
+                </StepLink>
+              </StepAction>
+            </StepCard>
+          </StepsContainer>
+        </SectionContainer>
       </Section>
 
       <CTASection>

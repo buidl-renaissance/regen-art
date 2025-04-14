@@ -1,13 +1,25 @@
 import React from 'react';
-import { ComingSoon } from '@gods.work/ui';
 import { Container } from '@gods.work/ui';
+import { ForumPostCreate } from '../../components/ForumPostCreate';
+import { SectionContainer } from '.';
 
-const ComingSoonPage = () => {
+const ForumNewPage = () => {
+  const handleSubmit = (postData: {
+    title: string;
+    content: string;
+    category: string;
+    tags: string[];
+  }) => {
+    console.log(postData);
+  };
+
   return (
     <Container>
-      <ComingSoon />
+      <SectionContainer>
+          <ForumPostCreate onSubmit={handleSubmit} />
+      </SectionContainer>
     </Container>
   );
 };
 
-export default ComingSoonPage;
+export default ForumNewPage;
