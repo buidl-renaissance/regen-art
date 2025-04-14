@@ -69,7 +69,7 @@ const ForumPage = ({
           Recent Discussions
         </SectionTitle>
         <ThreadGrid threads={threads} />
-        <MoreLink href="/forum/all">View all discussions →</MoreLink>
+        <MoreLink href="/forum/threads">View all discussions →</MoreLink>
       </Section>
 
       {/* <Section>

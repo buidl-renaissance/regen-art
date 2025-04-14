@@ -11,7 +11,7 @@ export const ThreadGrid = ({ threads }: ThreadGridProps) => {
   return (
     <ThreadGridContainer>
       {threads.map((thread) => (
-        <Link href={`/forum/${thread.slug}`} key={thread.id}>
+        <Link href={`/forum/threads/${thread.slug}`} key={thread.id}>
           <ThreadCard>
             <ThreadHeader>
               <ThreadTitle>{thread.title}</ThreadTitle>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '@gods.work/ui';
-import { ForumPostCreate } from '../../components/ForumPostCreate';
-import { SectionContainer } from '.';
+import { ForumPostCreate } from '../../../components/ForumPostCreate';
+import { SectionContainer } from '..';
 
 const ForumNewPage = () => {
   const handleSubmit = (postData: {
@@ -16,7 +16,7 @@ const ForumNewPage = () => {
   return (
     <Container>
       <SectionContainer>
-          <ForumPostCreate onSubmit={handleSubmit} />
+        <ForumPostCreate onSubmit={handleSubmit} />
       </SectionContainer>
     </Container>
   );

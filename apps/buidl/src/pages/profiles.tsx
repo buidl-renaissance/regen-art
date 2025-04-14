@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
-import { getArtists, Artist, CreatorPortfolio } from '@gods.work/utils';
+import { getProfiles, ProfileData, CreatorPortfolio } from '@gods.work/utils';
 import ProfileCard from '../components/ProfileCard';
 import {
   Container,
@@ -62,19 +62,19 @@ const CREATORS: CreatorPortfolio[] = [
 ];
 
 export const getServerSideProps = async () => {
-  const artists = await getArtists();
+  const profiles = await getProfiles();
   return {
-    props: { artists },
+    props: { profiles },
   };
 };
 
-export default function CreatorProfiles({ artists }: { artists: Artist[] }) {
+export default function CreatorProfiles({ profiles }: { profiles: ProfileData[] }) {
   const [filter, setFilter] = useState('All');
 
   // Extract unique tags for filter
   const allTags = [
     'All',
-    ...new Set(artists.flatMap((creator) => creator.tags)),
+    ...new Set(profiles.flatMap((profile) => profile.tags)),
   ];
 
   // Filter creators based on selected tag
@@ -142,12 +142,12 @@ export default function CreatorProfiles({ artists }: { artists: Artist[] }) {
           </FilterHeader>
 
           <CreatorGrid>
-            {filteredCreators.map((creator) => (
+            {profiles.map((profile: ProfileData) => (
               <ProfileCard
-                key={creator.id}
-                profile={creator.profile}
-                tags={creator.tags}
-                linkUrl={`/projects/profiles/${creator.id}`}
+                key={profile.handle}
+                profile={profile}
+                tags={profile.tags}
+                linkUrl={`/profile/${profile.handle}`}
               />
             ))}
           </CreatorGrid>
@@ -200,101 +200,6 @@ const FeaturedGrid = styled.div`
 
   @media (min-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
-  }
-`;
-
-const FeaturedCreatorCard = styled.div`
-  background: #2a2a2a;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-  }
-`;
-
-const CreatorAvatar = styled.div`
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #0078d4;
-    color: #ffffff;
-    font-size: 3rem;
-    font-weight: 700;
-  }
-`;
-
-const CreatorInfo = styled.div`
-  padding: 1.5rem;
-  background-color: #1a1a1a;
-`;
-
-const CreatorName = styled.h3`
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-  color: #f5f5f5;
-`;
-
-const CreatorTitle = styled.h4`
-  font-size: 1rem;
-  font-weight: 500;
-  color: #b0b0b0;
-  margin-bottom: 1rem;
-`;
-
-const CreatorBio = styled.p`
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  color: #d0d0d0;
-`;
-
-const CreatorTags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-`;
-
-const CreatorTag = styled.span`
-  background: #333333;
-  color: #e0e0e0;
-  padding: 0.25rem 0.75rem;
-  border-radius: 50px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border: 1px solid #444444;
-`;
-
-const CreatorLinks = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
-const SocialLink = styled.a`
-  color: #a0a0a0; /* Lighter for dark theme */
-  font-size: 1.25rem;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: #3a97e8; /* Brighter blue for dark theme contrast */
   }
 `;
 

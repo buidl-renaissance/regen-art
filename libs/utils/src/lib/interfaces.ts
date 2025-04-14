@@ -64,6 +64,7 @@ export interface ProfileData {
   website?: string;
   organization?: string;
   socialLinks?: SocialLinks;
+  tags?: string[];
 }
 
 export interface Artwork {

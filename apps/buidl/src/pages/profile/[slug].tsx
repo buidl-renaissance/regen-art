@@ -91,9 +91,9 @@ export default function ProfilePage({ profile }: { profile: any }) {
       <CenteredContent>
         <ProfileHeader>
           <ProfileImage>
-            {user?.profile_picture ? (
+            {user?.profileImage ? (
               <Image
-                src={user.profile_picture}
+                src={user.profileImage}
                 alt={user.name || 'Profile'}
                 width={100}
                 height={100}

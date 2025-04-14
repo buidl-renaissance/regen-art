@@ -13,6 +13,10 @@ const nextConfig = {
     svgr: false,
   },
 
+  images: {
+    domains: ['localhost', 'dpop.nyc3.digitaloceanspaces.com'],
+  },
+
   compiler: {
     // For other options, see https://styled-components.com/docs/tooling#babel-plugin
     styledComponents: true,

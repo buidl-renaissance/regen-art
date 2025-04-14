@@ -3,28 +3,35 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
-import { ForumPostCard } from '../../components/ForumPostCard';
-import { RepliesList } from '../../components/ForumReplies';
-import { ReplyForm } from '../../components/ForumReplies';
-import { ForumThread, ForumPost, getThreadBySlug, getPostsByThreadId } from '@gods.work/forum';
+import { ForumPostCard } from '../../../components/ForumPostCard';
+import { RepliesList } from '../../../components/ForumReplies';
+import { ReplyForm } from '../../../components/ForumReplies';
+import {
+  ForumThread,
+  ForumPost,
+  getThreadBySlug,
+  getPostsByThreadId,
+} from '@gods.work/forum';
+import ForumThreadPreview from '../../../components/ForumThreadPreview';
 
 interface ForumThreadPageProps {
-    thread: ForumThread;
-    posts: ForumPost[];
+  thread: ForumThread;
+  posts: ForumPost[];
 }
 
-export const getServerSideProps = async ({ params }: { params: { thread: string } }) => {
-    const thread = await getThreadBySlug(params.thread);
-    const posts = await getPostsByThreadId(thread.id);
-    return {
-        props: { thread, posts },
-    };
+export const getServerSideProps = async ({
+  params,
+}: {
+  params: { thread: string };
+}) => {
+  const thread = await getThreadBySlug(params.thread);
+  const posts = await getPostsByThreadId(thread.id);
+  return {
+    props: { thread, posts },
+  };
 };
 
-const ForumThreadPage = ({
-    thread,
-    posts,
-}: ForumThreadPageProps) => {
+const ForumThreadPage = ({ thread, posts }: ForumThreadPageProps) => {
   return (
     <Container>
       <Head>
@@ -39,13 +46,16 @@ const ForumThreadPage = ({
         <FaArrowLeft style={{ marginRight: '8px' }} /> Back to Forum
       </BackButton>
 
+      <ForumThreadPreview thread={thread} />
+
       {posts.map((post) => (
         <>
           <ForumPostCard post={post} />
-          {post.replies && post.replies.length > 0 && <RepliesList replies={post.replies} />}
+          {post.replies && post.replies.length > 0 && (
+            <RepliesList replies={post.replies} />
+          )}
         </>
       ))}
-
 
       <ReplyForm />
     </Container>

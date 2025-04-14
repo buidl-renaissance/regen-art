@@ -103,8 +103,8 @@ const setDPoPToken = (token: string) => {
 };
 
 export const getProfile = async (id: string) => {
-  const result = await authorizedRequest(`user/${id}`);
-  return result;
+  const result = await authorizedRequest(`profile/${id}`);
+  return result.data;
 };
 
 export const getUser = (): User | null => {
@@ -293,6 +293,11 @@ export const getRAEvents = async ({ limit, offset, status }: RAEventsParams) => 
 
 export const getRAEvent = async (id: string) => {
   const result = await (await fetch(`${hostname}/api/events/ra/${id}`)).json();
+  return result.data;
+};
+
+export const getProfiles = async () => {
+  const result = await (await fetch(`${hostname}/api/profiles`)).json();
   return result.data;
 };
 

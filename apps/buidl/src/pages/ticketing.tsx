@@ -115,7 +115,7 @@ export default function TicketingPage() {
       </Section>
 
       <Section>
-        <SectionContainer>
+        <SectionContainer size="large">
           <SectionTitle>How It Works</SectionTitle>
 
           <ProcessSteps>

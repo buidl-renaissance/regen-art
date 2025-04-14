@@ -23,7 +23,7 @@ const ForumThreadPreview: React.FC<ThreadProps> = ({ thread }) => {
           <FaThumbtack />
         </PinnedIndicator>
       )}
-      <Link href={`/forum/${thread.slug}`}>
+      <Link href={`/forum/threads/${thread.slug}`}>
         <ThreadTitle>{thread.title}</ThreadTitle>
       </Link>
       <ThreadMeta>
