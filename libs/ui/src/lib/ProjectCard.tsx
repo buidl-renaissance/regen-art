@@ -2,10 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { FaMapMarkerAlt, FaExternalLinkAlt } from 'react-icons/fa';
-import { Project } from './interfaces';
+import { CardImage } from './CardImage';
 
 interface ProjectCardProps {
-  project: Project;
+  project: {
+    title: string;
+    description: string;
+    category: string;
+    imageUrl?: string;
+    location?: string;
+    websiteUrl?: string;
+    slug?: string;
+  };
   onClick?: () => void;
 }
 
@@ -20,15 +28,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <CardContainer onClick={onClick}>
-      <CardImageContainer>
-        {project.imageUrl ? (
-          <CardImage src={project.imageUrl} alt={project.title} />
-        ) : (
-          <PlaceholderImage>
-            <CategoryLabel>{project.category}</CategoryLabel>
-          </PlaceholderImage>
-        )}
-      </CardImageContainer>
+      <CardImage
+        imageUrl={project.imageUrl}
+        title={project.title}
+        category={project.category}
+        alt={project.title}
+      />
       <CardContent>
         <CardTitle>{project.title}</CardTitle>
         {project.location && (
@@ -37,11 +42,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <LocationText>{project.location}</LocationText>
           </LocationContainer>
         )}
-        <CardDescription>{truncateDescription(project.description)}</CardDescription>
+        <CardDescription>
+          {truncateDescription(project.description)}
+        </CardDescription>
         <CardFooter>
           <CategoryBadge>{project.category}</CategoryBadge>
           {project.websiteUrl && (
-            <WebsiteLink href={project.websiteUrl} target="_blank" rel="noopener noreferrer">
+            <WebsiteLink
+              href={project.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaExternalLinkAlt />
             </WebsiteLink>
           )}
@@ -66,32 +77,11 @@ const CardContainer = styled.div`
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
   cursor: pointer;
-  
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   }
-`;
-
-const CardImageContainer = styled.div`
-  height: 180px;
-  overflow: hidden;
-  position: relative;
-`;
-
-const CardImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const PlaceholderImage = styled.div`
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #2c3e50, #4a5568);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const CardContent = styled.div`
@@ -157,7 +147,7 @@ const WebsiteLink = styled.a`
   margin-left: auto;
   margin-right: 1rem;
   font-size: 0.9rem;
-  
+
   &:hover {
     color: #64b5f6;
   }
@@ -167,7 +157,7 @@ const ViewDetailsLink = styled(Link)`
   color: #90caf9;
   font-size: 0.9rem;
   text-decoration: none;
-  
+
   &:hover {
     color: #64b5f6;
     text-decoration: underline;

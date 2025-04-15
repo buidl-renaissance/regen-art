@@ -10,22 +10,13 @@ import {
 } from 'react-icons/fa';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import dynamic from 'next/dynamic';
 
-import { Container, CenteredContent } from '../../../app/components/Styled';
-import { Button, BackButton } from '../../../app/components/Styled';
-import { ErrorMessage } from '../../../app/components/Styled';
+import { Container, CenteredContent, ErrorMessage, Button, BackButton } from '../../../app/components/Styled';
 import { useAuth } from '@gods.work/auth';
 import { DPoPEvent, getEvent, updateEvent } from '@gods.work/utils';
-import { UploadMedia, VenueSearch } from '@gods.work/ui';
+import { UploadMedia, VenueSearch, RichTextEditor } from '@gods.work/ui';
 
-// Dynamically import the rich text editor to avoid SSR issues
-const RichTextEditor = dynamic(
-  () => import('../../../../../../libs/ui/src/lib/RichTextEditor'),
-  {
-    ssr: false,
-  }
-);
+
 
 interface EditEventPageProps {
   event: DPoPEvent;

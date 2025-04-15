@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
-import { ProjectCard, ProjectStatus } from '@gods.work/projects';
+import { ProjectStatus } from '@gods.work/projects';
 import { Project } from '@gods.work/projects';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
-import { ComingSoon } from '@gods.work/ui';
+import { ProjectCard } from '@gods.work/ui';
 import router from 'next/router';
 
 export async function getServerSideProps() {

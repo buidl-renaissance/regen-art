@@ -158,6 +158,9 @@ const BuidlPage = () => {
                 meet collaborators and learn about our development process.
               </StepDescription>
               <StepAction>
+                <StepLink href="/forum" style={{ marginRight: '2rem' }}>
+                  Read Forum <StepLinkArrow>→</StepLinkArrow>
+                </StepLink>
                 <StepLink href="https://discord.gg/kSuS9kdgTk">
                   Join Discord <StepLinkArrow>→</StepLinkArrow>
                 </StepLink>
@@ -175,7 +178,7 @@ const BuidlPage = () => {
                 you get started.
               </StepDescription>
               <StepAction>
-                <StepLink href="/projects" target="_blank">
+                <StepLink href="/projects">
                   Explore Projects <StepLinkArrow>→</StepLinkArrow>
                 </StepLink>
               </StepAction>

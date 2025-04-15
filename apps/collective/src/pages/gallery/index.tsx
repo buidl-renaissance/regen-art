@@ -3,16 +3,22 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import Link from 'next/link';
 import { FaCalendarAlt, FaPalette, FaProjectDiagram } from 'react-icons/fa';
-import { ArtworkCard, EventCard } from '@gods.work/ui';
-import { ProjectCard, Project } from '@gods.work/projects';
+import {
+  Container,
+  Section,
+  SectionTitle,
+  ProjectCard,
+  ArtworkCard,
+  EventCard,
+} from '@gods.work/ui';
+import { Project } from '@gods.work/projects';
 import { Artwork, Event, getArtworks, getEvents } from '@gods.work/utils';
-import { Container, Section, SectionTitle } from '@gods.work/ui';
 
 export async function getServerSideProps() {
   // In a real implementation, you would fetch this data from your API
   // This is just mock data for demonstration
   const featuredArtworks = await getArtworks();
-//   const featuredProjects = await getFeaturedProjects();
+  //   const featuredProjects = await getFeaturedProjects();
   const featuredProjects: Project[] = [];
   const upcomingEvents = await getEvents();
 
@@ -24,28 +30,29 @@ export async function getServerSideProps() {
       theme: 'dark',
       metadata: {
         title: 'Gallery | Art Night Detroit',
-        description: 'Explore curated artwork, projects, and upcoming events from Detroit\'s creative community.',
+        description:
+          "Explore curated artwork, projects, and upcoming events from Detroit's creative community.",
       },
     },
   };
 }
 
-export default function GalleryPage({ 
-  featuredArtworks, 
-  featuredProjects, 
-  upcomingEvents 
-}: { 
-  featuredArtworks: Artwork[], 
-  featuredProjects: Project[], 
-  upcomingEvents: Event[] 
+export default function GalleryPage({
+  featuredArtworks,
+  featuredProjects,
+  upcomingEvents,
+}: {
+  featuredArtworks: Artwork[];
+  featuredProjects: Project[];
+  upcomingEvents: Event[];
 }) {
   const [activeTab, setActiveTab] = useState('all');
 
   const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
@@ -54,7 +61,10 @@ export default function GalleryPage({
     <Container>
       <Head>
         <title>Gallery | Art Night Detroit</title>
-        <meta name="description" content="Explore curated artwork, projects, and upcoming events from Detroit's creative community." />
+        <meta
+          name="description"
+          content="Explore curated artwork, projects, and upcoming events from Detroit's creative community."
+        />
       </Head>
 
       <Header>
@@ -63,26 +73,23 @@ export default function GalleryPage({
       </Header>
 
       <TabContainer>
-        <Tab 
-          active={activeTab === 'all'} 
-          onClick={() => setActiveTab('all')}
-        >
+        <Tab active={activeTab === 'all'} onClick={() => setActiveTab('all')}>
           All
         </Tab>
-        <Tab 
-          active={activeTab === 'artwork'} 
+        <Tab
+          active={activeTab === 'artwork'}
           onClick={() => setActiveTab('artwork')}
         >
           <FaPalette style={{ marginRight: '8px' }} /> Artwork
         </Tab>
-        <Tab 
-          active={activeTab === 'projects'} 
+        <Tab
+          active={activeTab === 'projects'}
           onClick={() => setActiveTab('projects')}
         >
           <FaProjectDiagram style={{ marginRight: '8px' }} /> Projects
         </Tab>
-        <Tab 
-          active={activeTab === 'events'} 
+        <Tab
+          active={activeTab === 'events'}
           onClick={() => setActiveTab('events')}
         >
           <FaCalendarAlt style={{ marginRight: '8px' }} /> Events
@@ -97,10 +104,7 @@ export default function GalleryPage({
           </SectionTitle>
           <CardGrid>
             {upcomingEvents.map((event) => (
-              <EventCard 
-                key={event.id}
-                event={event}
-              />
+              <EventCard key={event.id} event={event} />
             ))}
           </CardGrid>
         </Section>
@@ -114,10 +118,7 @@ export default function GalleryPage({
           </SectionTitle>
           <CardGrid>
             {featuredArtworks.map((artwork) => (
-              <ArtworkCard 
-                key={artwork.id}
-                artwork={artwork}
-              />
+              <ArtworkCard key={artwork.id} artwork={artwork} />
             ))}
           </CardGrid>
           <ViewAllLink href="/artwork">View All Artwork →</ViewAllLink>
@@ -132,10 +133,7 @@ export default function GalleryPage({
           </SectionTitle>
           <CardGrid>
             {featuredProjects.map((project) => (
-              <ProjectCard 
-                key={project.id}
-                project={project}
-              />
+              <ProjectCard key={project.id} project={project} />
             ))}
           </CardGrid>
           <ViewAllLink href="/projects">View All Projects →</ViewAllLink>
@@ -186,7 +184,8 @@ const Tab = styled.button<{ active: boolean }>`
   cursor: pointer;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid ${(props) => (props.active ? '#90caf9' : 'transparent')};
+  border-bottom: 2px solid
+    ${(props) => (props.active ? '#90caf9' : 'transparent')};
   transition: all 0.3s ease;
 
   &:hover {
@@ -211,9 +210,8 @@ const ViewAllLink = styled(Link)`
   text-decoration: none;
   margin-top: 1rem;
   margin-bottom: 3rem;
-  
+
   &:hover {
     text-decoration: underline;
   }
 `;
-
