@@ -107,6 +107,11 @@ export const getProfile = async (id: string) => {
   return result.data;
 };
 
+export const getSubmissions = async () => {
+  const result = await authorizedRequest(`submissions`);
+  return result.data;
+};
+
 export const getUser = (): User | null => {
   if (typeof window === "undefined") return null;
   const u = localStorage.getItem("DPoPUser");
