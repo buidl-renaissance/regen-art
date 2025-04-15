@@ -19,3 +19,6 @@ export * from './lib/useWallet';
 export * from './lib/VenueSearch';
 export * from './lib/ComingSoon';
 export * from './lib/RichTextEditor';
+export * from './lib/EventsGrid';
+export * from './lib/RSVPButton';
+export * from './lib/CalendarBox';

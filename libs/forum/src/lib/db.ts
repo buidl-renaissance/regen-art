@@ -35,11 +35,6 @@ export const getThreads = async (
   } = {}
 ) => {
   const query = db('forum_threads')
-    .join(
-      'forum_categories',
-      'forum_threads.category_id',
-      'forum_categories.id'
-    )
     .leftJoin('forum_posts', function () {
       this.on('forum_threads.id', '=', 'forum_posts.thread_id').andOn(
         'forum_posts.is_first_post',
@@ -49,12 +44,15 @@ export const getThreads = async (
     })
     .select(
       'forum_threads.*',
-      'forum_categories.name as category_name',
-      'forum_categories.slug as category_slug',
       'forum_posts.content as first_post_content'
     );
 
   if (options.categoryId) {
+    query.join(
+      'forum_categories',
+      'forum_threads.category_id',
+      'forum_categories.id'
+    )
     query.where('forum_threads.category_id', options.categoryId);
   }
 
@@ -120,7 +118,7 @@ export const createThread = async (threadData: {
   // Start a transaction
   return db.transaction(async (trx) => {
     // Insert thread
-    const [threadId] = await trx('forum_threads')
+    const [thread] = await trx('forum_threads')
       .insert({
         title: threadData.title,
         slug,
@@ -133,7 +131,7 @@ export const createThread = async (threadData: {
 
     // Insert first post
     await trx('forum_posts').insert({
-      thread_id: threadId,
+      thread_id: thread.id,
       user_id: threadData.user_id,
       content: threadData.content,
       is_first_post: true,
@@ -165,18 +163,18 @@ export const createThread = async (threadData: {
             })
             .returning('id');
 
-          tagId = newTagId;
+          tagId = newTagId.id;
         }
 
         // Associate tag with thread
         await trx('forum_thread_tags').insert({
-          thread_id: threadId,
+          thread_id: thread.id,
           tag_id: tagId,
         });
       }
     }
 
-    return threadId;
+    return thread.id;
   });
 };
 

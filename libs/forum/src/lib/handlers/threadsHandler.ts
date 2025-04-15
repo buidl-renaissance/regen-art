@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getThreads, getThreadBySlug, createThread, getCategoryBySlug } from '../db';
+import { getThreads, getThreadBySlug, createThread, getCategoryBySlug, incrementThreadViews } from '../db';
 
 export const getThreadsHandler = async (req: Request, res: Response) => {
   try {
@@ -53,17 +53,17 @@ export const getThreadHandler = async (req: Request, res: Response) => {
 
 export const createThreadHandler = async (req: Request, res: Response) => {
   try {
-    const { title, content, category_id, user_id, tags } = req.body;
+    const { title, content, category, user_id, tags } = JSON.parse(req.body);
     
-    if (!title || !content || !category_id || !user_id) {
+    if (!title || !content || !category) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
     
     const threadId = await createThread({
       title,
       content,
-      category_id,
-      user_id,
+      category_id: 1,
+      user_id: 2,
       tags
     });
     
@@ -71,5 +71,29 @@ export const createThreadHandler = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error creating thread:', error);
     return res.status(500).json({ error: 'Failed to create thread' });
+  }
+};
+
+
+export const incrementThreadViewHandler = async (req: Request, res: Response) => {
+  try {
+    const { threadId } = req.params;
+    
+    if (!threadId) {
+      return res.status(400).json({ error: 'Thread ID is required' });
+    }
+    
+    const numericThreadId = parseInt(threadId, 10);
+    
+    if (isNaN(numericThreadId)) {
+      return res.status(400).json({ error: 'Invalid thread ID format' });
+    }
+    
+    await incrementThreadViews(numericThreadId);
+    
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error incrementing thread view:', error);
+    return res.status(500).json({ error: 'Failed to increment thread view' });
   }
 };

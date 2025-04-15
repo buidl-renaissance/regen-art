@@ -40,7 +40,7 @@ const CategoryPage = ({ category, threads }: CategoryPageProps) => {
           <HeroTitle>{category.name}</HeroTitle>
           <HeroSubtitle>{category.description}</HeroSubtitle>
           {/* <HeroCTA>
-            <NewThreadButton href="/forum/new">
+            <NewThreadButton href="/forum/threads/new">
               <FaPlus style={{ marginRight: '0.5rem' }} /> New Thread
             </NewThreadButton>
           </HeroCTA> */}
@@ -54,7 +54,7 @@ const CategoryPage = ({ category, threads }: CategoryPageProps) => {
           ) : (
             <EmptyState>
               <p>No threads in this category yet.</p>
-              <Link href="/forum/new">
+              <Link href="/forum/threads/new">
                 <EmptyStateButton>Start the first thread</EmptyStateButton>
               </Link>
             </EmptyState>

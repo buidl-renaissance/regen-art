@@ -67,10 +67,22 @@ export const ForumPostCreate: React.FC<ForumPostCreateProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (validateForm()) {
+      const response = await fetch('/api/threads', {
+        method: 'POST',
+        body: JSON.stringify({
+          title,
+          content,
+          category,
+          tags,
+        }),
+      });
+
+      console.log("response: ", response);
+
       onSubmit?.({
         title,
         content,

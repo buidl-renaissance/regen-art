@@ -6,7 +6,7 @@ interface RSVPButtonProps {
   event: DPoPEvent;
 }
 
-const RSVPButton = ({ event }: RSVPButtonProps) => {
+export const RSVPButton = ({ event }: RSVPButtonProps) => {
   const [isRSVPing, setIsRSVPing] = useState(false);
   const [hasRSVPed, setHasRSVPed] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -87,4 +87,3 @@ const ErrorMessage = styled.div`
   font-size: 0.9rem;
 `;
 
-export default RSVPButton;

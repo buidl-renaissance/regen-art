@@ -59,7 +59,7 @@ const ForumCategoriesPage = ({ categories }: ForumCategoriesPageProps) => {
           <HeroTitle>Forum Categories</HeroTitle>
           <HeroSubtitle>Browse discussions by topic or start a new thread</HeroSubtitle>
           {/* <HeroCTA>
-            <NewThreadButton href="/forum/new">Start New Thread</NewThreadButton>
+            <NewThreadButton href="/forum/threads/new">Start New Thread</NewThreadButton>
           </HeroCTA> */}
         </HeroContent>
       </Hero>

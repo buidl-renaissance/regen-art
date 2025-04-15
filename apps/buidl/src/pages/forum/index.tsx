@@ -53,7 +53,7 @@ const ForumPage = ({
             Detroit&apos;s digital infrastructure.
           </HeroDescription>
           <HeroCTA>
-            <PrimaryButton href="/forum/new">
+            <PrimaryButton href="/forum/threads/new">
               <FaPlus style={{ marginRight: '8px' }} /> Start a Discussion
             </PrimaryButton>
             <SecondaryButton href="/forum/categories">
