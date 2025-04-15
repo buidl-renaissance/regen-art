@@ -2,13 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Link from 'next/link';
-import {
-  FaCode,
-  FaRobot,
-  FaTicketAlt,
-  FaBrain,
-  FaArchive,
-} from 'react-icons/fa';
+import { FaCode, FaRobot, FaBrain } from 'react-icons/fa';
 import { SectionContainer } from '../components/Styles';
 
 export default function RenAIssance() {
@@ -92,52 +86,6 @@ export default function RenAIssance() {
             <EventLargeCard>
               <EventImageContainer>
                 <EventImage
-                  src="/images/sui-overflow-2025.jpeg"
-                  alt="Sui Overflow 2025"
-                />
-              </EventImageContainer>
-              <EventContent>
-                <EventTitle>Sui Overflow 2025</EventTitle>
-                <EventDescription>
-                  Building the next generation of decentralized applications on
-                  the Sui blockchain.
-                </EventDescription>
-                <EventLink
-                  href="https://sui-overflow-2025.devfolio.co/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Explore on Devfolio →
-                </EventLink>
-              </EventContent>
-            </EventLargeCard>
-
-            <EventLargeCard>
-              <EventImageContainer>
-                <EventImage
-                  src="/images/hack-the-grid.jpeg"
-                  alt="LUKSO Hack The Grid"
-                />
-              </EventImageContainer>
-              <EventContent>
-                <EventTitle>LUKSO Hack The Grid</EventTitle>
-                <EventDescription>
-                  Creating innovative solutions at the intersection of fashion,
-                  design, and blockchain.
-                </EventDescription>
-                <EventLink
-                  href="https://lukso.gitcoin.co/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Explore on Gitcoin →
-                </EventLink>
-              </EventContent>
-            </EventLargeCard>
-
-            <EventLargeCard>
-              <EventImageContainer>
-                <EventImage
                   src="/images/ren-ai-ssance.png"
                   alt="RenAIssance 2025"
                 />
@@ -182,6 +130,52 @@ export default function RenAIssance() {
               </EventContent>
             </EventLargeCard>
           </EventsGrid>
+
+          <EventLargeCard>
+            <EventImageContainer>
+              <EventImage
+                src="/images/sui-overflow-2025.jpeg"
+                alt="Sui Overflow 2025"
+              />
+            </EventImageContainer>
+            <EventContent>
+              <EventTitle>Sui Overflow 2025</EventTitle>
+              <EventDescription>
+                Building the next generation of decentralized applications on
+                the Sui blockchain.
+              </EventDescription>
+              <EventLink
+                href="https://sui-overflow-2025.devfolio.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Explore on Devfolio →
+              </EventLink>
+            </EventContent>
+          </EventLargeCard>
+
+          <EventLargeCard>
+            <EventImageContainer>
+              <EventImage
+                src="/images/hack-the-grid.jpeg"
+                alt="LUKSO Hack The Grid"
+              />
+            </EventImageContainer>
+            <EventContent>
+              <EventTitle>LUKSO Hack The Grid</EventTitle>
+              <EventDescription>
+                Creating innovative solutions at the intersection of design and
+                blockchain.
+              </EventDescription>
+              <EventLink
+                href="https://lukso.gitcoin.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Explore on Gitcoin →
+              </EventLink>
+            </EventContent>
+          </EventLargeCard>
 
           {/* <CTAButton href="/projects">Join a Project</CTAButton> */}
         </SectionContainer>
