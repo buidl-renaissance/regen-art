@@ -49,8 +49,9 @@ export default function RenAIssance() {
             <ProjectTitle>Your Digital Creative Space</ProjectTitle>
             <ProjectDescription>
               Helping artists and creators own their online presence without
-              tech companies controlling their work, while ensuring Detroit's art 
-              and creativity has a safe, permanent place to live that anyone can visit.
+              tech companies controlling their work, while ensuring Detroit's
+              art and creativity has a safe, permanent place to live that anyone
+              can visit.
             </ProjectDescription>
           </ProjectCard>
 
@@ -63,7 +64,7 @@ export default function RenAIssance() {
             </ProjectTitle>
             <ProjectDescription>
               Using smart technology to collect and share Detroit&apos;s rich
-              history and cultural treasures, creating honest, easy-to-use tools 
+              history and cultural treasures, creating honest, easy-to-use tools
               for community events that everyone can access and afford.
             </ProjectDescription>
           </ProjectCard>
@@ -76,7 +77,8 @@ export default function RenAIssance() {
             <ProjectDescription>
               Building a new cultural movement that preserves community stories,
               supports local artists, and connects our physical neighborhoods
-              with digital possibilities while bringing our history to life for new generations.
+              with digital possibilities while bringing our history to life for
+              new generations.
             </ProjectDescription>
           </ProjectCard>
         </ProjectsGrid>
@@ -100,6 +102,13 @@ export default function RenAIssance() {
                   Building the next generation of decentralized applications on
                   the Sui blockchain.
                 </EventDescription>
+                <EventLink
+                  href="https://sui-overflow-2025.devfolio.co/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Explore on Devfolio →
+                </EventLink>
               </EventContent>
             </EventLargeCard>
 
@@ -116,6 +125,13 @@ export default function RenAIssance() {
                   Creating innovative solutions at the intersection of fashion,
                   design, and blockchain.
                 </EventDescription>
+                <EventLink
+                  href="https://lukso.gitcoin.co/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Explore on Gitcoin →
+                </EventLink>
               </EventContent>
             </EventLargeCard>
 
@@ -133,6 +149,13 @@ export default function RenAIssance() {
                   tools that preserve memory, empower artists, and bridge
                   physical and digital worlds.
                 </EventDescription>
+                <EventLink
+                  href="https://explorer.gitcoin.co/#/round/42161/867/54"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Explore on Gitcoin →
+                </EventLink>
               </EventContent>
             </EventLargeCard>
 
@@ -149,6 +172,13 @@ export default function RenAIssance() {
                   Connecting with our community through workshops, events, and
                   collaborative projects.
                 </EventDescription>
+                <EventLink
+                  href="https://explorer.gitcoin.co/#/round/8453/148"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Explore on Gitcoin →
+                </EventLink>
               </EventContent>
             </EventLargeCard>
           </EventsGrid>
@@ -318,6 +348,13 @@ const EventTitle = styled.h3`
 const EventDescription = styled.p`
   color: #ccc;
   line-height: 1.6;
+`;
+
+const EventLink = styled(Link)`
+  color: #90caf9;
+  text-decoration: underline;
+  margin-top: 0.5rem;
+  display: block;
 `;
 
 const EventLargeCard = styled(EventCard)`
