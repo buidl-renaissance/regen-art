@@ -107,11 +107,11 @@ const ProjectsPage = ({ projects }: { projects: Project[] }) => {
   }, [activeCategory, projects]);
 
   
-  return (
-    <Container>
-      <ComingSoon />
-    </Container>
-  )
+  // return (
+  //   <Container>
+  //     <ComingSoon />
+  //   </Container>
+  // )
   
 
   return (
