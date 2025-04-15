@@ -102,7 +102,7 @@ export default function CreatorProfiles({ profiles }: { profiles: ProfileData[] 
           <HeroSubtitle>
             Discover the talent shaping Detroit&apos;s creative renaissance
           </HeroSubtitle>
-          <CreateProfileButton href="/projects/profiles/create">
+          <CreateProfileButton href="/profile">
             <FaPlus style={{ marginRight: '8px' }} /> Create Your Portfolio
           </CreateProfileButton>
         </HeroContent>
@@ -117,7 +117,7 @@ export default function CreatorProfiles({ profiles }: { profiles: ProfileData[] 
                 key={creator.id}
                 profile={creator.profile}
                 tags={creator.tags}
-                linkUrl={`/projects/profiles/${creator.id}`}
+                linkUrl={`/profile/${creator.profile.handle}`}
               />
             ))}
           </FeaturedGrid>
@@ -161,7 +161,7 @@ export default function CreatorProfiles({ profiles }: { profiles: ProfileData[] 
             Showcase your work, connect with collaborators, and be part of
             Detroit&apos;s creative renaissance.
           </CTAText>
-          <CTAButton href="/projects/profiles/create">
+          <CTAButton href="/profile">
             Create Your Portfolio
           </CTAButton>
         </CTAContent>
