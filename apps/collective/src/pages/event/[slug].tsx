@@ -10,11 +10,10 @@ import {
 } from '../../app/components/Styled';
 import Link from 'next/link';
 import { formatDate, formatTime } from '@gods.work/utils';
-import RSVPButton from '../../app/components/RSVPButton';
-import { CalendarBox } from '../../app/components/CalendarBox';
+import { CalendarBox, RSVPButton } from '@gods.work/ui';
 import { ErrorMessage, BackLink } from '../../app/components/Styled';
 import { useEffect, useState } from 'react';
-import { GetServerSidePropsContext, Metadata, ResolvingMetadata } from 'next';
+import { GetServerSidePropsContext, Metadata } from 'next';
 
 export async function generateMetadata(slug: string): Promise<Metadata> {
   const event: DPoPEvent = await getEvent(slug);

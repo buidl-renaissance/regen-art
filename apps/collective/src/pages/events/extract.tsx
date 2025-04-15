@@ -37,7 +37,7 @@ const ButtonGroup = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ primary?: boolean }>`
   padding: 0.5rem 1rem;
   background-color: ${(props) => (props.primary ? '#3182ce' : '#e2e8f0')};
   color: ${(props) => (props.primary ? 'white' : 'black')};
