@@ -3,7 +3,7 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { FaArrowLeft, FaGithub, FaGlobe, FaEdit, FaUsers, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
-import { getProjectBySlug } from '@gods.work/utils';
+// import { getProjectBySlug } from '@gods.work/utils';
 import { ButtonLink } from '@gods.work/ui';
 
 interface Project {
