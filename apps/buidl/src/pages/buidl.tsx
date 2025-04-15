@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { FaCode, FaRobot, FaBrain } from 'react-icons/fa';
+import { FaCode, FaRobot, FaBrain, FaIdCard, FaTicketAlt, FaUsers } from 'react-icons/fa';
 import { SectionContainer } from '../components/Styles';
 
 export default function RenAIssance() {
@@ -38,41 +38,34 @@ export default function RenAIssance() {
         <ProjectsGrid>
           <ProjectCard>
             <ProjectIcon>
-              <FaCode />
+              <FaUsers />
             </ProjectIcon>
-            <ProjectTitle>Your Digital Creative Space</ProjectTitle>
+            <ProjectTitle>Community Profiles</ProjectTitle>
             <ProjectDescription>
-              Helping artists and creators own their online presence without
-              tech companies controlling their work, while ensuring Detroit's
-              art and creativity has a safe, permanent place to live that anyone
-              can visit.
+              Create your digital identity within Detroit&apos;s creative community. Connect with collaborators, 
+              showcase your skills, and build your network.
             </ProjectDescription>
           </ProjectCard>
 
           <ProjectCard>
             <ProjectIcon>
-              <FaRobot />
+              <FaIdCard />
             </ProjectIcon>
-            <ProjectTitle>
-              Preserving Detroit&apos;s Cultural Heritage
-            </ProjectTitle>
+            <ProjectTitle>Collective Gallery</ProjectTitle>
             <ProjectDescription>
-              Using smart technology to collect and share Detroit&apos;s rich
-              history and cultural treasures, creating honest, easy-to-use tools
-              for community events that everyone can access and afford.
+              Showcase your work as part of Detroit&apos;s creative community. Our collaborative portfolio system 
+              helps creators gain visibility, connect with opportunities, and build collective power through shared resources.
             </ProjectDescription>
           </ProjectCard>
 
           <ProjectCard>
             <ProjectIcon>
-              <FaBrain />
+              <FaTicketAlt />
             </ProjectIcon>
-            <ProjectTitle>Building the Cultural Layer</ProjectTitle>
+            <ProjectTitle>Event Ticketing</ProjectTitle>
             <ProjectDescription>
-              Building a new cultural movement that preserves community stories,
-              supports local artists, and connects our physical neighborhoods
-              with digital possibilities while bringing our history to life for
-              new generations.
+              Our transparent ticketing system ensures fair revenue distribution among artists, 
+              venues, and organizers while creating a seamless experience for attendees.
             </ProjectDescription>
           </ProjectCard>
         </ProjectsGrid>
