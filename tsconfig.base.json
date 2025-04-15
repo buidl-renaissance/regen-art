@@ -18,6 +18,7 @@
       "@/*": ["./*"],
       "@gods.work/auth": ["libs/auth/src/index.ts"],
       "@gods.work/community": ["libs/community/src/index.ts"],
+      "@gods.work/creations": ["libs/creations/src/index.ts"],
       "@gods.work/forum": ["libs/forum/src/index.ts"],
       "@gods.work/hooks": ["libs/hooks/src/index.ts"],
       "@gods.work/projects": ["libs/projects/src/index.ts"],
