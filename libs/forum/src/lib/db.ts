@@ -126,12 +126,11 @@ export const createThread = async (threadData: {
         user_id: threadData.user_id,
         created_at: new Date(),
         updated_at: new Date(),
-      })
-      .returning('id');
+      });
 
     // Insert first post
     await trx('forum_posts').insert({
-      thread_id: thread.id,
+      thread_id: thread,
       user_id: threadData.user_id,
       content: threadData.content,
       is_first_post: true,
@@ -160,21 +159,20 @@ export const createThread = async (threadData: {
               slug: tagSlug,
               created_at: new Date(),
               updated_at: new Date(),
-            })
-            .returning('id');
+            });
 
-          tagId = newTagId.id;
+          tagId = newTagId;
         }
 
         // Associate tag with thread
         await trx('forum_thread_tags').insert({
-          thread_id: thread.id,
+          thread_id: thread,
           tag_id: tagId,
         });
       }
     }
 
-    return thread.id;
+    return thread;
   });
 };
 

@@ -137,3 +137,17 @@ exports.seed = async function(knex) {
     { thread_id: threads[4].id, tag_id: tags[7].id } // Detroit
   ]);
 };
+
+
+  // // Insert categories
+  // const categories = await db.raw(`
+  //   INSERT INTO forum_categories (name, slug, description, "order")
+  //   VALUES 
+  //     ('General Discussion', 'general-discussion', 'General topics related to BUIDL Detroit', 1),
+  //     ('Project Collaboration', 'project-collaboration', 'Find collaborators and discuss ongoing projects', 2),
+  //     ('Technical Discussion', 'technical-discussion', 'Discuss technical topics, frameworks, and tools', 3),
+  //     ('Introductions', 'introductions', 'Introduce yourself to the community', 4),
+  //     ('Events & Meetups', 'events-meetups', 'Upcoming events and meetups in Detroit', 5),
+  //     ('Jobs & Opportunities', 'jobs-opportunities', 'Job postings and opportunities in Detroit tech', 6)
+  //   RETURNING id
+  // `);
