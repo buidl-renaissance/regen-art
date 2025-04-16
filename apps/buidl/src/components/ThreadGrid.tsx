@@ -7,7 +7,7 @@ interface ThreadGridProps {
 }
 
 export const ThreadGrid = ({ threads }: ThreadGridProps) => {
-  const timestamp = new Date(threads[0].created_at).toLocaleString();
+  const timestamp = new Date(threads[0]?.created_at).toLocaleString();
   return (
     <ThreadGridContainer>
       {threads.map((thread) => (
