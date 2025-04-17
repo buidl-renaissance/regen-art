@@ -12,12 +12,12 @@ exports.seed = async function(knex) {
 
   // Insert categories
   const categories = await knex('forum_categories').insert([
-    { name: 'General Discussion', slug: 'general-discussion', description: 'General topics related to BUIDL Detroit', order: 1 },
-    { name: 'Project Collaboration', slug: 'project-collaboration', description: 'Find collaborators and discuss ongoing projects', order: 2 },
-    { name: 'Technical Discussion', slug: 'technical-discussion', description: 'Discuss technical topics, frameworks, and tools', order: 3 },
-    { name: 'Introductions', slug: 'introductions', description: 'Introduce yourself to the community', order: 4 },
-    { name: 'Events & Meetups', slug: 'events-meetups', description: 'Upcoming events and meetups in Detroit', order: 5 },
-    { name: 'Jobs & Opportunities', slug: 'jobs-opportunities', description: 'Job postings and opportunities in Detroit tech', order: 6 }
+    { name: 'General Discussion', slug: 'general-discussion', description: 'General topics related to BUIDL Detroit', display_order: 1 },
+    { name: 'Project Collaboration', slug: 'project-collaboration', description: 'Find collaborators and discuss ongoing projects', display_order: 2 },
+    { name: 'Technical Discussion', slug: 'technical-discussion', description: 'Discuss technical topics, frameworks, and tools', display_order: 3 },
+    { name: 'Introductions', slug: 'introductions', description: 'Introduce yourself to the community', display_order: 4 },
+    { name: 'Events & Meetups', slug: 'events-meetups', description: 'Upcoming events and meetups in Detroit', display_order: 5 },
+    { name: 'Jobs & Opportunities', slug: 'jobs-opportunities', description: 'Job postings and opportunities in Detroit tech', display_order: 6 }
   ]).returning('id');
 
   // Insert tags

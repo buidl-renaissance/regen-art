@@ -22,9 +22,17 @@ export enum CreationType {
 export interface Creator {
   handle: string;
   name?: string;
-  profileImage?: string;
+  image?: string;
   bio?: string;
   websiteUrl?: string;
+  address?: string;
+  social?: {
+    twitter?: string;
+    instagram?: string;
+    facebook?: string;
+    linkedin?: string;
+    youtube?: string;
+  };
 }
 
 export interface Creation {
@@ -34,7 +42,7 @@ export interface Creation {
   slug?: string;
   imageUrl?: string;
   category: string;
-  tags?: string[];
+  tags?: string[] | string;
   status: CreationStatus;
   type?: CreationType;
   location?: string;

@@ -3,13 +3,13 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
-import { ComingSoon } from '@gods.work/ui';
+import { UploadMedia } from '@gods.work/ui';
 
 const NewProject = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: '',
+    type: '',
     location: '',
     contactEmail: '',
     imageUrl: '',
@@ -92,25 +92,25 @@ const NewProject = () => {
 
         <FormRow>
           <FormGroup>
-            <Label htmlFor="category">Category *</Label>
+            <Label htmlFor="type">Project Type *</Label>
             <Select
-              id="category"
-              name="category"
-              value={formData.category}
+              id="type"
+              name="type"
+              value={formData.type}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 const { name, value } = e.target;
                 setFormData((prev) => ({ ...prev, [name]: value }));
               }}
               required
             >
-              <option value="">Select a category</option>
-              <option value="art">Art & Culture</option>
-              <option value="music">Music</option>
-              <option value="technology">Technology</option>
-              <option value="education">Education</option>
-              <option value="community">Community Building</option>
-              <option value="environment">Environment</option>
-              <option value="other">Other</option>
+              <option value="">Select a project type</option>
+              <option value="artwork">Artwork</option>
+              <option value="event">Event</option>
+              <option value="project">Project</option>
+              <option value="workshop">Workshop</option>
+              <option value="installation">Installation</option>
+              <option value="performance">Performance</option>
+              <option value="exhibition">Exhibition</option>
             </Select>
           </FormGroup>
 
@@ -141,14 +141,12 @@ const NewProject = () => {
         </FormGroup>
 
         <FormGroup>
-          <Label htmlFor="imageUrl">Project Image URL</Label>
-          <Input
-            type="url"
-            id="imageUrl"
-            name="imageUrl"
-            value={formData.imageUrl}
-            onChange={handleChange}
-            placeholder="Link to an image representing your project"
+          <Label htmlFor="imageUrl">Project Image</Label>
+          <UploadMedia
+            onUploadComplete={(url) =>
+              setFormData((prev) => ({ ...prev, imageUrl: url }))
+            }
+            label="Upload an image representing your project"
           />
         </FormGroup>
 

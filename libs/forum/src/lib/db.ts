@@ -17,7 +17,7 @@ const db = knex(config);
 
 // Forum categories
 export const getCategories = async () => {
-  return db('forum_categories').orderBy('order');
+  return db('forum_categories').orderBy('display_order');
 };
 
 export const getCategoryBySlug = async (slug: string) => {

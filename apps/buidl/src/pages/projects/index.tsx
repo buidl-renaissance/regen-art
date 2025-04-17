@@ -1,88 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
-import { ProjectStatus } from '@gods.work/projects';
-import { Project } from '@gods.work/projects';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
 import { ProjectCard } from '@gods.work/ui';
 import router from 'next/router';
+import { Creation } from '@gods.work/create';
+import { CreateClient } from '@gods.work/clients';
 
 export async function getServerSideProps() {
-  // In a real implementation, you would fetch this data from your API
-  // This is just mock data for demonstration
-  const projects: Project[] = [
-    {
-      id: '1',
-      title: 'Community Art Wall',
-      description: 'A collaborative mural project bringing together local artists to transform blank walls into vibrant public art displays throughout Detroit neighborhoods.',
-      category: 'Art & Culture',
-      location: 'Eastern Market',
-      imageUrl: '/images/projects/art-wall.jpg',
-      websiteUrl: 'https://communityartwall.org',
-      status: ProjectStatus.ACTIVE,
-      tags: ['mural', 'community', 'public art'],
-      slug: 'community-art-wall'
-    },
-    {
-      id: '2',
-      title: 'Tech Mentorship Program',
-      description: 'Connecting tech professionals with underserved youth to provide coding education, career guidance, and hands-on experience with technology projects.',
-      category: 'Technology',
-      location: 'Midtown',
-      imageUrl: '/images/projects/tech-mentorship.jpg',
-      status: ProjectStatus.ACTIVE,
-      tags: ['education', 'coding', 'youth'],
-      slug: 'tech-mentorship-program'
-    },
-    {
-      id: '3',
-      title: 'Urban Garden Initiative',
-      description: 'Transforming vacant lots into productive community gardens that provide fresh produce and educational opportunities for neighborhood residents.',
-      category: 'Environment',
-      location: 'North End',
-      imageUrl: '/images/projects/urban-garden.jpg',
-      websiteUrl: 'https://detroitgrows.org',
-      status: ProjectStatus.ACTIVE,
-      tags: ['gardening', 'sustainability', 'food'],
-      slug: 'urban-garden-initiative'
-    },
-    {
-      id: '4',
-      title: 'Music Production Workshop',
-      description: 'Weekly workshops teaching music production skills to aspiring artists, providing access to equipment and mentorship from industry professionals.',
-      category: 'Music',
-      location: 'Corktown',
-      status: ProjectStatus.ACTIVE,
-      tags: ['music', 'production', 'education'],
-      slug: 'music-production-workshop'
-    },
-    {
-      id: '5',
-      title: 'Neighborhood Cleanup Collective',
-      description: 'Regular community cleanup events focused on beautifying neighborhoods and fostering community pride and ownership.',
-      category: 'Community Building',
-      location: 'Various Locations',
-      imageUrl: '/images/projects/cleanup.jpg',
-      status: ProjectStatus.ACTIVE,
-      tags: ['cleanup', 'environment', 'community'],
-      slug: 'neighborhood-cleanup-collective'
-    },
-    {
-      id: '6',
-      title: 'Youth Leadership Academy',
-      description: 'A program designed to develop leadership skills in Detroit youth through workshops, community service, and mentorship opportunities.',
-      category: 'Education',
-      location: 'Downtown',
-      status: ProjectStatus.ACTIVE,
-      tags: ['youth', 'leadership', 'education'],
-      slug: 'youth-leadership-academy'
-    }
-  ];
+  // Initialize the CreateClient to fetch data from the database
+  const createClient = new CreateClient();
+  const creations = await createClient.listCreations();
 
   return {
     props: {
-      projects,
+      creations,
       theme: 'dark',
       metadata: {
         title: 'Community Projects | Art Night Detroit',
@@ -92,19 +25,19 @@ export async function getServerSideProps() {
   };
 }
 
-const ProjectsPage = ({ projects }: { projects: Project[] }) => {
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
-  const [activeCategory, setActiveCategory] = useState('All');
+const ProjectsPage = ({ creations }: { creations: Creation[] }) => {
+  const [filteredCreations, setFilteredCreations] = useState<Creation[]>(creations);
+  const [activeType, setActiveType] = useState('All');
 
-  const categories = ['All', ...new Set(projects.map(project => project.category))];
+  const types = ['All', ...new Set(creations.map(creation => creation.type))];
 
   useEffect(() => {
-    if (activeCategory === 'All') {
-      setFilteredProjects(projects);
+    if (activeType === 'All') {
+      setFilteredCreations(creations);
     } else {
-      setFilteredProjects(projects.filter(project => project.category === activeCategory));
+      setFilteredCreations(creations.filter(creation => creation.type === activeType));
     }
-  }, [activeCategory, projects]);
+  }, [activeType, creations]);
 
   
   // return (
@@ -130,24 +63,24 @@ const ProjectsPage = ({ projects }: { projects: Project[] }) => {
       </Header>
 
       <CategoryFilter>
-        {categories.map(category => (
+        {types.map(type => (
           <CategoryButton 
-            key={category}
-            active={activeCategory === category}
-            onClick={() => setActiveCategory(category)}
+            key={type}
+            active={activeType === type}
+            onClick={() => type && setActiveType(type)}
           >
-            {category}
+            {type}
           </CategoryButton>
         ))}
       </CategoryFilter>
 
       <ProjectsGrid>
-        {filteredProjects.map(project => (
+        {filteredCreations.map(creation => (
           <ProjectCard
-            key={project.id}
-            project={project}
+            key={creation.id}
+            project={creation}
             onClick={() => {
-              router.push(`/projects/${project.slug}`);
+              router.push(`/projects/${creation.slug}`);
             }}
           />
         ))}

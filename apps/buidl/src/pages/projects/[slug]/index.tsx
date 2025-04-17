@@ -2,82 +2,70 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { FaArrowLeft, FaGithub, FaGlobe, FaEdit, FaUsers, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import {
+  FaArrowLeft,
+  FaGithub,
+  FaGlobe,
+  FaEdit,
+  FaUsers,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+} from 'react-icons/fa';
 // import { getProjectBySlug } from '@gods.work/utils';
 import { ButtonLink } from '@gods.work/ui';
-
-interface Project {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  category: string;
-  location: string;
-  contactEmail: string;
-  imageUrl: string;
-  websiteUrl: string;
-  githubUrl: string;
-  createdAt: string;
-  updatedAt: string;
-  members: number;
-  status: 'active' | 'completed' | 'planning';
-}
-
-export async function getServerSideProps({ params }: { params: { slug: string } }) {
+import { Creation } from '@gods.work/create';
+import { CreateClient } from '@gods.work/clients';
+export async function getServerSideProps({
+  params,
+}: {
+  params: { slug: string };
+}) {
   try {
-    // const project = await getProjectBySlug(params.slug);
-    const project = {
-      id: "1",
-      slug: params.slug,
-      title: "Detroit Community Platform",
-      description: "An open-source platform connecting Detroit's creative communities, managing events, and showcasing local projects. Built with Next.js, TypeScript, and modern web technologies.",
-      category: "Web Development",
-      location: "Detroit, MI",
-      contactEmail: "hello@buidldetroit.com",
-      imageUrl: "https://dpop.nyc3.digitaloceanspaces.com/projects/detroit-platform.jpg",
-      websiteUrl: "https://buidldetroit.com",
-      githubUrl: "https://github.com/buidl-renaissance/regen-art",
-      createdAt: "2023-09-15T12:00:00Z",
-      updatedAt: "2023-11-20T15:30:00Z",
-      members: 12,
-      status: "active" as const
-    };
-    
-    if (!project) {
+    const createClient = new CreateClient();
+    const creation = await createClient.getCreationBySlug(params.slug);
+
+    if (!creation) {
       return {
         notFound: true,
       };
     }
-    
+
     return {
       props: {
-        project,
+        creation,
       },
     };
   } catch (error) {
-    console.error('Error fetching project:', error);
+    console.error('Error fetching creation:', error);
     return {
       notFound: true,
     };
   }
 }
 
-export default function ProjectDetailPage({ project }: { project: Project }) {
+export default function CreationDetailPage({
+  creation,
+}: {
+  creation: Creation;
+}) {
   const router = useRouter();
-  
+
   if (router.isFallback) {
     return <LoadingContainer>Loading project details...</LoadingContainer>;
   }
-  
-  if (!project) {
+
+  if (!creation) {
     return (
       <Container>
         <Head>
-          <title>Project Not Found | BUIDL Detroit</title>
+          <title>Creation Not Found | BUIDL Detroit</title>
         </Head>
         <ErrorContainer>
-          <h1>Project Not Found</h1>
-          <p>The project you&apos;re looking for doesn&apos;t exist or has been removed.</p>
+          <h1>Creation Not Found</h1>
+          <p>
+            The creation you&apos;re looking for doesn&apos;t exist or has been
+            removed.
+          </p>
           <BackLink href="/projects">← Back to Projects</BackLink>
         </ErrorContainer>
       </Container>
@@ -87,76 +75,79 @@ export default function ProjectDetailPage({ project }: { project: Project }) {
   return (
     <Container>
       <Head>
-        <title>{project.title} | BUIDL Detroit</title>
-        <meta name="description" content={project.description.substring(0, 160)} />
+        <title>{creation.title} | BUIDL Detroit</title>
+        <meta
+          name="description"
+          content={creation.description.substring(0, 160)}
+        />
       </Head>
-      
+
       <BackButtonContainer>
         <BackLink href="/projects">
           <FaArrowLeft /> Back to Projects
         </BackLink>
       </BackButtonContainer>
-      
-      {project.imageUrl && (
-        <ProjectImage 
-          src={project.imageUrl} 
-          alt={project.title} 
-        />
+
+      {creation.imageUrl && (
+        <ProjectImage src={creation.imageUrl} alt={creation.title} />
       )}
-      
+
       <ProjectHeader>
-        <ProjectTitle>{project.title}</ProjectTitle>
-        <ProjectCategory>{project.category}</ProjectCategory>
-        
+        <ProjectTitle>{creation.title}</ProjectTitle>
+        <ProjectCategory>{creation.category}</ProjectCategory>
+
         <ProjectMeta>
-          <MetaItem>
-            <FaUsers /> {project.members || 0} Contributors
-          </MetaItem>
-          {project.location && (
+          {/* <MetaItem>
+            <FaUsers /> {creation.members || 0} Contributors
+          </MetaItem> */}
+          {creation.location && (
             <MetaItem>
-              <FaMapMarkerAlt /> {project.location}
+              <FaMapMarkerAlt /> {creation.location}
             </MetaItem>
           )}
           <MetaItem>
-            <FaCalendarAlt /> Created {new Date(project.createdAt).toLocaleDateString()}
+            <FaCalendarAlt /> Created{' '}
+            {creation.createdAt ? new Date(creation.createdAt).toLocaleDateString() : 'N/A'}
           </MetaItem>
-          <StatusBadge status={project.status || 'active'}>
-            {project.status || 'Active'}
+          <StatusBadge status={creation.status || 'active'}>
+            {creation.status || 'Active'}
           </StatusBadge>
         </ProjectMeta>
       </ProjectHeader>
-      
+
       <ContentSection>
-        <ProjectDescription>
-          {project.description}
-        </ProjectDescription>
-        
+        <ProjectDescription>{creation.description}</ProjectDescription>
+
         <ActionButtons>
-          {project.githubUrl && (
-            <ActionButton href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+          {/* {creation.githubUrl && (
+            <ActionButton href={creation.githubUrl} target="_blank" rel="noopener noreferrer">
               <FaGithub /> View on GitHub
             </ActionButton>
-          )}
-          {project.websiteUrl && (
-            <ActionButton href={project.websiteUrl} target="_blank" rel="noopener noreferrer">
+          )} */}
+          {creation.url && (
+            <ActionButton
+              href={creation.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaGlobe /> Visit Website
             </ActionButton>
           )}
-          <ActionButton href={`/projects/${project.slug}/edit`} secondary>
+          <ActionButton href={`/projects/${creation.slug}/edit`} secondary>
             <FaEdit /> Edit Project
           </ActionButton>
         </ActionButtons>
       </ContentSection>
-      
-      <ContactSection>
+
+      {/* <ContactSection>
         <SectionTitle>Get Involved</SectionTitle>
         <p>Interested in contributing to this project? Contact the project team:</p>
-        {project.contactEmail && (
-          <ContactLink href={`mailto:${project.contactEmail}`}>
-            {project.contactEmail}
+        {creation.contactEmail && (
+          <ContactLink href={`mailto:${creation.contactEmail}`}>
+            {creation.contactEmail}
           </ContactLink>
         )}
-      </ContactSection>
+      </ContactSection> */}
     </Container>
   );
 }
@@ -180,12 +171,12 @@ const LoadingContainer = styled.div`
 const ErrorContainer = styled.div`
   text-align: center;
   padding: 3rem 1rem;
-  
+
   h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
   }
-  
+
   p {
     margin-bottom: 2rem;
     color: #b0b0b0;
@@ -203,7 +194,7 @@ const BackLink = styled(Link)`
   text-decoration: none;
   font-weight: 500;
   gap: 0.5rem;
-  
+
   &:hover {
     text-decoration: underline;
   }
@@ -258,7 +249,7 @@ const StatusBadge = styled.span<{ status: string }>`
   font-size: 0.9rem;
   font-weight: 500;
   text-transform: capitalize;
-  
+
   background-color: ${({ status }) => {
     switch (status) {
       case 'active':
@@ -271,7 +262,7 @@ const StatusBadge = styled.span<{ status: string }>`
         return 'rgba(39, 174, 96, 0.2)';
     }
   }};
-  
+
   color: ${({ status }) => {
     switch (status) {
       case 'active':
@@ -313,13 +304,14 @@ const ActionButton = styled(ButtonLink)<{ secondary?: boolean }>`
   font-weight: 500;
   text-decoration: none;
   transition: all 0.2s ease;
-  
-  background-color: ${props => props.secondary ? 'transparent' : '#4a90e2'};
-  color: ${props => props.secondary ? '#4a90e2' : 'white'};
-  border: ${props => props.secondary ? '1px solid #4a90e2' : 'none'};
-  
+
+  background-color: ${(props) => (props.secondary ? 'transparent' : '#4a90e2')};
+  color: ${(props) => (props.secondary ? '#4a90e2' : 'white')};
+  border: ${(props) => (props.secondary ? '1px solid #4a90e2' : 'none')};
+
   &:hover {
-    background-color: ${props => props.secondary ? 'rgba(74, 144, 226, 0.1)' : '#357ABD'};
+    background-color: ${(props) =>
+      props.secondary ? 'rgba(74, 144, 226, 0.1)' : '#357ABD'};
   }
 `;
 
@@ -340,7 +332,7 @@ const ContactLink = styled.a`
   text-decoration: none;
   display: inline-block;
   margin-top: 0.5rem;
-  
+
   &:hover {
     text-decoration: underline;
   }

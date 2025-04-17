@@ -10,7 +10,7 @@ exports.up = function(knex) {
       table.string('name').notNullable();
       table.string('slug').notNullable().unique();
       table.text('description');
-      table.integer('order').defaultTo(0);
+      table.integer('display_order').defaultTo(0);
       table.timestamps(true, true);
     }),
 
