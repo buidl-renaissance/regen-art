@@ -4,7 +4,7 @@ import { Knex, knex } from 'knex';
 const config: Knex.Config = {
   client: process.env.DB_CLIENT || 'sqlite3',
   connection: process.env.DB_CONNECTION_STRING || {
-    filename: process.env.DB_FILENAME || '../../../dev.sqlite3',
+    filename: process.env.DB_FORUM_FILENAME || '../../../dev-forum.sqlite3',
   },
   useNullAsDefault: true,
   migrations: {

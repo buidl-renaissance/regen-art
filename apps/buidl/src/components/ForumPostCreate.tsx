@@ -179,6 +179,12 @@ const FormContainer = styled.form`
   margin-bottom: 2rem;
   font-family: 'Courier New', monospace;
   min-width: 800px;
+  .quill .ql-container {
+    font-family: 'Courier New', monospace;
+  }
+  .quill .ql-toolbar.ql-snow {
+    font-family: 'Courier New', monospace;
+  }
 `;
 
 const FormTitle = styled.h2`
