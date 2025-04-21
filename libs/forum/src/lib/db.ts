@@ -104,7 +104,7 @@ export const getThreads = async (
 export const getThreadById = async (
   threadId: number
 ) => {
-  return db('forum_threads')
+  const thread = await db('forum_threads')
     .where({
       'forum_threads.id': threadId,
     })
@@ -112,12 +112,41 @@ export const getThreadById = async (
       'forum_threads.*'
     )
     .first();
+  
+  if (thread) {
+    // Get posts for this thread
+    const posts = await db('forum_posts')
+      .where({ thread_id: threadId })
+      .orderBy('created_at', 'asc');
+    
+    // Get category information
+    const category = await db('forum_categories')
+      .where({ id: thread.category_id })
+      .first();
+    
+    // Get tags for this thread
+    const tags = await db('forum_thread_tags')
+      .join('forum_tags', 'forum_thread_tags.tag_id', 'forum_tags.id')
+      .where({ thread_id: threadId })
+      .select('forum_tags.name');
+    
+    return {
+      ...thread,
+      posts,
+      category,
+      tags: tags.map(tag => tag.name),
+      num_replies: posts.length - 1,
+      num_views: thread.num_views || 0,
+    };
+  }
+  
+  return thread;
 };
 
 export const getThreadBySlug = async (
   threadSlug: string
 ) => {
-  return db('forum_threads')
+  const thread = await db('forum_threads')
     .where({
       'forum_threads.slug': threadSlug,
     })
@@ -125,6 +154,35 @@ export const getThreadBySlug = async (
       'forum_threads.*'
     )
     .first();
+  
+  if (thread) {
+    // Get posts for this thread
+    const posts = await db('forum_posts')
+      .where({ thread_id: thread.id })
+      .orderBy('created_at', 'asc');
+    
+    // Get category information
+    const category = await db('forum_categories')
+      .where({ id: thread.category_id })
+      .first();
+    
+    // Get tags for this thread
+    const tags = await db('forum_thread_tags')
+      .join('forum_tags', 'forum_thread_tags.tag_id', 'forum_tags.id')
+      .where({ thread_id: thread.id })
+      .select('forum_tags.name');
+    
+    return {
+      ...thread,
+      posts,
+      category,
+      tags: tags.map(tag => tag.name),
+      num_replies: posts.length - 1,
+      num_views: thread.num_views || 0,
+    };
+  }
+  
+  return thread;
 };
 
 export const incrementThreadViews = async (threadId: number) => {
@@ -140,8 +198,8 @@ export const getPostsByThreadId = async (threadId: number) => {
 
 export const createThread = async (threadData: {
   title: string;
-  category: string;
-  user_id: number;
+  category_id: string;
+  handle: string;
   content: string;
   tags?: string[];
 }) => {
@@ -156,20 +214,50 @@ export const createThread = async (threadData: {
   // Start a transaction
   const threadId = await db.transaction(async (trx) => {
     // Insert thread
-    const [threadId] = await trx('forum_threads')
-      .insert({
-        title: threadData.title,
-        slug,
-        category_id: threadData.category,
-        user_id: threadData.user_id,
-        created_at: new Date(),
-        updated_at: new Date(),
-      });
+
+    console.log("THREAD DATA: ", {
+      title: threadData.title,
+      slug,
+      category_id: threadData.category_id,
+      handle: threadData.handle,
+      created_at: new Date(),
+      updated_at: new Date(),
+    });
+    
+    // Fix: Ensure we're properly handling the returned value based on the database client
+    let threadId;
+    
+    if (process.env.DB_CLIENT === 'sqlite3') {
+      // SQLite returns the last inserted ID
+      threadId = await trx('forum_threads')
+        .insert({
+          title: threadData.title,
+          slug,
+          category_id: threadData.category_id,
+          handle: threadData.handle,
+          created_at: new Date(),
+          updated_at: new Date(),
+        });
+    } else {
+      // For other databases like MySQL or PostgreSQL that support returning
+      const result = await trx('forum_threads')
+        .insert({
+          title: threadData.title,
+          slug,
+          category_id: threadData.category_id,
+          handle: threadData.handle,
+          created_at: new Date(),
+          updated_at: new Date(),
+        })
+        .returning('id');
+      
+      threadId = result[0].id || result[0];
+    }
 
     // Insert first post
     await trx('forum_posts').insert({
       thread_id: threadId,
-      user_id: threadData.user_id,
+      handle: threadData.handle,
       content: threadData.content,
       is_first_post: true,
       created_at: new Date(),
@@ -191,22 +279,40 @@ export const createThread = async (threadData: {
         if (existingTag) {
           tagId = existingTag.id;
         } else {
-          const [newTagId] = await trx('forum_tags')
-            .insert({
-              name: tagName,
-              slug: tagSlug,
-              created_at: new Date(),
-              updated_at: new Date(),
-            });
-
-          tagId = newTagId;
+          // Handle tag insertion based on database client
+          if (process.env.DB_CLIENT === 'sqlite3') {
+            tagId = await trx('forum_tags')
+              .insert({
+                name: tagName,
+                slug: tagSlug,
+                created_at: new Date(),
+                updated_at: new Date(),
+              });
+          } else {
+            const result = await trx('forum_tags')
+              .insert({
+                name: tagName,
+                slug: tagSlug,
+                created_at: new Date(),
+                updated_at: new Date(),
+              })
+              .returning('id');
+            
+            tagId = result[0].id || result[0];
+          }
         }
 
-        // Associate tag with thread
-        await trx('forum_thread_tags').insert({
-          thread_id: threadId,
-          tag_id: tagId,
-        });
+        // Associate tag with thread - check for duplicates first
+        const existingThreadTag = await trx('forum_thread_tags')
+          .where({ thread_id: threadId, tag_id: tagId })
+          .first();
+          
+        if (!existingThreadTag) {
+          await trx('forum_thread_tags').insert({
+            thread_id: threadId,
+            tag_id: tagId,
+          });
+        }
       }
     }
 
@@ -218,7 +324,7 @@ export const createThread = async (threadData: {
 
 export const createPost = async (postData: {
   thread_id: number;
-  user_id: number;
+  handle: number;
   content: string;
 }) => {
   const [postId] = await db('forum_posts')

@@ -11,15 +11,15 @@ export const ReplyCard: React.FC<ReplyCardProps> = ({ reply }) => (
   <StyledReplyCard>
     <ReplyHeader>
       <ReplyAuthorInfo>
-        <ReplyAuthorAvatar src={reply.authorAvatar} alt={reply.author} />
-        <ReplyAuthorName>{reply.author}</ReplyAuthorName>
+        <ReplyAuthorAvatar src={reply.handle} alt={reply.handle} />
+        <ReplyAuthorName>{reply.handle}</ReplyAuthorName>
       </ReplyAuthorInfo>
       <ReplyDate>{reply.date}</ReplyDate>
     </ReplyHeader>
     <ReplyContent>{reply.content}</ReplyContent>
     <ReplyActions>
       <ActionButton small>
-        <FaThumbsUp style={{ marginRight: '5px' }} /> ({reply.likes})
+        <FaThumbsUp style={{ marginRight: '5px' }} /> ({reply.num_likes})
       </ActionButton>
       <ActionButton small>
         <FaReply style={{ marginRight: '5px' }} /> Reply

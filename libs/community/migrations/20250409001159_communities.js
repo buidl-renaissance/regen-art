@@ -21,7 +21,7 @@ exports.up = function(knex) {
     })
     .createTable('community_members', (table) => {
       table.string('id').primary();
-      table.string('user_id').notNullable();
+      table.string('handle').notNullable();
       table.string('community_id').notNullable();
       table.enum('role', ['admin', 'moderator', 'member']).notNullable();
       table.timestamp('joined_at').defaultTo(knex.fn.now()).notNullable();

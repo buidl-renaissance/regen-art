@@ -26,7 +26,7 @@ exports.seed = async function(knex) {
   
   const communityMembers = mockCommunityMembers.map(member => ({
     id: member.id,
-    user_id: member.userId,
+    handle: member.handle,
     community_id: member.communityId,
     role: member.role.toLowerCase(),
     joined_at: member.joinedAt,

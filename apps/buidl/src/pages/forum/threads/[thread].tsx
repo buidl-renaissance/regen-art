@@ -43,6 +43,9 @@ export const getServerSideProps = async ({
 };
 
 const ForumThreadPage = ({ thread, posts }: ForumThreadPageProps) => {
+  // Get the first post (main thread post)
+  const firstPost = posts.find(post => post.is_first_post);
+  
   return (
     <Container>
       <Head>
@@ -57,9 +60,9 @@ const ForumThreadPage = ({ thread, posts }: ForumThreadPageProps) => {
         <FaArrowLeft style={{ marginRight: '8px' }} /> Back to Forum
       </BackButton>
 
-      <ForumThreadPreview thread={thread} />
+      <ForumThreadPreview thread={thread} post={firstPost} />
 
-      {posts.map((post) => (
+      {posts.filter((post) => !post.is_first_post).map((post) => (
         <>
           <ForumPostCard post={post} />
           {post.replies && post.replies.length > 0 && (
@@ -68,7 +71,7 @@ const ForumThreadPage = ({ thread, posts }: ForumThreadPageProps) => {
         </>
       ))}
 
-      <ReplyForm />
+      {/* <ReplyForm /> */}
     </Container>
   );
 };

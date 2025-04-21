@@ -53,7 +53,7 @@ export const getThreadHandler = async (req: Request, res: Response) => {
 
 export const createThreadHandler = async (req: Request, res: Response) => {
   try {
-    const { title, content, category, user_id, tags } = JSON.parse(req.body);
+    const { title, content, category, handle, tags } = JSON.parse(req.body);
     
     if (!title || !content || !category) {
       return res.status(400).json({ error: 'Missing required fields' });
@@ -62,9 +62,9 @@ export const createThreadHandler = async (req: Request, res: Response) => {
     const thread = await createThread({
       title,
       content,
-      category,
-      user_id: 2,
-      tags
+      category_id: category,
+      handle,
+      tags,
     });
 
     console.log("CREATED THREAD: ", thread);

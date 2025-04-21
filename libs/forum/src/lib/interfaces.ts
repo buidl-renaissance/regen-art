@@ -2,7 +2,7 @@ export interface ForumThread {
   id: number | string;
   slug: string;
   title: string;
-  author: string;
+  handle: string;
   date: string;
   preview: string;
   category: string;
@@ -11,17 +11,18 @@ export interface ForumThread {
   is_pinned: boolean;
   created_at: string;
   updated_at: string;
+  tags: string[];
 }
 
 export interface ForumPost {
   id: string;
   title: string;
-  author: string;
-  authorAvatar: string;
+  handle: string;
   date: string;
   content: string;
   category: string;
   tags: string[];
+  is_first_post: boolean;
   num_views: number;
   num_likes: number;
   replies: ForumReply[];
@@ -31,8 +32,7 @@ export interface ForumPost {
 
 export interface ForumReply {
   id: string;
-  author: string;
-  authorAvatar: string;
+  handle: string;
   date: string;
   content: string;
   num_likes: number;

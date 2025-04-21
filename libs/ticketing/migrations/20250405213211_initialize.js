@@ -53,7 +53,7 @@ exports.up = function(knex) {
       table.increments('id').primary();
       table.string('event_id').notNullable().references('id').inTable('events').onDelete('CASCADE');
       table.string('ticket_type_id').notNullable().references('id').inTable('ticket_types').onDelete('CASCADE');
-      table.string('user_id');
+      table.string('handle');
       table.timestamp('purchase_date').defaultTo(knex.fn.now());
       table.enum('status', ['valid', 'redeemed', 'refunded', 'cancelled']).defaultTo('valid');
       table.string('checkout_session_id').notNullable().references('session_id').inTable('checkout_sessions').onDelete('CASCADE');

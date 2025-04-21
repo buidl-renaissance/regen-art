@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaPaperPlane, FaTags } from 'react-icons/fa';
+import { FaPaperPlane, FaTags, FaRobot } from 'react-icons/fa';
 import { RichTextEditor } from '@gods.work/ui';
 import { ForumThread } from '@gods.work/forum';
+import { useHandle } from '../hooks/useHandle';
 
 interface ForumPostCreateProps {
   onSubmit?: (thread: ForumThread) => void;
@@ -19,6 +20,8 @@ export const ForumPostCreate: React.FC<ForumPostCreateProps> = ({
   const [tagInput, setTagInput] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [enableAIResponses, setEnableAIResponses] = useState(true);
+  const { handle } = useHandle();
 
   const handleTagAdd = () => {
     if (tagInput.trim() && !tags.includes(tagInput.trim())) {
@@ -61,19 +64,32 @@ export const ForumPostCreate: React.FC<ForumPostCreateProps> = ({
     e.preventDefault();
 
     if (validateForm()) {
+
+      if (enableAIResponses) {
+        tags.push('ai');
+      }
+
       const response = await fetch('/api/threads', {
         method: 'POST',
         body: JSON.stringify({
           title,
           content,
           category,
-          tags,
+          handle,
+          tags
         }),
       });
 
       const thread = await response.json();
 
-      onSubmit?.(thread as unknown as ForumThread);
+      if (thread.id) {
+        onSubmit?.(thread as unknown as ForumThread);
+      } else {
+        setErrors({
+          title: thread.error,
+        });
+        throw new Error(thread.error);
+      }
     }
   };
 
@@ -147,6 +163,27 @@ export const ForumPostCreate: React.FC<ForumPostCreateProps> = ({
             </Tag>
           ))}
         </TagsContainer>
+      </FormGroup>
+
+      <FormGroup>
+        <AIToggleContainer>
+          <AIToggleLabel htmlFor="ai-toggle">
+            <FaRobot style={{ marginRight: '8px' }} />
+            Enable AI Responses
+            <AIToggleSwitch>
+              <AIToggleCheckbox
+                id="ai-toggle"
+                type="checkbox"
+                checked={enableAIResponses}
+                onChange={() => setEnableAIResponses(!enableAIResponses)}
+              />
+              <AIToggleSlider />
+            </AIToggleSwitch>
+          </AIToggleLabel>
+          <AIToggleDescription>
+            When enabled, AI will automatically generate helpful responses to your discussion.
+          </AIToggleDescription>
+        </AIToggleContainer>
       </FormGroup>
 
       <SubmitButton type="submit">
@@ -312,6 +349,71 @@ const TagRemoveButton = styled.button`
   &:hover {
     color: #e74c3c;
   }
+`;
+
+const AIToggleContainer = styled.div`
+  margin-top: 1rem;
+`;
+
+const AIToggleLabel = styled.label`
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #f5f5f5;
+  cursor: pointer;
+`;
+
+const AIToggleSwitch = styled.div`
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin-left: 10px;
+`;
+
+const AIToggleCheckbox = styled.input`
+  opacity: 0;
+  width: 0;
+  height: 0;
+  
+  &:checked + span {
+    background-color: #3498db;
+  }
+  
+  &:checked + span:before {
+    transform: translateX(26px);
+  }
+`;
+
+const AIToggleSlider = styled.span`
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #444;
+  transition: .4s;
+  border-radius: 24px;
+  
+  &:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+`;
+
+const AIToggleDescription = styled.p`
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 0.5rem;
+  margin-left: 32px;
 `;
 
 const SubmitButton = styled.button`

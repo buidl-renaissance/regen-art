@@ -20,7 +20,7 @@ exports.up = function(knex) {
       table.string('title').notNullable();
       table.string('slug').notNullable();
       table.integer('category_id').unsigned().references('id').inTable('forum_categories').onDelete('CASCADE');
-      table.integer('user_id').unsigned().notNullable();
+      table.string('handle').notNullable();
       table.boolean('is_pinned').defaultTo(false);
       table.boolean('is_locked').defaultTo(false);
       table.integer('views').defaultTo(0);
@@ -32,7 +32,7 @@ exports.up = function(knex) {
     knex.schema.createTable('forum_posts', (table) => {
       table.increments('id').primary();
       table.integer('thread_id').unsigned().notNullable().references('id').inTable('forum_threads').onDelete('CASCADE');
-      table.integer('user_id').unsigned().notNullable();
+      table.string('handle').notNullable();
       table.text('content').notNullable();
       table.boolean('is_first_post').defaultTo(false);
       table.timestamps(true, true);

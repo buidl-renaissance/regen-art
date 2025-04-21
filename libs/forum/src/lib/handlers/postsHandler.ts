@@ -3,15 +3,15 @@ import { createPost, getThreadBySlug } from '../db';
 
 export const createPostHandler = async (req: Request, res: Response) => {
   try {
-    const { thread_id, user_id, content } = req.body;
+    const { thread_id, handle, content } = req.body;
     
-    if (!thread_id || !user_id || !content) {
+    if (!thread_id || !handle || !content) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
     
     const postId = await createPost({
       thread_id,
-      user_id,
+      handle,
       content
     });
     
