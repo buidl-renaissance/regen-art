@@ -15,7 +15,6 @@ import {
   HeroContent,
   HeroTitle,
   HeroSubtitle,
-  HeroCTA,
 } from '../../../components/Styles';
 
 interface ForumCategoriesPageProps {
@@ -58,9 +57,6 @@ const ForumCategoriesPage = ({ categories }: ForumCategoriesPageProps) => {
         <HeroContent>
           <HeroTitle>Forum Categories</HeroTitle>
           <HeroSubtitle>Browse discussions by topic or start a new thread</HeroSubtitle>
-          {/* <HeroCTA>
-            <NewThreadButton href="/forum/threads/new">Start New Thread</NewThreadButton>
-          </HeroCTA> */}
         </HeroContent>
       </Hero>
 
@@ -94,20 +90,6 @@ export const getServerSideProps = async () => {
   };
 };
 
-const NewThreadButton = styled.a`
-  display: inline-block;
-  background-color: #3498db;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #2980b9;
-  }
-`;
 
 const CategoriesGrid = styled.div`
   display: grid;

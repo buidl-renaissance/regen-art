@@ -15,6 +15,31 @@ const config: Knex.Config = {
 // Initialize knex instance
 const db = knex(config);
 
+// Helper function to format dates as strings
+export const formatDate = (date: Date | string | null): string | null => {
+  if (!date) return null;
+  return new Date(date).toISOString();
+};
+
+// Ensure dates are returned as strings in query results
+db.on('query-response', (response, query) => {
+  if (Array.isArray(response)) {
+    response.forEach(row => {
+      Object.keys(row).forEach(key => {
+        if (row[key] instanceof Date) {
+          row[key] = formatDate(row[key]);
+        }
+      });
+    });
+  } else if (response && typeof response === 'object') {
+    Object.keys(response).forEach(key => {
+      if (response[key] instanceof Date) {
+        response[key] = formatDate(response[key]);
+      }
+    });
+  }
+});
+
 // Forum categories
 export const getCategories = async () => {
   return db('forum_categories').orderBy('display_order');
