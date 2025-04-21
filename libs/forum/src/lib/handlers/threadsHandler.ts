@@ -59,15 +59,17 @@ export const createThreadHandler = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
     
-    const threadId = await createThread({
+    const thread = await createThread({
       title,
       content,
-      category_id: 1,
+      category,
       user_id: 2,
       tags
     });
+
+    console.log("CREATED THREAD: ", thread);
     
-    return res.status(201).json({ id: threadId });
+    return res.status(200).json(thread);
   } catch (error) {
     console.error('Error creating thread:', error);
     return res.status(500).json({ error: 'Failed to create thread' });

@@ -22,8 +22,8 @@ export const ThreadGrid = ({ threads }: ThreadGridProps) => {
                     <ThreadAuthor>{thread.author}</ThreadAuthor>
                   )}
                   <ThreadDate>{timestamp}</ThreadDate>
-                  |<ThreadStat>{thread.replies ?? 0} replies</ThreadStat>
-                  |<ThreadStat>{thread.views ?? 0} views</ThreadStat>
+                  |<ThreadStat>{thread.num_replies ?? 0} replies</ThreadStat>
+                  |<ThreadStat>{thread.num_views ?? 0} views</ThreadStat>
                 </ThreadStats>
               </ThreadMeta>
             </ThreadHeader>

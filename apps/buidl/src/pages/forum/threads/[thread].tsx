@@ -11,6 +11,7 @@ import {
   ForumPost,
   getThreadBySlug,
   getPostsByThreadId,
+  incrementThreadViews,
 } from '@gods.work/forum';
 import ForumThreadPreview from '../../../components/ForumThreadPreview';
 
@@ -25,9 +26,36 @@ export const getServerSideProps = async ({
   params: { thread: string };
 }) => {
   const thread = await getThreadBySlug(params.thread);
+  if (!thread) {
+    return {
+      notFound: true,
+    };
+  }
+  
+  // Increment view count
+  await incrementThreadViews(thread.id);
+  
+  // Serialize dates to ISO strings to make them JSON serializable
+  const serializedThread = {
+    ...thread,
+    created_at: thread.created_at instanceof Date ? thread.created_at.toISOString() : thread.created_at,
+    updated_at: thread.updated_at instanceof Date ? thread.updated_at.toISOString() : thread.updated_at
+  };
   const posts = await getPostsByThreadId(thread.id);
+  // Serialize dates in posts to make them JSON serializable
+  const serializedPosts = posts.map((post: ForumPost) => ({
+    ...post,
+    created_at: (post.created_at instanceof Date) ? post.created_at.toISOString() : post.created_at,
+    updated_at: (post.updated_at instanceof Date) ? post.updated_at.toISOString() : post.updated_at,
+    // Also serialize dates in replies if they exist
+    replies: post.replies ? post.replies.map((reply: ForumPost) => ({
+      ...reply,
+      created_at: reply.created_at instanceof Date ? reply.created_at.toISOString() : reply.created_at,
+      updated_at: reply.updated_at instanceof Date ? reply.updated_at.toISOString() : reply.updated_at
+    })) : []
+  }));
   return {
-    props: { thread, posts },
+    props: { thread: serializedThread, posts: serializedPosts },
   };
 };
 

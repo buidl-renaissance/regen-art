@@ -24,8 +24,14 @@ interface ThreadsPageProps {
 
 export const getServerSideProps = async () => {
   const threads = await getThreads();
+  const serializedThreads = threads.map((thread: ForumThread) => ({
+    ...thread,
+    created_at: new Date(thread.created_at).toISOString(),
+    updated_at: new Date(thread.updated_at).toISOString()
+  }));
+  console.log("THREADS: ", serializedThreads);
   return {
-    props: { threads },
+    props: { threads: serializedThreads },
   };
 };
 

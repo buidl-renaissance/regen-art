@@ -28,7 +28,12 @@ module.exports = {
     },
     pool: {
       min: 2,
-      max: 10
+      max: 20,
+      acquireTimeoutMillis: 30000,
+      createTimeoutMillis: 30000,
+      idleTimeoutMillis: 30000,
+      reapIntervalMillis: 1000,
+      createRetryIntervalMillis: 200
     },
     migrations: {
       directory: './src/migrations',

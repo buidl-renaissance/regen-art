@@ -2,22 +2,20 @@ import React from 'react';
 import { Container } from '@gods.work/ui';
 import { ForumPostCreate } from '../../../components/ForumPostCreate';
 import { SectionContainer } from '..';
-import { getCategories } from '@gods.work/forum';
+import { getCategories, ForumThread } from '@gods.work/forum';
+import { useRouter } from 'next/router';
 
 const ForumNewPage = ({ categories }: { categories: any[] }) => {
-  const handleSubmit = (postData: {
-    title: string;
-    content: string;
-    category: string;
-    tags: string[];
-  }) => {
-    console.log(postData);
+  const router = useRouter();
+
+  const handleSubmit = (thread: ForumThread) => {
+    router.push(`/forum/threads/${thread.slug}`);
   };
 
   return (
     <Container>
       <SectionContainer>
-        <ForumPostCreate onSubmit={handleSubmit} />
+        <ForumPostCreate onSubmit={handleSubmit} categories={categories} />
       </SectionContainer>
     </Container>
   );

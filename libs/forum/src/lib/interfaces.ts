@@ -6,8 +6,8 @@ export interface ForumThread {
   date: string;
   preview: string;
   category: string;
-  replies: number;
-  views: number;
+  num_replies: number;
+  num_views: number;
   is_pinned: boolean;
   created_at: string;
   updated_at: string;
@@ -22,9 +22,11 @@ export interface ForumPost {
   content: string;
   category: string;
   tags: string[];
-  views: number;
-  likes: number;
+  num_views: number;
+  num_likes: number;
   replies: ForumReply[];
+  created_at: string;
+  updated_at: string;
 }
 
 export interface ForumReply {
@@ -33,7 +35,9 @@ export interface ForumReply {
   authorAvatar: string;
   date: string;
   content: string;
-  likes: number;
+  num_likes: number;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface ForumCategory {
@@ -44,4 +48,6 @@ export interface ForumCategory {
   icon: React.ReactNode;
   threads: number;
   posts: number;
+  created_at: string;
+  updated_at: string;
 }

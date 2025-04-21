@@ -76,6 +76,19 @@ export const getThreads = async (
   return query;
 };
 
+export const getThreadById = async (
+  threadId: number
+) => {
+  return db('forum_threads')
+    .where({
+      'forum_threads.id': threadId,
+    })
+    .select(
+      'forum_threads.*'
+    )
+    .first();
+};
+
 export const getThreadBySlug = async (
   threadSlug: string
 ) => {
@@ -90,7 +103,7 @@ export const getThreadBySlug = async (
 };
 
 export const incrementThreadViews = async (threadId: number) => {
-  return db('forum_threads').where({ id: threadId }).increment('views', 1);
+  return db('forum_threads').where({ id: threadId }).increment('num_views', 1);
 };
 
 // Forum posts
@@ -102,7 +115,7 @@ export const getPostsByThreadId = async (threadId: number) => {
 
 export const createThread = async (threadData: {
   title: string;
-  category_id: number;
+  category: string;
   user_id: number;
   content: string;
   tags?: string[];
@@ -116,13 +129,13 @@ export const createThread = async (threadData: {
     .substring(0, 60);
 
   // Start a transaction
-  return db.transaction(async (trx) => {
+  const threadId = await db.transaction(async (trx) => {
     // Insert thread
-    const [thread] = await trx('forum_threads')
+    const [threadId] = await trx('forum_threads')
       .insert({
         title: threadData.title,
         slug,
-        category_id: threadData.category_id,
+        category_id: threadData.category,
         user_id: threadData.user_id,
         created_at: new Date(),
         updated_at: new Date(),
@@ -130,7 +143,7 @@ export const createThread = async (threadData: {
 
     // Insert first post
     await trx('forum_posts').insert({
-      thread_id: thread,
+      thread_id: threadId,
       user_id: threadData.user_id,
       content: threadData.content,
       is_first_post: true,
@@ -166,14 +179,16 @@ export const createThread = async (threadData: {
 
         // Associate tag with thread
         await trx('forum_thread_tags').insert({
-          thread_id: thread,
+          thread_id: threadId,
           tag_id: tagId,
         });
       }
     }
 
-    return thread;
+    return threadId;
   });
+
+  return getThreadById(threadId);
 };
 
 export const createPost = async (postData: {

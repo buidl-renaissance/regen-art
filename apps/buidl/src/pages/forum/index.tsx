@@ -23,8 +23,14 @@ interface ForumPageProps {
 
 export const getServerSideProps = async () => {
   const threads = await getThreads();
+  // Serialize dates to ISO strings to make them JSON serializable
+  const serializedThreads = threads.map(thread => ({
+    ...thread,
+    created_at: thread.created_at instanceof Date ? thread.created_at.toISOString() : thread.created_at,
+    updated_at: thread.updated_at instanceof Date ? thread.updated_at.toISOString() : thread.updated_at
+  }));
   return {
-    props: { threads },
+    props: { threads: serializedThreads },
   };
 };
 

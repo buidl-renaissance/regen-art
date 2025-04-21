@@ -34,10 +34,10 @@ const ForumThreadPreview: React.FC<ThreadProps> = ({ thread }) => {
           <FaClock style={{ marginRight: '5px' }} /> {formattedDate}
         </MetaItem>
         <MetaItem>
-          <FaComments style={{ marginRight: '5px' }} /> {thread.replies} replies
+          <FaComments style={{ marginRight: '5px' }} /> {thread.num_replies ?? 0} replies
         </MetaItem>
         <MetaItem>
-          <FaEye style={{ marginRight: '5px' }} /> {thread.views} views
+          <FaEye style={{ marginRight: '5px' }} /> {thread.num_views ?? 0} views
         </MetaItem>
       </ThreadMeta>
     </ThreadItem>

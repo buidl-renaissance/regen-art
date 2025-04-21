@@ -2,26 +2,16 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaPaperPlane, FaTags } from 'react-icons/fa';
 import { RichTextEditor } from '@gods.work/ui';
+import { ForumThread } from '@gods.work/forum';
 
 interface ForumPostCreateProps {
-  onSubmit?: (postData: {
-    title: string;
-    content: string;
-    category: string;
-    tags: string[];
-  }) => void;
-  categories?: { id: string; name: string }[];
+  onSubmit?: (thread: ForumThread) => void;
+  categories: { id: string; name: string }[];
 }
 
 export const ForumPostCreate: React.FC<ForumPostCreateProps> = ({
   onSubmit,
-  categories = [
-    { id: 'general', name: 'General Discussion' },
-    { id: 'project-collaboration', name: 'Project Collaboration' },
-    { id: 'questions', name: 'Questions & Help' },
-    { id: 'events', name: 'Events & Meetups' },
-    { id: 'jobs', name: 'Jobs & Opportunities' },
-  ],
+  categories,
 }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -81,14 +71,9 @@ export const ForumPostCreate: React.FC<ForumPostCreateProps> = ({
         }),
       });
 
-      console.log("response: ", response);
+      const thread = await response.json();
 
-      onSubmit?.({
-        title,
-        content,
-        category,
-        tags,
-      });
+      onSubmit?.(thread as unknown as ForumThread);
     }
   };
 
