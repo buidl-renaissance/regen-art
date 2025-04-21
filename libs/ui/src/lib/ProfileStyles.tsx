@@ -82,6 +82,7 @@ export const ProfileInput = styled.input`
   font-size: 1rem;
   background-color: #333;
   color: #f5f5f5;
+  font-family: monospace;
 
   &:focus {
     outline: none;

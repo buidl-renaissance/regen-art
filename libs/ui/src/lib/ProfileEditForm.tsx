@@ -2,7 +2,7 @@
 
 import { FC, useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaXTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa6';
 import {
   CreateProfileContainer,
   PageTitle,
@@ -170,7 +170,7 @@ export const ProfileEditForm: FC = () => {
             <ProfileLabel htmlFor="twitter">Twitter</ProfileLabel>
             <SocialInputContainer>
               <SocialIcon>
-                <FaTwitter />
+                <FaXTwitter />
               </SocialIcon>
               <SocialInput
                 id="twitter"
