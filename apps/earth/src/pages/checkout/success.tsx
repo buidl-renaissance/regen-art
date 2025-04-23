@@ -317,7 +317,7 @@ export default function CheckoutSuccess() {
           </DetailRow>
           <DetailRow>
             <DetailLabel>Total Amount:</DetailLabel>
-            <DetailValue>${session.total.toFixed(2)}</DetailValue>
+            <DetailValue>${session.total?.toFixed(2)}</DetailValue>
           </DetailRow>
           {/* <DetailRow>
             <DetailLabel>Status:</DetailLabel>
