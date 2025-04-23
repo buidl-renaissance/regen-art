@@ -10,6 +10,7 @@ import {
   Subtitle,
   Title,
 } from '../../app/components/Styled';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Artwork | Art Night Detroit',
@@ -38,7 +39,9 @@ const ArtworksPage = ({ artworks: initialArtworks }: { artworks: Artwork[] }) =>
       </Header>
       <ArtworkGrid>
         {artworks.map((artwork: Artwork) => (
-          <ArtworkCard key={artwork.id} artwork={artwork} />
+          <Link href={`/artwork/${artwork.slug}`} key={artwork.id}>
+            <ArtworkCard artwork={artwork} />
+          </Link>
         ))}
         <AddArtworkCard onClick={() => setIsModalOpen(true)}>
           <PlusIcon>+</PlusIcon>
