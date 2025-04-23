@@ -76,3 +76,5 @@ exports.down = function(knex) {
     knex.schema.dropTableIfExists('events')
   ]);
 };
+
+
