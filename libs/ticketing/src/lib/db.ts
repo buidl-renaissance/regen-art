@@ -38,16 +38,21 @@ export const getEvent = async (id: number): Promise<TicketedEvent | null> => {
 export const createEvent = async (
   event: Omit<TicketedEvent, 'id'>
 ): Promise<TicketedEvent> => {
-  const [{ id }] = await db('events')
+  await db('events')
     .insert({
       title: event.title,
       date: event.date,
       location: event.location,
       description: event.description,
-    })
-    .returning('id');
-
-  return getEvent(id) as Promise<TicketedEvent>;
+    });
+  
+  // Get the last inserted ID
+  const [result] = await db('events')
+    .select('id')
+    .orderBy('id', 'desc')
+    .limit(1);
+  
+  return getEvent(result.id) as Promise<TicketedEvent>;
 };
 
 // Ticket type operations
@@ -67,17 +72,23 @@ export const createTicketType = async (
   eventId: string,
   ticketType: Omit<TicketType, 'id'>
 ): Promise<TicketType> => {
-  const [{ id }] = await db('ticket_types')
+  await db('ticket_types')
     .insert({
       event_id: eventId,
       name: ticketType.name,
       price: ticketType.price,
       description: ticketType.description,
       available: ticketType.available,
-    })
-    .returning('id');
-
-  return db('ticket_types').where({ id }).first();
+    });
+  
+  // Get the last inserted ID
+  const [result] = await db('ticket_types')
+    .select('id')
+    .where({ event_id: eventId })
+    .orderBy('id', 'desc')
+    .limit(1);
+  
+  return db('ticket_types').where({ id: result.id }).first();
 };
 
 // Inventory operations
@@ -152,33 +163,47 @@ export const addCartItem = async (
   sessionId: string,
   item: Omit<CartItem, 'id'>
 ): Promise<CartItem> => {
-  const [{ id }] = await db('cart_items')
+  await db('cart_items')
     .insert({
       checkout_session_id: sessionId,
       ticket_type_id: item.ticketTypeId,
       event_id: item.eventId,
       quantity: item.quantity,
-    })
-    .returning('id');
+    });
+  
+  // Get the last inserted ID
+  const [result] = await db('cart_items')
+    .select('id')
+    .where({ checkout_session_id: sessionId })
+    .orderBy('id', 'desc')
+    .limit(1);
 
-  return db('cart_items').where({ id }).first();
+  console.log('cart item id', result.id);
+
+  return db('cart_items').where({ id: result.id }).first();
 };
 
 // Purchased ticket operations
 export const createPurchasedTicket = async (
   ticket: Omit<PurchasedTicket, 'id'>
 ): Promise<PurchasedTicket> => {
-  const [{ id }] = await db('purchased_tickets')
+  await db('purchased_tickets')
     .insert({
       event_id: ticket.eventId,
       ticket_type_id: ticket.ticketTypeId,
       user_id: ticket.userId,
       status: ticket.status,
       checkout_session_id: ticket.checkoutSessionId,
-    })
-    .returning('id');
+    });
+  
+  // Get the last inserted ID
+  const [result] = await db('purchased_tickets')
+    .select('id')
+    .where({ checkout_session_id: ticket.checkoutSessionId })
+    .orderBy('id', 'desc')
+    .limit(1);
 
-  return db('purchased_tickets').where({ id }).first();
+  return db('purchased_tickets').where({ id: result.id }).first();
 };
 
 export const getPurchasedTickets = async (
