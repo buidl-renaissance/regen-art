@@ -59,6 +59,8 @@ export async function createCheckoutSessionHandler(
         });
       }
 
+      item.eventId = eventId;
+
       total += ticketType.price * item.quantity;
 
       lineItems.push({
