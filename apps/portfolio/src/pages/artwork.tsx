@@ -21,41 +21,6 @@ const ArtworkContainer = styled.div`
   }
 `;
 
-const CategoryTabs = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-
-  @media (max-width: 768px) {
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const CategoryTab = styled.button<{ active: boolean }>`
-  padding: 0.75rem 1.5rem;
-  background-color: ${(props) => (props.active ? '#96885f' : 'transparent')};
-  color: ${(props) => (props.active ? '#fff' : '#333')};
-  border: 2px solid #96885f;
-  cursor: pointer;
-  font-size: 1rem;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: ${(props) =>
-      props.active ? '#96885f' : 'rgba(150, 136, 95, 0.2)'};
-  }
-
-  @media (max-width: 768px) {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    border-width: 1px;
-  }
-`;
-
 const ArtworkGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
