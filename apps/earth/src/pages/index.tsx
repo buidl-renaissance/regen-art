@@ -51,8 +51,8 @@ const Header = styled.header`
   margin: 0 auto;
   position: relative;
   z-index: 2;
-  padding: 1rem;
-  padding-top: 17rem;
+  padding: 0.5rem;
+  padding-top: 22rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,15 +60,23 @@ const Header = styled.header`
   min-height: 30vh;
 
   p {
-    font-size: 0.875rem;
-    margin-top: 1rem;
+    font-size: 0.75rem;
+    margin-top: 0.75rem;
     margin-bottom: 0;
     color: #a7f3d0;
+    max-width: 90%;
   }
 
   @media (min-width: 640px) {
+    padding: 1rem;
     padding-top: 10rem;
     padding-bottom: 0;
+    
+    p {
+      font-size: 0.875rem;
+      margin-top: 1rem;
+      max-width: 100%;
+    }
   }
 
   @media (min-width: 768px) {
@@ -78,9 +86,9 @@ const Header = styled.header`
 `;
 
 const MainTitle = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 900;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   font-family: var(--font-cambria);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -90,6 +98,7 @@ const MainTitle = styled.h1`
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.6),
     0 0 20px rgba(212, 252, 121, 0.4);
   animation: glow 3s ease-in-out infinite alternate;
+  line-height: 1.1;
 
   @keyframes glow {
     from {
@@ -104,6 +113,7 @@ const MainTitle = styled.h1`
 
   @media (min-width: 640px) {
     font-size: 4rem;
+    margin-bottom: 0.75rem;
   }
   @media (min-width: 768px) {
     font-size: 5.5rem;
@@ -114,18 +124,37 @@ const MainTitle = styled.h1`
   }
 `;
 
+const EventProduction = styled.h4`
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  font-family: var(--font-cambria);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #a7f3d0;
+  text-shadow: 0 0 10px rgba(167, 243, 208, 0.5),
+    0 0 15px rgba(167, 243, 208, 0.3);
+
+  @media (min-width: 640px) {
+    font-size: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
+`;
+
 const SubTitle = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #a7f3d0;
   font-family: var(--font-cambria);
   text-shadow: 0 0 10px rgba(167, 243, 208, 0.5),
     0 0 15px rgba(167, 243, 208, 0.3);
   letter-spacing: 0.08em;
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
 
   @media (min-width: 640px) {
     font-size: 2rem;
+    margin: 0.5rem 0;
   }
   @media (min-width: 768px) {
     font-size: 2.5rem;
@@ -133,8 +162,8 @@ const SubTitle = styled.h2`
 `;
 
 const EventTime = styled.h4`
-  font-size: 1.25rem;
-  margin-top: 0.5rem;
+  font-size: 1rem;
+  margin-top: 0.25rem;
   margin-bottom: 0;
   font-family: var(--font-cambria);
   font-weight: 600;
@@ -147,6 +176,7 @@ const EventTime = styled.h4`
 
   @media (min-width: 640px) {
     font-size: 1.5rem;
+    margin-top: 0.5rem;
   }
   @media (min-width: 768px) {
     font-size: 1.75rem;
@@ -154,11 +184,16 @@ const EventTime = styled.h4`
 `;
 
 const EventLocation = styled.h4`
-  font-size: 1.25rem;
-  margin-top: 0.5rem;
+  font-size: 1rem;
+  margin-top: 0.25rem;
   font-family: var(--font-cambria);
   font-weight: 600;
   letter-spacing: 0.05em;
+
+  @media (min-width: 640px) {
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
+  }
 `;
 
 const EventImage = styled.img`
@@ -170,12 +205,11 @@ const EventImage = styled.img`
   top: 0;
   left: 0;
   z-index: 0;
-  opacity: 0.5;
+  opacity: 0.35;
   margin: 0;
   padding: 0;
 
   @media (max-width: 768px) {
-    /* object-position: 70% center; */
     height: 56vh;
   }
 
@@ -201,7 +235,7 @@ export default function Home() {
   >([]);
 
   useEffect(() => {
-    const particleCount = window.innerWidth < 768 ? 10 : 30;
+    const particleCount = window.innerWidth < 768 ? 8 : 30;
     const newParticles = [];
 
     for (let i = 0; i < particleCount; i++) {
@@ -209,7 +243,7 @@ export default function Home() {
         id: i,
         top: `${Math.random() * 100}%`,
         left: `${Math.random() * 100}%`,
-        size: `${Math.random() * 4 + 2}px`,
+        size: `${Math.random() * 3 + 2}px`,
         animationDuration: `${Math.random() * 20 + 10}s`,
         animationDelay: `${Math.random() * 5}s`,
       });
@@ -235,6 +269,7 @@ export default function Home() {
       ))}
       <Header>
         <MainTitle>ARTS FOR THE EARTH</MainTitle>
+        <EventProduction>A BURG INK PRODUCTION</EventProduction>
         <SubTitle>APRIL 26, 2025</SubTitle>
         <EventTime>12PM - 2AM</EventTime>
         <EventLocation>2804 WIGHT ST, DETROIT, MI</EventLocation>

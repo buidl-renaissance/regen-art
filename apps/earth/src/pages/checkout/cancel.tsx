@@ -3,6 +3,7 @@
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import { Metadata } from 'next';
 
 const CancelContainer = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const CancelContainer = styled.div`
   color: #ffffff;
   text-align: center;
   font-family: var(--font-geist-sans);
-  
+
   @media (min-width: 768px) {
     padding: 2rem;
   }
@@ -26,7 +27,7 @@ const CancelHeader = styled.div`
   padding: 1rem;
   padding-top: 6rem;
   padding-bottom: 0;
-  
+
   @media (min-width: 768px) {
     padding: 2rem;
     padding-top: 12rem;
@@ -57,7 +58,7 @@ const CancelMessage = styled.p`
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  
+
   @media (min-width: 768px) {
     font-size: 1.2rem;
     margin-bottom: 2rem;
@@ -151,6 +152,18 @@ const Raindrop = styled.div`
   border-radius: 0 0 5px 5px;
   z-index: -1;
 `;
+
+export const getServerSideProps = async () => {
+  return {
+    props: {
+      metadata: {
+        title: 'Checkout Canceled',
+        description:
+          'Your purchase was cancelled, and somewhere, a tree just lost its last leaf. The Earth was counting on your support today.',
+      },
+    },
+  };
+};
 
 export default function CheckoutCancel() {
   const router = useRouter();
