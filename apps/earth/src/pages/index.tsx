@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import BuyButton from '../components/BuyButton';
+import Link from 'next/link';
 
 const PageContainer = styled.div`
   display: grid;
@@ -71,7 +72,7 @@ const Header = styled.header`
     padding: 1rem;
     padding-top: 10rem;
     padding-bottom: 0;
-    
+
     p {
       font-size: 0.875rem;
       margin-top: 1rem;
@@ -222,6 +223,59 @@ const EventImage = styled.img`
   }
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+const LearnMoreLink = styled(Link)`
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #5c5c3d, #4a4433);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: var(--font-cambria);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  width: auto;
+  min-width: 180px;
+  max-width: 250px;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(92, 92, 61, 0.5),
+    0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(92, 92, 61, 0.7),
+      0 15px 20px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 640px) {
+    font-size: 0.875rem;
+    padding: 0.625rem 1.25rem;
+    min-width: 150px;
+    max-width: 200px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: 0.75rem 1rem;
+    min-width: 120px;
+    max-width: 180px;
+    letter-spacing: 0.03em;
+  }
+`;
+
 export default function Home() {
   const [particles, setParticles] = useState<
     Array<{
@@ -273,7 +327,10 @@ export default function Home() {
         <SubTitle>APRIL 26, 2025</SubTitle>
         <EventTime>12PM - 2AM</EventTime>
         <EventLocation>2804 WIGHT ST, DETROIT, MI</EventLocation>
-        <BuyButton />
+        <ButtonContainer>
+          <BuyButton />
+          <LearnMoreLink href="/about">Learn More</LearnMoreLink>
+        </ButtonContainer>
         <p>
           All proceeds benefit: Water Protectors Network, Friends of the Rouge,
           & Greening of Detroit—supporting the vital work of protecting our
