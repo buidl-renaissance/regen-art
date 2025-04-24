@@ -163,6 +163,7 @@ export const addCartItem = async (
   sessionId: string,
   item: Omit<CartItem, 'id'>
 ): Promise<CartItem> => {
+  // Insert the cart item
   await db('cart_items')
     .insert({
       checkout_session_id: sessionId,
@@ -171,16 +172,24 @@ export const addCartItem = async (
       quantity: item.quantity,
     });
   
-  // Get the last inserted ID
-  const [result] = await db('cart_items')
-    .select('id')
-    .where({ checkout_session_id: sessionId })
+  // Get the last inserted item by its unique properties instead of ID
+  const result = await db('cart_items')
+    .where({ 
+      checkout_session_id: sessionId,
+      ticket_type_id: item.ticketTypeId,
+      event_id: item.eventId,
+      quantity: item.quantity
+    })
     .orderBy('id', 'desc')
-    .limit(1);
+    .first();
+
+  if (!result) {
+    throw new Error('Failed to retrieve the inserted cart item');
+  }
 
   console.log('cart item id', result.id);
 
-  return db('cart_items').where({ id: result.id }).first();
+  return result;
 };
 
 // Purchased ticket operations
