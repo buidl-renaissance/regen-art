@@ -101,7 +101,7 @@ const MainTitle = styled.h1`
   animation: glow 3s ease-in-out infinite alternate;
   line-height: 1.1;
 
-  @keyframes glow {
+  @keyframes glowFade {
     from {
       text-shadow: 0 0 15px rgba(255, 255, 255, 0.6),
         0 0 20px rgba(212, 252, 121, 0.4);
@@ -275,6 +275,37 @@ const LearnMoreLink = styled(Link)`
     letter-spacing: 0.03em;
   }
 `;
+
+export async function getStaticProps() {
+  return {
+    props: {
+      metadata,
+    },
+  };
+}
+
+// Add metadata for SEO
+export const metadata = {
+  title: 'Arts For The Earth | A Burg Ink Production',
+  description:
+    'Join us for Arts For The Earth, a celebration of creativity and environmental awareness through art, music, and community engagement.',
+  keywords:
+    'arts, earth, environment, community, detroit, art exhibition, music, sustainability',
+  openGraph: {
+    title: 'Arts For The Earth | A Burg Ink Production',
+    description:
+      'A celebration of creativity and environmental awareness through art, music, and community engagement.',
+    images: [
+      {
+        url: '/images/arts-for-earth-banner.png',
+        width: 1200,
+        height: 630,
+        alt: 'Arts For The Earth',
+      },
+    ],
+    type: 'website',
+  },
+};
 
 export default function Home() {
   const [particles, setParticles] = useState<
