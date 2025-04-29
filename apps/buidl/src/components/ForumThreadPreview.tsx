@@ -14,7 +14,7 @@ import { ForumPostCard } from './ForumPostCard';
 
 interface ThreadProps {
   thread: ForumThread;
-  post: ForumPost;
+  post?: ForumPost;
 }
 
 const ForumThreadPreview: React.FC<ThreadProps> = ({ thread, post }) => {
@@ -70,7 +70,7 @@ const ForumThreadPreview: React.FC<ThreadProps> = ({ thread, post }) => {
           ))}
         </TagsContainer>
       )}
-      <ForumPostCard post={post} />
+      {post && <ForumPostCard post={post} />}
     </ThreadItem>
   );
 };
