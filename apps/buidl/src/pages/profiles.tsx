@@ -49,7 +49,7 @@ const CREATORS: CreatorPortfolio[] = [
       profileImage:
         'https://dpop.nyc3.digitaloceanspaces.com/wiredinsamurai.jpg',
       bio: 'A multidisciplinary creator exploring the space between traditional and digital mediums, developing software that empowers creative communities through connection, storytelling, and systems where creativity becomes a collective act.',
-      website: 'https://portfolio.gods.work',
+      website: 'https://wiredinsamurai.builddetroit.xyz',
       socialLinks: {
         twitter: 'https://twitter.com/WiredInSamurai',
         linkedin: 'https://www.linkedin.com/in/john-gulbronson-a285285b/',
@@ -117,7 +117,7 @@ export default function CreatorProfiles({ profiles }: { profiles: ProfileData[] 
                 key={creator.id}
                 profile={creator.profile}
                 tags={creator.tags}
-                linkUrl={`/profile/${creator.profile.handle}`}
+                linkUrl={creator.profile.website}
               />
             ))}
           </FeaturedGrid>
