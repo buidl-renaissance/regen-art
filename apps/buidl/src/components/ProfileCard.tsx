@@ -8,9 +8,10 @@ interface ProfileCardProps {
   profile: ProfileData;
   tags?: string[];
   linkUrl?: string;
+  buttonText?: string;
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ profile, tags, linkUrl }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ profile, tags, linkUrl, buttonText = 'View Profile' }) => {
   return (
     <Card>
       <Avatar>
@@ -64,7 +65,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, tags, linkUrl }) => 
         
         {linkUrl && (
           <ViewButton href={linkUrl}>
-            View Profile
+            {buttonText}
           </ViewButton>
         )}
       </CardContent>

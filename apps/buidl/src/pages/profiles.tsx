@@ -118,6 +118,7 @@ export default function CreatorProfiles({ profiles }: { profiles: ProfileData[] 
                 profile={creator.profile}
                 tags={creator.tags}
                 linkUrl={creator.profile.website}
+                buttonText="View Portfolio"
               />
             ))}
           </FeaturedGrid>
