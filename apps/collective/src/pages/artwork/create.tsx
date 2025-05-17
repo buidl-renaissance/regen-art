@@ -6,10 +6,12 @@ import {
   Button as MuiButton,
   Typography,
   Autocomplete,
+  Box,
 } from "@mui/material";
 import { Artist, createArtwork, getArtists } from "@gods.work/utils";
 import { UploadMedia } from "@gods.work/ui";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: 'Create Artwork | Art Night Detroit',
@@ -178,6 +180,24 @@ const CreateArtworkPage = () => {
               />
             )}
           />
+        </FormGroup>
+
+        <FormGroup>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
+            <Link href="/artist/create" passHref>
+              <MuiButton
+                variant="text"
+                color="primary"
+                component="a"
+                target="_blank"
+                rel="noopener noreferrer"
+                size="small"
+                sx={{ textDecoration: 'none' }}
+              >
+                Create New Artist
+              </MuiButton>
+            </Link>
+          </Box>
         </FormGroup>
 
         <MuiButton
