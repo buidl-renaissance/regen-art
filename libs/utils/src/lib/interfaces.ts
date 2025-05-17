@@ -24,6 +24,16 @@ export interface ArtworkData {
   image?: string;
   collaborator_ids?: number[];
   category?: string;
+  is_for_sale?: boolean;
+  price?: number;
+  num_collaborators?: number;
+  review?: {
+    text: string;
+    image: string;
+  };
+  artist_name?: string;
+  uploaded_by?: string;
+  transaction_digest?: string;
 }
 
 export interface Company extends ProfileData {

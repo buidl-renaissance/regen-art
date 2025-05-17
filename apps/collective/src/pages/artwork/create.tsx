@@ -7,6 +7,9 @@ import {
   Typography,
   Autocomplete,
   Box,
+  FormControlLabel,
+  Switch,
+  Chip,
 } from "@mui/material";
 import { Artist, createArtwork, getArtists } from "@gods.work/utils";
 import { UploadMedia } from "@gods.work/ui";
@@ -35,6 +38,10 @@ const CreateArtworkPage = () => {
   const [generating, setGenerating] = useState(false);
   const [artists, setArtists] = useState([]);
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
+  const [isForSale, setIsForSale] = useState(false);
+  const [price, setPrice] = useState<number | string>("");
+  const [collaborators, setCollaborators] = useState<Artist[]>([]);
+  const [selectedCollaborator, setSelectedCollaborator] = useState<Artist | null>(null);
 
   useEffect(() => {
     const loadArtists = async () => {
@@ -81,6 +88,17 @@ const CreateArtworkPage = () => {
     }
   };
 
+  const handleAddCollaborator = () => {
+    if (selectedCollaborator && !collaborators.some(c => c.id === selectedCollaborator.id)) {
+      setCollaborators([...collaborators, selectedCollaborator]);
+      setSelectedCollaborator(null);
+    }
+  };
+
+  const handleRemoveCollaborator = (collaboratorId: number) => {
+    setCollaborators(collaborators.filter(c => c.id !== collaboratorId));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -101,6 +119,9 @@ const CreateArtworkPage = () => {
         artist_id: selectedArtist?.id,
         data: {
           image: imageUrl,
+          collaborator_ids: collaborators.map(c => c.id),
+          is_for_sale: isForSale,
+          price: isForSale ? Number(price) : undefined,
         },
       });
 
@@ -199,6 +220,76 @@ const CreateArtworkPage = () => {
             </Link>
           </Box>
         </FormGroup>
+
+        <FormGroup>
+          <Typography variant="subtitle1" gutterBottom>
+            Collaborators
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
+            <Autocomplete
+              options={artists.filter((artist: Artist) => !collaborators.some(c => c.id === artist.id))}
+              getOptionLabel={(artist: Artist) => artist.name}
+              value={selectedCollaborator}
+              onChange={(_, newValue) => setSelectedCollaborator(newValue)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Add Collaborator"
+                  variant="outlined"
+                  fullWidth
+                />
+              )}
+              sx={{ flexGrow: 1 }}
+            />
+            <MuiButton 
+              variant="outlined" 
+              onClick={handleAddCollaborator}
+              disabled={!selectedCollaborator}
+            >
+              Add
+            </MuiButton>
+          </Box>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            {collaborators.map((collaborator) => (
+              <Chip
+                key={collaborator.id}
+                label={collaborator.name}
+                onDelete={() => handleRemoveCollaborator(collaborator.id)}
+              />
+            ))}
+          </Box>
+        </FormGroup>
+
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={isForSale}
+                onChange={(e) => setIsForSale(e.target.checked)}
+                color="primary"
+              />
+            }
+            label="Artwork is for sale"
+          />
+        </FormGroup>
+
+        {isForSale && (
+          <FormGroup>
+            <TextField
+              fullWidth
+              label="Price ($)"
+              id="price"
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required={isForSale}
+              variant="outlined"
+              InputProps={{
+                startAdornment: <span>$</span>,
+              }}
+            />
+          </FormGroup>
+        )}
 
         <MuiButton
           variant="contained"
