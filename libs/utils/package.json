@@ -1,0 +1,27 @@
+{
+  "name": "buidl-utils",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "files": [
+    "src/**/*.js",
+    "src/**/*.d.ts"
+  ],
+  "scripts": {
+    "build": "nx build utils",
+    "test": "nx test utils",
+    "lint": "nx lint utils"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "ethers": "^6.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+} 
