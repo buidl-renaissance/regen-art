@@ -1,13 +1,13 @@
-# buidl-utils
+# gods-work-utils
 
 A comprehensive utility library for the BUIDL ecosystem, providing common utilities for DPoP (Decentralized Proof of Presence), image processing, date/time formatting, wallet management, and profile handling.
 
 ## Installation
 
 ```bash
-npm install buidl-utils
+npm install gods-work-utils
 # or
-yarn add buidl-utils
+yarn add gods-work-utils
 ```
 
 ## Features
@@ -44,7 +44,7 @@ yarn add buidl-utils
 
 ### DPoP Authentication
 ```typescript
-import { login, getUser, logout } from 'buidl-utils';
+import { login, getUser, logout } from 'gods-work-utils';
 
 // Login user
 const result = await login(email, password);
@@ -58,7 +58,7 @@ logout();
 
 ### Event Management
 ```typescript
-import { getEvents, createEvent, submitEventRsvp } from 'buidl-utils';
+import { getEvents, createEvent, submitEventRsvp } from 'gods-work-utils';
 
 // Get events
 const events = await getEvents({ limit: 10, featured: true });
@@ -72,7 +72,7 @@ const rsvp = await submitEventRsvp(eventId, contactData);
 
 ### Image Utilities
 ```typescript
-import { convertResizedToTiles, convertDefaultToResized } from 'buidl-utils';
+import { convertResizedToTiles, convertDefaultToResized } from 'gods-work-utils';
 
 // Convert image URL formats
 const tilesUrl = convertResizedToTiles(resizedUrl);
@@ -81,7 +81,7 @@ const resizedUrl = convertDefaultToResized(defaultUrl);
 
 ### Date/Time Formatting
 ```typescript
-import { formatDate, formatTime } from 'buidl-utils';
+import { formatDate, formatTime } from 'gods-work-utils';
 
 // Format date
 const formattedDate = formatDate('2024-01-15', true); // "Monday, January 15th"
@@ -92,7 +92,7 @@ const timeRange = formatTime('2024-01-15T10:00:00Z', '2024-01-15T12:00:00Z'); //
 
 ### Wallet Management
 ```typescript
-import { getOrCreateHotWallet, signMessage } from 'buidl-utils';
+import { getOrCreateHotWallet, signMessage } from 'gods-work-utils';
 
 // Get or create wallet
 const { wallet, address, phrase } = getOrCreateHotWallet();
@@ -103,7 +103,7 @@ const signature = await signMessage('Hello World');
 
 ### Profile Management
 ```typescript
-import { useProfile } from 'buidl-utils';
+import { useProfile } from 'gods-work-utils';
 
 function ProfileComponent() {
   const { profileData, loading, error, saveProfile } = useProfile();
