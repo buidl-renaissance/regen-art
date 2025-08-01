@@ -68,6 +68,7 @@
     "lucide-react": "^0.462.0",
     "mipd": "^0.0.7",
     "moment": "^2.30.1",
+    "multiformats": "^13.3.7",
     "mysql": "^2.18.1",
     "mysql2": "^3.14.0",
     "next": "15.2.0",
