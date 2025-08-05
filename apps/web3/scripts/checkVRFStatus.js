@@ -3,7 +3,7 @@ const hre = require("hardhat");
 async function main() {
   // VRF v2.5 Configuration for Ethereum Sepolia
   const VRF_COORDINATOR_V2 = "0x9DdfaCa8183c41ad55329BdeeD9F6A8d53168B1B";
-  const CONTRACT_ADDRESS = "0xf28295f3291DAA77Eb60B64b30a70ee25ea8C5dB";
+  const CONTRACT_ADDRESS = "0x34cD89c7e94519004Fcf34807D70F94F886927EA";
   
   console.log("Checking VRF request status...");
   console.log("Contract Address:", CONTRACT_ADDRESS);

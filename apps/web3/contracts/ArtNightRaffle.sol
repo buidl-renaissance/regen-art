@@ -38,6 +38,7 @@ contract ArtNightRaffle is VRFConsumerBaseV2Plus {
     event RaffleCreated(uint256 raffleId, uint256[] tickets);
     event WinnerSelected(uint256 raffleId, uint256 winner);
     event RaffleReset(uint256 raffleId);
+    event RandomValueReceived(uint256 requestId, uint256 randomValue, uint256 randomIndex, uint256 winningTicket);
     
     // Errors
     error ArtNightRaffle__RaffleNotActive();
@@ -126,12 +127,16 @@ contract ArtNightRaffle is VRFConsumerBaseV2Plus {
         uint256 raffleId = s_requestIdToRaffleId[requestId];
         Raffle storage raffle = s_raffles[raffleId];
         
-        uint256 randomIndex = randomWords[0] % raffle.tickets.length;
-        raffle.winner = raffle.tickets[randomIndex];
+        uint256 randomValue = randomWords[0];
+        uint256 randomIndex = randomValue % raffle.tickets.length;
+        uint256 winningTicket = raffle.tickets[randomIndex];
+        
+        raffle.winner = winningTicket;
         raffle.winnerSelected = true;
         raffle.active = false;
         
-        emit WinnerSelected(raffleId, raffle.winner);
+        emit RandomValueReceived(requestId, randomValue, randomIndex, winningTicket);
+        emit WinnerSelected(raffleId, winningTicket);
     }
     
     /**

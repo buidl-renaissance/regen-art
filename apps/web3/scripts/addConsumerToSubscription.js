@@ -8,7 +8,7 @@ async function main() {
   const SUBSCRIPTION_ID = "77899604690368234140542231011632468025290834504310678429410906800047067486655";
   
   // Replace this with your deployed contract address
-  const CONTRACT_ADDRESS = "0xf28295f3291DAA77Eb60B64b30a70ee25ea8C5dB";
+  const CONTRACT_ADDRESS = "0x34cD89c7e94519004Fcf34807D70F94F886927EA";
   
   console.log("Adding contract as consumer to VRF subscription...");
   console.log("Contract Address:", CONTRACT_ADDRESS);

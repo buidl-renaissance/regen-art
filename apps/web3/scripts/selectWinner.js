@@ -2,7 +2,7 @@ const hre = require("hardhat");
 
 async function main() {
   // Replace with your deployed contract address
-  const CONTRACT_ADDRESS = "0xf28295f3291DAA77Eb60B64b30a70ee25ea8C5dB";
+  const CONTRACT_ADDRESS = "0x34cD89c7e94519004Fcf34807D70F94F886927EA";
   
   // Get raffle ID from environment variable or default to 0
   const raffleId = process.env.RAFFLE_ID || "0";

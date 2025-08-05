@@ -1397,8 +1397,8 @@
       ]
     },
     "/Users/johngulbronson/Developer/regen-art/apps/web3/contracts/ArtNightRaffle.sol": {
-      "lastModificationDate": 1754350802679,
-      "contentHash": "139dcc521821ff1b0760b5258f004380",
+      "lastModificationDate": 1754352664013,
+      "contentHash": "1056863bb02e7b35d2779effd5e143f0",
       "sourceName": "contracts/ArtNightRaffle.sol",
       "solcConfig": {
         "version": "0.8.20",
