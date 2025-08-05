@@ -34,9 +34,9 @@ async function main() {
     console.log("- Request Confirmations:", vrfConfig.requestConfirmations.toString());
     console.log("- Number of Words:", vrfConfig.numWords.toString());
     
-    // Example: Create a new raffle with ticket numbers 0-100
-    console.log("\n🎫 Creating new raffle with tickets 0-100...");
-    const tickets = Array.from({length: 100}, (_, i) => i + 1); // Creates array [1, 2, ..., 100]
+    // Example: Create a new raffle with ticket numbers 1-200
+    console.log("\n🎫 Creating new raffle with tickets 1-200...");
+    const tickets = Array.from({length: 200}, (_, i) => i + 1); // Creates array [1, 2, ..., 200]
     const createTx = await raffleContract.createRaffle(tickets);
     const receipt = await createTx.wait();
     console.log("✅ Raffle created successfully!");
