@@ -2,7 +2,7 @@ const hre = require("hardhat");
 
 async function main() {
   // Replace with your deployed contract address
-  const CONTRACT_ADDRESS = "0x34cD89c7e94519004Fcf34807D70F94F886927EA";
+  const CONTRACT_ADDRESS = "0x15eACC51afD8b24aeCC85835A3F3921B345e8634";
   
   console.log("Testing ArtNightRaffle contract...");
   console.log("Contract Address:", CONTRACT_ADDRESS);
