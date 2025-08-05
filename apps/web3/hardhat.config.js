@@ -19,6 +19,11 @@ module.exports = {
       accounts: [`${process.env.PRIVATE_KEY}`],
       gasPrice: 1000000000,
     },
+    arbitrumSepolia: {
+      url: 'https://sepolia-rollup.arbitrum.io/rpc',
+      accounts: [`${process.env.PRIVATE_KEY}`],
+      gasPrice: 1000000000,
+    },
   },
   solidity: {
     version: '0.8.20',

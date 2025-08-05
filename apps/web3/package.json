@@ -3,6 +3,7 @@
     "hardhat": "^2.22.15"
   },
   "dependencies": {
+    "@chainlink/contracts": "^1.4.0",
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/providers": "^5.7.2",
     "@nomiclabs/hardhat-ethers": "^2.2.3",
